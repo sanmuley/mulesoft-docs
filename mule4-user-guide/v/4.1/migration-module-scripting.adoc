@@ -42,7 +42,7 @@ The `<scripting>` component in Mule 3 is replaced with a new `<scripting>` modul
 
 As you can see, the main difference here is that now you can use DataWeave to generate the input parameters.
 
-== Accesing variables from the script
+== Accessing variables from the script
 
 The above example uses a variable to show how to pass parameters into the script. Mulesoft recommends that as a best practice to keep the script decoupled from the rest of the flow, so that changes to the mule applications don't require changes to the script.
 
