@@ -35,11 +35,11 @@ This tab displays the name and type of the deployment target you selected above.
 +
 See [link to supported runtimes] for more information.
 
-. Select the number of workers(I think we use term replicas) you want allocate to the application.
+. Select the number of replicas you want allocate to the application.
 +
 See [link to work/core/memory topic] for more information.
 
-. Specify the number of *Cores* and *Memory* you want to allocate to the application by adjusting the sliders to the appropriate values(I think this is incorrect. We specify *Cores* and *Memory* per replica not per application. I know that UI is confusing and it is unclear).
+. Specify the number of *Cores* and *Memory* you want to allocate to each application replica by adjusting the sliders to the appropriate values.
 +
 See [link to docs on scaling and number of cores/memory] for more information.
 
