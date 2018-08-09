@@ -76,16 +76,12 @@ Regardless of which option you choose to run the Terraform, keep the state file 
 
 ==== Run using Native Terraform
 
-. Copy the script below in a text editor to easily define the variables.
+. Copy the scripts below in a text editor to easily define the variables.
 +
-----
-terraform init -> we need to describe this step... What about docker command???
-----
 
-
-By default after running terraform instances will not have public IPs.
-To make them have public IPs
-we need to add `-var enable_public_ips=true \`. How to document that?
+----
+terraform init
+----
 
 ----
 terraform apply \
