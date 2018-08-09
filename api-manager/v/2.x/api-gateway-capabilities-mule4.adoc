@@ -94,7 +94,7 @@ When the API Gateway is connected to API Manager, you can monitor the usage of y
 API Gateway reports API usage, including the detected policy violations.
 
 
-=== Pointcut
+==== Pointcut
 
 API Gateway uses pointcuts to point a policy to the resource where it should be applied. +
 If you are enforcing a policy in API Manager, this policy uses pointcuts to know the endpoints of your Mule application to which it should affect.

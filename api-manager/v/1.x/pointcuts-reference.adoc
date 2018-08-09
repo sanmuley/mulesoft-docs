@@ -1,6 +1,9 @@
 = Pointcuts Reference
 
-A custom policy must contain a pointcut declaration. Pointcuts control the scope of a policy application and they use regular expressions to indicate what flows in the application are affected by a policy.
+Pointcuts point a policy to the resource where it should be applied. +
+If you are enforcing a policy in API Manager, this policy uses pointcuts to know the endpoints of your Mule application to which it should affect.
+
+A custom policy must contain a pointcut declaration. Pointcuts use regular expressions to indicate what flows in the application are affected by a policy.
 
 If you're applying your policy to APIs that are deployed in Anypoint Platform, then set your pointcut to the default properties `apiName` and `apiVersion`. This action guarantees that your policy is applied to only the API that you're activating the policy. This is what your pointcut should look like:
 
