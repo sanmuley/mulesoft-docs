@@ -1,4 +1,4 @@
-= Migrating Mule 3 Applications to Mule 4
+= Migrating Mule 3 Apps to Mule 4
 
 //TODO: FOR GA, REMOVE *Beta* FROM GA VERSION
 *Beta Release: Migration Tool and Compatibility Module*
@@ -8,8 +8,8 @@
 Instead of performing a completely manual migration, you can use the Migration
 tool (migrator) to automate the initial migration step for supported component, connector, and module configurations. The migrator runs a sequence of tasks
 over a Mule 3 project and outputs a Mule 4 project with a report about what
-remains to migrate. The output is designed to work with a <<compatibility_module, Compatibility module>> in Studio for some items that are not migrated
-automatically by the tool.
+remains to migrate. The output project is designed to work with a <<compatibility_module, Compatibility module>> in Studio for some important
+items that are not migrated automatically by the tool.
 
 The migration process is a multi-part task, where you:
 
@@ -34,7 +34,7 @@ time.
 
 The Migration tool supports the following migrations:
 
-* Mule applications only (no domains or policies supported)
+* Mule apps only (no domains or policies supported)
 * MEL to DatWeave expressions (simple cases only)
 * DataWeave component to `ee:transform` (DataWeave 1.0 to DataWeave 2.0)
 * Connectors: HTTP, DB, WebService Consumer
@@ -129,7 +129,7 @@ You or your team will need to handle other migration gaps that are covered in
 the <<migration_report, Migration report>>.
 
 
-//TODO: FROM RODRO: we want them to migrate to a point where the compatibility plugin can be dropped from an application
+//TODO: FROM RODRO: we want them to migrate to a point where the compatibility plugin can be dropped from an app
 
 //TODO: QUESTION: WILL THEY ASK PEOPLE IF THEY WANT TO MIGRATE CASES WHERE BEST PRACTICES ARE NOT FOLLOWED?
 
@@ -233,6 +233,10 @@ output the results.
 
 Whenever the tool adds an entry to the report (either error or warning), the same information is also added as a comment in the Configuration XML file for the
 project.
+
+== See Also
+
+link:migration-manual[Migration to Mule 4: Recommended Post-Migration Tasks]
 
 ////
 MY NOTES: REPLACED WITH ANOTHER SECTION ABOVE
