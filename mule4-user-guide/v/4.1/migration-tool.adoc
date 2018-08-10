@@ -1,12 +1,13 @@
-= Migration Tool
+= Migrating Mule 3 Applications to Mule 4
 
 //TODO: FOR GA, REMOVE *Beta* FROM GA VERSION
-*Beta Release*
+*Beta Release: Migration Tool and Compatibility Module*
 
 //TODO: FOR GA, REPLACE "is a command-line utility that"...
 //"is a part of Studio that"
 The Migration tool (migrator) helps facilitate migrations of Mule 3 projects
-(Mule apps written for the Mule 3 runtime) to Mule 4. Instead of performing a completely manual migration, you can use the tool to automate the initial
+(Mule apps written for the Mule 3 runtime) to Mule 4. Instead of performing a
+completely manual migration, you can use the tool to automate the initial
 migration step for supported component, connector, and module configurations.
 The migrator runs a sequence of tasks over a Mule 3 project and outputs a
 Mule 4 project with a report about the migration.
@@ -29,15 +30,18 @@ Minimum requirements:
 == Migrating a Project
 
 //TODO: FOR GA, REMOVE NOTE AND REVISE CONTENT TO DESCRIBE STUDIO WORKFLOW
-*Note on the Beta release*: For the Beta release, the migrator is a command-line utility (an executable JAR file). The Migration tool will be released as part of Studio after the Beta. You will then be able to perform migrations through
-Studio, rather than from the command line.
+*Note on the Beta release*: For the Beta release, the migrator is a command-line
+utility (packaged as an executable JAR file). After the Beta program, the
+Migration tool will be released as part of Studio. You will then be able to
+perform migrations through Studio, rather than from the command line.
 
 //TODO: GET A JAR NAME THAT IS MORE LIKE WHAT CUSTOMERS WILL SEE
 //TODO: LINK OUT TO STUDIO IMPORT STEPS.
 To run the Migration tool:
 
 . Make sure that the required software is installed (see <<min_reqs, Requirements>>).
-. In your console, provide a command that specifies all the required <<options>>, for example:
+. In your console, provide a command that specifies all the required <<options>>,
+for example:
 +
 .Command-line Invocation
 [source,console,linenums]
@@ -48,10 +52,6 @@ mule-migration-tool-runner-1.0.0-20180806.163412-176-jar-with-dependencies.jar
 -muleVersion 4.1.3
 -destinationProjectBasePath /Users/me/my_dir/my_migrated_project
 ----
-+
-One way to find the path to your Mule 3 project from Studio by going to
-File -> Switch Workspace -> Other... and then copying the path that appears in
-the Workspace field.
 +
 If the migrator runs successfully, you will see a message something like this:
 +
@@ -75,12 +75,15 @@ In Studio, you can import the project by going to File -> Import, then from the 
 +
 You can find all errors and warnings in the <<migration_report>>.
 +
-It is important to note that the same information is provided as comments in the Mule Configuration files. See
+It is important to note that the same information is provided as comments in the Mule Configuration files.
 +
 . Address the errors and warnings in the report.
 +
-Note that the Compatibility tool is likely work around some of these issues until your team and address them with permanent fixes.
-
+Note that the <<compatibility_module, Compatibility module>> is likely work
+around some of these issues until your team and address them with permanent fixes.
++
+. Identify and consider additional migration steps where the automated migration
+can be improved. See link:migration-manual[Migration to Mule 4: Recommended Migration Tasks].
 
 [[compatibility_module]]
 == Compatibility Module
@@ -95,7 +98,9 @@ It is important to note that the Compatibility does not cover every migration ga
  * By providing MEL support for the cases where a MEL expression could not be migrated to DW automatically.
  * By adapting the Mule 3 message model to Mule 4.
 
-You or your team will need to handle other migration gaps.
+You or your team will need to handle other migration gaps that are covered in
+the <<migration_report, Migration report>>.
+
 
 //TODO: FROM RODRO: we want them to migrate to a point where the compatibility plugin can be dropped from an application
 
@@ -190,8 +195,16 @@ output the results.
 | `-destinationProjectBasePath <arg>` | Required. Directory for the migrated project.
 | `-help` | For displaying the help.
 | `-muleVersion <arg>` | Required. The Mule version to which you are migrating: `4.1.3`.
-| `-projectBasePath <arg>` | Required. Directory of the project to to migrate.
+| `-projectBasePath <arg>` a| Required. Directory of the project to to migrate.
+
+  To discover the path to your Mule 3 project from Studio, you can go to
+  File -> Switch Workspace -> Other..., copy the path that appears in
+  the Workspace field. You need to append the name of your project
+  to that path when you use it as the `<arg>` to `-projectBasePath`, for
+  example: `-projectBasePath /Users/me/AnypointStudio/v6/migrator/my-v6-project`
 |===
+
+
 
 Whenever the tool adds an entry to the report (either error or warning), the same information is also added as a comment in the output file. _TODO: Question: what output file?_
 

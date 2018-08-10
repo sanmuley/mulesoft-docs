@@ -1,0 +1,68 @@
+= Migration to Mule 4: Recommended Migration Tasks
+
+The Migration tool performs migrations on individual components, connectors, and
+modules. So, in some cases, you can improve the migration by taking into account
+the project as a whole, rather than these individual building blocks of the
+project.
+
+This section focuses on some recommended post-migration tasks to perform after
+using the Migration tool, incorporating the Compatibility module (see
+link:migration-tool[Migrating Mule 3 Applications to Mule 4]) as needed, and
+performing any manual migration steps indicated in the Migration report.
+
+//TODO: REMOVE WHEN BETA IS OVER.
+*Note on the Beta Release:* This page will be augmented periodically through the
+Beta period based on feedback.
+
+
+[[migrate_mel]]
+== Migrating Remaining MEL Expressions to DataWeave
+
+When migrating MEL expressions to link:dataweave[DataWeave], you should use the
+link:scripting-module[Scripting Module] for procedural MEL expressions.
+
+//TODO: NEED EXAMPLES PLEASE
+
+In the XML for the migrated Mule application:
+
+. Remove link:intro-mule-message#inbound-properties-are-now-attributes[compatibility:attributes-to-inbound-properties].
++
+
++
+. Replace uses of `inboundProperties` in expressions and `vars.compatibility_inboundProperties[‘propName’]`) for attributes in DataWeave
+migrations.
++
+//TODO: REPLACE WITH WHAT? NEED EXAMPLES OF BOTH.
++
+. Remove link:intro-mule-message#outbound-properties[compatibility:outbound-properties-to-var]
++
+If the outbound property is _not_ set in the flow, you can safely remove any
+expressions that use that property. For example, you can remove the `status`
+attribute from an HTTP listener and rely on the default for the listener _if_
+an `http.status` outbound property is never set in the flow.
++
+If a property is set in the flow, you must move the expression that sets the
+property into the attribute of the operation or source where it is used. For
+example, you might modify the auto-migrated XML in the next example to the
+manually migrated.
+
+.Auto-Migrated XML Source
+[source,XML,linenums]
+----
+<compatibility:set-property propertyName="http.method" value="#[if(get) 'GET' else 'PUT']"/>
+...
+<http:request config-ref="myHttp" method="#[vars.compatibility_outboundProperties['http.method']]"/>
+----
+
+The next example moves the expression that sets the `http.method` property
+(shown in the auto-migrated example above) to the `method` attribute of the
+`http:request` operation where it is used.
+
+.Manually Modified XML
+[source,XML,linenums]
+----
+<http:request config-ref="myHttp" method="#[if(get) 'GET' else 'PUT']"/>
+----
+
+Note that in Mule 3, the outbound property can be set by any component or inside
+a referenced flow.
