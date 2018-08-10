@@ -25,6 +25,20 @@ Minimum requirements:
 
 * Studio 7.2 (with support for Mule Runtime 4.1.3 or above).
 
+The tool migrates Mule apps that use these versions of the Mule runtime:
+
+* 3.9.x
+* 3.8.x
+
+The tool can be used for the following versions but will not be supported in the Beta or GA:
+
+* 3.7.x
+* 3.6.x
+
+If you run the Migration tool on these unsupported apps, the migrated output
+might be less comprehensive than with supported apps.
+
+
 [[supported_migrations]]
 == Supported Migrations
 
@@ -224,11 +238,11 @@ output the results.
 | `-muleVersion <arg>` | Required. The Mule version to which you are migrating: `4.1.3`.
 | `-projectBasePath <arg>` a| Required. Directory of the project to to migrate.
 
-  To discover the path to your Mule 3 project from Studio, you can go to
-  File -> Switch Workspace -> Other..., copy the path that appears in
-  the Workspace field. You need to append the name of your project
-  to that path when you use it as the `<arg>` to `-projectBasePath`, for
-  example: `-projectBasePath /Users/me/AnypointStudio/v6/migrator/my-v6-project`
+To discover the path to your Mule 3 project from Studio, you can go to
+File -> Switch Workspace -> Other..., copy the path that appears in
+the Workspace field. You need to append the name of your project
+to that path when you use it as the `<arg>` to `-projectBasePath`, for
+example: `-projectBasePath /Users/me/AnypointStudio/v6/migrator/my-v6-project`
 |===
 
 Whenever the tool adds an entry to the report (either error or warning), the same information is also added as a comment in the Configuration XML file for the
