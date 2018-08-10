@@ -1,9 +1,8 @@
-= Migration to Mule 4: Recommended Migration Tasks
+= Migration to Mule 4: Recommended Post-Migration Tasks
 
 The Migration tool performs migrations on individual components, connectors, and
-modules. So, in some cases, you can improve the migration by taking into account
-the project as a whole, rather than these individual building blocks of the
-project.
+modules. In some cases, you can improve the migration by taking into account
+the flow or project as a whole.
 
 This section focuses on some recommended post-migration tasks to perform after
 using the Migration tool, incorporating the Compatibility module (see
@@ -11,42 +10,63 @@ link:migration-tool[Migrating Mule 3 Applications to Mule 4]) as needed, and
 performing any manual migration steps indicated in the Migration report.
 
 //TODO: REMOVE WHEN BETA IS OVER.
-*Note on the Beta Release:* This page will be augmented periodically through the
-Beta period based on feedback.
+*Note on the Beta Release:* This page might be augmented periodically during the
+Beta period based on feedback and recommendations.
 
+=== Using the Scripting Module to Migrate Some MEL Expressions
 
-[[migrate_mel]]
-== Migrating Remaining MEL Expressions to DataWeave
+Most MEL expressions are migrated to link:dataweave[DataWeave] by the Migration
+tool. However, for certain procedural MEL expressions that cannot be migrated
+seamlessly to DataWeave, you should use the link:scripting-module[Scripting module].
 
-When migrating MEL expressions to link:dataweave[DataWeave], you should use the
-link:scripting-module[Scripting Module] for procedural MEL expressions.
+//TODO: A BEFORE/AFTER EXAMPLE WOULD HELP HERE
 
-//TODO: NEED EXAMPLES PLEASE
+== Inbound Properties (Manual Post-Migration Steps)
 
-In the XML for the migrated Mule application:
+Instead of relying on the Compatibility module to handle inbound properties (see
+link:intro-mule-message#inbound-properties-are-now-attributes[Inbound Properties Are Now Attributes]) and on the `mel:` syntax to allow MEL expressions in Mule 4,
+it is recommended that you follow each of these steps on the Migration tool
+output:
 
-. Remove link:intro-mule-message#inbound-properties-are-now-attributes[compatibility:attributes-to-inbound-properties].
-+
+. Remove `<compatibility:attributes-to-inbound-properties/>` elements.
+. Replace uses of `inboundProperties` in MEL expressions with a DataWeave 2.0 expression.
+. Replace uses of `vars.compatibility_inboundProperties[‘propName’]` with a DataWeave 2.0 expression.
 
-+
-. Replace uses of `inboundProperties` in expressions and `vars.compatibility_inboundProperties[‘propName’]`) for attributes in DataWeave
-migrations.
-+
-//TODO: REPLACE WITH WHAT? NEED EXAMPLES OF BOTH.
-+
-. Remove link:intro-mule-message#outbound-properties[compatibility:outbound-properties-to-var]
-+
-If the outbound property is _not_ set in the flow, you can safely remove any
-expressions that use that property. For example, you can remove the `status`
-attribute from an HTTP listener and rely on the default for the listener _if_
-an `http.status` outbound property is never set in the flow.
-+
-If a property is set in the flow, you must move the expression that sets the
+This example shows modifications to inbound properties from an HTTP listener:
+
+.Example: Output of the Migration Tool
+[source,XML,linenums]
+----
+<http:listener config-ref="myHttp"/>
+<compatibility:attributes-to-inbound-properties/>
+<logger message="#[vars.compatibility_inboundProperties['http.request']]">
+<logger message="#[mel:message.inboundProperties['http.request']]">
+----
+
+.Example: Manual Modification to the Output of the Migration Tool
+[source,XML,linenums]
+----
+<http:listener config-ref="myHttp"/>
+<logger message="#[message.attributes.requestPath]">
+<logger message="#[message.attributes.requestPath]">
+----
+
+== Outbound Properties (Manual Post-Migration Steps)
+
+If an outbound property is _not_ set in a flow, you can safely remove any
+outbound properties (see
+link:intro-mule-message#outbound-properties[Outbound Properties]).
+For example, you can remove the `status` attribute from an HTTP listener and
+rely on the default for the listener _if_ an `http.status` outbound property is
+never set in the flow.
+
+//TODO: A BEFORE/AFTER EXAMPLE HERE WOULD HELP NICE.
+
+If a property is set in the flow, you need to move the expression that sets the
 property into the attribute of the operation or source where it is used. For
-example, you might modify the auto-migrated XML in the next example to the
-manually migrated.
+example, you might modify the XML output of the Migration tool:
 
-.Auto-Migrated XML Source
+.Example: Output of the Migration Tool
 [source,XML,linenums]
 ----
 <compatibility:set-property propertyName="http.method" value="#[if(get) 'GET' else 'PUT']"/>
@@ -55,10 +75,10 @@ manually migrated.
 ----
 
 The next example moves the expression that sets the `http.method` property
-(shown in the auto-migrated example above) to the `method` attribute of the
-`http:request` operation where it is used.
+(shown in the example above) to the `method` attribute of the `http:request`
+operation where it is used.
 
-.Manually Modified XML
+.Example: Manual Modification to the Output of the Migration Tool
 [source,XML,linenums]
 ----
 <http:request config-ref="myHttp" method="#[if(get) 'GET' else 'PUT']"/>
