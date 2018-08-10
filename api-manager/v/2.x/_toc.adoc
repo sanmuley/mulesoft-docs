@@ -1,6 +1,8 @@
 // TOC File
 
 * link:/api-manager/v/2.x/index[API Manager]
+** link:/api-manager/v/2.x/api-gateway-capabilities-mule4[API Gateway capabilities (Mule 4)]
+
 ** link:/api-manager/v/2.x/latest-overview-concept[About API Manager 2.x]
 *** link:/api-manager/v/2.x/latest-tasks[Basic API Management Tasks]
 **** link:/api-manager/v/2.x/manage-exchange-api-task[To Manage an API from Exchange]
@@ -32,7 +34,6 @@
 *** link:/api-manager/v/2.x/proxy-deploy-hybrid-latest-task[To Deploy a Proxy to Hybrid]
 *** link:/api-manager/v/2.x/download-proxy-task[To Download a Proxy]
 
-** link:/api-manager/v/2.x/api-gateway-capabilities-mule4[API Gateway capabilities (Mule 4)]
 
 ** link:/api-manager/v/2.x/policies-4-concept[About Policies]
 *** link:/api-manager/v/2.x/policies-whats-new-concept[What's New in Policy Management]
