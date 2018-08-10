@@ -11,17 +11,17 @@ over a Mule 3 project and outputs a Mule 4 project with a report about what
 remains to migrate. The output project is designed to work with a <<compatibility_module, Compatibility module>> in Studio for some important
 items that are not migrated automatically by the tool.
 
-The migration process is a multi-part task, where you:
+The migration process is a multi-part procedure, where you:
 
-. <<migrate_project, Run the migrator>> on a Mule 3 project, and review the <<migration_report, Migration Report>>.
+. <<migrate_project, Run the migrator>> on a Mule 3 project, and review the <<migration_report, Migration report>>.
 . Import the migrator output into a supported version of <<min_reqs, Studio 7>>.
-. Perform a manual migration for areas that the migrator does not migrate, and
+. Perform a manual migration on what the migrator does not migrate, and
 use the Compatibility module on that project, as needed.
 
 [[min_reqs]]
 == Requirements
 
-Minimum requirements:
+Minimum requirements for a migrated app:
 
 * Studio 7.2 (with support for Mule Runtime 4.1.3 or above).
 
@@ -30,7 +30,9 @@ The tool migrates Mule apps that use these versions of the Mule runtime:
 * 3.9.x
 * 3.8.x
 
-The tool can be used for the following versions but will not be supported in the Beta or GA:
+//TODO: REMOVE REF TO BETA AT GA
+The tool can be used on the following versions, but these versions are not
+supported in the Beta or at GA:
 
 * 3.7.x
 * 3.6.x
@@ -48,13 +50,13 @@ time.
 
 The Migration tool supports the following migrations:
 
-* Mule apps only (no domains or policies supported)
-* MEL to DatWeave expressions (simple cases only)
+* Mule apps only (no domains or policies are supported)
+* MEL to DataWeave expressions (simple cases only)
 * DataWeave component to `ee:transform` (DataWeave 1.0 to DataWeave 2.0)
-* Connectors: HTTP, DB, WebService Consumer
+* Connectors: HTTP, Database, Web Service Consumer
 * Modules: Validations
 * Transports: HTTP, JMS, File, VM (request-reply not supported)
-* Components: Cache, Batch, ForEach, Choice, ScatterGather, Poll
+* Components: Cache, Batch, For Each, Choice, Scatter-Gather, Poll
 * Error Handling, Transactional scope
 * Properties and secure properties
 * Spring Beans definitions
@@ -81,6 +83,7 @@ To run the Migration tool:
 . In your console, provide a command that specifies all the required <<options>>,
 for example:
 +
+//TODO: NEED TO CHANGE THE FILENAME OF THE .jar HERE to something more realistic
 .Command-line Invocation
 [source,console,linenums]
 ----
@@ -113,15 +116,16 @@ In Studio, you can import the project by going to File -> Import, then from the 
 +
 You can find all errors and warnings in the <<migration_report>>.
 +
-It is important to note that the same information is provided as comments in the Mule Configuration files.
+It is important to note that the same information is provided as comments in the Mule Configuration XML files for your project that the Migration tool outputs.
 +
 . Address the errors and warnings in the report.
 +
 Note that the <<compatibility_module, Compatibility module>> is likely work
-around some of these issues until your team and address them with permanent fixes.
+around some of these issues until you or your team can address them with
+permanent fixes.
 +
 . Identify and consider additional migration steps where the automated migration
-can be improved. See link:migration-manual[Migration to Mule 4: Recommended Migration Tasks].
+by the tool can be improved. See link:migration-manual[Migration to Mule 4: Recommended Migration Tasks].
 
 [[compatibility_module]]
 == Compatibility Module
@@ -130,13 +134,13 @@ Studio automatically applies the Compatibility module to your migrated project.
 
 *Important:* MuleSoft recommends that you migrate to a point where the
 Compatibility module can be dropped from your app and that you simply use the
-module as a bridge until you or your team can do so.
+module as a bridge until you can drop the tool.
 
 The Compatibility does not cover every migration gap. The module simply
-complements of the Migration tool:
+complements the Migration tool:
 
  * By providing MEL support for the cases where a MEL expression could not be
- migrated to DW automatically.
+ migrated to DataWeave automatically.
  * By adapting the Mule 3 message model to Mule 4.
 
 You or your team will need to handle other migration gaps that are covered in
@@ -174,7 +178,7 @@ image::migrator-report.png[Mule Migration Tool Report]
 * Error (`ERROR`): Identifies something that behaves differently than its Mule 3 counterpart.
 
 [[message_types]]
-In the Configuration XML file for the project, you see any `WARN` or `ERROR`
+In the Configuration XML file for the output project, you see any `WARN` or `ERROR`
 notices. For example, see the `Migration WARN:` messages and links in the
 migrated Choice router:
 
@@ -228,8 +232,7 @@ image::migrator-issue-found.png[Mule Migration Tool Report - Issue Found]
 [[options]]
 == Command-line Options
 
-The migrator is a command-line tool. You simply input a Mule 3 project and
-output the results.
+The migrator is a command-line tool. You simply input a Mule 3 project and target version and then output the results.
 
 .Command-line Options
 |===
@@ -354,7 +357,7 @@ Caveats:
 
 Tool makes best effort to migrate MEL expressions, but when the automatic migration is not possible:
 
-* MEL Expression migration to DW can happen before or after running the tool. Resorting to MEL means:
+* MEL Expression migration to DataWeave can happen before or after running the tool. Resorting to MEL means:
 ** Adding the compatibility module
 ** Adding the `mel:` prefix to the expression
 
