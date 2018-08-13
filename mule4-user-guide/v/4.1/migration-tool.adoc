@@ -54,7 +54,7 @@ The Migration tool supports the following migrations:
 * MEL to DataWeave expressions (simple cases only)
 * DataWeave component to `ee:transform` (DataWeave 1.0 to DataWeave 2.0)
 * Connectors: HTTP, Database, Web Service Consumer
-* Modules: Validations
+* Modules: Validations, Scripting (DSL only, no migration of the script itself)
 * Transports: HTTP, JMS, File, VM (request-reply not supported)
 * Components: Cache, Batch, For Each, Choice, Scatter-Gather, Poll
 * Error Handling, Transactional scope
