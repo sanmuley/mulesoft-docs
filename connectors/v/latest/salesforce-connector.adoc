@@ -1,34 +1,621 @@
 = Salesforce Connector
-:keywords: salesforce connector, inbound, outbound, streaming, poll, dataweave, datasense
 :imagesdir: _images
-:icons: font
 
-link:/connectors/salesforce-about[About the Salesforce Connector]
+_Select_
 
-link:/connectors/salesforce-connector-tech-ref[Salesforce Connector Technical Reference]
+The Anypoint Salesforce Connector lets you connect to the Salesforce platform. The connector exposes convenient methods for accessing Salesforce, including working with the Salesforce Apex classes.
 
-link:/connectors/salesforce-to-work-with-topics[To Work with Salesforce Topics]
+The connector executes API calls targeting Salesforce's SOAP API, REST API, Bulk API, and Streaming API, depending on the operation you configure. The API calls use an XML request and response over an HTTPS connection. All required request headers, error handling, and HTTPS connection configurations are abstracted from the user and built into the connector.
 
-link:/connectors/salesforce-to-work-with-streaming-channels[To Work with Streaming Channels]
+There are three ways to use a Salesforce connector in your application: as an outbound connector, an inbound connector, or a streaming inbound connector.
 
-link:/connectors/salesforce-to-receive-custom-events[To Receive Custom Event Notifications]
+== Prerequisites
 
-link:/connectors/salesforce-about-date-calendar-object-storage[About Date and Calendar Object Storage]
+This document assumes that you are familiar with Salesforce, HTTP, SOAP, REST, Bulk and Streaming APIs, Mule, Anypoint Connectors, Anypoint Studio, Mule concepts, elements in a Mule flow, and Global Elements.
 
-link:/connectors/salesforce-to-create-bulk-objects[About Creating Objects in Bulk]
+Requirements for using the connector:
 
-link:/connectors/salesforce-to-create-consumer-key[To Create a Consumer Key]
+* https://developer.salesforce.com[Salesforce developer account].
+* Security token - You can receive a new security token by email if you run Reset Security Token through My Personal Information from the Salesforce Setup pages.
+* Consumer key and Secret - Required if you are using the OAuth API. 
+* Namespace and schema location: If you plan to create the XML for your Mule application by hand, you need to include the correct namespace and schema location in your XML file. Anypoint Studio adds this information to the XML file automatically when you add the Salesforce connector to a flow in a Mule app.
 
-link:/connectors/salesforce-to-generate-keystore-file[To Generate a KeyStore File]
+== What's New in this Connector
 
-link:/connectors/salesforce-about-apex-settings[About Apex Settings and Invoke Operations]
+This connector is the first release for Mule 4.
 
-link:/connectors/salesforce-about-proxy-settings[About Proxy Settings]
+== To Connect in Design Center
 
-link:/connectors/salesforce-about-threads-concurrency[About Working with Threads and Concurrent Flows]
+. Click a trigger to initiate access to your flow. To use Salesforce to send content to your application, select Salesforce as the trigger. 
++
+The Salesforce triggers are:
++
+* New Object - Create a new object. Possible object types are Contact, Lead, Account, Contracts, and custom objects. 
+* Modified Object - Modify an object.
+* Deleted Object - Delete an object.
+* Replay Channel: Subscribes to a streaming channel. This trigger provides channel-related notification settings for new events and events stored by Salesforce within the 24-hour retention period. Events that take place in the specified channel trigger the flow.
++
+Note: A channel or topic must be published to Salesforce before a subscription to the channel can be created.
++
+* Replay Topic: Subscribes to a topic. This trigger provides topic-related notification settings for new events and events stored by Salesforce within the 24-hour retention period. Events that take place on records in the specified topic trigger the flow.
+* Subscribe Channel: Subscribes to a streaming channel. This trigger provides channel-related notification settings for new events that take place after you subscribe.
+* Subscribe Topic: Subscribes to a topic. This trigger provides topic-related notification settings for new events that take place after you subscribe.
++
+Alternatively, you can use an HTTP Listener or Scheduler trigger.
++
+. To create an optional global element for the connector, you can choose from the following options:
++
+image:DC_sfdc-choose-global-type.png[sfdc-choose-global-type]
++
+** <<Required Parameters for Basic Authentication>> More details:  https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_calls_login.htm[Basic Authentication]
+** <<Required Parameters for the OAuth 2.0 Configuration>> More details: https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_web_server_flow.htm&language=en_US[OAuth 2.0]
+** <<Required Parameters for the OAuth 2.0 JWT Bearer Configuration>> More details: https://help.salesforce.com/HTViewHelpDoc?id=remoteaccess_oauth_jwt_flow.htm[OAuth 2.0 JWT Bearer]
+** <<Required Parameters for the OAuth 2.0 SAML Bearer Configuration>> More details: https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_SAML_bearer_flow.htm&language=en_US[OAuth 2.0 SAML Bearer]
+** <<Required Parameters for the OAuth 2.0 Username-Password Configuration>> More details: https://help.salesforce.com/articleView?id=remoteaccess_oauth_username_password_flow.htm&type=0&language=en_US[OAuth 2.0 Username-Password]
++
+. Select the plus sign to add a component.
+. Select the connector as a component.
+. Configure these fields:
++
+Create:
++
+** Type: Salesforce object type.
+** Records: DataSense expression.
++
+image:DC_create.png[sfdc-create]
++
+Query:
++
+** Salesforce Query: Salesforce query to retrieve objects.
+** Parameters: Values for placeholders in the salesforce query.
++
+image:DC_query.png[sfdc-query]
++
+Update:
++
+** Type: Salesforce object type.
+** Records: DataSense expression to produce a collection of Salesforce objects to be updated.
++
+image:DC_update.png[sfdc-update]
++
+Delete:
++
+** Records To Delete Ids: DataSense expression to produce a collection of Salesforce objects to be deleted.
++
+image:DC_delete.png[sfdc-delete]
 
-link:/connectors/salesforce-about-salesforce-apis[About Salesforce APIs]
+=== Required Parameters for Basic Authentication
 
-link:/connectors/salesforce-tips[Salesforce Connector Tips]
+* Username: Enter the Salesforce username.
+* Password: Enter the corresponding password.
+* Security Token: Enter the corresponding security token.
 
-link:/connectors/salesforce-xml-ref[XML Reference for the Salesforce Connector]
+[NOTE]
+Implementing *OAuth 2.0*-based authentication mechanisms involves extra steps, but may be preferred if your service is exposed to external users, as it ensures better security.
+
+image:DC_basic_auth_config.png[]
+
+=== Required Parameters for the OAuth 2.0 Configuration
+
+* Consumer Key: The consumer key for the Salesforce connected app.
+* Consumer Secret: The consumer secret for the connector to access Salesforce.
+
+image:DC_oauth_2_0_config.png[]
+
+=== Required Parameters for the OAuth 2.0 JWT Bearer Configuration
+
+* Consumer Key: The consumer key for the Salesforce connected app.
+* Keystore File: See <<Generating a Keystore File>>.
+* Store Password: The password for the keystore.
+* Principal: The Salesforce username that you want to use.
+
+image:DC_oauth_jwt_config.png[]
+
+==== Required Parameters for the OAuth 2.0 SAML Bearer Configuration
+
+* Consumer Key: The consumer key for the Salesforce connected app.
+* Keystore File: The path to the key store used to sign data during authentication. Only Java key store format is allowed.
+* Store Password: Key store password
+* Principal: Username of desired Salesforce user
+
+image:DC_oauth_saml_config.png[]
+
+==== Required Parameters for the OAuth 2.0 Username-Password Configuration
+
+* Consumer Key: The consumer key for the Salesforce connected app.
+* Consumer Secret: The consumer secret for the connector to access Salesforce.
+* Username: Enter the Salesforce username.
+* Password: Enter the corresponding password.
+* Security Token: Enter the corresponding security token.
++
+image:DC_oauth_usr_pass_config.png[]
+
+== Generating a Keystore File
+
+The *Keystore* is the path to the keystore used to sign data during authentication. Only Java keystore format is allowed.
+
+To generate a keystore file:
+
+. Go to your Mule workspace, and open the command prompt (for Windows) or Terminal (for Mac). 
+. Type `keytool -genkeypair -alias salesforce-cert -keyalg RSA -keystore salesforce-cert.jks` and press enter.  
+. Enter the following details: 
++
+** Password for the keystore. 
+** Your first name and last name. 
+** Your organization unit. 
+** Name of your city, state, and the two letters code of your county.
++
+The system generates a java keystore file containing a private/public key pair in your workspace.
++
+. Provide the file path for the *Keystore* in your connector configuration.
++
+Type `keytool -exportcert -alias salesforce-cert -file salesforce-cert.crt -keystore salesforce-cert.jks` and press enter.
++
+The system now exports the public key from the keystore into the workspace. This is the public key that you need to enter in your Salesforce instance.
++
+. Make sure that you have both the keystore (salesforce-cert.jks) and the public key (salesforce-cert.crt) files in your workspace.
+
+
+== Connect in Anypoint Studio 7
+
+You can use this connector in Anypoint Studio by first downloading it from Exchange
+and configuring it as needed.
+
+== Install Connector in Studio
+
+. In Anypoint Studio, click the Exchange icon in the Studio taskbar.
+. Click Login in Anypoint Exchange.
+. Search for this connector and click Install.
+. Follow the prompts to install this connector.
+
+When Studio has an update, a message displays in the lower right corner, 
+which you can click to install the update.
+
+=== Configure in Studio
+
+. Drag and drop the connector to the Studio Canvas.
+. To create a global element for the connector, set these fields:
++
+Basic Authentication:
++
+** Username: Enter the Salesforce username.
+** Password: Enter the corresponding password.
+** Security Token: Enter the corresponding security token.
++
+image:AS_basic_auth_config.png[]
++
+OAuth 2.0:
++
+** Consumer Key:  The consumer key for the Salesforce connected app.
+** Consumer Secret:  The consumer secret for the connector to access Salesforce.
++
+image:AS_oauth_2_0_config.png[]
++
+OAuth 2.0 JWT:
++
+** Consumer Key:  The consumer key for the Salesforce connected app.
+** Keystore File:  See <<Generating a Keystore File>>.
+** Store Password:  The password for the keystore.
+** Principal:  The password for the keystore.
++
+image:AS_oauth_jwt_config.png[]
++
+OAuth 2.0 SAML:
++
+** Consumer Key:  The consumer key for the Salesforce connected app.
+** Keystore File:  See <<Generating a Keystore File>>.
+** Store Password:  The password for the keystore.
+** Principal:  The password for the keystore.
++
+image:AS_oauth_saml_config.png[]
++
+OAuth 2.0 Username and Password:
++
+** Consumer Key:  The consumer key for the Salesforce connected app.
+** Consumer Secret:  The consumer secret for the connector to access Salesforce.
+** Username:  Enter the Salesforce username.
+** Password:  Enter the corresponding password.
+** Security Token:  Enter the corresponding security token.
++
+image:AS_oauth_usr_pass_config.png[]
++
+. Based on the operation that you have dragged on the canvas configure the following fields:
++
+Create:
++
+** Type:  Salesforce object type.
+** Records:  DataSense expression.
++
+image:AS_create.png[sfdc-create]
++
+Query:
++
+** Salesforce Query:  Salesforce query to retrieve objects.
+** Parameters:  Values for placeholders in the salesforce query.
++
+image:AS_query.png[sfdc-query]
++
+Update:
++
+** Type:  Salesforce object type.
+** Records:  DataSense expression to produce a collection of Salesforce objects to be updated.
++
+image:AS_update.png[sfdc-update]
++
+Delete:
++
+** Records To Delete Ids:  DataSense expression to produce a collection of Salesforce objects to be deleted.
++
+image:AS_delete.png[sfdc-delete]
+
+=== Configuring Session Invalidation
+
+As of Salesforce Connector version 7.0.0, for all the configurations *except OAuth v2.0*, you have
+the option to keep the session alive until it expires by checking the *Disable session invalidation*
+checkbox.
+
+If the checkbox is unchecked, the connector automatically destroys the session after it's no longer needed.
+
+You should keep the session alive when you are working with threads or concurrency in general. Salesforce uses
+the same session for all your threads (for example, if you have an active session and you log in again, Salesforce uses the existing session instead of
+creating a new one). To make sure the connection doesn't close when a thread is finished, you should check the *Disable session invalidation* checkbox in the Connection section of the connector's global element properties.
+
+image:disable-session.png[disable session checkbox]
+
+=== Configuring Apex and Proxy Settings
+
+All the Salesforce connector configurations support Apex and Proxy settings. 
+
+Configure the Apex and Proxy settings as follows:
+
+Apex Settings values:
+
+* Fetch All Apex SOAP Metadata - Fetches the metadata of all the Apex SOAP classes.
+* Fetch All Apex REST Metadata - Fetches the metadata of all the all Apex REST classes.
+
+Apex Class Name:
+
+* None - No Apex class name is mentioned for DataSense to acquire. 
+* From Message - Lets you specify the class name from a MEL expression.
+* Create Object manually - A user creates a list and adds class names to the list - only those classes and their methods are acquired by DataSense.
++
+[NOTE]
+The *Fetch All Apex SOAP Metadata* and *Fetch All Apex REST Metadata* checkboxes take precedence over the Apex Class Name settings. If these boxes are selected, they fetch all the Apex SOAP metadata or Apex REST metadata regardless of your selection in the Apex Class Names section.
+
+Proxy Settings values:
+
+* Host - Host name of the proxy server.
+* Port - The port number the proxy server runs on.
+* Username - The username to log in to the server.
+* Password - The corresponding password. 
+
+After configuring, click OK. 
+
+From the Mule Palette tab, select an operation. 
+
+image:select-operation.png[SalesForceMain]
+
+
+
+== Salesforce API Access
+
+Salesforce exposes operations that address the following integration patterns via its APIs:
+
+[%header,cols="30a,70a"]
+|===
+|Integration Pattern |Description
+|Remote Process Invocation: Request-Reply |Salesforce kicks off a process in a remote system, waits for the remote system to finish processing, then accepts control back again from the remote system.
+|Remote Process Invocation: Fire and Forget |Salesforce initiates a process in a third-party system and receives an acknowledgement that the process has started. The third-party system continues processing independent of Salesforce.
+|Batch Data Synchronization |An external system accesses, changes, deletes, or adds data in Salesforce _in batches_, and vice versa (Salesforce to external system).
+|Remote Call-In |An external system accesses, changes, deletes or adds data in Salesforce, and vice versa (Salesforce to external system).
+|User Interface Update Based on Data Changes |The Salesforce UI updates in response to a change in a third-party system.
+|=== 
+
+*Notes:*
+
+* This connector does not expose _all_ possible operations of these Salesforce APIs. 
+* The Salesforce connector does *NOT* provide operations in the Chatter REST API or the Tooling API.
+* See http://blogs.developerforce.com/tech-pubs/2011/10/salesforce-apis-what-they-are-when-to-use-them.html[Salesforce APIs: What they are and when to use them] and https://help.salesforce.com/HTViewHelpDoc?id=integrate_what_is_api.htm&language=en_US[Which API should I use?]
+
+The Salesforce connector works with these APIs.
+
+=== Apex SOAP API
+
+The Salesforce https://www.salesforce.com/us/developer/docs/apexcode/[Apex SOAP API] exposes Apex class methods as custom SOAP Web service calls. This allows an external application to invoke an Apex Web service to perform an action in Salesforce.
+
+=== SOAP API
+
+The Salesforce http://www.salesforce.com/us/developer/docs/api/index.htm[SOAP API]  provides secure access to your organization's information on Salesforce. Most of the operations that the Salesforce connector performs map to operations that this API exposes.
+
+All the Salesforce operations performed through the SOAP API have an optional parameter called "Headers" that can take any of the following https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/soap_headers.htm[Salesforce SOAP Headers]:
+
+AllOrNoneHeader, AllowFieldTruncationHeader, AssignmentRuleHeader,
+CallOptions, EmailHeader, LocaleOptions, MruHeader, OwnerChangeOptions,
+QueryOptions, UserTerritoryDeleteHeader, DuplicateRuleHeader
+
+=== Apex REST API
+
+The Salesforce https://developer.salesforce.com/page/Creating_REST_APIs_using_Apex_REST[Apex REST API] creates your own REST-based web services using Apex. It has all of the advantages of the REST architecture, and provides the ability to define custom logic and includes automatic argument/object mapping.
+
+=== Bulk API
+
+The Salesforce https://www.salesforce.com/us/developer/docs/api_asynch/[Bulk API] quickly and securely load batches of your organization's data into Salesforce. 
+
+=== Streaming API
+
+The Salesforce http://www.salesforce.com/us/developer/docs/api_streaming/[Streaming API] securely receives notifications for changes to your organization's information in Salesforce.
+
+=== Metadata API
+
+The Salesforce http://www.salesforce.com/us/developer/docs/api_meta/[Metadata API] manages customizations and build tools that work with the metadata model, not the data itself.
+
+== Best Practices for Using a Salesforce Connector in Studio
+
+Design-time best practice dictates that you should build an application in this order:
+
+. Configure the connector.
+. Test the connection.
+. Initiate DataSense metadata extraction.
+. Build the rest of your flow.
+. Add and configure DataWeave.
+
+The objective of this design-time strategy is to set the pieces of the integration puzzle in place, then glue them together with DataWeave. Rather than designing a flow sequentially, from the inbound endpoint, this type of align, then glue together strategy ensures that you are utilizing DataSense, wherever possible, to pre-populate the information about the structure and format of the input or output data in a Transform Message component.
+
+*Note*: When subscribing to a topic that was not previously published in Salesforce, the subscription is successful.  When the topic is later published, the user who is already subscribed to it does NOT receive notifications regarding that topic. The user has to resubscribe after the topic creates.
+
+=== Outbound Scenario
+
+Use as an outbound connector in your flow to push data into Salesforce. To use the connector in this capacity, simply place the connector in your flow at any point after an inbound endpoint.
+
+== Use Case: Studio
+
+image:sfdc-connector-outbound.png[sfdc_outbound]
+
+* HTTP connector: Accepts data from HTTP requests.
+* Transform Message: Transforms data structure and format to produce the output Salesforce connector expects.
+* Salesforce connector: (_outbound_) Connects with Salesforce and performs an operation to push data to Salesforce.
+
+=== Inbound Scenario
+
+image:sfdc-connector-inbound.png[query_inbound]
+
+. Scheduler connector: Triggers flow according to configuration.
+. Salesforce connector: Connects with Salesforce, and returns an InputStream with the query results.
+. Transform Message: Transforms data structure and format to produce output the File endpoint expects.
+. File connector: Records data in a file, such as a CSV and saves it to a user-defined directory or location.
+
+=== Streaming Inbound Scenario
+
+Use as an inbound connector, without wrapping in a poll scope, to stream data from Salesforce into your application. To use the connector in this capacity, place a Salesforce connector at the start of your flow.
+
+[NOTE]
+Studio automatically converts the connector to Salesforce (Streaming) mode. Technically, this is still the same connector, but it accesses Salesforce's Streaming API meaning that the _only_ operation the converted connector can perform is Subscribe to topic (that is, subscribe to PushTopic).
+
+image:AS_subscribe_streaming_channel.png[subscribe streaming channel]
+
+Salesforce connector: Listens to notifications on a topic and feeds the data into the flow. +
+See also: https://developer.salesforce.com/docs/atlas.en-us.api_streaming.meta/api_streaming/intro_stream.htm[Streaming API]
+
+== Use Case: XML
+
+Paste this XML code into Anypoint Studio to experiment with the two flows described in the previous section.
+
+[source, xml, linenums]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" 
+	xmlns="http://www.mulesoft.org/schema/mule/core" 
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http 
+http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core 
+http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/salesforce 
+http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/file 
+http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<configuration-properties file="mule-app.properties"/>
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" >
+	<http:listener-connection host="localhost" port="8081" />
+	</http:listener-config>
+	<salesforce:sfdc-config name="Salesforce_Sfdc_config" doc:name="Salesforce Sfdc config">
+	  <salesforce:basic-connection 
+	  username="${salesforce.username}" 
+	  password="${salesforce.password}" 
+	  securityToken="${salesforce.securityToken}" />
+	</salesforce:sfdc-config>
+	<flow name="crud_app_template">
+		<http:listener config-ref="HTTP_Listener_config" path="/" doc:name="Listener" />
+		<parse-template location="form.html" doc:name="Parse Template"  />
+	</flow>
+	<flow name="create_accountFlow" >
+		<http:listener config-ref="HTTP_Listener_config" path="/createAccount" doc:name="Listener"  />
+		<ee:transform doc:name="Transform Message" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+[{
+
+	Name: payload.Name,
+	AccountNumber: payload.AccountNumber,
+	BillingCity: payload.BillingCity
+}]]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<salesforce:create doc:name="Create" type="Account" config-ref="Salesforce_Sfdc_config"/>
+		<ee:transform doc:name="Transform Message" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload map {
+	id:$.id,
+	errors:$.errors,
+	success:$.success
+
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="delete_accountFlow" >
+		<http:listener config-ref="HTTP_Listener_config" path="/delete" doc:name="Listener"  />
+		<ee:transform doc:name="Transform Message" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+[payload.Id]]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<salesforce:delete config-ref="Salesforce_Sfdc_config" doc:name="Delete" />
+		<ee:transform doc:name="Transform Message" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload map {
+	id:$.id,
+	errors:$.errors,
+	success:$.success
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="query_accountFlow" >
+		<http:listener config-ref="HTTP_Listener_config" path="/query" doc:name="Listener"  />
+		<salesforce:query config-ref="Salesforce_Sfdc_config" doc:name="Query" >
+			<salesforce:salesforce-query>SELECT AccountNumber,BillingAddress,Id,Name FROM Account WHERE Name = ':name'</salesforce:salesforce-query>
+			<salesforce:parameters ><![CDATA[#[output applicaton/java
+---
+{
+	name : payload.name
+}]]]></salesforce:parameters>
+		</salesforce:query>
+		<ee:transform doc:name="Transform Message"  >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload map {
+		AccountNumber:$.AccountNumber,
+		BillingAddress:$.BillingAddress,
+		Id:$.Id,
+		Name:$.Name
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="update_accountFlow" >
+		<http:listener config-ref="HTTP_Listener_config" path="/update" doc:name="Listener"  />
+		<ee:transform doc:name="Transform Message"  >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+[{
+
+	Name: payload.Name,
+	AccountNumber: payload.AccountNumber,
+	Id:payload.Id
+}]]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<salesforce:update config-ref="Salesforce_Sfdc_config" type="Account" doc:name="Update"  />
+		<ee:transform doc:name="Transform Message" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload map {
+	id:$.id,
+	errors:$.errors,
+	success:$.success
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="upsert_accountFlow" >
+		<http:listener config-ref="HTTP_Listener_config" path="/upsert" doc:name="Listener" />
+		<ee:transform doc:name="Transform Message" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+[{
+
+	Name: payload.Name,
+	AccountNumber: payload.AccountNumber,
+	Id:payload.Id
+}]]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<salesforce:upsert config-ref="Salesforce_Sfdc_config" 
+		externalIdFieldName="Id" type="Account" doc:name="Upsert" />
+		<ee:transform doc:name="Transform Message" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload map {
+	id:$.id,
+	errors:$.errors,
+	success:$.success,
+	created:$.created
+
+	}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="find_duplicates_for_account_flow" >
+		<http:listener config-ref="HTTP_Listener_config" path="/findDuplicates" doc:name="Listener" />
+		<ee:transform doc:name="Transform Message" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+[
+	payload
+]]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<salesforce:find-duplicates config-ref="Salesforce_Sfdc_config" type="Account"
+		doc:name="Find duplicates" />
+		<ee:transform doc:name="Transform Message" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	success: payload.success,
+	duplicateResults: {
+		(payload.duplicateResults map {
+			matchRecords: $.matchResults
+		}
+		)
+	},
+	duplicateRuleEntityType: payload.duplicateRuleEntityType,
+	duplicateRule: payload.duplicateRule,
+	allowSave: payload.allowSave,
+	errorMessage: payload.errorMessage
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="crud-appFlow" >
+		<http:listener doc:name="Listener" config-ref="HTTP_Listener_config" path="/"/>
+		<salesforce:convert-lead doc:name="Convert lead" config-ref="Salesforce_Sfdc_config"/>
+	</flow>
+</mule>
+----
+
+== See Also
+
+* https://forums.mulesoft.com[MuleSoft Forum]
+* https://support.mulesoft.com[Contact MuleSoft Support]
+* Access the https://developer.salesforce.com/docs[Salesforce developer documentation] for detailed documentation on Salesforce objects and queries.
