@@ -19,14 +19,14 @@ If you want to apply policies and generate analytics info, you must use either:
 
 === API
 
-An API is an abstraction of a set of components. It encapsulates the complexity of your Mule application development, and presents an easy and reusable way of accessing your assets. +
-Pairing your API to API Manager through an Autodiscovery element, enables you to apply policies to that API.
+An API is an abstraction of a set of components. It encapsulates the complexity of your Mule application development, and it presents an easy and reusable way of accessing your assets. +
+Pairing your API to API Manager through an Autodiscovery element enables you to apply policies to that API.
 
 Learn more link:api-auto-discovery-new-concept[About API Autodiscovery].
 
 ==== HTTP/HTTPS API
 
-An API that you create using an HTTP Exchange asset. API gateway assumes that the associated Mule Application being tracked by API Manager has an HTTP or HTTPS listener defined as an implementation endpoint.
+An API that you create using an HTTP Exchange asset. API Gateway assumes that the associated Mule application being tracked by API Manager has an HTTP or HTTPS listener defined as an implementation endpoint.
 
 *Usual usage*: REST based APIs.
 
@@ -34,7 +34,7 @@ Learn more about link:/anypoint-exchange/to-create-an-asset#creating-an-api-asse
 
 ==== RAML API
 
-An API that you create using a RAML/OAS Exchange asset. Your API gateway assumes that the associated Mule Application being tracked by API Manager has an HTTP or HTTPS listener with a RAML/OAS router defined as an implementation endpoint. +
+An API that you create using a RAML/OAS Exchange asset. Your API gateway assumes that the associated Mule application being tracked by API Manager has an HTTP or HTTPS listener with a RAML/OAS router defined as an implementation endpoint. +
 To have this asset in Exchange, you can design your API using API Designer, and then export it to Exchange.
 
 *Usual usage*: RAML/OAS based APIs.
