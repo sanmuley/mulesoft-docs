@@ -59,16 +59,15 @@ If Mule finds the flow variable `language=Spanish`, your message produces this p
 +
 image:choice-router-set-default.png[Setting the default language to English]
 +
-This Variable Transformer, and the Set Payload that follows it, are only invoked if neither of the expressions in the choice routing logic evaluate to true. Thus, if Mule does not find either the flow variable `language=Spanish` or the flow variable `language=French`, Mule routes the message to this default processing option, which sets the flow variable `language` with the value `English`.
+This *Set Variable* component, and the *Set Payload* component that follows it, are only invoked if neither of the expressions in the choice routing logic evaluate to true. Thus, if Mule does not find either the flow variable `language=French` or the flow variable `language=Spanish`, Mule routes the message to this default processing option, which sets the flow variable `language` with the value `English`.
 +
 [NOTE]
-Note that in this configuration you are setting a literal value for the variable, rather than using Mule expression language to extract a value from the message, as you did in the previous Variable Transformer.
+Note that in this configuration you are setting a literal value for the variable, rather than using Mule expression language to extract a value from the message, as you did in the previous *Set Variable* component.
+
+
+. Click the *Set Payload* component that comes after the *Set Variable* component inside the Default box. Then, in the *Properties Editor*, set the value to `Hello!`.
 +
-. Click the *Set Payload* after the Variable Transformer inside the Default box to open its Properties Editor, then configure it as:
-+
-image:SetPayLoadEnglish.png[SetPayLoadEnglish]
-+
-This Set Payload transformer sets a payload for the default option you configured above in your choice routing logic.
+This *Set Payload* component sets a payload for the default option you configured above in your choice routing logic.
 +
 As it processes messages, Mule evaluates the expressions defined in your routing options in order, top down, until one of them evaluates to "true".
 +
