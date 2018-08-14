@@ -3,11 +3,11 @@
 
 _Select_
 
-The Anypoint Salesforce Connector lets you connect to the Salesforce platform. The connector exposes convenient methods for accessing Salesforce, including working with the Salesforce Apex classes.
+The Anypoint Salesforce Connector lets you connect to the Salesforce platform APIs. This connector exposes methods for accessing Salesforce, including working with the https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_dev_process_chapter.htm[Salesforce Apex classes].
 
-The connector executes API calls targeting Salesforce's SOAP API, REST API, Bulk API, and Streaming API, depending on the operation you configure. The API calls use an XML request and response over an HTTPS connection. All required request headers, error handling, and HTTPS connection configurations are abstracted from the user and built into the connector.
+This connector works with Salesforce's SOAP API, REST API, Bulk API, and Streaming API, depending on the operation you configure. Each API call use an XML request and response over an HTTPS connection. All required request headers, error handling, and HTTPS connection configurations are built into the connector.
 
-There are three ways to use a Salesforce connector in your application: as an outbound connector, an inbound connector, or a streaming inbound connector.
+There are three ways to use a Salesforce connector in your application: as an outbound connector, an inbound connector, or a streaming inbound connector. These ways are discussed later in this topic.
 
 == Prerequisites
 
@@ -24,13 +24,14 @@ Requirements for using the connector:
 
 This connector is the first release for Mule 4.
 
-== To Connect in Design Center
+== Set a Trigger in Design Center
 
-. Click a trigger to initiate access to your flow. To use Salesforce to send content to your application, select Salesforce as the trigger. 
+. In Anypoint Platform > Design Center, click Create > Mule Application. 
+. Click a trigger to initiate access to your flow. To have Salesforce send content to your application, select Salesforce as the trigger and choose one of the following triggers:
 +
-The Salesforce triggers are:
+image:salesforce-triggers.png[Triggers in Design Center]
 +
-* New Object - Create a new object. Possible object types are Contact, Lead, Account, Contracts, and custom objects. 
+* New Object - Create a new object. Possible object types are Contact, Lead, Account, Contracts, Opportunity, and custom objects. The object types correspond to the Salesforce object you want to create, modify, or delete.
 * Modified Object - Modify an object.
 * Deleted Object - Delete an object.
 * Replay Channel: Subscribes to a streaming channel. This trigger provides channel-related notification settings for new events and events stored by Salesforce within the 24-hour retention period. Events that take place in the specified channel trigger the flow.
@@ -42,49 +43,75 @@ Note: A channel or topic must be published to Salesforce before a subscription t
 * Subscribe Topic: Subscribes to a topic. This trigger provides topic-related notification settings for new events that take place after you subscribe.
 +
 Alternatively, you can use an HTTP Listener or Scheduler trigger.
+
+== Example: Configuring a Salesforce New Object Trigger
+
+The following example shows how to configure the Salesforce New Object trigger. 
+
+. Create a New Mule Application in Design Center. 
+. Set the trigger to Salesforce > New Object.
+. Click *Set up*.
 +
-. To create an optional global element for the connector, you can choose from the following options:
+image:salesforce-new-object.png[New Object Configuration Screen]
 +
-image:DC_sfdc-choose-global-type.png[sfdc-choose-global-type]
+. Specify the Connection Type:
 +
-** <<Required Parameters for Basic Authentication>> More details:  https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_calls_login.htm[Basic Authentication]
-** <<Required Parameters for the OAuth 2.0 Configuration>> More details: https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_web_server_flow.htm&language=en_US[OAuth 2.0]
-** <<Required Parameters for the OAuth 2.0 JWT Bearer Configuration>> More details: https://help.salesforce.com/HTViewHelpDoc?id=remoteaccess_oauth_jwt_flow.htm[OAuth 2.0 JWT Bearer]
-** <<Required Parameters for the OAuth 2.0 SAML Bearer Configuration>> More details: https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_SAML_bearer_flow.htm&language=en_US[OAuth 2.0 SAML Bearer]
-** <<Required Parameters for the OAuth 2.0 Username-Password Configuration>> More details: https://help.salesforce.com/articleView?id=remoteaccess_oauth_username_password_flow.htm&type=0&language=en_US[OAuth 2.0 Username-Password]
+image:DC_sfdc-choose-global-type.png[Authentication Options]
 +
-. Select the plus sign to add a component.
-. Select the connector as a component.
-. Configure these fields:
+** <<Username Password Configuration>> See: https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_calls_login.htm[SOAP API Username Password Login]
+** <<OAuth v2.0 Configuration>> See: https://help.salesforce.com/articleView?id=remoteaccess_oauth_web_server_flow.htm[OAuth 2.0 Web Server Authentication Flow]
+** <<OAuth JWT Configuration>> See: https://help.salesforce.com/articleView?id=remoteaccess_oauth_jwt_flow.htm[OAuth 2.0 JWT Bearer Token Flow]
+** <<OAuth SAML Configuration>> See: https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_SAML_bearer_flow.htm[OAuth 2.0 SAML Bearer Assertion Flow]
+** <<OAuth Username Password Configuration>> See: https://help.salesforce.com/articleView?id=remoteaccess_oauth_username_password_flow.htm[OAuth 2.0 Username-Password Flow]
 +
+. Specify the parameters as required for each configuration type, and click
+*Test* to ensure you have a valid connection to Salesforce.
+. If needed, configure the Apex tab to decide what metadata to fetch, and to 
+add Apex class names.
++
+image:salesforce-apex.png[Apex configuration screen]
++
+. If needed, configure the Advanced tab to set the Max Idle Time and Time Units 
+for how long to hold open a connection before it expires.
+. If needed, set the Redelivery Policy on the main Configuration screen. 
+Redelivery indicates the maximum number of tries to deliver trigger contne
+
+== Configuring Salesforce as a Component
+
+After creating a trigger, click the plus sign. If needed, click *Transform* to 
+use DataWeave to map fields between your received data and what to use with 
+your Salesforce component.
+
+The following are examples of operations in the Salesforce component:
+
 Create:
-+
-** Type: Salesforce object type.
-** Records: DataSense expression.
-+
+
+* Type: Salesforce object type.
+* Records: DataSense expression.
+
 image:DC_create.png[sfdc-create]
-+
+
 Query:
-+
-** Salesforce Query: Salesforce query to retrieve objects.
-** Parameters: Values for placeholders in the salesforce query.
-+
+
+* Salesforce Query: Salesforce query to retrieve objects.
+* Parameters: Values for placeholders in the Salesforce query.
+
 image:DC_query.png[sfdc-query]
-+
+
 Update:
-+
-** Type: Salesforce object type.
-** Records: DataSense expression to produce a collection of Salesforce objects to be updated.
-+
+
+* Type: Salesforce object type.
+* Records: DataSense expression to produce a collection of Salesforce objects to be updated.
+
 image:DC_update.png[sfdc-update]
-+
+
 Delete:
-+
-** Records To Delete Ids: DataSense expression to produce a collection of Salesforce objects to be deleted.
-+
+
+* Records To Delete Ids: DataSense expression to produce a collection of Salesforce objects to be deleted.
+
 image:DC_delete.png[sfdc-delete]
 
-=== Required Parameters for Basic Authentication
+=== Username Password Configuration
 
 * Username: Enter the Salesforce username.
 * Password: Enter the corresponding password.
@@ -95,14 +122,14 @@ Implementing *OAuth 2.0*-based authentication mechanisms involves extra steps, b
 
 image:DC_basic_auth_config.png[]
 
-=== Required Parameters for the OAuth 2.0 Configuration
+=== OAuth v2.0 Configuration
 
 * Consumer Key: The consumer key for the Salesforce connected app.
 * Consumer Secret: The consumer secret for the connector to access Salesforce.
 
 image:DC_oauth_2_0_config.png[]
 
-=== Required Parameters for the OAuth 2.0 JWT Bearer Configuration
+=== OAuth JWT Configuration
 
 * Consumer Key: The consumer key for the Salesforce connected app.
 * Keystore File: See <<Generating a Keystore File>>.
@@ -111,7 +138,7 @@ image:DC_oauth_2_0_config.png[]
 
 image:DC_oauth_jwt_config.png[]
 
-==== Required Parameters for the OAuth 2.0 SAML Bearer Configuration
+=== OAuth SAML Configuration
 
 * Consumer Key: The consumer key for the Salesforce connected app.
 * Keystore File: The path to the key store used to sign data during authentication. Only Java key store format is allowed.
@@ -120,7 +147,7 @@ image:DC_oauth_jwt_config.png[]
 
 image:DC_oauth_saml_config.png[]
 
-==== Required Parameters for the OAuth 2.0 Username-Password Configuration
+=== OAuth Username Password Configuration
 
 * Consumer Key: The consumer key for the Salesforce connected app.
 * Consumer Secret: The consumer secret for the connector to access Salesforce.
@@ -154,6 +181,8 @@ Type `keytool -exportcert -alias salesforce-cert -file salesforce-cert.crt -keys
 The system now exports the public key from the keystore into the workspace. This is the public key that you need to enter in your Salesforce instance.
 +
 . Make sure that you have both the keystore (salesforce-cert.jks) and the public key (salesforce-cert.crt) files in your workspace.
+
+
 
 
 == Connect in Anypoint Studio 7
@@ -295,9 +324,67 @@ From the Mule Palette tab, select an operation.
 
 image:select-operation.png[SalesForceMain]
 
+== Events and Topics
 
+Your application can receive events by subscribing to a Salesforce topic.
 
-== Salesforce API Access
+Each event that travels through your flows contains information about the Salesforce data that has changed, how it changes, and when. The connector parses this information and sends you information that a flow can work with.
+
+Inbound properties of events:
+
+* payload
+* createdDate
+* replayId
+
+Salesforce stores events for 24 hours, so you can retrieve stored events during that retention window. A subscriber (to a topic or channel) can retrieve events at any time and is not restricted to listening to events at the time they are sent.
+
+Each broadcasted event is assigned a numeric ID. IDs are incremented and not guaranteed to be contiguous for consecutive events. Each ID is guaranteed to be higher than the ID of the previous event. For example, the event following the event with ID 999 can have an ID of 1,025. The ID is unique for the organization and the channel. The IDs of deleted events are not reused.
+
+=== Receiving Events for a Topic
+
+Before you can receive events for Salesforce changes that are associated with a topic, you must first create a topic (a PushTopic). A PushTopic is a special object in Salesforce that binds a name (the topic's name) and Salesforce Object Query Language (SOQL) query together. Once a PushTopic is created, you can subscribe to it by using its name.
+
+In Design Center, you can either use the Create (`create`) or Publish Topic (`publish-topic`) operation to create a topic. Example of the required fields for these operations:
+
+* Topic Name: `AccountUpdates`
+* Query: `SELECT Id, Name FROM Account`
+
+Example in XML for `publish-topic`:
+
+`<sfdc:publish-topic name="AccountUpdates" query="SELECT Id, Name FROM Account"/>`
+
+Alternatively, in Salesforce you might create a topic by executing code like this from an Enter Apex Code window, accessible through your system logs:
+
+[source, code, linenums]
+----
+PushTopic pushTopic = new PushTopic();
+pushTopic.ApiVersion = 23.0;
+pushTopic.Name = 'AllAccounts';
+pushTopic.Description = 'All records for the Account object';
+pushtopic.Query = 'SELECT Id, Name FROM Account';
+insert pushTopic;
+System.debug('Created new PushTopic: '+ pushTopic.Id);
+----
+
+=== Subscribing to a Topic
+
+After you create a topic, you can start receiving events by subscribing to the topic. To do so, you add the Subscribe Topic (`subscribe-topic`) or a Replay Topic (`replay-topic`) trigger to your flow. The trigger acts as an inbound endpoint. Every time the subscription receives an event, the trigger executes the rest of the flow in your Mule app. In the case of the XML example below, it prints a message to the log at INFO level.
+
+In Design Center, you use Subscribe Topic or Replay Topic operations for the Salesforce connector as the trigger.
+
+In XML, you use `subscribe-topic` or `replay-topic` as the trigger:
+
+[source, xml, linenums]
+----
+<flow name="accountUpdatesSubscription">
+    <!-- INBOUND ENDPOINT -->
+    <sfdc:subscribe-topic topic="AccountUpdates"/>
+    <!-- REST OF YOUR FLOW -->
+    <logger level="INFO" message="Received an event for Salesforce Object ID #[map-payload:Id]"/>
+</flow>
+----
+
+== Integration Patterns
 
 Salesforce exposes operations that address the following integration patterns via its APIs:
 
@@ -316,6 +403,8 @@ Salesforce exposes operations that address the following integration patterns vi
 * This connector does not expose _all_ possible operations of these Salesforce APIs. 
 * The Salesforce connector does *NOT* provide operations in the Chatter REST API or the Tooling API.
 * See http://blogs.developerforce.com/tech-pubs/2011/10/salesforce-apis-what-they-are-when-to-use-them.html[Salesforce APIs: What they are and when to use them] and https://help.salesforce.com/HTViewHelpDoc?id=integrate_what_is_api.htm&language=en_US[Which API should I use?]
+
+== Salesforce APIs
 
 The Salesforce connector works with these APIs.
 
