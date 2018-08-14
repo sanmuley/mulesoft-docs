@@ -29,7 +29,7 @@ This connector is the first release for Mule 4.
 . In Anypoint Platform > Design Center, click Create > Mule Application. 
 . Click a trigger to initiate access to your flow. To have Salesforce send content to your application, select Salesforce as the trigger and choose one of the following triggers:
 +
-image:salesforce-triggers.png[Triggers in Design Center]
+image:salesforce-dc-triggers.png[Triggers in Design Center]
 +
 * New Object - Create a new object. Possible object types are Contact, Lead, Account, Contracts, Opportunity, and custom objects. The object types correspond to the Salesforce object you want to create, modify, or delete.
 * Modified Object - Modify an object.
@@ -52,11 +52,11 @@ The following example shows how to configure the Salesforce New Object trigger.
 . Set the trigger to Salesforce > New Object.
 . Click *Set up*.
 +
-image:salesforce-new-object.png[New Object Configuration Screen]
+image:salesforce-dc-new-object.png[New Object Configuration Screen]
 +
 . Specify the Connection Type:
 +
-image:DC_sfdc-choose-global-type.png[Authentication Options]
+image:salesforce-dc-choose-global-type.png[Authentication Options]
 +
 ** <<Username Password Configuration>> See: https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_calls_login.htm[SOAP API Username Password Login]
 ** <<OAuth v2.0 Configuration>> See: https://help.salesforce.com/articleView?id=remoteaccess_oauth_web_server_flow.htm[OAuth 2.0 Web Server Authentication Flow]
@@ -69,7 +69,7 @@ image:DC_sfdc-choose-global-type.png[Authentication Options]
 . If needed, configure the Apex tab to decide what metadata to fetch, and to 
 add Apex class names.
 +
-image:salesforce-apex.png[Apex configuration screen]
+image:salesforce-dc-apex.png[Apex configuration screen]
 +
 . If needed, configure the Advanced tab to set the Max Idle Time and Time Units 
 for how long to hold open a connection before it expires.
@@ -82,34 +82,34 @@ After creating a trigger, click the plus sign. If needed, click *Transform* to
 use DataWeave to map fields between your received data and what to use with 
 your Salesforce component.
 
-The following are examples of operations in the Salesforce component:
+The following are examples of the operations in the Salesforce component:
 
 Create:
 
 * Type: Salesforce object type.
 * Records: DataSense expression.
 
-image:DC_create.png[sfdc-create]
+image:salesforce-dc-create.png[sfdc-create]
 
 Query:
 
 * Salesforce Query: Salesforce query to retrieve objects.
 * Parameters: Values for placeholders in the Salesforce query.
 
-image:DC_query.png[sfdc-query]
+image:salesforce-dc-query.png[sfdc-query]
 
 Update:
 
 * Type: Salesforce object type.
 * Records: DataSense expression to produce a collection of Salesforce objects to be updated.
 
-image:DC_update.png[sfdc-update]
+image:salesforce-dc-update.png[sfdc-update]
 
 Delete:
 
 * Records To Delete Ids: DataSense expression to produce a collection of Salesforce objects to be deleted.
 
-image:DC_delete.png[sfdc-delete]
+image:salesforce-dc-delete.png[sfdc-delete]
 
 === Username Password Configuration
 
@@ -120,14 +120,14 @@ image:DC_delete.png[sfdc-delete]
 [NOTE]
 Implementing *OAuth 2.0*-based authentication mechanisms involves extra steps, but may be preferred if your service is exposed to external users, as it ensures better security.
 
-image:DC_basic_auth_config.png[]
+image:salesforce-dc-user-pass.png[Username Password Configuration]
 
 === OAuth v2.0 Configuration
 
 * Consumer Key: The consumer key for the Salesforce connected app.
 * Consumer Secret: The consumer secret for the connector to access Salesforce.
 
-image:DC_oauth_2_0_config.png[]
+image:salesforce-dc-oauth-2.png[OAuth v2.0 Configuration]
 
 === OAuth JWT Configuration
 
@@ -136,7 +136,7 @@ image:DC_oauth_2_0_config.png[]
 * Store Password: The password for the keystore.
 * Principal: The Salesforce username that you want to use.
 
-image:DC_oauth_jwt_config.png[]
+image:salesforce-dc-oauth-jwt.png[OAuth JWT Configuration]
 
 === OAuth SAML Configuration
 
@@ -145,7 +145,7 @@ image:DC_oauth_jwt_config.png[]
 * Store Password: Key store password
 * Principal: Username of desired Salesforce user
 
-image:DC_oauth_saml_config.png[]
+image:salesforce-dc-oauth-saml.png[OAuth SAML Configuration]
 
 === OAuth Username Password Configuration
 
@@ -155,7 +155,7 @@ image:DC_oauth_saml_config.png[]
 * Password: Enter the corresponding password.
 * Security Token: Enter the corresponding security token.
 +
-image:DC_oauth_usr_pass_config.png[]
+image:salesforce-dc-oauth-user-pass.png[]
 
 == Generating a Keystore File
 
@@ -182,9 +182,6 @@ The system now exports the public key from the keystore into the workspace. This
 +
 . Make sure that you have both the keystore (salesforce-cert.jks) and the public key (salesforce-cert.crt) files in your workspace.
 
-
-
-
 == Connect in Anypoint Studio 7
 
 You can use this connector in Anypoint Studio by first downloading it from Exchange
@@ -205,40 +202,40 @@ which you can click to install the update.
 . Drag and drop the connector to the Studio Canvas.
 . To create a global element for the connector, set these fields:
 +
-Basic Authentication:
+Username Password Authentication:
 +
 ** Username: Enter the Salesforce username.
 ** Password: Enter the corresponding password.
 ** Security Token: Enter the corresponding security token.
 +
-image:AS_basic_auth_config.png[]
+image:salesforce-studio-user-pass.png[Studio Username Password Authentication]
 +
-OAuth 2.0:
+OAuth 2:
 +
 ** Consumer Key:  The consumer key for the Salesforce connected app.
 ** Consumer Secret:  The consumer secret for the connector to access Salesforce.
 +
-image:AS_oauth_2_0_config.png[]
+image:salesforce-studio-oauth-2.png[Studio OAuth 2]
 +
-OAuth 2.0 JWT:
-+
-** Consumer Key:  The consumer key for the Salesforce connected app.
-** Keystore File:  See <<Generating a Keystore File>>.
-** Store Password:  The password for the keystore.
-** Principal:  The password for the keystore.
-+
-image:AS_oauth_jwt_config.png[]
-+
-OAuth 2.0 SAML:
+OAuth 2 JWT:
 +
 ** Consumer Key:  The consumer key for the Salesforce connected app.
 ** Keystore File:  See <<Generating a Keystore File>>.
 ** Store Password:  The password for the keystore.
 ** Principal:  The password for the keystore.
 +
-image:AS_oauth_saml_config.png[]
+image:salesforce-studio-oauth-jwt.png[Studio OAuth 2 JWT]
 +
-OAuth 2.0 Username and Password:
+OAuth 2 SAML:
++
+** Consumer Key:  The consumer key for the Salesforce connected app.
+** Keystore File:  See <<Generating a Keystore File>>.
+** Store Password:  The password for the keystore.
+** Principal:  The password for the keystore.
++
+image:salesforce-studio-oauth-saml.png[Studio OAuth 2 SAML]
++
+OAuth 2 Username and Password:
 +
 ** Consumer Key:  The consumer key for the Salesforce connected app.
 ** Consumer Secret:  The consumer secret for the connector to access Salesforce.
@@ -246,7 +243,7 @@ OAuth 2.0 Username and Password:
 ** Password:  Enter the corresponding password.
 ** Security Token:  Enter the corresponding security token.
 +
-image:AS_oauth_usr_pass_config.png[]
+image:salesforce-studio-oauth-user-pass.png[Studio OAuth 2 Username and Password]
 +
 . Based on the operation that you have dragged on the canvas configure the following fields:
 +
@@ -255,27 +252,27 @@ Create:
 ** Type:  Salesforce object type.
 ** Records:  DataSense expression.
 +
-image:AS_create.png[sfdc-create]
+image:salesforce-studio-create.png[sfdc-create]
 +
 Query:
 +
 ** Salesforce Query:  Salesforce query to retrieve objects.
 ** Parameters:  Values for placeholders in the salesforce query.
 +
-image:AS_query.png[sfdc-query]
+image:salesforce-studio-query.png[sfdc-query]
 +
 Update:
 +
 ** Type:  Salesforce object type.
 ** Records:  DataSense expression to produce a collection of Salesforce objects to be updated.
 +
-image:AS_update.png[sfdc-update]
+image:salesforce-studio-update.png[sfdc-update]
 +
 Delete:
 +
 ** Records To Delete Ids:  DataSense expression to produce a collection of Salesforce objects to be deleted.
 +
-image:AS_delete.png[sfdc-delete]
+image:salesforce-studio-delete.png[sfdc-delete]
 
 === Configuring Session Invalidation
 
@@ -289,7 +286,7 @@ You should keep the session alive when you are working with threads or concurren
 the same session for all your threads (for example, if you have an active session and you log in again, Salesforce uses the existing session instead of
 creating a new one). To make sure the connection doesn't close when a thread is finished, you should check the *Disable session invalidation* checkbox in the Connection section of the connector's global element properties.
 
-image:disable-session.png[disable session checkbox]
+image:salesforce-disable-session.png[disable session checkbox]
 
 === Configuring Apex and Proxy Settings
 
@@ -322,7 +319,7 @@ After configuring, click OK.
 
 From the Mule Palette tab, select an operation. 
 
-image:select-operation.png[SalesForceMain]
+image:salesforce-select-operation.png[SalesForceMain]
 
 == Events and Topics
 
@@ -458,7 +455,7 @@ Use as an outbound connector in your flow to push data into Salesforce. To use t
 
 == Use Case: Studio
 
-image:sfdc-connector-outbound.png[sfdc_outbound]
+image:salesforce-outbound.png[sfdc_outbound]
 
 * HTTP connector: Accepts data from HTTP requests.
 * Transform Message: Transforms data structure and format to produce the output Salesforce connector expects.
@@ -466,7 +463,7 @@ image:sfdc-connector-outbound.png[sfdc_outbound]
 
 === Inbound Scenario
 
-image:sfdc-connector-inbound.png[query_inbound]
+image:salesforce-inbound.png[query_inbound]
 
 . Scheduler connector: Triggers flow according to configuration.
 . Salesforce connector: Connects with Salesforce, and returns an InputStream with the query results.
@@ -480,9 +477,10 @@ Use as an inbound connector, without wrapping in a poll scope, to stream data fr
 [NOTE]
 Studio automatically converts the connector to Salesforce (Streaming) mode. Technically, this is still the same connector, but it accesses Salesforce's Streaming API meaning that the _only_ operation the converted connector can perform is Subscribe to topic (that is, subscribe to PushTopic).
 
-image:AS_subscribe_streaming_channel.png[subscribe streaming channel]
+image:salesforce-studio-subscribe-streaming-channel.png[subscribe streaming channel]
 
-Salesforce connector: Listens to notifications on a topic and feeds the data into the flow. +
+Salesforce connector: Listens to notifications on a topic and feeds the data into the flow. 
+
 See also: https://developer.salesforce.com/docs/atlas.en-us.api_streaming.meta/api_streaming/intro_stream.htm[Streaming API]
 
 == Use Case: XML
