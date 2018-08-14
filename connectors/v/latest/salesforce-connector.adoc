@@ -58,11 +58,15 @@ image:salesforce-dc-new-object.png[New Object Configuration Screen]
 +
 image:salesforce-dc-choose-global-type.png[Authentication Options]
 +
-** <<Username Password Configuration>> See: https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_calls_login.htm[SOAP API Username Password Login]
-** <<OAuth v2.0 Configuration>> See: https://help.salesforce.com/articleView?id=remoteaccess_oauth_web_server_flow.htm[OAuth 2.0 Web Server Authentication Flow]
-** <<OAuth JWT Configuration>> See: https://help.salesforce.com/articleView?id=remoteaccess_oauth_jwt_flow.htm[OAuth 2.0 JWT Bearer Token Flow]
-** <<OAuth SAML Configuration>> See: https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_SAML_bearer_flow.htm[OAuth 2.0 SAML Bearer Assertion Flow]
-** <<OAuth Username Password Configuration>> See: https://help.salesforce.com/articleView?id=remoteaccess_oauth_username_password_flow.htm[OAuth 2.0 Username-Password Flow]
+[%header%autowidth.spread]
+|===
+|Connection Type |Salesforce Information Site
+| <<Username Password Configuration, Username Password>> |https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_calls_login.htm[SOAP API Username Password Login]
+| <<OAuth 2 Configuration, OAuth 2>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_web_server_flow.htm[OAuth 2.0 Web Server Authentication Flow]
+| <<OAuth JWT Configuration, OAuth JWT>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_jwt_flow.htm[OAuth 2.0 JWT Bearer Token Flow]
+| <<OAuth SAML Configuration, OAuth SAML>> |https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_SAML_bearer_flow.htm[OAuth 2.0 SAML Bearer Assertion Flow]
+| <<OAuth Username Password Configuration, OAuth Username Password>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_username_password_flow.htm[OAuth 2.0 Username-Password Flow]
+|===
 +
 . Specify the parameters as required for each configuration type, and click
 *Test* to ensure you have a valid connection to Salesforce.
@@ -122,7 +126,7 @@ Implementing *OAuth 2.0*-based authentication mechanisms involves extra steps, b
 
 image:salesforce-dc-user-pass.png[Username Password Configuration]
 
-=== OAuth v2.0 Configuration
+=== OAuth 2 Configuration
 
 * Consumer Key: The consumer key for the Salesforce connected app.
 * Consumer Secret: The consumer secret for the connector to access Salesforce.
