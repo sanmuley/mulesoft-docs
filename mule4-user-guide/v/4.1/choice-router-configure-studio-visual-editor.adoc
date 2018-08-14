@@ -1,18 +1,28 @@
-# Configure the Choice in Anypoint Studio's Visual Editor
+# Tutorial: Routing Messages in Anypoint Studio's Visual Editor
 :imagesdir: ./_images
 
-To configure the choice flow control, you need to determine the following message routing details:
+You can follow the procedure in this tutorial to learn the basics of routing messages in a flow by using the *Choice* component.
 
-* What content the choice flow router evaluates to determine routing
-* Number of routing options for the choice flow control
-* Default routing option
-* What processing Mule performs for each routing option
+The end result is a flow that listens for requests. The *Choice* component finds out whether each request contains a `language` attribute. The presence and value of this attribute determine how the *Choice* component routes the message:
 
-To learn how to configure choice flow control, you can use the following procedure, which starts with this flow:
+- If the value is `French`, the component routes the message to a *Set Payload* component that is named *Reply in French*. This latter component returns the message `Bonjour!` to the requester.
+- If the value is `Spanish`, the component routes the message to a *Set Payload* component that is named *Reply in Spanish*. This latter component returns the message `Hola!` to the requester.
+- If the message contains no `language` attribute, the component routes the message to the default path. The first component in this path, a *Set Variable* component named *Set Language to English*, sets the value of `language` to `English`. The next component in this path, a *Set Payload* component named *Reply in English*, returns the message `Hello!`.
+
+This example demonstrates that, when you are planning to route messages in a flow by using a *Choice* component, there are four aspects to planning that you need to consider:
+
+* The content that the *Choice* component evaluates to determine how it routes messages
+* The number of routes
+* The default routing option
+* The processing that the flow performs for each routing option
+
+== Prerequisite
+
+You start with the following, unfinished flow:
 
 image:choice-router-initial-flow.png[InitialFlow]
 
-To get started with this flow, you can create a new Mule project in Anypoint Studio version 7 or later, replacing the XML in the default XML file in `src/main/mule` with this XML:
+To create this inital flow, create a new Mule project in Anypoint Studio version 7 or later, replacing the XML in the default XML file in `src/main/mule` with this XML:
 
 .XML source
 [source,xml]
@@ -34,17 +44,20 @@ http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/cu
 </mule>
 ----
 
-Your task is to configure a flow that listens for a GET request that includes the attribute `language`. This attribute can have one of three values: `French`, `Spanish`, or `English`. The value determines the message that the flow returns:
-
-- If the value is `French`, the flow returns `Bonjour!`.
-- If the value is `Spanish`, the flow returns `Hola!`.
-- If the value is `English` or if the message contains no `language` attribute, the flow returns `Hello!`. This option is the default option.
-
 == Procedure
 
-. Insert a *Choice* component into the flow, placing it after the *Set Variable* component.
+. Drag a *Choice* component into the flow, placing it after the *Set Variable* component.
 +
 image:choice-router-add-component.png[AddingToFlow]
++
+*Result:* The component appears inside a box that has three parts:
++
+image:choice-router-three-parts.png[ThreeParts]
++
+1. The first part contains the *Choice* component itself.
+2. The second part will contain the non-default routing options.
+3. The third part will contain the default routing option.
+
 +
 . Within the scope of the *Choice* component, insert components that represent the different routing options.
 .. Drag a *Set Variable* component into the *Default* area, and then place a *Set Payload* component after than.
@@ -63,61 +76,42 @@ image:choice-router-example-flow.png[choice-flow]
 .. In the properties editor, change the value in *Display Name* to `Reply in Spanish`.
 .. Also in the properties editor, change the value in *Value* to `Hola!`.
 
-. Click the *Choice* component to open its properties editor. You can enter Mule expressions to define the routing logic that Mule applies to incoming messages (see table below; detailed instructions follow).
-+
-[%header,cols="70a,30a"]
-|===
-|When |Route Message to
-|`#[flowVars.language == 'Spanish']` |`Set Payload`
-|`#[flowVars.language == 'French']` |`Set Payload`
-|`Default` |`Variable`
-|===
-+
-. In the table, double-click the first empty row under *When*, as indicated by the blue arrow in this image:
+. Change the display names of the components for the default option, set the value of the `language` variable, and specify the output message.
+.. In the *Default* area of the *Choice* component, select the *Set Variable* component.
+.. In the properties editor, set the display name to `Set Language to English`.
+.. Under *Settings*, set the *Name* field to `language` and set the value field to `English`.
+.. Select the *Set Payload* component that is in the *Default* area.
+.. Set the display name to `Reply in English" and set the *Value* field to `Hello!`.
+
+. Configure the *Choice* component to route messages according to the value of or absence of the attribute `language` in an incoming message.
+.. Select the *Choice* component to open its properties editor.
+.. In the table, double-click the first empty row under *When*, as indicated by the blue arrow in this image:
 +
 image:choice-router-reply-in-french-1.png[ChoiceClickHere]
 +
-. In the *Route Properties* dialog, enter: +
+.. In the *Route Properties* dialog, type this expression: +
 `#[flowVars.language == 'French']`
 +
 image:choice-router-route-properties-french.png[ChoiceRouteProperties]
 +
-. Click *OK*. This expression tells Mule to look for a flow variable called `language` on the incoming message and check whether it equals French. If this expression evaluates to true, Mule routes the message to the message processor in that path.
-. Click the next empty row, and enter in the *Route Properties* dialog: +
+This expression tells Mule to look for a flow variable called `language` in incoming messages and check whether its value is `French`. If this expression evaluates to true, Mule routes the message to *Reply in French*.
++
+.. Click *OK*.
+.. Click the next empty row and enter in the *Route Properties* dialog: +
 `#[flowVars.language == 'Spanish']`
 +
-Just as in the previous row, this expression tells Mule to look for a flow variable called `language` in the incoming message. This time, the expression indicates Mule should check whether `language` equals Spanish. If this expression evaluates to true, Mule routes the message to the message processor in that path.
+This expression tells Mule to look for the `language` variable and check whether its value is `Spanish`. If this expression evaluates to true, Mule routes the message to *Reply in Spanish*.
 +
-. Click *OK*.
-. Double-click the *Default* line item to open its *Route Properties* dialog.
+.. Click *OK*.
+.. Double-click the *Default* line item to open its *Route Properties* dialog.
 +
 Notice that:
 +
-.. You cannot edit the *Expression* field
-.. The *Otherwise* box is checked
+- You cannot edit the *Expression* field
+- The *Otherwise* box is checked
 +
-The *Otherwise* box identifies this route as the *Default*  for the choice flow control. If the flow control cannot route a message to any of the preceding routing options in its scope, it directs the message to the default route.
-. Click the *Set Payload* processor for *Reply in French* and set the value to `Bonjour!`.
-+
-If Mule finds the flow variable `language=French`, your message produces this payload as a response.
-. Next, click the *Set Payload* processor for *Reply in Spanish* to open its Properties Editor and set value to `Hola!`
-+
-If Mule finds the flow variable `language=Spanish`, your message produces this payload as a response.
-+
+The *Otherwise* box identifies this route as the *Default*  for the choice flow control. If the flow control cannot route a message to either of the preceding routing options in its scope, it directs the message to the default route.
+
 . Click the *Set Variable* component inside the *Default* box that is in the message flow to open the component's properties editor. Set *Name* to `language` and *Value* to `English`.
 +
 image:choice-router-set-default.png[Setting the default language to English]
-+
-This *Set Variable* component, and the *Set Payload* component that follows it, are only invoked if neither of the expressions in the choice routing logic evaluate to true. Thus, if Mule does not find either the flow variable `language=French` or the flow variable `language=Spanish`, Mule routes the message to this default processing option, which sets the flow variable `language` with the value `English`.
-+
-[NOTE]
-Note that in this configuration you are setting a literal value for the variable, rather than using Mule expression language to extract a value from the message, as you did in the previous *Set Variable* component.
-
-
-. Click the *Set Payload* component that comes after the *Set Variable* component inside the Default box. Then, in the properties editor, set the value to `Hello!`.
-+
-This *Set Payload* component sets a payload for the default option you configured above in your choice routing logic.
-+
-As it processes messages, Mule evaluates the expressions defined in your routing options in order, top down, until one of them evaluates to "true".
-+
-. If necessary, drag and drop processors within the choice flow control scope on the canvas to reorder routing options.
