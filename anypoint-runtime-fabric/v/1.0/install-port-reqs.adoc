@@ -16,6 +16,8 @@ The following table lists the ports that must be accessible when running Anypoin
 | 2379, 2380, 4001, 7001 | TCP | Internal | Etcd distributed database
 | 6060 | TCP | Internal | Health check
 | 6443, 8080 | TCP | Internal | Kubernetes API server
+| 10248-10250 | TCP | Internal | Kubernetes components
+| 10255 | TCP | Internal | Kubernetes components
 | 30000-32767 | TCP | Internal | Internal services port range
 | 53 | TCP / UDP | Internal | Internal DNS
 | 7496 | TCP | Internal  | Peer-to-peer connectivity
