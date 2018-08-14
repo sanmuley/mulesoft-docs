@@ -1,7 +1,7 @@
 # Tutorial: Routing Messages in Anypoint Studio's Visual Editor
 :imagesdir: ./_images
 
-You can follow the procedure in this tutorial to learn the basics of routing messages in a flow by using the *Choice* component.
+You can follow the procedure in this tutorial to learn the basics of using Anypoint Studio to route messages in a flow by using the *Choice* component.
 
 The end result is a flow that listens for requests. The *Choice* component finds out whether each request contains a `language` attribute. The presence and value of this attribute determine how the *Choice* component routes the message:
 
@@ -35,7 +35,9 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
 http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
 http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
-<http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8081" doc:name="HTTP Listener Configuration"/>
+<http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8081" doc:name="HTTP Listener Configuration">
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
 <flow name="choiceExample" >
         <http:listener doc:name="Listener" doc:id="698b7d0e-1e5e-4105-bd24-6d900eb47f08" config-ref="HTTP_Listener_Configuration" path="/"/>
         <set-variable variableName="language" value="#[message.inboundProperties.'http.query.params'.language]" doc:name="Set Language Variable"/>
@@ -103,14 +105,10 @@ This expression tells Mule to look for a flow variable called `language` in inco
 This expression tells Mule to look for the `language` variable and check whether its value is `Spanish`. If this expression evaluates to true, Mule routes the message to *Reply in Spanish*.
 +
 .. Click *OK*.
-.. Double-click the *Default* line item to open its *Route Properties* dialog.
+.. *(Optional)* Double-click the *Default* line to open its *Route Properties* dialog, simply so that you can see two things:
 +
-Notice that:
-+
-- You cannot edit the *Expression* field
-- The *Otherwise* box is checked
-+
-The *Otherwise* box identifies this route as the *Default*  for the choice flow control. If the flow control cannot route a message to either of the preceding routing options in its scope, it directs the message to the default route.
+- You cannot edit the *Expression* field. That is because the Default option exists for when there is no value in a message for the *Choice* component to evaluate with an expression.
+- The *Otherwise* checkbox is selected. This checkbox identifies this route as the Default. If the *Choice* component cannot route a message to either of the preceding routes in its scope, it directs the message to the default route.
 
 . Click the *Set Variable* component inside the *Default* box that is in the message flow to open the component's properties editor. Set *Name* to `language` and *Value* to `English`.
 +
