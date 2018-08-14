@@ -1,20 +1,69 @@
-# Configure the Choice Router in Anypoint Studio's Visual Editor
+# Configure the Choice in Anypoint Studio's Visual Editor
 :imagesdir: ./_images
 
 To configure the choice flow control, you need to determine the following message routing details:
 
 * What content the choice flow router evaluates to determine routing
 * Number of routing options for the choice flow control
-* What processing Mule performs for each routing option
 * Default routing option
+* What processing Mule performs for each routing option
 
-After you determine your routing goals, follow this procedure to define the routing options, then the routing instructions.
+To learn how to configure choice flow control, you can use the following procedure, which starts with this flow:
 
-. Insert message processors, in this example Set Payload processors within the dashed line area that signifies the choice flow control scope to define the routing options. Add a Variable within the "Default" box along with another Set Payload item. The default blocks define the default routing option. You can place several message processors in a chain for each routing option, as needed. In the following example are three routing options to reply in Spanish, French, or English:
+image:choice-router-initial-flow.png[InitialFlow]
+
+To get started with this flow, you can create a new Mule project in Anypoint Studio version 7 or later, replacing the XML in the default XML file in `src/main/mule` with this XML:
+
+.XML source
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
+<http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8081" doc:name="HTTP Listener Configuration"/>
+<flow name="choiceExample" >
+        <http:listener doc:name="Listener" doc:id="698b7d0e-1e5e-4105-bd24-6d900eb47f08" config-ref="HTTP_Listener_Configuration" path="/"/>
+        <set-variable variableName="language" value="#[message.inboundProperties.'http.query.params'.language]" doc:name="Set Language Variable"/>
+		<logger message="#[payload]" level="INFO" doc:name="Logger"/>
+</flow>
+</mule>
+----
+
+Your task is to configure a flow that listens for a GET request that includes the attribute `language`. This attribute can have one of three values: `French`, `Spanish`, or `English`. The value determines the message that the flow returns:
+
+- If the value is `French`, the flow returns `Bonjour!`.
+- If the value is `Spanish`, the flow returns `Hola!`.
+- If the value is `English` or if the message contains no `language` attribute, the flow returns `Hello!`. This option is the default option.
+
+== Procedure
+
+. Insert a *Choice* component into the flow, placing it after the *Set Variable* component.
++
+image:choice-router-add-component.png[AddingToFlow]
++
+. Within the scope of the *Choice* component, insert components that represent the different routing options.
+.. Drag a *Set Variable* component into the *Default* area, and then place a *Set Payload* component after than.
+.. Drag two more *Set Payload* components to positions within the scope of the *Choice* component.
+
 +
 image:choice-router-example-flow.png[choice-flow]
-+
-. Click the *Choice Router* processor to open its *Properties Editor*. You can enter Mule expressions to define the routing logic that Mule applies to incoming messages (see table below; detailed instructions follow).
+
+. Change the display name of the first *Set Payload* component to reflect the option that it represents, and specify its output message.
+.. Select the component.
+.. In the properties editor, change the value in *Display Name* to `Reply in French`.
+.. Also in the properties editor, change the value in *Value* to `Bonjour!`.
+
+. Change the display name of the second *Set Payload* component to reflect the option that it represents, and specify its output message.
+.. Select the component.
+.. In the properties editor, change the value in *Display Name* to `Reply in Spanish`.
+.. Also in the properties editor, change the value in *Value* to `Hola!`.
+
+. Click the *Choice* component to open its properties editor. You can enter Mule expressions to define the routing logic that Mule applies to incoming messages (see table below; detailed instructions follow).
 +
 [%header,cols="70a,30a"]
 |===
@@ -55,7 +104,7 @@ If Mule finds the flow variable `language=French`, your message produces this pa
 +
 If Mule finds the flow variable `language=Spanish`, your message produces this payload as a response.
 +
-. Click the *Set Variable* component inside the *Default* box that is in the message flow to open the component's *Properties Editor*. Set *Name* to `language` and *Value* to `English`.
+. Click the *Set Variable* component inside the *Default* box that is in the message flow to open the component's properties editor. Set *Name* to `language` and *Value* to `English`.
 +
 image:choice-router-set-default.png[Setting the default language to English]
 +
@@ -65,7 +114,7 @@ This *Set Variable* component, and the *Set Payload* component that follows it, 
 Note that in this configuration you are setting a literal value for the variable, rather than using Mule expression language to extract a value from the message, as you did in the previous *Set Variable* component.
 
 
-. Click the *Set Payload* component that comes after the *Set Variable* component inside the Default box. Then, in the *Properties Editor*, set the value to `Hello!`.
+. Click the *Set Payload* component that comes after the *Set Variable* component inside the Default box. Then, in the properties editor, set the value to `Hello!`.
 +
 This *Set Payload* component sets a payload for the default option you configured above in your choice routing logic.
 +
