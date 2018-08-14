@@ -20,14 +20,60 @@ tool. However, some operators or MEL constructs are not supported by the migrato
 
 This expressions will have the `mel:` prefix, and the Compatibility module includes the MEL language from Mule 3 so these expressions still work. 
 
-//TODO: add example
+.Example 1: Output of the Migration Tool
+[source,linenums]
+----
+#[mel:flowVars.booleanVar ? 1 : 0]
+----
+
+.Example 2: Manual Modification to the Output of the Migration Tool
+[source,linenums]
+----
+#[if (vars.booleanVar) 1 else 0]
+----
+
+.Example 1: Output of the Migration Tool
+[source,linenums]
+----
+#[mel:Map m = new HashMap<>(); m.put(“key”, “value”); return m;]
+----
+
+.Example 2: Manual Modification to the Output of the Migration Tool
+[source,linenums]
+----
+#[{‘key’, ‘value’}]
+----
 
 === Using the Scripting Module to Migrate procedural MEL Expressions
 
 There are some MEL expressions that are not just expressions but actual procedural scripts, and as such cannot be migrated
 seamlessly to a functional language such as DataWeave. For these cases, you should use the link:scripting-module[Scripting module] and migrate the MEL script to a language supported by the Scripting module.
 
-//TODO: A BEFORE/AFTER EXAMPLE WOULD HELP HERE
+.Example: Output of the Migration Tool
+[source,XML,linenums]
+----
+<expression-component><![CDATA[
+if(flowVars.fail) {
+    throw new IllegalStateException(“var fail is set to true”);
+} else {
+    payload = “Some Result”;
+}
+]]></expression-component>
+----
+
+.Example: Manual Modification to the Output of the Migration Tool (The content may look similar because MEL and Groocy syntax are both Java-based, but always test taht the behavior of any migrated script is maintained)
+[source,XML,linenums]
+----
+<script:execute engine="groovy">
+    <script:code><![CDATA[
+if(vars.fail) {
+    throw new IllegalStateException(“var fail is set to true”);
+} else {
+    payload = “Some Result”;
+}
+    ]]></script:code>
+</script:execute>
+----
 
 == Inbound Properties (Manual Post-Migration Steps)
 
