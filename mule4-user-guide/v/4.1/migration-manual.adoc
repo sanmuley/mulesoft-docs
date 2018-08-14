@@ -1,7 +1,7 @@
 = Migration to Mule 4: Recommended Post-Migration Tasks
 
 The Migration tool performs migrations on individual components, connectors, and
-modules. In some cases, you can improve the migration by taking into account
+modules. In some cases, you can improve the migrated application by taking into account
 the flow or project as a whole.
 
 This section focuses on some recommended post-migration tasks to perform after
@@ -13,13 +13,67 @@ performing any manual migration steps indicated in the Migration report.
 *Note on the Beta Release:* This page might be augmented periodically during the
 Beta period based on feedback and recommendations.
 
-=== Using the Scripting Module to Migrate Some MEL Expressions
+== MEL Expressions
 
 Most MEL expressions are migrated to link:dataweave[DataWeave] by the Migration
-tool. However, for certain procedural MEL expressions that cannot be migrated
-seamlessly to DataWeave, you should use the link:scripting-module[Scripting module].
+tool. However, some operators or MEL constructs are not supported by the migrator to generate the equivalent DataWeave automatically.
 
-//TODO: A BEFORE/AFTER EXAMPLE WOULD HELP HERE
+This expressions will have the `mel:` prefix, and the Compatibility module includes the MEL language from Mule 3 so these expressions still work. 
+
+.Example 1: Output of the Migration Tool
+[source,linenums]
+----
+#[mel:flowVars.booleanVar ? 1 : 0]
+----
+
+.Example 2: Manual Modification to the Output of the Migration Tool
+[source,linenums]
+----
+#[if (vars.booleanVar) 1 else 0]
+----
+
+.Example 1: Output of the Migration Tool
+[source,linenums]
+----
+#[mel:Map m = new HashMap<>(); m.put(“key”, “value”); return m;]
+----
+
+.Example 2: Manual Modification to the Output of the Migration Tool
+[source,linenums]
+----
+#[{‘key’, ‘value’}]
+----
+
+=== Using the Scripting Module to Migrate procedural MEL Expressions
+
+There are some MEL expressions that are not just expressions but actual procedural scripts, and as such cannot be migrated
+seamlessly to a functional language such as DataWeave. For these cases, you should use the link:scripting-module[Scripting module] and migrate the MEL script to a language supported by the Scripting module.
+
+.Example: Output of the Migration Tool
+[source,XML,linenums]
+----
+<expression-component><![CDATA[
+if(flowVars.fail) {
+    throw new IllegalStateException(“var fail is set to true”);
+} else {
+    payload = “Some Result”;
+}
+]]></expression-component>
+----
+
+.Example: Manual Modification to the Output of the Migration Tool (The content may look similar because MEL and Groocy syntax are both Java-based, but always test taht the behavior of any migrated script is maintained)
+[source,XML,linenums]
+----
+<script:execute engine="groovy">
+    <script:code><![CDATA[
+if(vars.fail) {
+    throw new IllegalStateException(“var fail is set to true”);
+} else {
+    payload = “Some Result”;
+}
+    ]]></script:code>
+</script:execute>
+----
 
 == Inbound Properties (Manual Post-Migration Steps)
 
@@ -30,7 +84,7 @@ output:
 
 . Remove `<compatibility:attributes-to-inbound-properties/>` elements.
 . Replace uses of `inboundProperties` in MEL expressions with a DataWeave 2.0 expression.
-. Replace uses of `vars.compatibility_inboundProperties[‘propName’]` with a DataWeave 2.0 expression.
+. Replace uses of `vars.compatibility_inboundProperties[‘propName’]` with a reference to a Message attribute value.
 
 This example shows modifications to inbound properties from an HTTP listener:
 
@@ -54,7 +108,7 @@ This example shows modifications to inbound properties from an HTTP listener:
 == Outbound Properties (Manual Post-Migration Steps)
 
 If an outbound property is _not_ set in a flow, you can safely remove any
-outbound properties (see
+usage of that outbound property (see
 link:intro-mule-message#outbound-properties[Outbound Properties]).
 For example, you can remove the `status` attribute from an HTTP listener and
 rely on the default for the listener _if_ an `http.status` outbound property is
@@ -85,4 +139,4 @@ operation where it is used.
 ----
 
 Note that in Mule 3, the outbound property can be set by any component or inside
-a referenced flow.
+a referenced flow. This kind of complexity is what makes a manual step needed since the migration tool does not have the full context to interpret the semantics of an application.
