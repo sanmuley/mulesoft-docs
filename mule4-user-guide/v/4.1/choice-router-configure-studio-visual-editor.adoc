@@ -1,4 +1,4 @@
-# Configurig the Choice Router in Anypoint Studio's Visual Editor
+# Configure the Choice Router in Anypoint Studio's Visual Editor
 :imagesdir: ./_images
 
 To configure the choice flow control, you need to determine the following message routing details:
