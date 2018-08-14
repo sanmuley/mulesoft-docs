@@ -6,17 +6,16 @@
 //TODO: FOR GA, REPLACE "is a command-line utility that"...
 //"is a part of Studio that"
 Instead of performing a completely manual migration, you can use the Migration
-tool (migrator) to automate the initial migration step for supported component, connector, and module configurations. The migrator runs a sequence of tasks
+tool (migrator) to automate the initial migration step for supported components, connectors, and module configurations. The migrator runs a sequence of tasks
 over a Mule 3 project and outputs a Mule 4 project with a report about what
-remains to migrate. The output project is designed to work with a <<compatibility_module, Compatibility module>> in Studio for some important
-items that are not migrated automatically by the tool.
+remains to be migrated. The output project uses a <<compatibility_module, Compatibility module>> for some 
+items that are not migrated automatically by the tool, and to resolve some ambiguities caused by the Message structure changes.
 
 The migration process is a multi-part procedure, where you:
 
-. <<migrate_project, Run the migrator>> on a Mule 3 project, and review the <<migration_report, Migration report>>.
+. <<migrate_project, Run the migrator>> on a Mule 3 project.
 . Import the migrator output into a supported version of <<min_reqs, Studio 7>>.
-. Perform a manual migration on what the migrator does not migrate, and
-use the Compatibility module on that project, as needed.
+. Review the <<migration_report, Migration report>> and perform a manual migration on what the migrator does not migrate. Remove usages of the Compatibility module components.
 
 [[min_reqs]]
 == Requirements
@@ -64,7 +63,13 @@ The Migration tool supports the following migrations:
 * ApiKit
 
 Note that the <<compatibility_module, Compatibility module>> supports some
-additional items until you can migrate them.
+additional items from Mule 3.x until you can migrate them:
+
+* `set-property`
+* `remove-property`
+* `copy-properties`
+* `set-session-variable`
+* `remove-session-variable`
 
 [[migrate_project]]
 == Migrating a Project
@@ -95,7 +100,6 @@ mule-migration-tool-runner-1.0.0-20180806.163412-176-jar-with-dependencies.jar
 ----
 +
 If the migrator runs successfully, you will see a message something like this:
-+
 .Successful Migration
 [source,console,linenums]
 ----
@@ -130,11 +134,11 @@ by the tool can be improved. See link:migration-manual[Migration to Mule 4: Reco
 [[compatibility_module]]
 == Compatibility Module
 
-Studio automatically applies the Compatibility module to your migrated project.
+The migrator adds the Compatibility module to your migrated project.
 
 *Important:* MuleSoft recommends that you migrate to a point where the
 Compatibility module can be dropped from your app and that you simply use the
-module as a bridge until you can drop the tool.
+module as a bridge until the manual steps of the migration are complete.
 
 The Compatibility does not cover every migration gap. The module simply
 complements the Migration tool:
