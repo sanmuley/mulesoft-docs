@@ -31,16 +31,16 @@ This connector is the first release for Mule 4.
 +
 image:salesforce-dc-triggers.png[Triggers in Design Center]
 +
-* New Object - Create a new object. Possible object types are Contact, Lead, Account, Contracts, Opportunity, and custom objects. The object types correspond to the Salesforce object you want to create, modify, or delete.
-* Modified Object - Modify an object.
-* Deleted Object - Delete an object.
-* Replay Channel: Subscribes to a streaming channel. This trigger provides channel-related notification settings for new events and events stored by Salesforce within the 24-hour retention period. Events that take place in the specified channel trigger the flow.
+* *New Object* - Create a new object. Possible object types are Contact, Lead, Account, Contracts, Opportunity, and custom objects. The object types correspond to the Salesforce object you want to create, modify, or delete.
+* *Modified Object* - Modify an object.
+* *Deleted Object* - Delete an object.
+* *Replay Channel* - Subscribe to a streaming channel. This trigger provides channel-related notification settings for new events and events stored by Salesforce within the 24-hour retention period. Events that take place in the specified channel trigger the flow.
 +
 Note: A channel or topic must be published to Salesforce before a subscription to the channel can be created.
 +
-* Replay Topic: Subscribes to a topic. This trigger provides topic-related notification settings for new events and events stored by Salesforce within the 24-hour retention period. Events that take place on records in the specified topic trigger the flow.
-* Subscribe Channel: Subscribes to a streaming channel. This trigger provides channel-related notification settings for new events that take place after you subscribe.
-* Subscribe Topic: Subscribes to a topic. This trigger provides topic-related notification settings for new events that take place after you subscribe.
+* *Replay Topic* - Subscribe to a topic. This trigger provides topic-related notification settings for new events and events stored by Salesforce within the 24-hour retention period. Events that take place on records in the specified topic trigger the flow.
+* *Subscribe Channel* - Subscribe to a streaming channel. This trigger provides channel-related notification settings for new events that take place after you subscribe.
+* *Subscribe Topic* - Subscribe to a topic. This trigger provides topic-related notification settings for new events that take place after you subscribe.
 +
 Alternatively, you can use an HTTP Listener or Scheduler trigger.
 
