@@ -102,14 +102,16 @@ The Migration tool does not support the following migrations:
 ** etc.
 * DataMapper
 
-== Custom Devkit components
+=== Custom DevKit Connectors
 
-Applications might also contain custom made Devkit connectors. The migrator will obviously not be able to
-migrate those, but remember that a link:mule-sdk/v/1.1/dmt[Devkit migration tool] is also available to convert those Devkit projects
-to Mule 4 SDK ones. After the components have been migrated, you will then have to:
+Applications might also contain custom-made DevKit connectors. Though the
+migrator cannot migrate them, note that a
+link:mule-sdk/v/1.1/dmt[DevKit migration tool] is available to convert such
+DevKit projects to Mule 4 SDK ones. After migrating the connectors, you then
+need to:
 
-* Manually add the migrated modules to the application's `pom.xml`
-* Manually adapt all the uses of such components
+* Manually add the migrated modules to the application's `pom.xml`.
+* Manually adapt all the uses of such connectors.
 
 [[migrate_project]]
 == Migrating a Project
