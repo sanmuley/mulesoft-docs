@@ -170,9 +170,7 @@ the Mule Configuration XML files for your project that the Migration tool output
 +
 . Address the errors and warnings in the report.
 +
-Note that the <<compatibility_module, Compatibility module>> is likely to work
-around some of these issues until you or your team can address them with
-permanent fixes.
+Note that the <<compatibility_module, Compatibility module>> can work around warnings until you or your team can address them with permanent fixes.
 +
 . Identify and consider additional migration steps where the automated migration
 by the tool can be improved. See
