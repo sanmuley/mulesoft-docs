@@ -88,7 +88,7 @@ additional items from Mule 3.x until you can migrate them:
 == Unsupported Migrations
 
 //TODO: FOR GA, REMOVE NOTE AND REVISE CONTENT, AS NEEDED
-*Note on the Beta release*: This list applies to the Beta and will expand over
+*Note on the Beta release*: This list applies to the Beta and will change over
 time.
 
 The Migration tool does not support the following migrations:
