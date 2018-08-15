@@ -181,10 +181,10 @@ This step includes removing Compatibility module components from the project XML
 [[compatibility_module]]
 == Compatibility Module
 
-Some components or patterns cannot be automatically migrated by just transforming the application's
-XML. For such cases, the migrator adds the Compatibility module to your project. The Compatibility Module
-is a set of components which either adapt Mule 3 components into the Mule 4 architecture, or in some cases,
-even allows to run some Mule 3 components in Mule 4.
+Some components or patterns cannot be migrated automatically by transforming
+the application's XML. For such cases, the migrator adds the Compatibility module to your project. The Compatibility module is a set of components that either
+adapts Mule 3 components into the Mule 4 architecture, or in some cases,
+enables some Mule 3 components to work in Mule 4.
 
 *Important:* MuleSoft recommends that you migrate to a point where the
 Compatibility module can be dropped from your app and that you simply use the
@@ -199,6 +199,9 @@ complements the Migration tool:
 
 You or your team will need to handle other migration gaps that are covered in
 the <<migration_report, Migration report>>.
+
+Note that you can test your app with your Munit tests, which are also migrated
+by the tool.
 
 //TODO: QUESTION: API for the tool? Tool consists of an execution engine,
 //a proprietary API to allow extensions of it, and a reporting framework.
