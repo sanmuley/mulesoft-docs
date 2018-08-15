@@ -3,19 +3,27 @@
 //TODO: FOR GA, REMOVE *Beta* FROM GA VERSION
 *Beta Release: Migration Tool and Compatibility Module*
 
-//TODO: FOR GA, REPLACE "is a command-line utility that"...
-//"is a part of Studio that"
-Instead of performing a completely manual migration, you can use the Migration
-tool (migrator) to automate the initial migration step for supported components, connectors, and module configurations. The migrator runs a sequence of tasks
-over a Mule 3 project and outputs a Mule 4 project with a report about what
-remains to be migrated. The output project uses a <<compatibility_module, Compatibility module>> for some 
-items that are not migrated automatically by the tool, and to resolve some ambiguities caused by the Message structure changes.
+The Migration tool (migrator) automates the migration of certain Mule 3 components, 
+connectors, and module configurations to Mule 4. Though it does not migrate every part
+of a flow or project, it does output a Mule 4 project with a report about what remains 
+to be migrated, and it is preconfigured for use with the 
+<<compatibility_module, Compatibility module>>.
+
+You can use the Compatibility module to make certain unmigrated features, such as MEL 
+expressions, work with the Mule 4 runtime and to resolve some ambiguities caused by 
+the Message structure changes in Mule 4. The rest of the project requires manual 
+migration, preferably a configuration that takes into account best practices for 
+the flow or project as a whole.
+
+== About the Migration Process
 
 The migration process is a multi-part procedure, where you:
 
 . <<migrate_project, Run the migrator>> on a Mule 3 project.
 . Import the migrator output into a supported version of <<min_reqs, Studio 7>>.
-. Review the <<migration_report, Migration report>> and perform a manual migration on what the migrator does not migrate. Remove usages of the Compatibility module components.
+. Review the <<migration_report, Migration report>>.
+. Perform a manual migration on what the migrator does not migrate. 
+. Remove uses of Compatibility module components.
 
 [[min_reqs]]
 == Requirements
@@ -30,6 +38,7 @@ The tool migrates Mule apps that use these versions of the Mule runtime:
 * 3.8.x
 
 //TODO: REMOVE REF TO BETA AT GA
+////
 The tool can be used on the following versions, but these versions are not
 supported in the Beta or at GA:
 
@@ -38,7 +47,7 @@ supported in the Beta or at GA:
 
 If you run the Migration tool on these unsupported apps, the migrated output
 might be less comprehensive than with supported apps.
-
+////
 
 [[supported_migrations]]
 == Supported Migrations
