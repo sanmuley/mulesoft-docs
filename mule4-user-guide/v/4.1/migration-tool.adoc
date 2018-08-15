@@ -39,17 +39,16 @@ The tool migrates Mule apps that use these versions of the Mule runtime:
 * 3.9.x
 * 3.8.x
 
-//TODO: REMOVE REF TO BETA AT GA
-////
-The tool can be used on the following versions, but these versions are not
-supported in the Beta or at GA:
+// TODO: REMOVE BETA INFO AT GA?
+*For the Beta:*
+You can also try out the migrator on Mule apps that run on these earlier Mule Runtime versions, but please note these versions are not supported for the
+Beta or at GA:
 
 * 3.7.x
 * 3.6.x
 
-If you run the Migration tool on these unsupported apps, the migrated output
-might be less comprehensive than with supported apps.
-////
+Also note that if you run the migrator on apps that use unsupported versions, the migrated output might be less comprehensive than with supported ones.
+
 
 [[supported_migrations]]
 == Supported Migrations
