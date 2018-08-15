@@ -3,17 +3,20 @@
 //TODO: FOR GA, REMOVE *Beta* FROM GA VERSION
 *Beta Release: Migration Tool and Compatibility Module*
 
-The Migration tool (migrator) automates the migration of certain Mule 3
-components, connectors, and module configurations to Mule 4. Though it does not
-migrate every part of a flow or project, it does output a Mule 4 project with a
-report about what remains to be migrated, and it is preconfigured for use with
-the Compatibility module.
+The Migration tool (migrator) automates the migration of Mule 3 applications to
+Mule 4. Although it will not migrate the application entirely, the tool will be of
+great help regarding:
 
-You can use the Compatibility module to make certain unmigrated features, such as MEL
-expressions, work with the Mule 4 runtime and to resolve some ambiguities caused by
-the Message structure changes in Mule 4. The rest of the project requires manual
-migration, preferably a configuration that takes into account best practices for
-the flow or project as a whole.
+* Migrating the project structure
+* Automatically creating descriptor files, such as `pom.xml` or `mule-artifact.json`
+* Automatically performing a great number of adaptations in the application's code
+* Provide guidance on how to manually deal with components and patterns which cannot be automatically migrated
+
+Although the migrator will help with the heavy lifting, it's not to be expected to deliver a fully functional application. Some additional steps will be required. Those steps will include testing and may also include:
+
+* Manual migration of unsupported components
+* Manual migration of complex DataWeave transformations
+* Manual migration of DataMapper transformations
 
 == About the Migration Process
 
@@ -38,18 +41,6 @@ The tool migrates Mule apps that use these versions of the Mule runtime:
 
 * 3.9.x
 * 3.8.x
-
-//TODO: REMOVE REF TO BETA AT GA
-////
-The tool can be used on the following versions, but these versions are not
-supported in the Beta or at GA:
-
-* 3.7.x
-* 3.6.x
-
-If you run the Migration tool on these unsupported apps, the migrated output
-might be less comprehensive than with supported apps.
-////
 
 [[supported_migrations]]
 == Supported Migrations
@@ -81,6 +72,33 @@ additional items from Mule 3.x until you can migrate them:
 * `copy-properties`
 * `set-session-variable`
 * `remove-session-variable`
+
+== Unsupported Migrations
+
+//TODO: FOR GA, REMOVE NOTE AND REVISE CONTENT, AS NEEDED
+*Note on the Beta release*: This list applies to the Beta and will expand over
+time.
+
+The Migration tool does not support the following migrations:
+
+* Custom Java code, either used directly or through any of the following:
+** `<custom-transformer>`
+** `<custom-message-processor>`
+** `<component`
+** `<pooled-component>`
+** `<invoke>`
+** Anything that implements the `org.mule.api.lifecycle.Callable` interface
+** etc.
+* DataMapper
+
+== Custom Devkit components
+
+Applications might also contain custom made Devkit connectors. The migrator will obviously not be able to
+migrate those, but remember that a link:mule-sdk/v/1.1/dmt[Devkit migration tool] is also available to convert those Devkit projects
+to Mule 4 SDK ones. After the components have been migrated, you will then have to:
+
+* Manually add the migrated modules to the application's `pom.xml`
+* Manually adapt all the uses of such components
 
 [[migrate_project]]
 == Migrating a Project
@@ -151,7 +169,10 @@ This step includes removing Compatibility module components from the project XML
 [[compatibility_module]]
 == Compatibility Module
 
-The migrator adds the Compatibility module to your migrated project.
+Some components or patterns cannot be automatically migrated by just transforming the application's
+XML. For such cases, the migrator adds the Compatibility module to your project. The Compatibility Module 
+is a set of components which either adapt Mule 3 components into the Mule 4 architecture, or in some cases, 
+even allows to run some Mule 3 components in Mule 4.
 
 *Important:* MuleSoft recommends that you migrate to a point where the
 Compatibility module can be dropped from your app and that you simply use the
