@@ -3,7 +3,11 @@
 
 You can follow the procedure in this tutorial to learn the basics of using Anypoint Studio to route messages in a flow by using the *Choice* component.
 
-The end result is a flow that listens for requests. The *Choice* component finds out whether each request contains a `language` attribute. The presence and value of this attribute determine how the *Choice* component routes the message:
+The end result of the tutorial is a flow that:
+
+. Listens for messages.
+. Passes messages to a *Set Variable* component that sets the variable `language` to the language that is passed in the message by the parameter `language`.
+. Uses a  *Choice* component to find out whether each message contains a `language` attribute. The presence and value of this attribute determine how the *Choice* component routes the message:
 
 - If the value is `French`, the component routes the message to a *Set Payload* component that is named *Reply in French*. This latter component returns the message `Bonjour!` to the requester.
 - If the value is `Spanish`, the component routes the message to a *Set Payload* component that is named *Reply in Spanish*. This latter component returns the message `Hola!` to the requester.
@@ -22,27 +26,27 @@ You start with the following, unfinished flow:
 
 image:choice-router-initial-flow.png[InitialFlow]
 
-To create this inital flow, create a new Mule project in Anypoint Studio version 7 or later, replacing the XML in the default XML file in `src/main/mule` with this XML:
+To create this initial flow, create a new Mule project in Anypoint Studio version 7 or later, replacing the XML in the default XML file in `src/main/mule` with this XML:
 
 .XML source
 [source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
-http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
-http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
-<http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8081" doc:name="HTTP Listener Configuration">
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="6a037efc-3ac9-42ae-b108-1dad24ca3bb2" >
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
-<flow name="choiceExample" >
-        <http:listener doc:name="Listener" doc:id="698b7d0e-1e5e-4105-bd24-6d900eb47f08" config-ref="HTTP_Listener_Configuration" path="/"/>
-        <set-variable variableName="language" value="#[message.inboundProperties.'http.query.params'.language]" doc:name="Set Language Variable"/>
-		<logger message="#[payload]" level="INFO" doc:name="Logger"/>
-</flow>
+	<flow name="content-based-routingFlow" doc:id="7cb1512d-7ca0-4db6-87d8-9080bbaf0e71" >
+		<http:listener config-ref="HTTP_Listener_config" path="/" doc:name="Listener" doc:id="175bd54e-3d54-408f-861c-abc042292dda" />
+		<set-variable variableName="language" value="#[attributes.queryParams.language]" doc:name="Set Variable" doc:id="cee7c70c-a891-439d-be70-8c826f12cc15" />
+		<logger level="INFO" doc:name="Log the reply" doc:id="a7da53e8-77b5-4bea-8213-fd7f2f644092" message='#["The reply $(payload) means hello in $(vars.language)" ]'/>
+	</flow>
 </mule>
 ----
 
