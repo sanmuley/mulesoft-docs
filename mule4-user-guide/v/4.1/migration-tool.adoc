@@ -5,7 +5,7 @@
 
 The Migration tool (migrator) automates the migration of Mule 3 applications to
 Mule 4. Although it does not migrate the application entirely, the tool provides
-a significant amount of help with these tasks:
+significant help with these tasks:
 
 * Migrating the project structure.
 * Automatically creating descriptor files, such as `pom.xml` or `mule-artifact.json`.
@@ -13,7 +13,7 @@ a significant amount of help with these tasks:
 code.
 * Providing guidance on how to manually migrate components and patterns that cannot be migrated automatically.
 
-Although the migrator helps with such heavy lifting, it is not to be expected to deliver a fully functional application. Some additional steps are required. Those steps include testing and might also include:
+Although the migrator helps with such heavy lifting, it is not to be expected to deliver a fully functional application. Some additional steps are required. Those steps include testing and can also include:
 
 * Manual migration of unsupported components.
 * Manual migration of complex DataWeave transformations.
@@ -51,7 +51,8 @@ Beta or at GA:
 * 3.7.x
 * 3.6.x
 
-Also note that if you run the migrator on apps that use unsupported versions, the migrated output might be less comprehensive than with supported ones.
+Also note that if you run the migrator on apps that use unsupported versions,
+the migrated output might be less comprehensive than with supported ones.
 
 [[supported_migrations]]
 == Supported Migrations
@@ -291,119 +292,3 @@ project.
 == See Also
 
 link:migration-manual[Migration to Mule 4: Recommended Post-Migration Tasks]
-
-////
-MY NOTES: REPLACED WITH ANOTHER SECTION ABOVE
-== Supported Migrations
-
-The tool attempts to migrate these components, modules, and connectors:
-
-* VM connector and components
-* HTTP Transport (Mule 3) to HTTP connector (Mule 4)
-* File Transport (Mule 3) to File connector (Mule 4)
-* All (Mule 3) to Scatter-Gather component (Mule 4)
-* Choice router
-* For Each router
-* Transform component
-* Scripting module
-* Cache scope
-* Batch scope
-* Web Service Consumer connector
-* Spring module
-* Poll component (Mule 3) to Scheduler
-* Validation components
-* Database connector
-
-In addition, the following migrations take place:
-
-* `outboundProperties` to `vars`
-* Enrichers to Target Variables
-* Secure properties and placeholders
-* Inbound properties?
-
-IN PROGRESS:
-
-* JMS components
-* All (Mule 3) to Scatter-Gather component (Mule 4)??
-
-TODOS:
-
-* Email
-* Oauth
-* XML module
-* gzip?
-* splitter + aggregators
-* watermark
-* Sockets
-* FTP
-* ALWAYS_BEGIN tx config in outbound endpoints
-* WebSphere MQ Connector https://www.mulesoft.org/jira/browse/MMT-202
-* properties files declared inside src/main/app.https://www.mulesoft.org/jira/browse/MMT-200
-* Security module
-* Fully migrate properties/sessionVars to variables
-* Review idempotent-redelivery-policy cases
-* CXF?
-* JSON module
-* first succ/until succ/async/flow
-* Filters
-* Domains
-
-
-Module migrations include:
-
-//NEW OR IN ANALYSIS on Aha:
-* !!! Migration Tool Beta... !!!
-* Use of the Mule 3 transport in Mule 4: JMS, File, SFTP, VM, FTP, HTTP, SSL, TCP,
-* DataWeave transformations
-* Migrate Mule 3 connectors to Mule 4: DB,
-* Scripting module
-* Mule 3 Gateway proxies to Mule 4
-* ExtensionModel for compatibility plugin
-
-//READY TO START on Aha:
-* Batch jobs from Mule 3 to Mule 4
-* Poll and Watermark from Mule 3 to Mule 4
-* Compatibility modules for filters, transformers, components
-
-* Adding the corresponding module to the POM (if not already added)
-* Adding the necessary namespace definitions on the XML prologs (if not already added)
-
-* Poll (`<poll/>`) replaced by Scheduler (`<scheduler/>`)
-** Any `<processor-chain/>` element removed
-** Cron expressions migrated
-* Watermark
-** If `updateExpression` is present and value is MEL, expression requires manual migration or compatibility module.
-* Batch
-* Legacy scopes (inbound, outbound, session) handled by new component to the compatibility module: `<ee:dump-legacy-properties />`
-
-*
-* Error Handlers
-* Component bindings, Custom Components and Callable not migrated. Mule SDK.
-* Secure Properties Placeholders
-* Reconnection strategies: https://docs.mulesoft.com/mule4-user-guide/v/4.1/migration-patterns-reconnection-strategies
-* Threading profiles removed, except for Batch
-* Transactional Scope replaced with Try.
-* Processing strategies removed.
-* Custom Components not migrated. Mule SDK.
-* Filters
-* Object Store
-* Message properties
-* HTTP
-
-Caveats:
-
-Tool makes best effort to migrate MEL expressions, but when the automatic migration is not possible:
-
-* MEL Expression migration to DataWeave can happen before or after running the tool. Resorting to MEL means:
-** Adding the compatibility module
-** Adding the `mel:` prefix to the expression
-
-_TODO: NOT INITIAL GA_
-* API Manager:
-* Proxy apps: For each defined proxy, should have a “Migrate to Mule 4” button which triggers the Migration tool. The tool will attempt to migrate the proxy and all the policies inside.
-* Policies
-
-If the migration is successful (no errors, but warning allowed), the user should get the chance to deploy the migrated proxy to a testing environment to verify it. If the validation succeeded, the migrated proxy should continue the standard promotion process.
-
-If errors were found, then the user should be notified and able to download the migrated project. He can then import that project in Studio and access the migration report to take corrective action.
-////
