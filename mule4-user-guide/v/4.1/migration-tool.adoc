@@ -4,19 +4,20 @@
 *Beta Release: Migration Tool and Compatibility Module*
 
 The Migration tool (migrator) automates the migration of Mule 3 applications to
-Mule 4. Although it will not migrate the application entirely, the tool will be of
-great help regarding:
+Mule 4. Although it does not migrate the application entirely, the tool provides
+a significant amount of help with these tasks:
 
-* Migrating the project structure
-* Automatically creating descriptor files, such as `pom.xml` or `mule-artifact.json`
-* Automatically performing a great number of adaptations in the application's code
-* Provide guidance on how to manually deal with components and patterns which cannot be automatically migrated
+* Migrating the project structure.
+* Automatically creating descriptor files, such as `pom.xml` or `mule-artifact.json`.
+* Automatically performing a great number of adaptations in the application's
+code.
+* Providing guidance on how to manually migrate components and patterns that cannot be migrated automatically.
 
-Although the migrator will help with the heavy lifting, it's not to be expected to deliver a fully functional application. Some additional steps will be required. Those steps will include testing and may also include:
+Although the migrator helps with such heavy lifting, it is not to be expected to deliver a fully functional application. Some additional steps are required. Those steps include testing and might also include:
 
-* Manual migration of unsupported components
-* Manual migration of complex DataWeave transformations
-* Manual migration of DataMapper transformations
+* Manual migration of unsupported components.
+* Manual migration of complex DataWeave transformations.
+* Manual migration of DataMapper transformations.
 
 == About the Migration Process
 
