@@ -178,6 +178,9 @@ link:migration-manual[Migration to Mule 4: Recommended Migration Tasks].
 +
 This step includes removing Compatibility module components from the project XML.
 
+Note that you can test your app with your Munit tests, which are also migrated
+by the tool.
+
 [[compatibility_module]]
 == Compatibility Module
 
@@ -190,18 +193,15 @@ enables some Mule 3 components to work in Mule 4.
 Compatibility module can be dropped from your app and that you simply use the
 module as a bridge until the manual steps of the migration are complete.
 
-The Compatibility does not cover every migration gap. The module simply
+The Compatibility module does not cover every migration gap. Instead, it
 complements the Migration tool:
 
  * By providing MEL support for the cases where a MEL expression could not be
  migrated to DataWeave automatically.
- * By adapting the Mule 3 message model to Mule 4.
+ * By adapting the Mule 3 Message model to Mule 4.
 
 You or your team will need to handle other migration gaps that are covered in
 the <<migration_report, Migration report>>.
-
-Note that you can test your app with your Munit tests, which are also migrated
-by the tool.
 
 //TODO: QUESTION: API for the tool? Tool consists of an execution engine,
 //a proprietary API to allow extensions of it, and a reporting framework.
