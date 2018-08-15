@@ -4,7 +4,7 @@
 *Beta Release: Migration Tool and Compatibility Module*
 
 The Migration tool (migrator) automates the migration of Mule 3 applications to
-Mule 4. Although it does not migrate the application entirely, the tool provides
+Mule 4. Though it does not migrate the application entirely, the tool provides
 significant help with these tasks:
 
 * Migrating the project structure.
