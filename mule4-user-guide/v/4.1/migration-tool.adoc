@@ -106,7 +106,7 @@ The Migration tool does not support the following migrations:
 === Custom DevKit Connectors
 
 Applications might also contain custom-made DevKit connectors. Though the
-migrator cannot migrate them, note that a
+tool cannot migrate them, note that a
 link:mule-sdk/v/1.1/dmt[DevKit migration tool] is available to convert such
 DevKit projects to Mule 4 SDK ones. After migrating the connectors, you then
 need to:
