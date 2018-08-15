@@ -3,27 +3,29 @@
 //TODO: FOR GA, REMOVE *Beta* FROM GA VERSION
 *Beta Release: Migration Tool and Compatibility Module*
 
-The Migration tool (migrator) automates the migration of certain Mule 3 components, 
-connectors, and module configurations to Mule 4. Though it does not migrate every part
-of a flow or project, it does output a Mule 4 project with a report about what remains 
-to be migrated, and it is preconfigured for use with the 
-<<compatibility_module, Compatibility module>>.
+The Migration tool (migrator) automates the migration of certain Mule 3
+components, connectors, and module configurations to Mule 4. Though it does not
+migrate every part of a flow or project, it does output a Mule 4 project with a
+report about what remains to be migrated, and it is preconfigured for use with
+the <<compatibility_module, Compatibility module>>.
 
-You can use the Compatibility module to make certain unmigrated features, such as MEL 
-expressions, work with the Mule 4 runtime and to resolve some ambiguities caused by 
-the Message structure changes in Mule 4. The rest of the project requires manual 
-migration, preferably a configuration that takes into account best practices for 
+You can use the Compatibility module to make certain unmigrated features, such as MEL
+expressions, work with the Mule 4 runtime and to resolve some ambiguities caused by
+the Message structure changes in Mule 4. The rest of the project requires manual
+migration, preferably a configuration that takes into account best practices for
 the flow or project as a whole.
 
 == About the Migration Process
 
 The migration process is a multi-part procedure, where you:
 
-. <<migrate_project, Run the migrator>> on a Mule 3 project.
-. Import the migrator output into a supported version of <<min_reqs, Studio 7>>.
-. Review the <<migration_report, Migration report>>.
-. Perform a manual migration on what the migrator does not migrate. 
+. Run the migrator on a Mule 3 project.
+. Import the migrator output into a supported version of Studio 7.
+. Review the Migration report.
+. Perform a manual migration on what the migrator does not migrate.
 . Remove uses of Compatibility module components.
+
+These steps are detailed in <<migrate_project, Migrating a Project>>.
 
 [[min_reqs]]
 == Requirements
@@ -100,13 +102,14 @@ for example:
 .Command-line Invocation
 [source,console,linenums]
 ----
-$ java -jar mule-migration-tool-runner-0.1.0.jar 
+$ java -jar mule-migration-tool-runner-0.1.0.jar
  -projectBasePath /Users/me/AnypointStudio/v6/migrator/my-v6-project
  -muleVersion 4.1.3
  -destinationProjectBasePath /Users/me/my_dir/my_migrated_project
 ----
 +
 If the migrator runs successfully, you will see a message something like this:
++
 .Successful Migration
 [source,console,linenums]
 ----
@@ -119,27 +122,30 @@ Total time: 11.335 s
 Migration report:
 /Users/me/my_dir/my_migrated_project/report/summary.html
 ----
-. Import the project to a supported version of Studio.
 +
-In Studio, you can import the project by going to File -> Import, then from the 
+. Import the project to a supported version of Studio (see <<min_reqs, Requirements>>).
++
+In Studio, you can import the project by going to File -> Import, then from the
 dialog that opens, Anypoint Studio -> Anypoint Studio Project from File System.
 +
 . Open and check the Migration report (`summary.html`) at the provided URL.
 +
 You can find all errors and warnings in the <<migration_report>>.
 +
-It is important to note that the same information is provided as comments in 
+It is important to note that the same information is provided as comments in
 the Mule Configuration XML files for your project that the Migration tool outputs.
 +
 . Address the errors and warnings in the report.
 +
-Note that the <<compatibility_module, Compatibility module>> is likely work
+Note that the <<compatibility_module, Compatibility module>> is likely to work
 around some of these issues until you or your team can address them with
 permanent fixes.
 +
 . Identify and consider additional migration steps where the automated migration
-by the tool can be improved. See 
+by the tool can be improved. See
 link:migration-manual[Migration to Mule 4: Recommended Migration Tasks].
++
+This step includes removing Compatibility module components from the project XML.
 
 [[compatibility_module]]
 == Compatibility Module
@@ -214,16 +220,6 @@ migrated Choice router:
     <!-- For more information refer to:-->
     <!-- https://docs.mulesoft.com/mule4-user-guide/v/4.1/migration-mel-->
     <!-- https://blogs.mulesoft.com/dev/mule-dev/why-dataweave-main-expression-language-mule-4/-->
-
-    <!--Migration WARN: MEL expression could not be migrated to a DataWeave expression-->
-    <!-- For more information refer to:-->
-    <!-- https://docs.mulesoft.com/mule4-user-guide/v/4.1/migration-mel-->
-    <!--  https://blogs.mulesoft.com/dev/mule-dev/why-dataweave-main-expression-language-mule-4/-->
-
-    <!--Migration WARN: MEL expression could not be migrated to a DataWeave expression-->
-    <!-- For more information refer to:-->
-    <!-- https://docs.mulesoft.com/mule4-user-guide/v/4.1/migration-mel-->
-    <!--  https://blogs.mulesoft.com/dev/mule-dev/why-dataweave-main-expression-language-mule-4/-->
     </logger>
   </otherwise>
 </choice>
