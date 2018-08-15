@@ -7,7 +7,7 @@ The Migration tool (migrator) automates the migration of certain Mule 3
 components, connectors, and module configurations to Mule 4. Though it does not
 migrate every part of a flow or project, it does output a Mule 4 project with a
 report about what remains to be migrated, and it is preconfigured for use with
-the <<compatibility_module, Compatibility module>>.
+the Compatibility module.
 
 You can use the Compatibility module to make certain unmigrated features, such as MEL
 expressions, work with the Mule 4 runtime and to resolve some ambiguities caused by
@@ -105,7 +105,7 @@ for example:
 $ java -jar mule-migration-tool-runner-0.1.0.jar
  -projectBasePath /Users/me/AnypointStudio/v6/migrator/my-v6-project
  -muleVersion 4.1.3
- -destinationProjectBasePath /Users/me/my_dir/my_migrated_project
+ -destinationProjectBasePath /Users/me/my-dir/my-migrated-project
 ----
 +
 If the migrator runs successfully, you will see a message something like this:
@@ -115,12 +115,12 @@ If the migrator runs successfully, you will see a message something like this:
 ----
 Executing migration...
 ...
-===========================================================================
+========================================================
 MIGRATION SUCCESS
-===========================================================================
+========================================================
 Total time: 11.335 s
 Migration report:
-/Users/me/my_dir/my_migrated_project/report/summary.html
+/Users/me/my-dir/my-migrated-project/report/summary.html
 ----
 +
 . Import the project to a supported version of Studio (see <<min_reqs, Requirements>>).
@@ -128,7 +128,8 @@ Migration report:
 In Studio, you can import the project by going to File -> Import, then from the
 dialog that opens, Anypoint Studio -> Anypoint Studio Project from File System.
 +
-. Open and check the Migration report (`summary.html`) at the provided URL.
+. Open and check the Migration report (`summary.html`) at the path provided in
+the console output.
 +
 You can find all errors and warnings in the <<migration_report>>.
 +
@@ -184,8 +185,10 @@ a list of migration errors and warnings, for example:
 
 image::migrator-report.png[Mule Migration Tool Report]
 
-* Warning (`WARN`): Identifies what you need to migrate manually even though the behavior is the same in Mule 4.
-* Error (`ERROR`): Identifies something that behaves differently than its Mule 3 counterpart.
+* Warning (`WARN`): For these issues, the Compatibility module can serve as a
+temporary workaround until you migrate them manually.
+* Error (`ERROR`): Issues that require a manual migration. There is no
+workaround through the Compatibility module.
 
 [[message_types]]
 In the Configuration XML file for the output project, you see any `WARN` or `ERROR`
