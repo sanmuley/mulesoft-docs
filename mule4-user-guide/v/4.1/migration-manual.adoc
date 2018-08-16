@@ -48,6 +48,8 @@ manually migrate the expressions in the Output examples to Mule 4.
 #[{‘key’, ‘value’}]
 ----
 
+See also, link:migration-mel[Migrating MEL to DataWeave].
+
 === Using the Scripting Module to Migrate procedural MEL Expressions
 
 Some MEL expressions are not simply expressions but actually procedural scripts,
