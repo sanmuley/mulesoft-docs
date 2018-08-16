@@ -29,6 +29,7 @@ The migration process is a multi-part procedure, where you:
 . Review the Migration report.
 . Perform a manual migration on what the tool does not migrate.
 . Remove uses of Compatibility module components.
+. Run any migrated MUnit tests.
 
 These steps are detailed in <<migrate_project, Migrating a Project>>.
 
@@ -63,7 +64,7 @@ The Migration tool supports the following migrations:
 * Error Handling, Transactional scope
 * Properties and secure properties
 * Spring Beans definitions
-* MUnit tests
+* <<munit, MUnit tests>>
 * ApiKit
 
 Note that the <<compatibility_module, Compatibility module>> supports some
@@ -91,7 +92,7 @@ The Migration tool does not support the following migrations:
 ** `<invoke>`
 ** Anything that implements the `org.mule.api.lifecycle.Callable` interface
 ** etc.
-* DataMapper
+* <<datamapper, DataMapper>>
 
 === Migrating from Unsupported Runtime Versions
 
@@ -99,10 +100,12 @@ If you want to migrate applications that are currently running on unsupported ru
 
 Although MuleSoft will not officially support these cases, it is probably a good idea to try the tool on them anyway. Dealing with limitations is likely to be much easier than dealing with a completely unaided migration.
 
+[[datamapper]]
 === Migrating DataMapper
 
 DataMapper is not supported by this tool. The recommendation in this case is to first migrate your DataMapper transformations to DataWeave in your Mule 3.x first, then run the tool afterwards.
 
+[[devkit]]
 === Custom DevKit Connectors
 
 Applications might also contain custom-made DevKit connectors. Though the
@@ -139,6 +142,7 @@ For future releases, we will also support these:
 * XML and JSON module
 * Splitter and aggregator pattern
 
+[[munit]]
 === Testing the Migrated App
 
 Automatic migration of MUnit tests is supported by this tool, so the first step should be to run those migrated tests. Once those tests are all passing, you can perform any additional testing that you were already performing on the original version of the application.
@@ -208,9 +212,10 @@ by the tool can be improved. See
 link:migration-manual[Migration to Mule 4: Recommended Migration Tasks].
 +
 This step includes removing Compatibility module components from the project XML.
-
-Note that you can test your app with your Munit tests, which are also migrated
-by the tool.
++
+. Run any migrated MUnit tests.
++
+See <<munit, Testing the Migrated App>>.
 
 [[compatibility_module]]
 == Compatibility Module
