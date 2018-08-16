@@ -1,4 +1,4 @@
-= Migrating Mule 3 Apps to Mule 4
+= Migrating to Mule 4
 
 //TODO: FOR GA, REMOVE *Beta* FROM GA VERSION
 *Beta Release: Migration Tool and Compatibility Module*
