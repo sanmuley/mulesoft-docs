@@ -44,17 +44,6 @@ The tool migrates Mule apps that use these versions of the Mule runtime:
 * 3.9.x
 * 3.8.x
 
-// TODO: REMOVE BETA INFO AT GA?
-*For the Beta:*
-You can also try out the migrator on Mule apps that run on these earlier Mule Runtime versions, but please note these versions are not supported for the
-Beta or at GA:
-
-* 3.7.x
-* 3.6.x
-
-Also note that if you run the migrator on apps that use unsupported versions,
-the migrated output might be less comprehensive than with supported ones.
-
 [[supported_migrations]]
 == Supported Migrations
 
@@ -104,6 +93,16 @@ The Migration tool does not support the following migrations:
 ** etc.
 * DataMapper
 
+=== Migrating from unsupported Runtime versions
+
+In case you wish to migrate applications currently running in unsupported versions like 3.7.x, 3.6.x or prior, you can still use the migration tool for those version. However, a greater ratio of migration errors, unsupported patterns or incorrect code generation is to be expected. 
+
+Although Mulesoft won't oficially support these cases, it's probably a good idea to try the tool anyway since dealing with limitations is probably still much easier than dealing with a completely unaided migration.
+
+=== Migrating DataMapper
+
+DataMapper is not supported by this tool. Our recommendation in this case is to first migrate your DataMapper transformations to DataWeave in your Mule 3.x first, and run the tool afterwards.
+
 === Custom DevKit Connectors
 
 Applications might also contain custom-made DevKit connectors. Though the
@@ -113,6 +112,39 @@ migrating them, you then need to:
 
 * Manually add the migrated modules to the application's `pom.xml`.
 * Manually adapt all the uses of such connectors.
+
+== Supported in the future
+
+For future releases, we will also support the likes of:
+
+For the GA release we will also support the likes of:
+*Note*: This list may change over time.
+
+* Attachments and multipart handling
+* DataWeave 1.0 CSV output 
+* `<spring:import>` tags
+* CorrelationID handling in the JMS transport
+* Documentation on how to migrate DataMapper transformations
+* Object Stores
+* `<until-successful>`
+* `<first-successful>`
+* `<async>`
+* Security Module
+* Watermark
+* Domains
+* Email transport
+* Tracking component
+* Gzip transformers
+* Basic structure for policies
+* FTP and SFTP transports
+* XML and JSON module
+* Splitter and aggregator pattern
+
+=== Testing the Migrated App
+
+Automatic migration of MUnit tests is supported by this tool, so the first step should be to run those migrated tests. Once those tests are all passing, you can perform any additional testing that you were already performing on the original version of the application. 
+
+In either case, do expect some of this tests to fail. Manual intervention may be required to deal with additional details not automatically handled by the tool.
 
 [[migrate_project]]
 == Migrating a Project
