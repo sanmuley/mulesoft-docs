@@ -8,7 +8,7 @@ image::component-choice-schematic.png[Choice Router Schematic]
 
 == Example
 
-You can use Anypoint Studio to download the example project _Content-Based Routing_ for a working example of a flow that uses the Choice router.
+You can use Anypoint Studio to download the example project _Content-Based Routing_ from Anypoint Exchange for a working example of a flow that uses the Choice router.
 
 When you run the project as a Mule application, the application performs the following actions:
 
