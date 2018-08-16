@@ -13,7 +13,8 @@ significant help with these tasks:
 code.
 * Providing guidance on how to manually migrate components and patterns that cannot be migrated automatically.
 
-Although the migrator helps with such heavy lifting, it is not to be expected to deliver a fully functional application. Some additional steps are required. Those steps include testing and can also include:
+The migrator helps with such heavy lifting, but it is not to be expected to deliver a fully functional application. Some additional steps are required.
+Those steps include testing and can also include:
 
 * Manual migration of unsupported components.
 * Manual migration of complex DataWeave transformations.
@@ -134,9 +135,9 @@ for example:
 .Command-line Invocation
 [source,console,linenums]
 ----
-$ java -jar mule-migration-tool-runner-0.1.0.jar
- -projectBasePath /Users/me/AnypointStudio/v6/migrator/my-v6-project
- -muleVersion 4.1.3
+$ java -jar mule-migration-tool-runner-0.1.0.jar \
+ -projectBasePath /Users/me/AnypointStudio/v6/migrator/my-v6-project \
+ -muleVersion 4.1.3 \
  -destinationProjectBasePath /Users/me/my-dir/my-migrated-project
 ----
 +
