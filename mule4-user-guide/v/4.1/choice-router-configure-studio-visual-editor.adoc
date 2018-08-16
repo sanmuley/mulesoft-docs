@@ -11,7 +11,9 @@ The end result of the tutorial is a flow that:
 
 - If the value is `French`, the component routes the message to a *Set Payload* component that is named *Reply in French*. This latter component returns the message `Bonjour!` to the requester.
 - If the value is `Spanish`, the component routes the message to a *Set Payload* component that is named *Reply in Spanish*. This latter component returns the message `Hola!` to the requester.
-- If the message contains no `language` attribute, the component routes the message to the default path. The first component in this path, a *Set Variable* component named *Set Language to English*, sets the value of `language` to `English`. The next component in this path, a *Set Payload* component named *Reply in English*, returns the message `Hello!`.
+- If the message contains no `language` attribute, the component routes the message to the default path, which is a subflow that:
++
+. Uses a *Logger* component to log the message "The first component in this path, a *Set Variable* component named *Set Language to English*, sets the value of `language` to `English`. The next component in this path, a *Set Payload* component named *Reply in English*, returns the message `Hello!`.
 
 This example demonstrates that, when you are planning to route messages in a flow by using a *Choice* component, there are four aspects to planning that you need to consider:
 
