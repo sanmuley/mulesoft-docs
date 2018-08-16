@@ -27,7 +27,7 @@ The migration process is a multi-part procedure, where you:
 . Run the migrator on a Mule 3 project.
 . Import the migrator output into a supported version of Studio 7.
 . Review the Migration report.
-. Perform a manual migration on what the migrator does not migrate.
+. Perform a manual migration on what the tool does not migrate.
 . Remove uses of Compatibility module components.
 
 These steps are detailed in <<migrate_project, Migrating a Project>>.
@@ -43,17 +43,6 @@ The tool migrates Mule apps that use these versions of the Mule runtime:
 
 * 3.9.x
 * 3.8.x
-
-// TODO: REMOVE BETA INFO AT GA?
-*For the Beta:*
-You can also try out the migrator on Mule apps that run on these earlier Mule Runtime versions, but please note these versions are not supported for the
-Beta or at GA:
-
-* 3.7.x
-* 3.6.x
-
-Also note that if you run the migrator on apps that use unsupported versions,
-the migrated output might be less comprehensive than with supported ones.
 
 [[supported_migrations]]
 == Supported Migrations
@@ -104,6 +93,16 @@ The Migration tool does not support the following migrations:
 ** etc.
 * DataMapper
 
+=== Migrating from Unsupported Runtime Versions
+
+If you want to migrate applications that are currently running on unsupported runtime versions such as 3.7.x, 3.6.x or before, you can still use the migration tool. However, a greater ratio of migration errors, unsupported patterns, or incorrect code generation is to be expected.
+
+Although MuleSoft will not officially support these cases, it is probably a good idea to try the tool on them anyway. Dealing with limitations is likely to be much easier than dealing with a completely unaided migration.
+
+=== Migrating DataMapper
+
+DataMapper is not supported by this tool. The recommendation in this case is to first migrate your DataMapper transformations to DataWeave in your Mule 3.x first, then run the tool afterwards.
+
 === Custom DevKit Connectors
 
 Applications might also contain custom-made DevKit connectors. Though the
@@ -113,6 +112,38 @@ migrating them, you then need to:
 
 * Manually add the migrated modules to the application's `pom.xml`.
 * Manually adapt all the uses of such connectors.
+
+== Supported in the Future
+
+*Note*: This list might change over time.
+
+For future releases, we will also support these:
+
+* Attachments and multipart handling
+* DataWeave 1.0 CSV output
+* `<spring:import>` tags
+* CorrelationID handling in the JMS transport
+* Documentation on how to migrate DataMapper transformations
+* Object Stores
+* `<until-successful>`
+* `<first-successful>`
+* `<async>`
+* Security Module
+* Watermark
+* Domains
+* Email transport
+* Tracking component
+* Gzip transformers
+* Basic structure for policies
+* FTP and SFTP transports
+* XML and JSON module
+* Splitter and aggregator pattern
+
+=== Testing the Migrated App
+
+Automatic migration of MUnit tests is supported by this tool, so the first step should be to run those migrated tests. Once those tests are all passing, you can perform any additional testing that you were already performing on the original version of the application.
+
+In either case, do expect some of this tests to fail. Manual intervention may be required to deal with additional details not automatically handled by the tool.
 
 [[migrate_project]]
 == Migrating a Project
@@ -278,7 +309,7 @@ The migrator is a command-line tool. You simply input a Mule 3 project and targe
 | `-destinationProjectBasePath <arg>` | Required. Directory for the migrated project.
 | `-help` | For displaying the help.
 | `-muleVersion <arg>` | Required. The Mule version to which you are migrating: `4.1.3`.
-| `-projectBasePath <arg>` a| Required. Directory of the project to to migrate.
+| `-projectBasePath <arg>` a| Required. Directory of the project to migrate.
 
 To discover the path to your Mule 3 project from Studio, you can go to
 File -> Switch Workspace -> Other..., copy the path that appears in
