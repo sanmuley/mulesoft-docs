@@ -1,7 +1,6 @@
 // TOC File
-
 * link:/api-manager/v/2.x/index[API Manager]
-
++
 // API Manager general
 ** link:/api-manager/v/2.x/latest-overview-concept[Review concepts]
 ** link:/api-manager/v/2.x/environments-concept[Environment: Review concepts]
@@ -24,14 +23,14 @@
 ** link:/api-manager/v/2.x/remove-client-app-latest-task[API Contracts: Remove]
 ** link:/api-manager/v/2.x/defining-sla-tiers[SLA Tiers: Review concepts]
 ** link:/api-manager/v/2.x/delete-sla-tier-task[SLA Tiers: Remove]
-
++
 // Analytics
 ** link:/api-manager/v/2.x/analytics-concept[Analytics]
 *** link:/api-manager/v/2.x/viewing-api-analytics[Review usage]
 *** link:/api-manager/v/2.x/analytics-chart[Review API Manager usage]
 *** link:/api-manager/v/2.x/analytics-event-api[Review Event API]
 *** link:/api-manager/v/2.x/analytics-event-forward[Review Event Forwarding]
-
++
 // Policies
 ** link:/api-manager/v/2.x/policies-4-concept[Policies]
 *** link:/api-manager/v/2.x/policies-whats-new-concept[Review concepts]
@@ -43,7 +42,7 @@
 *** link:/api-manager/v/2.x/resource-level-policies-about[Review Resource Level Policies]
 *** link:/api-manager/v/2.x/resource-level-policy-reference[Review Resource Level Policy concepts]
 *** link:/api-manager/v/2.x/prepare-raml-task[Review RAML based APIs: Traits & policies]
-
++
 // Policies: OOTB
 *** link:/api-manager/v/2.x/available-policies[Review Provided Policies]
 *** link:/api-manager/v/2.x/mule4-policy-reference[Review Mule Runtime 4.x Policy concepts]
@@ -76,7 +75,7 @@
 *** link:/api-manager/v/2.x/message-logging-policy[Message Logging Policy]
 *** link:/api-manager/v/2.x/header-inject-remove-task[Header Injection and Removal]
 *** link:/api-manager/v/2.x/http-caching-policy[HTTP Caching]
-
++
 // Policies: Custom
 *** link:/api-manager/v/2.x/custom-policy-index-latest[Custom Policies]
 **** link:/api-manager/v/2.x/policy-scope-size-concept[Package a Policy]
@@ -88,11 +87,11 @@
 ***** link:/api-manager/v/2.x/add-remove-headers-latest-task[Add/Remove Headers]
 ***** link:/api-manager/v/2.x/add-remove-headers[Test]
 **** link:/api-manager/v/2.x/caching-in-a-custom-policy-mule-4[Example: HTTP Caching]
-
++
 // Policies: Offline
 *** link:/api-manager/v/2.x/offline-policy-task[Apply]
 *** link:/api-manager/v/2.x/offline-remove-task[Remove]
-
++
 // API Proxy
 ** link:/api-manager/v/2.x/proxy-advantages[Review concepts]
 *** link:/api-manager/v/2.x/wsdl-raml-http-proxy-reference[Taxonomy]
@@ -100,7 +99,7 @@
 *** link:/api-manager/v/2.x/proxy-deploy-cloudhub-latest-task[Deploy to CloudHub]
 *** link:/api-manager/v/2.x/proxy-deploy-hybrid-latest-task[Deploy to Hybrid]
 *** link:/api-manager/v/2.x/download-proxy-task[Download]
-
++
 // Mule oAuth 2.0 provider
 ** link:/api-manager/v/2.x/aes-oauth-faq[Review Mule OAuth Provider concepts]
 *** link:/api-manager/v/2.x/to-use-authentication[Use a Mule Provider for OAuth 2.0 Authentication]
@@ -116,14 +115,14 @@
 *** link:/api-manager/v/2.x/oauth-grant-types-about[Review OAuth Grant Types]
 *** link:/api-manager/v/2.x/oauth-persist-obj-store-about[Review OAuth Tokens persistence mechanism]
 *** link:/api-manager/v/2.x/oauth2-provider-configuration[Review Mule OAuth 2.0 Provider Configuration concepts]
-
++
 // Alerts
 ** link:/api-manager/v/2.x/using-api-alerts[Review concepts]
 *** link:/api-manager/v/2.x/add-api-alert-task[To Add an API Alert]
 *** link:/api-manager/v/2.x/test-alert-task[To Test an API Alert]
 *** link:/api-manager/v/2.x/view-delete-alerts-task[To View and Delete API Alerts]
 *** link:/api-manager/v/2.x/edit-enable-disable-alerts-task[To Edit, Enable, or Disable API Alerts]
-
++
 // Runtime
 ** link:/api-manager/v/2.x/gatekeeper[Review concepts]
 *** link:/api-manager/v/2.x/gatekeeper[Gatekeeper Enhanced Security Reference]
