@@ -102,6 +102,10 @@ The URL that provides the user’s identity encoded in a secure JSON Web Token.
 +
 The URL that returns user profile information to the client app.  
 +
+* OpenID Connect Issuer
++
+It is the the location of the OpenID Provider. Generally `/.well-known/openid-configuration` gets appended to the issuer to generate metadata URL for openID Connect specifications. For Salesforce, it is required to provide the `issuer`.
++
 . Save your configuration.
 +
 . Sign out and navigate to your organization’s SSO URL, for example:
