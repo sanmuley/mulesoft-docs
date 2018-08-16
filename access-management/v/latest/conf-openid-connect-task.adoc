@@ -104,7 +104,7 @@ The URL that returns user profile information to the client app.
 +
 * OpenID Connect Issuer
 +
-It is the the location of the OpenID Provider. Generally `/.well-known/openid-configuration` gets appended to the issuer to generate metadata URL for openID Connect specifications. For Salesforce, it is required to provide the `issuer`.
+The location of the OpenID Provider. For most providers, `/.well-known/openid-configuration` is appended to the issuer to generate the metadata URL for openID Connect specifications. For Salesforce, you must provide the value for `issuer`.
 +
 . Save your configuration.
 +
