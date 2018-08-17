@@ -5,7 +5,7 @@ If you are enforcing a policy in API Manager, this policy uses pointcuts to dete
 
 A custom policy must contain a pointcut declaration. Pointcuts use regular expressions to indicate what flows in the application are affected by a policy.
 
-If you're applying your policy to APIs that are deployed in Anypoint Platform, then set your pointcut to the default properties `apiName` and `apiVersion`. This action guarantees that your policy is applied only to the API for which you're activating the policy. This is what your pointcut should look like:
+If you are applying your policy to APIs that are deployed in Anypoint Platform, set your pointcut to the default properties `apiName` and `apiVersion`. This action guarantees that your policy is applied only to the API for which you are activating the policy. This is what your pointcut should look like:
 
 [source,xml,linenums]
 ----
@@ -16,9 +16,9 @@ If you're applying your policy to APIs that are deployed in Anypoint Platform, t
 
 Setting your pointcut to a broad regular expression such as `regex=”.*”` may have undesirable effects.
 
-Applying this policy to a single API through the platform might affect other APIs you're deploying.
+Applying this policy to a single API through the platform might affect other APIs you are deploying.
 
-If you're using your policies in an on-site deployment, you might want to modify the pointcut to apply your policy to multiple APIs simultaneously.
+If you are using your policies in an on-site deployment, you might want to modify the pointcut to apply your policy to multiple APIs simultaneously.
 
 == Enabling Resource-Level Policies
 
