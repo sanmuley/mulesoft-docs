@@ -48,11 +48,11 @@ remain the same in DataWeave except for the new `attributes` variables and the f
 
 |`flowVars`
 |Renamed to `vars`
-| link:migration-connectors-http#http-request[HTTP Request]
+| link:migration-connectors-http#http-request[HTTP Request],  link:migration-manual#mel_expressions[MEL Expressions (Manual Post-Migration Steps)] (assumes prior use of the Migration tool)
 
 |`sessionVars`
 |Removed: See link:intro-mule-message#session-properties[Session Properties]
-|Not Applicable.
+|link:migration-manual#session_variables[Session Properties (Manual Post-Migration Steps)] (assumes prior use of the Migration tool)
 
 |`exception`
 |Replaced: exceptions within a flow are now represented by a link:error-handling[Mule Error] you can access with the `error` variable.
@@ -60,11 +60,11 @@ remain the same in DataWeave except for the new `attributes` variables and the f
 
 |`message.inboundProperties`
 |Removed: See link:intro-mule-message#inbound-properties-are-now-attributes[Inbound Properties Are Now Attributes].
-|
+|link:migration-manual#inbound_properties[Inbound Properties (Manual Post-Migration Steps)] (assumes prior use of the Migration tool)
 
 |`message.outboundProperties`
 |Removed: See link:intro-mule-message#outbound-properties[Outbound Properties].
-|
+|link:migration-manual#outbound_properties[Outbound Properties (Manual Post-Migration Steps)] (assumes prior use of the Migration tool)
 
 |`message.inboundAttachments` and `message.outboundAttachments`
 |Removed: See link:intro-mule-message#attachments[Attachments].
