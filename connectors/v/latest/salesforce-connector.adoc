@@ -75,10 +75,20 @@ add Apex class names.
 +
 image:salesforce-dc-apex.png[Apex configuration screen]
 +
-. If needed, configure the Advanced tab to set the Max Idle Time and Time Units 
-for how long to hold open a connection before it expires.
+. If you haven't specified a Connection Type, and if needed, configure the Advanced tab to set the Max Idle Time and Time Units for how long to hold open a connection before it expires.
++
+image:salesforce-dc-nocc-advanced.png[Advanced Tab when no Connection Type specified]
++
+After you specify a Connection Type, if needed, you can use the Advanced tab
+to change values for the Reconnection Strategy, Pooling Profile, and 
+Expiration Policy.
++
+image:salesforce-dc-cc-advanced.png[Advanced Tab for Connection Type]
++
 . If needed, set the Redelivery Policy on the main Configuration screen. 
-Redelivery indicates the maximum number of tries to deliver trigger contne
+Redelivery indicates the maximum number of tries to deliver trigger content.
++
+image:
 
 == Configuring Salesforce as a Component
 
