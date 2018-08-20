@@ -1,8 +1,7 @@
 = Migration to Mule 4: Recommended Post-Migration Tasks
 
 The Migration tool performs migrations on individual components, connectors, and
-modules. In some cases, you can improve the migrated application by taking into
-account the flow or project as a whole.
+modules. In some cases, you can make improvements to the migrated application by taking into account the flow or project as a whole.
 
 This section focuses on some recommended post-migration tasks to perform after
 using the Migration tool, incorporating the Compatibility module (see
@@ -13,7 +12,8 @@ performing any manual migration steps indicated in the Migration report.
 *Note on the Beta Release:* This page might be augmented periodically during the
 Beta period based on feedback and recommendations.
 
-== MEL Expressions
+[[mel_expressions]]
+== MEL Expressions (Manual Post-Migration Steps)
 
 Most MEL expressions are migrated to link:dataweave[DataWeave] by the Migration
 tool. However, some operators or MEL constructs are not supported by the migrator
@@ -87,6 +87,7 @@ Note that the content might look similar because MEL and Groovy syntax are
 both Java-based, but always test that the behavior of any migrated script
 is maintained.
 
+[[inbound_properties]]
 == Inbound Properties (Manual Post-Migration Steps)
 
 Instead of relying on the Compatibility module to handle inbound properties (see
@@ -117,6 +118,7 @@ This example shows modifications to inbound properties from an HTTP listener:
 <logger message="#[message.attributes.requestPath]">
 ----
 
+[[outbound_properties]]
 == Outbound Properties (Manual Post-Migration Steps)
 
 If an outbound property is _not_ set in a flow, you can safely remove any
@@ -154,3 +156,73 @@ Note that in Mule 3, the outbound property can be set by any component or inside
 a referenced flow. This kind of complexity makes the manual step necessary
 because the Migration tool does not have the full context to interpret the
 semantics of an application.
+
+[[session_variables]]
+== Session Properties (Manual Post-Migration Steps)
+
+Because transport barriers do not exist in Mule 4, Session properties are no longer needed and have been removed in Mule 4. After running the Migration tool
+on a Mule app that uses Session properties, you should store data in variables (`vars`).
+
+To migrate Session properties to variables:
+
+* Migrate `compatibility:set-session-variable` processors to `set-variable`.
+* Migrate `compatibility:remove-session-variable` processors to `set-variable`.
+* Replace uses of the Session property in expressions with a variable.
+* In the connectors migrated from transports (for example, File, VM, JMS, HTTP connectors), make sure to pass these migrated variables to the operation or the response builder of the source.
++
+The way to accomplish this varies by connector. For HTTP, you can use headers. For JMS, you can use message properties. For VM, you can use the body expression.
++
+* For sources that receive Session information, read the information as it was set on the previous step and set the needed variables.
+
+.Example: Output of the Migration Tool
+[source,xml,linenums]
+----
+<flow="sessionExampleFlow">
+  <compatibility:set-session-variable variableName="token" value="1234" />
+  <compatibility:outbound-properties-to-var/>
+  <http:request config-ref="flowRequestConfig" method="GET" path="/">
+    <http:headers>
+        #[migration::HttpRequester::httpRequesterTransportHeaders(vars)]
+    </http:headers>
+  </http:request>
+  <compatibility:attributes-to-inbound-properties/>
+</flow>
+
+<flow="sessionExampleFlowListener">
+  <http:listener config-ref="flowListenerConfig" path="/">
+    <http:response statusCode="200">
+      <http:headers>#[migration::HttpListener::httpListenerResponseHeaders(vars)]</http:headers>
+    </http:response>
+  </http:listener>
+  <compatibility:attributes-to-inbound-properties/>
+  <logger message="#[mel:sessionVars['token']]"/>
+  <compatibility:remove-session-variable variableName="token" />
+  <compatibility:outbound-properties-to-var/>
+</flow>
+----
+
+.Example: Manual Modification to the Output of the Migration Tool
+[source,XML,linenums]
+----
+<flow="sessionExampleFlow">
+  <set-variable variableName="token" value="1234" />
+  <http:request config-ref="flowRequestConfig" method="GET" path="/">
+    <http:headers>
+      <!-- Because no outbound properties were set before this operation, you do
+          not need the httpRequesterTransportHeaders function anymore -->
+      #[{'token': vars.token}]
+    </http:headers>
+  </http:request>
+</flow>
+
+<flow="sessionExampleFlowListener">
+  <http:listener config-ref="flowListenerConfig" path="/">
+    <http:response statusCode="301">
+      <http:headers>#[migration::HttpListener::httpListenerResponseHeaders(vars)]</http:headers>
+    </http:response>
+  </http:listener>
+  <set-variable variableName="token" value="#[message.attributes.headers.token]" />
+  <logger message="#[vars.token]"/>
+  <remove-variable variableName="token" />
+</flow>
+----

@@ -42,27 +42,33 @@ The next sections show how to adapt some uses of MEL to Mule 4.
 All https://docs.mulesoft.com/mule-user-guide/v/3.9/mel-cheat-sheet#server-mule-application-and-message-variables[context variables]
 remain the same in DataWeave except for the new `attributes` variables and the following changes:
 
-[%header,cols="2,3a"]
+[%header,cols="2,3,2"]
 |===
-| MEL | DataWeave
+| MEL | DataWeave | Migration Examples
 
 |`flowVars`
 |Renamed to `vars`
+| link:migration-connectors-http#http-request[HTTP Request]
 
 |`sessionVars`
-|Removed: See link:intro-mule-message#session-properties[Session Properties].
+|Removed: See link:intro-mule-message#session-properties[Session Properties]
+|Not Applicable.
 
 |`exception`
 |Replaced: exceptions within a flow are now represented by a link:error-handling[Mule Error] you can access with the `error` variable.
+|
 
 |`message.inboundProperties`
 |Removed: See link:intro-mule-message#inbound-properties-are-now-attributes[Inbound Properties Are Now Attributes].
+|
 
 |`message.outboundProperties`
 |Removed: See link:intro-mule-message#outbound-properties[Outbound Properties].
+|
 
 |`message.inboundAttachments` and `message.outboundAttachments`
 |Removed: See link:intro-mule-message#attachments[Attachments].
+|
 
 //This section will only make sense once the aggregators module is out
 //|`message.correlationId`
@@ -76,13 +82,15 @@ remain the same in DataWeave except for the new `attributes` variables and the f
 
 |`message.id`, `message.rootId` and `message.replyTo`
 |Removed.
+|
 
 |`message.dataType`
 |Renamed to `dataType`.
+|
 
 |`server.dateTime`
-|Removed: use DataWeave's link:dw-core-functions-now[`now`] function
-
+|Removed: Use the DataWeave link:dw-core-functions-now[`now`] function.
+|`now() as Date as String {format: "MM/dd/yyyy"}` returns a date like `"08/16/2018"`
 |===
 
 [[extract_data]]
