@@ -832,7 +832,9 @@ services:
 
 In your network, you may need to whitelist the hostnames and ports of various parts of the Anypoint Platform to allow the Runtime Manager Agent in a customer-hosted Mule runtime to communicate with the MuleSoft-managed online Anypoint Platform APIs and services.
 
-These tables show you the ports or IPs/hostnames to add to your whitelists to allow communication between the Runtime Manager Agent and the Runtime Manager console:
+These tables show you the ports or IPs/hostnames to add to your whitelists to allow communication between the Runtime Manager Agent and the Runtime Manager console, depending on the platform region your organization account is setup.
+
+=== US Region
 
 *Ports*
 
@@ -856,6 +858,29 @@ There are two Static IPs that needs to be whitelisted to access the mule-manager
 |*mule-manager.anypoint.mulesoft.com* |52.201.67.218
 |===
 
+=== EU Region
+
+*Ports*
+
+[%header,cols="2*a"]
+|===
+|Name |Port
+|*eu1.anypoint.mulesoft.com* | 443
+|*mule-manager.eu1.anypoint.mulesoft.com* | 443
+|*analytics-ingest.eu1.anypoint.mulesoft.com* |  443
+|*arm-auth-proxy.prod-eu.msap.io* |  443
+|===
+
+*Static IPs*
+
+Static IPs to be whitelisted to access the mule-manager.eu1.anypoint.mulesoft.com hostname.
+
+[%header,cols="2*a"]
+|===
+|Name |IP Address
+|*mule-manager.eu1.anypoint.mulesoft.com* |18.194.245.32
+|===
+
 *Dynamic IPs*
 
 Some of the IP addresses used by Anypoint services are assigned automatically by the underlying cloud infrastructure, and hence we can't guarantee that they are not going to change in the future.
@@ -866,12 +891,24 @@ Nowadays, many firewall devices allow you to define Layer 7 Firewall Rules, wher
 
 The hostnames that you should include in your Layer 7 Firewall rules include:
 
+=== US Region
+
 [%header,cols="1*a"]
 |===
 |Hostname
 |*anypoint.mulesoft.com*
 |*analytics-ingest.anypoint.mulesoft.com*
 |*arm-auth-proxy.prod.cloudhub.io*
+|===
+
+=== EU Region
+
+[%header,cols="1*a"]
+|===
+|Hostname
+|*eu1.anypoint.mulesoft.com*
+|*analytics-ingest.eu1.anypoint.mulesoft.com*
+|*arm-auth-proxy.prod-eu.msap.io*
 |===
 
 == Setting up a Proxy
