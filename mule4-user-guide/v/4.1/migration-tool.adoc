@@ -221,10 +221,10 @@ You can find all errors and warnings in the <<migration_report>>.
 It is important to note that the same information is provided as comments in
 the Mule Configuration XML files for your project that the Migration tool outputs.
 +
-. Address the errors in the report, and address the warnings as time and
-resources permit.
+. Address the errors in the report, and address the warnings before deploying the migrated app to a production environment.
 +
-Note that the <<compatibility_module, Compatibility module>> can work around warnings until you or your team can address them with permanent fixes.
+Note that the <<compatibility_module, Compatibility module>> can work around warnings until you or your team can address them with permanent fixes. However,
+addressing the warnings is important for improving the performance of the flows.
 +
 . Identify and consider additional migration steps where the automated migration
 by the tool can be improved. See
