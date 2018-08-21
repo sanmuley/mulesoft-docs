@@ -14,6 +14,8 @@ If you are applying your policy to APIs that are deployed in Anypoint Platform, 
 </pointcut>
 ----
 
+Note that this is only necessary if you are using Mule 3.x.
+
 Setting your pointcut to a broad regular expression such as `regex=”.*”` may have undesirable effects.
 
 Applying this policy to a single API through the platform might affect other APIs you are deploying.
