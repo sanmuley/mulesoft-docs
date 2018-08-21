@@ -38,7 +38,7 @@ These steps are detailed in <<migrate_project, Migrating a Project>>.
 
 Minimum requirements for a migrated app:
 
-* Studio 7.2 (with support for Mule Runtime 4.1.3 or above).
+* Studio 7.2.x (with support for Mule Runtime 4.1.3 or above).
 
 The tool migrates Mule apps that use these versions of the Mule runtime:
 
@@ -221,7 +221,8 @@ You can find all errors and warnings in the <<migration_report>>.
 It is important to note that the same information is provided as comments in
 the Mule Configuration XML files for your project that the Migration tool outputs.
 +
-. Address the errors and warnings in the report.
+. Address the errors in the report, and address the warnings as time and
+resources permit.
 +
 Note that the <<compatibility_module, Compatibility module>> can work around warnings until you or your team can address them with permanent fixes.
 +
