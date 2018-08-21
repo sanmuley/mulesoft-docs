@@ -10,8 +10,26 @@ Note that in a Mule runtime cluster or multi-worker CloudHub deployment, the Sch
 
 == Fixed Frequency
 
-You can set a Scheduler so that it triggers your flow at a regular interval. This is the easiest way to set it up. For this you can select a time unit, an amount of time between triggers and an initial delay before the first triggering occurs.
+You can use the following parameters to set a Scheduler to trigger a flow at a regular intervals.
 
+[%header,cols="34,33,33"]
+|===
+|Attribute |Description |Default
+|*Frequency*
+|The frequency at which the Scheduler triggers the flow. You select the unit of time in the *Time unit* field. Setting the value to `0` or a negative value causes the default value to be used.
+|
+1000
+
+| *Start Delay*
+| The amount of time to wait before triggering the flow for the first time after the application is started. This value is expressed in the same unit of time as the frequency.
+| 0
+
+| *Time Unit*
+| The time unit for the values of *Frequency* and *Start Delay*. The possible values are:
+
+MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS
+| MILLISECONDS
+|===
 
 == Cron Expressions
 
