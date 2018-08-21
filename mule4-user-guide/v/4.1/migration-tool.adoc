@@ -20,6 +20,9 @@ Those steps include testing and can also include:
 * Manual migration of complex DataWeave transformations.
 * Manual migration of DataMapper transformations.
 
+It is important to note that the Migration tool does not support incremental
+migrations.
+
 == The Migration Process
 
 The migration process is a multi-part procedure, where you:
@@ -39,6 +42,8 @@ These steps are detailed in <<migrate_project, Migrating a Project>>.
 Minimum requirements for a migrated app:
 
 * Studio 7.2.x (with support for Mule Runtime 4.1.3 or above).
++
+You can check your Studio version by navigating to *Anypoint Studio --> About Anypoint Studio*.
 
 The tool migrates Mule apps that use these versions of the Mule runtime:
 
@@ -210,18 +215,20 @@ Migration report:
 +
 . Import the project to a supported version of Studio (see <<min_reqs, Requirements>>).
 +
-In Studio, you can import the project by going to File -> Import, then from the
+In Studio 7, you can import the project by going to File -> Import, then from the
 dialog that opens, Anypoint Studio -> Anypoint Studio Project from File System.
 +
 . Open and check the Migration report (`summary.html`) at the path provided in
-the console output.
+the console output (under your
+`_destinationProjectBasePath_/report/summary.html`).
 +
-You can find all errors and warnings in the <<migration_report>>.
+To understand errors and warnings in the Migration report, see <<migration_report>>.
 +
-It is important to note that the same information is provided as comments in
-the Mule Configuration XML files for your project that the Migration tool outputs.
+Also note that the same information is provided as comments in the Mule Configuration XML files for your project that the Migration tool outputs.
 +
 . Address the errors in the report, and address the warnings before deploying the migrated app to a production environment.
++
+Note that the migrated application will not run in Studio if there are any unresolved errors in it.
 +
 Note that the <<compatibility_module, Compatibility module>> can work around warnings until you or your team can address them with permanent fixes. However,
 addressing the warnings is important for improving the performance of the flows,
