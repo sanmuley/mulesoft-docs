@@ -330,14 +330,14 @@ The migrator is a command-line tool. You simply input a Mule 3 project and targe
 
 .Command-line Options
 |===
-| `-destinationProjectBasePath <arg>` | Required. Directory for the migrated project.
+| `-destinationProjectBasePath <arg>` | Required. Directory for the migrated project that includes a destination folder for the migrated project, for example, `/path/to/my/destination-folder`. The tool will create the `destination-folder`. It will produce an error if `destination-folder` already exists.
 | `-help` | For displaying the help.
 | `-muleVersion <arg>` | Required. The Mule version to which you are migrating: `4.1.3`.
 | `-projectBasePath <arg>` a| Required. Directory of the project to migrate.
 
 To discover the path to your Mule 3 project from Studio, you can go to
-File -> Switch Workspace -> Other..., copy the path that appears in
-the Workspace field. You need to append the name of your project
+*File -> Switch Workspace -> Other...*, copy the path that appears in
+the *Workspace* field. You need to append the name of your project
 to that path when you use it as the `<arg>` to `-projectBasePath`, for
 example: `-projectBasePath /Users/me/AnypointStudio/v6/migrator/my-v6-project`
 |===
