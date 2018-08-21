@@ -1,48 +1,65 @@
-= Migrating Mule 3 Apps to Mule 4
+= Migrating to Mule 4
 
 //TODO: FOR GA, REMOVE *Beta* FROM GA VERSION
 *Beta Release: Migration Tool and Compatibility Module*
 
-//TODO: FOR GA, REPLACE "is a command-line utility that"...
-//"is a part of Studio that"
-Instead of performing a completely manual migration, you can use the Migration
-tool (migrator) to automate the initial migration step for supported component, connector, and module configurations. The migrator runs a sequence of tasks
-over a Mule 3 project and outputs a Mule 4 project with a report about what
-remains to migrate. The output project is designed to work with a <<compatibility_module, Compatibility module>> in Studio for some important
-items that are not migrated automatically by the tool.
+The Migration tool (migrator) automates the migration of Mule 3 applications to
+Mule 4. Though it does not migrate the application entirely, the tool provides
+significant help with these tasks:
+
+* Migrating the project structure.
+* Automatically creating descriptor files, such as `pom.xml` or `mule-artifact.json`.
+* Automatically performing a great number of adaptations in the application's
+code.
+* Providing guidance on how to manually migrate components and patterns that cannot be migrated automatically.
+
+The migrator helps with such heavy lifting, but it is not to be expected to deliver a fully functional application. Some additional steps are required.
+Those steps include testing and can also include:
+
+* Manual migration of unsupported components.
+* Manual migration of complex DataWeave transformations.
+* Manual migration of DataMapper transformations.
+
+It is important to note that the Migration tool does not support incremental
+migrations.
+
+== The Migration Process
 
 The migration process is a multi-part procedure, where you:
 
-. <<migrate_project, Run the migrator>> on a Mule 3 project, and review the <<migration_report, Migration report>>.
-. Import the migrator output into a supported version of <<min_reqs, Studio 7>>.
-. Perform a manual migration on what the migrator does not migrate, and
-use the Compatibility module on that project, as needed.
+. Run the migrator on a Mule 3 project.
+. Import the migrator output into a supported version of Studio 7.
+. Review the Migration report.
+. Perform a manual migration on what the tool does not migrate.
+. Remove uses of Compatibility module components.
+. Run any migrated MUnit tests.
+
+These steps are detailed in <<migrate_project, Migrating a Project>>.
 
 [[min_reqs]]
 == Requirements
 
 Minimum requirements for a migrated app:
 
-* Studio 7.2 (with support for Mule Runtime 4.1.3 or above).
+* Studio 7.2.x (with support for Mule Runtime 4.1.3 or above).
++
+You can check your Studio version by navigating to *Anypoint Studio --> About Anypoint Studio*.
 
 The tool migrates Mule apps that use these versions of the Mule runtime:
 
 * 3.9.x
 * 3.8.x
 
-//TODO: REMOVE REF TO BETA AT GA
-The tool can be used on the following versions, but these versions are not
-supported in the Beta or at GA:
+See also, <<unsupported_projects>>.
 
-* 3.7.x
-* 3.6.x
+== What is Migrated?
 
-If you run the Migration tool on these unsupported apps, the migrated output
-might be less comprehensive than with supported apps.
-
+* <<supported_migrations>>
+* <<unsupported_migrations>>
+* <<supported_future>>
 
 [[supported_migrations]]
-== Supported Migrations
+=== Supported Migrations
 
 //TODO: FOR GA, REMOVE NOTE AND REVISE CONTENT, AS NEEDED
 *Note on the Beta release*: This list applies to the Beta and will expand over
@@ -54,17 +71,106 @@ The Migration tool supports the following migrations:
 * MEL to DataWeave expressions (simple cases only)
 * DataWeave component to `ee:transform` (DataWeave 1.0 to DataWeave 2.0)
 * Connectors: HTTP, Database, Web Service Consumer
-* Modules: Validations
+* Modules: Validations, Scripting (DSL only, no migration of the script itself)
 * Transports: HTTP, JMS, File, VM (request-reply not supported)
 * Components: Cache, Batch, For Each, Choice, Scatter-Gather, Poll
 * Error Handling, Transactional scope
 * Properties and secure properties
 * Spring Beans definitions
-* MUnit tests
+* <<munit, MUnit tests>>
 * ApiKit
 
 Note that the <<compatibility_module, Compatibility module>> supports some
-additional items until you can migrate them.
+additional items from Mule 3.x until you can migrate them:
+
+* `set-property`
+* `remove-property`
+* `copy-properties`
+* `set-session-variable`
+* `remove-session-variable`
+
+[[unsupported_migrations]]
+=== Unsupported Migrations
+
+//TODO: FOR GA, REMOVE NOTE AND REVISE CONTENT, AS NEEDED
+*Note on the Beta release*: This list applies to the Beta and will change over
+time.
+
+The Migration tool does not support the following migrations:
+
+* Custom Java code, either used directly or through any of the following:
+** `<custom-transformer>`
+** `<custom-message-processor>`
+** `<component`
+** `<pooled-component>`
+** `<invoke>`
+** Anything that implements the `org.mule.api.lifecycle.Callable` interface
+** etc.
+* <<datamapper, DataMapper>>
+
+See also:
+
+* <<unsupported_projects>>
+* <<datamapper>>
+* <<devkit>>
+
+
+[[unsupported_projects]]
+==== Migrating from Unsupported Runtime Versions
+
+If you want to migrate applications that are currently running on unsupported runtime versions such as 3.7.x, 3.6.x or before, you can still use the migration tool. However, a greater ratio of migration errors, unsupported patterns, or incorrect code generation is to be expected.
+
+Although MuleSoft will not officially support these cases, it is probably a good idea to try the tool on them anyway. Dealing with limitations is likely to be much easier than dealing with a completely unaided migration.
+
+[[datamapper]]
+==== Migrating DataMapper
+
+DataMapper is not supported by this tool. The recommendation in this case is to first migrate your DataMapper transformations to DataWeave in your Mule 3.x first, then run the tool afterwards.
+
+[[devkit]]
+==== Custom DevKit Connectors
+
+Applications might also contain custom-made DevKit connectors. Though the
+tool cannot migrate them, the link:mule-sdk/v/1.1/dmt[DevKit migration tool]
+is available to convert these DevKit projects to Mule 4 SDK ones. After
+migrating them, you then need to:
+
+* Manually add the migrated modules to the application's `pom.xml`.
+* Manually adapt all the uses of such connectors.
+
+[[supported_future]]
+=== Supported in the Future
+
+*Note on the Beta Release:* This list might change over time.
+
+For future releases, we will also support these:
+
+* Attachments and multipart handling
+* DataWeave 1.0 CSV output
+* `<spring:import>` tags
+* CorrelationID handling in the JMS transport
+* Documentation on how to migrate DataMapper transformations
+* Object Stores
+* `<until-successful>`
+* `<first-successful>`
+* `<async>`
+* Security Module
+* Watermark
+* Domains
+* Email transport
+* Tracking component
+* Gzip transformers
+* Basic structure for policies
+* FTP and SFTP transports
+* XML and JSON module
+* Splitter and aggregator pattern
+
+[[munit]]
+=== Testing the Migrated App
+
+Automatic migration of MUnit tests is supported by this tool, so the first step should be to run those migrated tests. Once those tests are all passing, you can perform any additional testing that you were already performing on the original version of the application.
+
+In either case, do expect some of this tests to fail. Manual intervention may be required to deal with additional details not automatically handled by the tool.
 
 [[migrate_project]]
 == Migrating a Project
@@ -83,15 +189,13 @@ To run the Migration tool:
 . In your console, provide a command that specifies all the required <<options>>,
 for example:
 +
-//TODO: NEED TO CHANGE THE FILENAME OF THE .jar HERE to something more realistic
 .Command-line Invocation
 [source,console,linenums]
 ----
-$ java -jar
-mule-migration-tool-runner-1.0.0-20180806.163412-176-jar-with-dependencies.jar
--projectBasePath /Users/me/AnypointStudio/v6/migrator/my-v6-project
--muleVersion 4.1.3
--destinationProjectBasePath /Users/me/my_dir/my_migrated_project
+$ java -jar mule-migration-tool-runner-0.1.0.jar \
+ -projectBasePath /Users/me/AnypointStudio/workspace-studio/my-v6-project \
+ -muleVersion 4.1.3 \
+ -destinationProjectBasePath /Users/me/my-dir/my-migrated-project
 ----
 +
 If the migrator runs successfully, you will see a message something like this:
@@ -101,63 +205,70 @@ If the migrator runs successfully, you will see a message something like this:
 ----
 Executing migration...
 ...
-===========================================================================
+========================================================
 MIGRATION SUCCESS
-===========================================================================
+========================================================
 Total time: 11.335 s
 Migration report:
-/Users/me/my_dir/my_migrated_project/report/summary.html
+/Users/me/my-dir/my-migrated-project/report/summary.html
 ----
-. Import the project to a supported version of Studio.
 +
-In Studio, you can import the project by going to File -> Import, then from the dialog that opens, Anypoint Studio -> Anypoint Studio Project from File System.
+. Import the project to a supported version of Studio (see <<min_reqs, Requirements>>).
 +
-. Open and check the Migration report (`summary.html`) at the provided URL.
+In Studio 7, you can import the project by going to File -> Import, then from the
+dialog that opens, Anypoint Studio -> Anypoint Studio Project from File System.
 +
-You can find all errors and warnings in the <<migration_report>>.
+. Open and check the Migration report (`summary.html`) at the path provided in
+the console output (under your
+`_destinationProjectBasePath_/report/summary.html`).
 +
-It is important to note that the same information is provided as comments in the Mule Configuration XML files for your project that the Migration tool outputs.
+To understand errors and warnings in the Migration report, see <<migration_report>>.
 +
-. Address the errors and warnings in the report.
+Also note that the same information is provided as comments in the Mule Configuration XML files for your project that the Migration tool outputs.
 +
-Note that the <<compatibility_module, Compatibility module>> is likely work
-around some of these issues until you or your team can address them with
-permanent fixes.
+. Address the errors in the report, and address the warnings before deploying the migrated app to a production environment.
++
+Note that the migrated application will not run in Studio if there are any unresolved errors in it.
++
+Note that the <<compatibility_module, Compatibility module>> can work around warnings until you or your team can address them with permanent fixes. However,
+addressing the warnings is important for improving the performance of the flows,
+so you should treat warnings the same way you treat errors before you deploy
+your app to a production environment.
 +
 . Identify and consider additional migration steps where the automated migration
-by the tool can be improved. See link:migration-manual[Migration to Mule 4: Recommended Migration Tasks].
+by the tool can be improved. See
+link:migration-manual[Migration to Mule 4: Recommended Migration Tasks].
++
+This step includes removing Compatibility module components from the project XML.
++
+. Run any migrated MUnit tests.
++
+See <<munit, Testing the Migrated App>>.
 
 [[compatibility_module]]
 == Compatibility Module
 
-Studio automatically applies the Compatibility module to your migrated project.
+Some components or patterns cannot be migrated automatically by transforming
+the application's XML. For such cases, the migrator adds the Compatibility module to your project. The Compatibility module is a set of components that either
+adapts Mule 3 components into the Mule 4 architecture, or in some cases,
+enables some Mule 3 components to work in Mule 4.
 
 *Important:* MuleSoft recommends that you migrate to a point where the
 Compatibility module can be dropped from your app and that you simply use the
-module as a bridge until you can drop the tool.
+module as a bridge until the manual steps of the migration are complete.
 
-The Compatibility does not cover every migration gap. The module simply
+The Compatibility module does not cover every migration gap. Instead, it
 complements the Migration tool:
 
  * By providing MEL support for the cases where a MEL expression could not be
  migrated to DataWeave automatically.
- * By adapting the Mule 3 message model to Mule 4.
+ * By adapting the Mule 3 Message model to Mule 4.
 
 You or your team will need to handle other migration gaps that are covered in
 the <<migration_report, Migration report>>.
 
-
-//TODO: FROM RODRO: we want them to migrate to a point where the compatibility plugin can be dropped from an app
-
-//TODO: QUESTION: WILL THEY ASK PEOPLE IF THEY WANT TO MIGRATE CASES WHERE BEST PRACTICES ARE NOT FOLLOWED?
-
-
 //TODO: QUESTION: API for the tool? Tool consists of an execution engine,
 //a proprietary API to allow extensions of it, and a reporting framework.
-
-//* Task: A set of steps.
-//* Step: An operation that changes, removes, or updates a resource or content
-//in a Mule project.
 
 [[migration_report]]
 == Migration Report
@@ -174,8 +285,10 @@ a list of migration errors and warnings, for example:
 
 image::migrator-report.png[Mule Migration Tool Report]
 
-* Warning (`WARN`): Identifies what you need to migrate manually even though the behavior is the same in Mule 4.
-* Error (`ERROR`): Identifies something that behaves differently than its Mule 3 counterpart.
+* Warning (`WARN`): For these issues, the Compatibility module can serve as a
+temporary workaround until you migrate them manually.
+* Error (`ERROR`): Issues that require a manual migration. There is no
+workaround through the Compatibility module.
 
 [[message_types]]
 In the Configuration XML file for the output project, you see any `WARN` or `ERROR`
@@ -210,16 +323,6 @@ migrated Choice router:
     <!-- For more information refer to:-->
     <!-- https://docs.mulesoft.com/mule4-user-guide/v/4.1/migration-mel-->
     <!-- https://blogs.mulesoft.com/dev/mule-dev/why-dataweave-main-expression-language-mule-4/-->
-
-    <!--Migration WARN: MEL expression could not be migrated to a DataWeave expression-->
-    <!-- For more information refer to:-->
-    <!-- https://docs.mulesoft.com/mule4-user-guide/v/4.1/migration-mel-->
-    <!--  https://blogs.mulesoft.com/dev/mule-dev/why-dataweave-main-expression-language-mule-4/-->
-
-    <!--Migration WARN: MEL expression could not be migrated to a DataWeave expression-->
-    <!-- For more information refer to:-->
-    <!-- https://docs.mulesoft.com/mule4-user-guide/v/4.1/migration-mel-->
-    <!--  https://blogs.mulesoft.com/dev/mule-dev/why-dataweave-main-expression-language-mule-4/-->
     </logger>
   </otherwise>
 </choice>
@@ -236,16 +339,17 @@ The migrator is a command-line tool. You simply input a Mule 3 project and targe
 
 .Command-line Options
 |===
-| `-destinationProjectBasePath <arg>` | Required. Directory for the migrated project.
+| `-destinationProjectBasePath <arg>` | Required. Directory for the migrated project that includes a destination folder for the migrated project, for example, `/path/to/my/destination-folder`. The tool will create the `destination-folder`. It will produce an error if `destination-folder` already exists.
 | `-help` | For displaying the help.
 | `-muleVersion <arg>` | Required. The Mule version to which you are migrating: `4.1.3`.
-| `-projectBasePath <arg>` a| Required. Directory of the project to to migrate.
+| `-projectBasePath <arg>` a| Required. Directory of the project to migrate.
 
 To discover the path to your Mule 3 project from Studio, you can go to
-File -> Switch Workspace -> Other..., copy the path that appears in
-the Workspace field. You need to append the name of your project
-to that path when you use it as the `<arg>` to `-projectBasePath`, for
-example: `-projectBasePath /Users/me/AnypointStudio/v6/migrator/my-v6-project`
+*File -> Switch Workspace -> Other...*, copy the path that appears in
+the *Workspace* field. You need to append the name of your project
+to that path when you use it as the `<arg>`
+to `-projectBasePath`, for example:
+`-projectBasePath /Users/me/AnypointStudio/workspace-studio/my-v6-project`
 |===
 
 Whenever the tool adds an entry to the report (either error or warning), the same information is also added as a comment in the Configuration XML file for the
@@ -254,119 +358,3 @@ project.
 == See Also
 
 link:migration-manual[Migration to Mule 4: Recommended Post-Migration Tasks]
-
-////
-MY NOTES: REPLACED WITH ANOTHER SECTION ABOVE
-== Supported Migrations
-
-The tool attempts to migrate these components, modules, and connectors:
-
-* VM connector and components
-* HTTP Transport (Mule 3) to HTTP connector (Mule 4)
-* File Transport (Mule 3) to File connector (Mule 4)
-* All (Mule 3) to Scatter-Gather component (Mule 4)
-* Choice router
-* For Each router
-* Transform component
-* Scripting module
-* Cache scope
-* Batch scope
-* Web Service Consumer connector
-* Spring module
-* Poll component (Mule 3) to Scheduler
-* Validation components
-* Database connector
-
-In addition, the following migrations take place:
-
-* `outboundProperties` to `vars`
-* Enrichers to Target Variables
-* Secure properties and placeholders
-* Inbound properties?
-
-IN PROGRESS:
-
-* JMS components
-* All (Mule 3) to Scatter-Gather component (Mule 4)??
-
-TODOS:
-
-* Email
-* Oauth
-* XML module
-* gzip?
-* splitter + aggregators
-* watermark
-* Sockets
-* FTP
-* ALWAYS_BEGIN tx config in outbound endpoints
-* WebSphere MQ Connector https://www.mulesoft.org/jira/browse/MMT-202
-* properties files declared inside src/main/app.https://www.mulesoft.org/jira/browse/MMT-200
-* Security module
-* Fully migrate properties/sessionVars to variables
-* Review idempotent-redelivery-policy cases
-* CXF?
-* JSON module
-* first succ/until succ/async/flow
-* Filters
-* Domains
-
-
-Module migrations include:
-
-//NEW OR IN ANALYSIS on Aha:
-* !!! Migration Tool Beta... !!!
-* Use of the Mule 3 transport in Mule 4: JMS, File, SFTP, VM, FTP, HTTP, SSL, TCP,
-* DataWeave transformations
-* Migrate Mule 3 connectors to Mule 4: DB,
-* Scripting module
-* Mule 3 Gateway proxies to Mule 4
-* ExtensionModel for compatibility plugin
-
-//READY TO START on Aha:
-* Batch jobs from Mule 3 to Mule 4
-* Poll and Watermark from Mule 3 to Mule 4
-* Compatibility modules for filters, transformers, components
-
-* Adding the corresponding module to the POM (if not already added)
-* Adding the necessary namespace definitions on the XML prologs (if not already added)
-
-* Poll (`<poll/>`) replaced by Scheduler (`<scheduler/>`)
-** Any `<processor-chain/>` element removed
-** Cron expressions migrated
-* Watermark
-** If `updateExpression` is present and value is MEL, expression requires manual migration or compatibility module.
-* Batch
-* Legacy scopes (inbound, outbound, session) handled by new component to the compatibility module: `<ee:dump-legacy-properties />`
-
-*
-* Error Handlers
-* Component bindings, Custom Components and Callable not migrated. Mule SDK.
-* Secure Properties Placeholders
-* Reconnection strategies: https://docs.mulesoft.com/mule4-user-guide/v/4.1/migration-patterns-reconnection-strategies
-* Threading profiles removed, except for Batch
-* Transactional Scope replaced with Try.
-* Processing strategies removed.
-* Custom Components not migrated. Mule SDK.
-* Filters
-* Object Store
-* Message properties
-* HTTP
-
-Caveats:
-
-Tool makes best effort to migrate MEL expressions, but when the automatic migration is not possible:
-
-* MEL Expression migration to DataWeave can happen before or after running the tool. Resorting to MEL means:
-** Adding the compatibility module
-** Adding the `mel:` prefix to the expression
-
-_TODO: NOT INITIAL GA_
-* API Manager:
-* Proxy apps: For each defined proxy, should have a “Migrate to Mule 4” button which triggers the Migration tool. The tool will attempt to migrate the proxy and all the policies inside.
-* Policies
-
-If the migration is successful (no errors, but warning allowed), the user should get the chance to deploy the migrated proxy to a testing environment to verify it. If the validation succeeded, the migrated proxy should continue the standard promotion process.
-
-If errors were found, then the user should be notified and able to download the migrated project. He can then import that project in Studio and access the migration report to take corrective action.
-////
