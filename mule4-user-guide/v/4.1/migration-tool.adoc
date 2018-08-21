@@ -338,8 +338,9 @@ The migrator is a command-line tool. You simply input a Mule 3 project and targe
 To discover the path to your Mule 3 project from Studio, you can go to
 *File -> Switch Workspace -> Other...*, copy the path that appears in
 the *Workspace* field. You need to append the name of your project
-to that path when you use it as the `<arg>` to `-projectBasePath`, for
-example: `-projectBasePath /Users/me/AnypointStudio/v6/migrator/my-v6-project`
+to that path when you use it as the `<arg>`
+to `-projectBasePath`, for example:
+`-projectBasePath /Users/me/AnypointStudio/v6/migrator/my-v6-project`
 |===
 
 Whenever the tool adds an entry to the report (either error or warning), the same information is also added as a comment in the Configuration XML file for the
