@@ -45,7 +45,7 @@ The tool migrates Mule apps that use these versions of the Mule runtime:
 * 3.9.x
 * 3.8.x
 
-See also, <<unsupported_projects>>
+See also, <<unsupported_projects>>.
 
 == What is Migrated?
 
@@ -103,7 +103,11 @@ The Migration tool does not support the following migrations:
 ** etc.
 * <<datamapper, DataMapper>>
 
-See also: <<unsupported_projects>>, <<datamapper>>, <<devkit>>
+See also:
+
+* <<unsupported_projects>>
+* <<datamapper>>
+* <<devkit>>
 
 
 [[unsupported_projects]]
@@ -119,7 +123,7 @@ Although MuleSoft will not officially support these cases, it is probably a good
 DataMapper is not supported by this tool. The recommendation in this case is to first migrate your DataMapper transformations to DataWeave in your Mule 3.x first, then run the tool afterwards.
 
 [[devkit]]
-=== Custom DevKit Connectors
+==== Custom DevKit Connectors
 
 Applications might also contain custom-made DevKit connectors. Though the
 tool cannot migrate them, the link:mule-sdk/v/1.1/dmt[DevKit migration tool]
