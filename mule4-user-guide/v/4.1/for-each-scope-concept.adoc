@@ -33,6 +33,13 @@ If one of the elements in a collection throws an exception, the For Each scope s
 
 == Examples
 
+Authenticating Salesforce using OAuth2
+Import contacts into Microsoft Dynamics CRM
+Importing a CSV file into mongoDB
+Importing an Email Attachment using the IMAP Connector
+Importing Email Attachments using the POP3 Connector
+Querying a Database and Attaching Results to an Email
+
 === Iterate a JSON Array
 
 [source,xml,linenums]
