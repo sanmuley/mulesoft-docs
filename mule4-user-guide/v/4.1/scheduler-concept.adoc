@@ -2,10 +2,20 @@
 
 The Scheduler component allows you to trigger a flow when a time-based condition is met. You can configure it to be triggered at a regular interval or give it a more flexible cron expression. For example, a Scheduler might trigger an event to start a flow every 5 seconds.
 
-Schedulers follow the timezone used by the machine where the Mule runtime is running. In case of deploying to a CloudHub worker, its timezone corresponds to the region of the worker.
+Schedulers follow the timezone used by the machine where the Mule runtime is running. If an application is running in CloudHub, the timezone that the Scheduler conforms to corresponds to the region in which the CloudHub worker is running.
 
 //Enhancement request for this: MULE-14930
-Note that in a Mule runtime cluster or multi-worker CloudHub deployment, the Scheduler only runs (or triggers) on the primary node (that is, only in one Mule runtime).
+Note that in a Mule runtime cluster or multi-worker CloudHub deployment, the Scheduler runs (or triggers) only on the primary node (that is, only in one Mule runtime).
+
+There are several example projects in Anypoint Exchange that you can open in Anypoint Studio to learn more about how to use the Scheduler component:
+
+* _Data Sync Using Watermarking and Batch_
+* _Import Contacts into Microsoft Dynamics CRM_
+* _Import Leads into Salesforce_
+* _Importing a CSV File into mongoDB_
+* _Importing an Email Attachment Using the IMAP Connector_
+* _Salesforce to MySQL Database Using Batch Processing_
+* _Sending a CSV File Through Email Using SMTP_
 
 
 == Fixed Frequency
@@ -67,6 +77,3 @@ You can click the green arrow icon at the bottom of the Scheduler component in y
 == See Also
 
 * link:scheduler-xml-reference[Scheduler XML Reference]
-
-// no loner exists, no obvious replacement:
-//* link:/connectors/database-schedule-scan-task[Example: To Schedule a Database Scan]
