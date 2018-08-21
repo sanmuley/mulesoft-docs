@@ -224,7 +224,9 @@ the Mule Configuration XML files for your project that the Migration tool output
 . Address the errors in the report, and address the warnings before deploying the migrated app to a production environment.
 +
 Note that the <<compatibility_module, Compatibility module>> can work around warnings until you or your team can address them with permanent fixes. However,
-addressing the warnings is important for improving the performance of the flows.
+addressing the warnings is important for improving the performance of the flows,
+so you should treat warnings the same way you treat errors before you deploy
+your app to a production environment.
 +
 . Identify and consider additional migration steps where the automated migration
 by the tool can be improved. See
