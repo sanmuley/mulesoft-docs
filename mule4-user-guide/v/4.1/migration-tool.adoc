@@ -140,9 +140,6 @@ migrating them, you then need to:
 
 For future releases, we will also support these:
 
-* Attachments and multipart handling
-* DataWeave 1.0 CSV output
-* `<spring:import>` tags
 * CorrelationID handling in the JMS transport
 * Documentation on how to migrate DataMapper transformations
 * Object Stores
@@ -155,8 +152,9 @@ For future releases, we will also support these:
 * Email transport
 * Tracking component
 * Gzip transformers
-* Basic structure for policies
+* Policies
 * FTP and SFTP transports
+* AMQP Transport
 * XML and JSON module
 * Splitter and aggregator pattern
 
