@@ -11,14 +11,19 @@ significant help with these tasks:
 * Automatically creating descriptor files, such as `pom.xml` or `mule-artifact.json`.
 * Automatically performing a great number of adaptations in the application's
 code.
-* Providing guidance on how to manually migrate components and patterns that cannot be migrated automatically.
+* Providing guidance on how to manually migrate components and patterns that
+cannot be migrated automatically.
 
-The migrator helps with such heavy lifting, but it is not to be expected to deliver a fully functional application. Some additional steps are required.
+The migrator helps with such heavy lifting, but it is not to be expected to
+deliver a fully functional application. Some additional steps are required.
 Those steps include testing and can also include:
 
 * Manual migration of unsupported components.
 * Manual migration of complex DataWeave transformations.
 * Manual migration of DataMapper transformations.
+
+It is important to note that the Migration tool does not support incremental
+migrations.
 
 == The Migration Process
 
@@ -39,6 +44,9 @@ These steps are detailed in <<migrate_project, Migrating a Project>>.
 Minimum requirements for a migrated app:
 
 * Studio 7.2.x (with support for Mule Runtime 4.1.3 or above).
++
+You can check your Studio version by navigating to
+*Anypoint Studio -> About Anypoint Studio*.
 
 The tool migrates Mule apps that use these versions of the Mule runtime:
 
@@ -108,19 +116,26 @@ See also:
 * <<unsupported_projects>>
 * <<datamapper>>
 * <<devkit>>
-
+* <<unsupported_connectors>>
 
 [[unsupported_projects]]
 ==== Migrating from Unsupported Runtime Versions
 
-If you want to migrate applications that are currently running on unsupported runtime versions such as 3.7.x, 3.6.x or before, you can still use the migration tool. However, a greater ratio of migration errors, unsupported patterns, or incorrect code generation is to be expected.
+If you want to migrate applications that are currently running on unsupported
+runtime versions such as 3.7.x, 3.6.x or before, you can still use the migration
+tool. However, a greater ratio of migration errors, unsupported patterns, or
+incorrect code generation is to be expected.
 
-Although MuleSoft will not officially support these cases, it is probably a good idea to try the tool on them anyway. Dealing with limitations is likely to be much easier than dealing with a completely unaided migration.
+Although MuleSoft will not officially support these cases, it is probably a
+good idea to try the tool on them anyway. Dealing with limitations is likely
+to be much easier than dealing with a completely unaided migration.
 
 [[datamapper]]
 ==== Migrating DataMapper
 
-DataMapper is not supported by this tool. The recommendation in this case is to first migrate your DataMapper transformations to DataWeave in your Mule 3.x first, then run the tool afterwards.
+DataMapper is not supported by this tool. The recommendation in this case is to
+first migrate your DataMapper transformations to DataWeave in your Mule 3.x
+first, then run the tool afterwards.
 
 [[devkit]]
 ==== Custom DevKit Connectors
@@ -132,6 +147,30 @@ migrating them, you then need to:
 
 * Manually add the migrated modules to the application's `pom.xml`.
 * Manually adapt all the uses of such connectors.
+
+[[unsupported_connectors]]
+=== Unsupported Connectors
+
+Connectors that are used in an app but not yet supported by the Migration tool
+generate this ERROR in the Migration report:
+
+`The migration of some-connector is not supported`
+
+Such connectors require manual migration. To manually migrating them:
+
+. link:connectors/common-add-module-task[Add the equivalent connector] for
+Mule 4 to the application.
+. Refer to the connector documentation for both Mule 3 and Mule 4 to determine
+the correct mappings for the connector:
+.. If the connector has a `config` element, add a new configuration that is
+equivalent to that of the Mule 3 app.
+.. Migrate the sources and inbound endpoints to the source that are provided
+by the connector for Mule 4.
+.. Migrate the operations and outbound endpoints to the operations provided
+by the connector for Mule 4.
+.. Migrate any expressions that use the inbound properties that are set by a
+source or operation of a connector in Mule 3 to refer to the `attributes`,
+instead.
 
 [[supported_future]]
 === Supported in the Future
@@ -163,9 +202,14 @@ For future releases, we will also support these:
 [[munit]]
 === Testing the Migrated App
 
-Automatic migration of MUnit tests is supported by this tool, so the first step should be to run those migrated tests. Once those tests are all passing, you can perform any additional testing that you were already performing on the original version of the application.
+Automatic migration of MUnit tests is supported by this tool, so the first step
+should be to run those migrated tests. Once those tests are all passing, you
+can perform any additional testing that you were already performing on the
+original version of the application.
 
-In either case, do expect some of this tests to fail. Manual intervention may be required to deal with additional details not automatically handled by the tool.
+In either case, do expect some of these tests to fail. Manual intervention might
+be required to deal with additional details that are not automatically handled
+by the tool.
 
 [[migrate_project]]
 == Migrating a Project
@@ -193,7 +237,12 @@ $ java -jar mule-migration-tool-runner-0.1.0.jar \
  -destinationProjectBasePath /Users/me/my-dir/my-migrated-project
 ----
 +
-If the migrator runs successfully, you will see a message something like this:
+Note that for `-destinationProjectBasePath` option, the folder (for example,
+`my-migrated-project`) in which to place the migrated must _not_ exist. The tool
+will create it. If you point to a folder that exists already, the migration will
+fail an error like this: `Exception: Destination folder already exists.`
++
+When the migrator runs successfully, you will see a message something like this:
 +
 .Successful Migration
 [source,console,linenums]
@@ -210,21 +259,29 @@ Migration report:
 +
 . Import the project to a supported version of Studio (see <<min_reqs, Requirements>>).
 +
-In Studio, you can import the project by going to File -> Import, then from the
-dialog that opens, Anypoint Studio -> Anypoint Studio Project from File System.
+In Studio, you can import the project by going to *File -> Import*, then from the
+dialog that opens, *Anypoint Studio -> Anypoint Studio Project from File System*.
 +
 . Open and check the Migration report (`summary.html`) at the path provided in
-the console output.
+the console output  (under your
+  `_destinationProjectBasePath_/report/summary.html`).
 +
-You can find all errors and warnings in the <<migration_report>>.
+To understand errors and warnings in the Migration report, see <<migration_report>>.
 +
-It is important to note that the same information is provided as comments in
-the Mule Configuration XML files for your project that the Migration tool outputs.
+Also note that the same information is provided as comments in the
+Mule Configuration XML files for your project that the Migration tool outputs.
 +
-. Address the errors in the report, and address the warnings before deploying the migrated app to a production environment.
+. Address the errors in the report, and address the warnings before deploying
+the migrated app to a production environment.
 +
-Note that the <<compatibility_module, Compatibility module>> can work around warnings until you or your team can address them with permanent fixes. However,
-addressing the warnings is important for improving the performance of the flows.
+The migrated application will not run in Studio if there are any unresolved
+errors in it.
++
+The <<compatibility_module, Compatibility module>> can work around warnings
+until you or your team can address them with permanent fixes. However,
+addressing the warnings is important for improving the performance of the flows,
+so you should treat warnings the same way you treat errors before you deploy
+your app to a production environment.
 +
 . Identify and consider additional migration steps where the automated migration
 by the tool can be improved. See
@@ -240,8 +297,9 @@ See <<munit, Testing the Migrated App>>.
 == Compatibility Module
 
 Some components or patterns cannot be migrated automatically by transforming
-the application's XML. For such cases, the migrator adds the Compatibility module to your project. The Compatibility module is a set of components that either
-adapts Mule 3 components into the Mule 4 architecture, or in some cases,
+the application's XML. For such cases, the migrator adds the Compatibility
+module to your project. The Compatibility module is a set of components that
+either adapts Mule 3 components into the Mule 4 architecture, or in some cases,
 enables some Mule 3 components to work in Mule 4.
 
 *Important:* MuleSoft recommends that you migrate to a point where the
@@ -319,18 +377,24 @@ migrated Choice router:
 </choice>
 ----
 
-The Migration report links to information on any post-migration steps you need to perform, for example:
+The Migration report links to information on any post-migration steps you need
+to perform, for example:
 
 image::migrator-issue-found.png[Mule Migration Tool Report - Issue Found]
 
 [[options]]
 == Command-line Options
 
-The migrator is a command-line tool. You simply input a Mule 3 project and target version and then output the results.
+The migrator is a command-line tool. You simply input a Mule 3 project and
+target version and then output the results.
 
 .Command-line Options
 |===
-| `-destinationProjectBasePath <arg>` | Required. Directory for the migrated project that includes a destination folder for the migrated project, for example, `/path/to/my/destination-folder`. The tool will create the `destination-folder`. It will produce an error if `destination-folder` already exists.
+| `-destinationProjectBasePath <arg>` | Required. Directory for the migrated
+project that includes a destination folder for the migrated project, for
+example, `/path/to/my/destination-folder`. The tool will create the
+`destination-folder`. It will produce an error if `destination-folder` already
+exists.
 | `-help` | For displaying the help.
 | `-muleVersion <arg>` | Required. The Mule version to which you are migrating: `4.1.3`.
 | `-projectBasePath <arg>` a| Required. Directory of the project to migrate.
@@ -340,10 +404,12 @@ To discover the path to your Mule 3 project from Studio, you can go to
 the *Workspace* field. You need to append the name of your project
 to that path when you use it as the `<arg>`
 to `-projectBasePath`, for example:
+
 `-projectBasePath /Users/me/AnypointStudio/workspace-studio/my-v6-project`
 |===
 
-Whenever the tool adds an entry to the report (either error or warning), the same information is also added as a comment in the Configuration XML file for the
+Whenever the tool adds an entry to the report (either error or warning), the
+same information is also added as a comment in the Configuration XML file for the
 project.
 
 == See Also
