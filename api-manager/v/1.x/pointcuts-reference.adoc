@@ -24,7 +24,7 @@ If you are using your policies in an on-site deployment, you might want to modif
 
 == Enabling Resource-Level Policies
 
-If your API runs on Mule 3.8.4 and later, use the following code to include resource-level policies:
+If your API runs on Mule 3.8.4 or later versions of Mule 3.x, use the following code to include resource-level policies:
 
 [source,xml,linenums]
 ----
