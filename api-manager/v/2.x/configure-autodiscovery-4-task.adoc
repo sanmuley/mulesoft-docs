@@ -20,6 +20,8 @@ This API ID is required by the Autodiscovery element to identify the API to whic
 
 == Configuring API Manager
 
+This step is necessary to instruct API Manager to use your deployed Mule application as the API proxy itself.
+
 . For Managing type, select Basic Endpoint.
 . Add the Implementation URI that points to the deployed Mule application.
 . Select the checkmark `Check this box if you are managing this API in Mule 4 or above`.
@@ -64,7 +66,7 @@ wrapper.java.additional.<n>=-Danypoint.platform.client_secret=XXXXXXXX
 +
 In these arguments you can pass both organization, or environment credentials.
 
-==== Anypoint Platform.
+==== Runtime Manager for your Deployed Application.
 
 . Navigate to Runtime Manager in Anypoint Platform.
 . Access the Properties section of the deployed application. If the application is being deployed for the first time, the Properties section will appear during the deployment configuration.
