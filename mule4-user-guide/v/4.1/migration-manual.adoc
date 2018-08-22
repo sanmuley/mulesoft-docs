@@ -230,7 +230,8 @@ The way to accomplish this varies by connector. For HTTP, you can use headers. F
 [[inbound_attachments]]
 == Inbound Attachments (Manual Post-Migration Steps)
 
-Expressions that use inbound attachments should use the DataWeave features for handling multipart data formats.
+Expressions that use inbound attachments should use the DataWeave features for
+handling multipart data formats.
 
 .Example: Mule 3
 [source,MEL,linenums]
@@ -239,7 +240,6 @@ Expressions that use inbound attachments should use the DataWeave features for h
 #[message.inboundAttachments.get('myAttachment').getDataSource().getContentType()]
 #[message.inboundAttachments.get('myAttachment').getDataSource().getPart().getContentDispositionFilename()]
 ----
-
 
 .Example: Mule 4 Modifications
 [source,DataWeave,linenums]
