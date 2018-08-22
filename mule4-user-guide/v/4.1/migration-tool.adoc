@@ -43,7 +43,7 @@ Minimum requirements for a migrated app:
 
 * Studio 7.2.x (with support for Mule Runtime 4.1.3 or above).
 +
-You can check your Studio version by navigating to *Anypoint Studio --> About Anypoint Studio*.
+You can check your Studio version by navigating to *Anypoint Studio -> About Anypoint Studio*.
 
 The tool migrates Mule apps that use these versions of the Mule runtime:
 
@@ -197,6 +197,9 @@ $ java -jar mule-migration-tool-runner-0.1.0.jar \
  -muleVersion 4.1.3 \
  -destinationProjectBasePath /Users/me/my-dir/my-migrated-project
 ----
++
+Note that for `-destinationProjectBasePath` option, the folder (for example, `my-migrated-project`) in which to place the migrated must not exist. The tool
+will create it. If you point to a folder that exists already, the migration will fail an error like this: `Exception: Destination folder already exists.`
 +
 If the migrator runs successfully, you will see a message something like this:
 +
