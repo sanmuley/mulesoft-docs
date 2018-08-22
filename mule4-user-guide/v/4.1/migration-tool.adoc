@@ -108,7 +108,7 @@ See also:
 * <<unsupported_projects>>
 * <<datamapper>>
 * <<devkit>>
-
+* <<unsupported_connectors>>
 
 [[unsupported_projects]]
 ==== Migrating from Unsupported Runtime Versions
@@ -132,6 +132,20 @@ migrating them, you then need to:
 
 * Manually add the migrated modules to the application's `pom.xml`.
 * Manually adapt all the uses of such connectors.
+
+[[unsupported_connectors]]
+=== Unsupported Connectors
+
+Connectors used in an application that are not yet supported by the Migration Tool generate the `The migration of some-connector is not supported` ERROR in the migration report. Usages of these connectors has to be migrated manually.
+
+For manually migrating these components, the steps are:
+
+. link:common-add-module-task[Add the equivalent connector] for Mule 4 to the application.
+. Refer to the documentation of the connector for both Mule 3 and Mule 4 to understand how the following mappings should be for a particular connector.
+. If the connector has a `config` element, add a new configuration equivalent to what the application had in Mule 3. Refer to the documentation of the connector for both Mule 3 and Mule 4 to understand how this mapping should be for a particular connector.
+. Migrate the sources and inbound endpoints to the source provided by the connector for Mule 4. Refer to the documentation of the connector for both Mule 3 and Mule 4 to understand how this mapping should be for a particular connector.
+. Migrate the operations and outbound endpoints to the operations provided by the connector for Mule 4. Refer to the documentation of the connector for both Mule 3 and Mule 4 to understand how this mapping should be for a particular connector.
+. Migrate any expressions that use the inbound properties set by a source or operation of a connector in Mule 3 to refer to the `attributes` instead. Refer to the connector documentation.
 
 [[supported_future]]
 === Supported in the Future
