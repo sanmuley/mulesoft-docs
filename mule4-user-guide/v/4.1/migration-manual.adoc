@@ -230,26 +230,38 @@ The way to accomplish this varies by connector. For HTTP, you can use headers. F
 [[inbound_attachments]]
 == Inbound Attachments (Manual Post-Migration Steps)
 
-Expressions that use inbound attachments should use the DataWeave features for handling multipart.
+Expressions that use inbound attachments should use the DataWeave features for
+handling multipart data formats.
 
-.Example: Output of the Migration Tool
-[source,txt,linenums]
+.Example: Mule 3
+[source,MEL,linenums]
 ----
 #[message.inboundAttachments.get('myAttachment').getDataSource().getInputStream()]
 #[message.inboundAttachments.get('myAttachment').getDataSource().getContentType()]
 #[message.inboundAttachments.get('myAttachment').getDataSource().getPart().getContentDispositionFilename()]
 ----
 
-should respectively be migrated to
-
+.Example: Mule 4 Modifications
+[source,DataWeave,linenums]
+----
 #[payload.parts.myAttachment.content]
 #[payload.parts.myAttachment.headers.'Content-Type']
 #[payload.parts.myAttachment.headers.'Content-Disposition'.filename]
+----
 
-For more in depth documentation, refer to https://docs.mulesoft.com/mule4-user-guide/v/4.1/dataweave-formats#format_form_data
+See link:dataweave-formats#format_form_data[Multipart (Form-Data)] in
+_Data Formats Supported by DataWeave_.
 
-Outbound Attachments
+[[outbound_attachments]]
+== Outbound Attachments (Manual Post-Migration Steps)
 
-Instead of setting outbound attachments for them to be sent by the next operation in the flow or the response of the source, each operation and source must make explicit any attachments sent. These attachments to be sent may be set as variables for later reference in an expression.
+Instead of configuring outbound attachments to send in the next operation of a
+flow or in the response of the source, each operation and source must make
+explicit any attachments that are sent. You can set attachments as variables
+for later reference in an expression.
 
-Refer to the documentation of each connector for details on how to declare attachments to be sent.
+Refer to the documentation of each connector for details on how to declare
+attachments to be sent. For example, see
+link:connectors/email-list#getting-data-from-emails[Getting Data from Emails]
+in _Listing Emails with the Email Connector_ and the section on _Attachments_
+in link:connectors/web-service-consumer-consume[To Consume a Web Service].
