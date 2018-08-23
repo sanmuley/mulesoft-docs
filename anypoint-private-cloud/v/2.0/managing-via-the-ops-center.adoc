@@ -1,5 +1,4 @@
-= To Manage Anypoint Platform Private Cloud Edition Using Ops Center
-:keywords:anypoint platform, on premises
+= Manage Anypoint Platform Private Cloud Edition Using Ops Center
 
 This topic describes how to use the Ops Center to manage and monitor the Anypoint Platform Private Cloud Edition. The Ops Center is a web-base management tool that enables you to perform the following types of tasks:
 

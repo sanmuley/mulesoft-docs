@@ -1,4 +1,4 @@
-= To Configure DNS on Anypoint Private Cloud
+= Configure DNS on Anypoint Private Cloud
 
 You must provide the DNS or IP where your Anypoint Platform installation is exposed to the local network. This is required for Mule runtimes to communicate with the platform.
 

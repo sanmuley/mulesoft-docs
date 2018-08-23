@@ -1,4 +1,4 @@
-= To Configure LDAP in Anypoint Private Cloud
+= Configure LDAP in Anypoint Private Cloud
 
 This topic describes how to configure user management in Anypoint Platform Private Cloud Edition using LDAP version 3.
 
