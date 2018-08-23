@@ -5,9 +5,9 @@ _Select_
 
 The Anypoint Salesforce Connector lets you connect to the Salesforce platform APIs. This connector exposes methods for accessing Salesforce, including working with the https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_dev_process_chapter.htm[Salesforce Apex classes].
 
-This connector works with Salesforce's SOAP API, REST API, Bulk API, and Streaming API, depending on the operation you configure. Each API call use an XML request and response over an HTTPS connection. All required request headers, error handling, and HTTPS connection configurations are built into the connector.
+This connector works with Salesforce's SOAP API, REST API, Bulk API, and Streaming API, depending on the operation you configure. Each API call uses an XML request and response over an HTTPS connection. All required request headers, error handling, and HTTPS connection configurations are built into the connector.
 
-There are three ways to use a Salesforce connector in your application: as an outbound connector, an inbound connector, or a streaming inbound connector. These are discussed later in this topic.
+There are three ways to use a Salesforce connector in your application: as an outbound connector, an inbound connector, or a streaming inbound connector. These are discussed later in this document.
 
 == Prerequisites
 
@@ -24,8 +24,7 @@ Requirements for using the connector:
 
 * The Salesforce does not expose _all_ possible operations of the Salesforce APIs. 
 * The Salesforce connector does *not* provide access to the Chatter REST API or the Tooling API.
-* See http://blogs.developerforce.com/tech-pubs/2011/10/salesforce-apis-what-they-are-when-to-use-them.html[Salesforce APIs: What they are and when to use them] and https://help.salesforce.com/HTViewHelpDoc?id=integrate_what_is_api.htm&language=en_US[Which API should I use?]
-* When subscribing to a topic that was not previously published in Salesforce, the subscription is successful.  When the topic is later published, the user who is already subscribed to it does NOT receive notifications regarding that topic. The user has to resubscribe after the topic creates.
+* See http://blogs.developerforce.com/tech-pubs/2011/10/salesforce-apis-what-they-are-when-to-use-them.html[Salesforce APIs: What they are and when to use them] and https://help.salesforce.com/HTViewHelpDoc?id=integrate_what_is_api.htm[Which API should I use?]
 
 == Developing an App
 
@@ -86,7 +85,7 @@ See <<Stream Data to Your App>> for more information on the use of the Streaming
 
 The Salesforce link:http://www.salesforce.com/us/developer/docs/api_meta/[Metadata API] manages customizations and build tools that work with the metadata model, not the data itself.
 
-== Set a Trigger in Design Center
+== Configuring in Design Center
 
 . In Anypoint Platform > Design Center, click Create > Mule Application. 
 . Click a trigger to initiate access to your flow. To have Salesforce send content to your application, select Salesforce as the trigger and choose one of the following triggers:
@@ -491,6 +490,8 @@ In XML, you use `subscribe-topic` or `replay-topic` as the trigger:
     <logger level="INFO" message="Received an event for Salesforce Object ID #[map-payload:Id]"/>
 </flow>
 ----
+
+*Note:* When subscribing to a topic that was not previously published in Salesforce, the subscription is successful. When the topic is later published, the user who is already subscribed to it does NOT receive notifications regarding that topic. The user has to resubscribe after the topic creates.
 
 === Receiving Events for a Topic
 
