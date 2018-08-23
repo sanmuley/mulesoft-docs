@@ -25,7 +25,7 @@ Object Store v2 provides:
 
 You can use the existing Object Store Connector to create applications that write data to the object store.
 
-Object Store v2 contains a user interface available in the Anypoint Platform > Runtime Manager. 
+A user-interface for viewing partitions and contents is located at Anypoint Platform> Runtime Manager> Object Store. See link:/object-store/osv2-guide#to-view-data-in-an-object-store .
 
 == Upgrading to Object Store v2
 
