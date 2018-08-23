@@ -1,30 +1,30 @@
-= To Migrate to Anypoint Platform Private Cloud, Version 1.7.1
+= Upgrade to Anypoint Platform Private Cloud, Version 2.0
 
 This topic provides information about upgrading Anypoint Platform Private Cloud Edition to the most recent version. This version supports the following migration paths:
 
 [%header%autowidth.spread]
 |===
-| Base Version | Intermediate Version | Target Version | Comments
-| 1.7.0 | N/A | 1.7.1 | Direct migration is supported
-| 1.6.1 | N/A | 1.7.1 | Direct migration is supported
-| 1.6.0 | N/A | 1.7.1 | Direct migration is supported
-| 1.5.2 | 1.6.1 | 1.7.1 | Must upgrade to 1.6.1 first
-| 1.5.1 | 1.6.1 | 1.7.1 | Must upgrade to 1.6.1 first
+| Base Version | Intermediate Versions | Target Version | Comments
+| 1.7.x | N/A | 2.0 | Direct upgrade is supported
+| 1.6.x | 1.7.1 | 2.0 | Must upgrade to version 1.7.1
+| 1.5.x | 1.6.1, 1.7.1 | 2.0 | Must upgrade to 1.6.1, then 1.7.1 before upgrading to 2.0.
 |===
 
-See link:/anypoint-private-cloud/v/1.6/upgrade[About Migrating Anypoint Platform Private Cloud Edition] for information on upgrading to version 1.6.1.
+See link:/anypoint-private-cloud/v/1.6/upgrade[About Migrating Anypoint Platform Private Cloud Edition] for information on upgrading to version 1.6.1. See link:/anypoint-private-cloud/v/1.7/upgrade[About Migrating Anypoint Platform Private Cloud Edition] for information on upgrading to version 1.7.1.
 
 [WARNING]
-During the migration process, there will be some downtime as each node is updated.
+During the migration process, there will be some downtime as each node is updated. 
 
 
 == Prerequisites
 
 Before migrating, ensure that you have performed and met the following prerequisites:
 
-* Perform a backup of your system as described in link:backup-and-disaster-recovery[About Backup and Recovery].
+* Perform a backup of your system as described in link:backup-and-disaster-recovery[About Backup and Recovery]. If you are upgrading from an older version that requires multiple intermediate upgrades you must backup each intermediate version before proceding to the next.
 
-* Ensure that your environment meets all of the system and network requirements described in link:/anypoint-private-cloud/v/1.7/prereq-workflow[Workflow: Install and Verify Prerequisites for Physical Servers]
+* Anypoint Private Cloud, version 2.0 requires that you have an NFS server installed and configured. Ensure that this is installed before beginning the upgrade. See link:/anypoint-private-cloud/v/2.0/prereq-network[Private Cloud Edition Network Requirements]
+
+* Ensure that your environment meets all of the system and network requirements described in link:/anypoint-private-cloud/v/2.0/prereq-workflow[Workflow: Install and Verify Prerequisites for Physical Servers]
 
 * Enable TCP ports `53`, `3011`, `3012` intra-node to allow communication with the database cluster.
 
@@ -37,7 +37,7 @@ $ sudo gravity enter
 $ kubectl
 ----
 
-== Upgrading Anypoint Private Cloud
+== Procedure
 
 . Obtain a link to the installer from your customer success representative.
 
@@ -54,13 +54,13 @@ By performing these procedures from the master node, the upgrade scripts are abl
 . Uncompress the application archive.
 +
 ----
-tar -xvf anypoint-1.7.1-installer.tar.gz
+tar -xvf anypoint-1.2.0-installer.tar.gz
 ----
 
-. Navigate to the `anypoint-1.7.1` directory, then run the upload script.
+. Navigate to the `anypoint-2.0` directory, then run the upload script.
 +
 ----
-cd anypoint-1.7.0
+cd anypoint-2.0
 sudo ./upgrade
 ----
 +
@@ -70,12 +70,12 @@ This command updates the platform to the current version and restarts each pod i
 $ sudo ./upgrade
 -> initializing upload
 -> uploading update package
-importing anypoint:1.7.1
-synchronizing anypoint:1.7.1 with Docker registry at 172.31.0.26:5000
-synchronizing anypoint:1.7.1 with Docker registry at 172.31.0.45:5000
-synchronizing anypoint:1.7.1 with Docker registry at 172.31.0.5:5000
-anypoint:1.7.0 has been uploaded
-updating anypoint from 1.6.1 to 1.7.1
+importing anypoint:2.0
+synchronizing anypoint:2.0 with Docker registry at 172.31.0.26:5000
+synchronizing anypoint:2.0 with Docker registry at 172.31.0.45:5000
+synchronizing anypoint:2.0o with Docker registry at 172.31.0.5:5000
+anypoint:2.0 has been uploaded
+updating anypoint from 1.7.1 to 2.0
 update operation (bae00abf-98a7-4ca9-b0d2-06f3bfea3024) has been started
 the cluster is updating in background
 ----
@@ -96,4 +96,17 @@ $ kubectl get pods
 ----
 https://{platform-host}:9500
 ----
+
+. Configure Anypoint Private Cloud to use your NFS server.
++
+After upgrading Anypoing Private Cloud, you configure it to use the required NFS server.
++
+.. From Anypoint Platform, select *Access Management*.
+.. Click *NFS Settings*.
+.. Enter the domain name of your NFS server.
+.. Enter the path to your NFS server.
+.. Click *Test NFS Server*.
+.. Click *Save*.
+
+
 
