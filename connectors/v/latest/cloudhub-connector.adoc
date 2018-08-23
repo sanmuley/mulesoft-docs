@@ -104,7 +104,7 @@ Optionally can be configured:
 ----
 
 .Configuring on Studio
-image:./_images/cloudhub-list-notifications.png[Creating Notification]
+image:cloudhub-list-notifications.png[Creating Notification]
 
 This operation returns a list of notifications with the following structure.
 
