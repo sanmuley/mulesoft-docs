@@ -363,7 +363,6 @@ After configuring, click OK.
 
 From the Mule Palette tab, select an operation. 
 
-image:salesforce-select-operation.png[SalesForceMain]
 
 == Creating a Consumer Key
 
