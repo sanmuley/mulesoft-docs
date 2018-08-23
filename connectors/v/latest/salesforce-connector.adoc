@@ -150,7 +150,7 @@ image:salesforce-dc-cc-advanced.png[Advanced Tab for Connection Type]
 . If needed, set the Redelivery Policy on the main Configuration screen. 
 Redelivery indicates the maximum number of tries to deliver trigger content.
 +
-image:
+image:salesforce-dc-redelivery-policy.png[Redelivery Policy]
 
 == Configuring Salesforce as a Component
 
@@ -231,7 +231,7 @@ image:salesforce-dc-oauth-saml.png[OAuth SAML Configuration]
 * Password: Enter the corresponding password.
 * Security Token: Enter the corresponding security token.
 +
-image:salesforce-dc-oauth-user-pass.png[]
+image:salesforce-dc-oauth-user-pass.png[OAuth User Password]
 
 == Connect in Anypoint Studio 7
 
