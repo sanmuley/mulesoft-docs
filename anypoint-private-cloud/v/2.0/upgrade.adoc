@@ -17,6 +17,9 @@ See link:/anypoint-private-cloud/v/1.6/upgrade[About Migrating Anypoint Platform
 [WARNING]
 During the migration process, there will be some downtime as each node is updated.
 
+== Application Upgrades
+
+The procedures in this topic describe how to migrate Anypoint Platform and the Anypoint Private Cloud edition infrastructure. You must also upgrade your applications to work with the new version of Anypoint Platform. Contact your customer success representative for more information.
 
 == Prerequisites
 
