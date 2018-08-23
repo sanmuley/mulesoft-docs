@@ -28,16 +28,12 @@ Requirements for using the connector:
 
 == Developing an App
 
-Design-time best practice indicates for you to build an application in this order:
+Build an application in this order:
 
 . Configure the connector.
 . Test the connection.
 . Build the rest of your flow.
 . Add and configure DataWeave.
-
-The objective of this design-time strategy is to set the pieces of the integration puzzle in place, then glue them together with DataWeave.
-
-To store Date and DateTime fields, you can use DataWeave expressions to create Date and Calendar Java objects.
 
 When developing an app, the Salesforce connector provides these integration patterns
 you can use with the Salesforce APIs:
@@ -56,12 +52,9 @@ The Salesforce link:https://www.salesforce.com/us/developer/docs/apexcode/[Apex 
 
 *SOAP API:*
 
-The Salesforce link:http://www.salesforce.com/us/developer/docs/api/index.htm[SOAP API]  provides secure access to your organization's information on Salesforce. Most of the operations that the Salesforce connector performs map to operations that this API exposes.
+The Salesforce link:http://www.salesforce.com/us/developer/docs/api/index.htm[SOAP API] provides secure access to your organization's information on Salesforce. Most of the operations that the Salesforce connector performs map to this API.
 
-All the Salesforce operations performed through the SOAP API have an optional parameter called "Headers" that can take any of the following https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/soap_headers.htm[Salesforce SOAP Headers]:
-
-AllOrNoneHeader, AllowFieldTruncationHeader, AssignmentRuleHeader,
-CallOptions, EmailHeader, LocaleOptions, MruHeader, 
+All the Salesforce operations performed through the SOAP API have an optional parameter called "Headers" that can take any of the following https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/soap_headers.htm[Salesforce SOAP Headers]: AllOrNoneHeader, AllowFieldTruncationHeader, AssignmentRuleHeader, CallOptions, EmailHeader, LocaleOptions, MruHeader, 
 OwnerChangeOptions, QueryOptions, UserTerritoryDeleteHeader, 
 DuplicateRuleHeader
 
@@ -71,15 +64,11 @@ The Salesforce link:https://developer.salesforce.com/page/Creating_REST_APIs_usi
 
 *Bulk API:*
 
-The Salesforce link:https://www.salesforce.com/us/developer/docs/api_asynch/[Bulk API] quickly and securely load batches of your organization's data into Salesforce. 
-
-See also: <<Using the Bulk API>>
+The Salesforce link:https://www.salesforce.com/us/developer/docs/api_asynch/[Bulk API] quickly and securely load batches of your organization's data into Salesforce. See also: <<Using the Bulk API>>
 
 *Streaming API:*
 
-The Salesforce link:http://www.salesforce.com/us/developer/docs/api_streaming/[Streaming API] securely receives notifications for changes to your organization's information in Salesforce.
-
-See <<Stream Data to Your App>> for more information on the use of the Streaming API.
+The Salesforce link:http://www.salesforce.com/us/developer/docs/api_streaming/[Streaming API] securely receives notifications for changes to your organization's information in Salesforce. See <<Stream Data to Your App>> for more information on the use of the Streaming API.
 
 *Metadata API*
 
@@ -105,12 +94,12 @@ Note: A channel or topic must be published to Salesforce before a subscription t
 +
 Alternatively, you can use an HTTP Listener or Scheduler trigger.
 
-== Example: Configuring a Salesforce New Object Trigger
+== Configuring a Salesforce New Object Trigger
 
-The following example shows how to configure the Salesforce New Object trigger. 
+The following shows how to configure the Salesforce New Object trigger. 
 
 . Create a New Mule Application in Design Center. 
-. Set the trigger to Salesforce > New Object.
+. Set the trigger. For example, you can use Salesforce > New Object.
 . Click *Set up*.
 +
 image:salesforce-dc-new-object.png[New Object Configuration Screen]
@@ -232,10 +221,6 @@ image:salesforce-dc-oauth-saml.png[OAuth SAML Configuration]
 +
 image:salesforce-dc-oauth-user-pass.png[OAuth User Password]
 
-== Connect in Anypoint Studio 7
-
-You can use this connector in Anypoint Studio by first downloading it from Exchange and configuring it as needed.
-
 == Install Connector in Studio
 
 . In Anypoint Studio, click the Exchange icon in the Studio taskbar.
@@ -323,7 +308,7 @@ Delete:
 +
 image:salesforce-studio-delete.png[sfdc-delete]
 
-=== Session Invalidation
+=== Keeping a Session Alive
 
 For the Mule 4 Salesforce Connector, for all the configurations *except OAuth v2.0*, you have the option to keep the session alive until it expires by checking the *Disable session invalidation* checkbox.
 
@@ -562,7 +547,7 @@ If ALL or ONLY_NEW replay option is selected, then the `replayId` value is ignor
 
 Use as an outbound connector in your flow to push data to Salesforce. To use the connector in this capacity, simply place the connector in your flow at any point after an inbound endpoint.
 
-== Stream Data to Your App
+== Receive Inbound Data From Salesforce
 
 You can use the Salesforce connector as an inbound connector without wrapping the connector in a poll scope to stream data from Salesforce into your application. To use the connector in this capacity, place a Salesforce connector at the start of your flow.
 
@@ -577,7 +562,7 @@ See also: https://developer.salesforce.com/docs/atlas.en-us.api_streaming.meta/a
 
 Streaming channels provide notifications to subscribers that are not limited to record-based events. You can use the Salesforce Connector to work with Salesforce streaming channels.
 
-=== Creating a Streaming Channel
+=== Creating a Streaming Channel to Receive Data From Salesforce
 
 You must have the proper Streaming API permissions enabled in your organization.
 
@@ -609,7 +594,7 @@ After you create a streaming channel, you can start receiving events by subscrib
 
 A Mule flow is divided in two. The first portion is usually an inbound endpoint (or an HTTP connector) and a message source. The Mule flow is an entity that receives and generates events that later are processed by the rest of the flow. The other portion is a collection of message processors that processes the messages (also known as events) that are received and generated by the inbound endpoint.
 
-Every time our subscription to `/u/TestStreaming` receives an event it executes the rest of the flow. In the case of this example it prints a message to the log at INFO level.
+Every time a subscription to `/u/TestStreaming` receives an event, it executes the rest of the flow. In the case of this example it prints a message to the log at INFO level.
 
 === Streaming Channel Inbound Properties
 
@@ -707,9 +692,9 @@ In Salesforce, you can track the status of bulk data load jobs and their associa
 
 The job detail page includes a related list of all the batches for the job. The related list provides View Request and View Response links for each batch. If the batch is a CSV file, the links return the request or response in CSV format. If the batch is an XML file, the links return the request or response in XML format. These links are available for batches created in Salesforce API version 19.0 and later.
 
-== Tips
+== Connector Usage Tips
 
-* Fields To Null: The configurations have a checkbox called Can Clear Fields by Updating Field Value to Null. If checked, all the fields in a request that have a Null value will be added to the `fieldsToNull` field and sent to Salesforce.
+* Fields To Null: The configurations have a checkbox called Can Clear Fields by Updating Field Value to Null. If checked, all the fields in a request that have a Null value are added to the `fieldsToNull` field and sent to Salesforce.
 +
 Using this feature, you can decide which fields to set to Null without being forced to use the `fieldsToNull` field.
 +
@@ -724,8 +709,10 @@ In this example, although `CreatedDate` field appears as `dateTime`, the query r
 +
 To actually use the field as a dateTime, you can configure it using Transform Message, like in the example.
 +
+To store Date and DateTime fields, you can use DataWeave expressions to create Date and Calendar Java objects.
++
 * Inserting values into a Salesforce drop-down: Be aware that inserting dependent values into an existing drop-down list field in Salesforce does not always work. Test to confirm functionality.
-* Evaluating Values in Salesforce drop-down: If you are evaluating against a value in an existing drop-down list field in Salesforce, be sure to use the _exact value_ in the dropdown. For example, if you use the value "US" to evaluate against the contents of a drop-down list that contains the value "USA", the evaluation will work, but you end up with two values in the dropdown: one for US and one for USA.
+* Evaluating Values in Salesforce drop-down: If you are evaluating against a value in an existing drop-down list field in Salesforce, be sure to use the _exact value_ in the dropdown. For example, if you use the value "US" to evaluate against the contents of a drop-down list that contains the value "USA", the evaluation works, but you end up with two values in the dropdown: one for US and one for USA.
 * Currency:
 ** Currency values cannot exceed 18 characters in length.
 ** When working with multiple currencies, be aware of which currency your sObject uses so that you avoid inaccurate entries. The default currency matches the location at the organization level.
@@ -734,7 +721,7 @@ To actually use the field as a dateTime, you can configure it using Transform Me
 
 == XML Configuration
 
-If you are creating Salesforce connector XML by hand, you need to add the namespace for the connector. By contrast, Anypoint Studio creates the namespace for a connector automatically when you create a project for a Mule app.
+If you are creating Salesforce connector XML by hand, add the namespace for the connector. By contrast, Anypoint Studio creates the namespace for a connector automatically when you create a project for a Mule app.
 
 [source, code, linenums]
 ----
@@ -763,7 +750,8 @@ Example:
 
 === Configuring Maven Dependencies
 
-Repository information for your projects's `pom.xml` file:
+When creating an app manually from the XML, you need to set up 
+the pom.xml for your project:
 
 [source, xml, linenums]
 ----
