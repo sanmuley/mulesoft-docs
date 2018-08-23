@@ -3,9 +3,9 @@
 Secure properties can encrypt properties and store the encrypted text in secure properties files.
 
 == Adding the Secure Configuration Properties Module
-The Secure Configuration Properties module ships with Studio 7.
+The Mule Secure Configuration Property Extension module is available from link:https://anypoint.mulesoft.com/exchange/com.mulesoft.modules/mule-secure-configuration-property-module/[Exchange].
 
-You can configure secure properties file through the Secure Configuration Properties module (`<secure-properties:config>`), for example:
+You can configure a secure properties file with this module (`<secure-properties:config>`), for example:
 
 .Example: Secure Configuration Properties with Default Values
 [source,xml, linenums]
