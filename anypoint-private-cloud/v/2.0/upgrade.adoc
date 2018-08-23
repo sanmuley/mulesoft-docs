@@ -54,13 +54,13 @@ By performing these procedures from the master node, the upgrade scripts are abl
 . Uncompress the application archive.
 +
 ----
-tar -xvf anypoint-1.2.0-installer.tar.gz
+tar -xvf anypoint-2.0.0-installer.tar.gz
 ----
 
-. Navigate to the `anypoint-2.0` directory, then run the upload script.
+. Navigate to the `anypoint-2.0.0` directory, then run the upload script.
 +
 ----
-cd anypoint-2.0
+cd anypoint-2.0.0
 sudo ./upgrade
 ----
 +
@@ -68,15 +68,20 @@ This command updates the platform to the current version and restarts each pod i
 +
 ----
 $ sudo ./upgrade
+----
++
+This command produces output similar to the following:
++
+----
 -> initializing upload
 -> uploading update package
-importing anypoint:2.0
-synchronizing anypoint:2.0 with Docker registry at 172.31.0.26:5000
-synchronizing anypoint:2.0 with Docker registry at 172.31.0.45:5000
-synchronizing anypoint:2.0o with Docker registry at 172.31.0.5:5000
-anypoint:2.0 has been uploaded
-updating anypoint from 1.7.1 to 2.0
-update operation (bae00abf-98a7-4ca9-b0d2-06f3bfea3024) has been started
+importing anypoint:2.0.0
+Thu Aug 23 09:36:30 UTC	Synchronizing application with Docker registry x.x.x.xxx:5000
+Thu Aug 23 09:44:27 UTC	Synchronizing application with Docker registry x.x.x.xxx:5000
+Thu Aug 23 09:51:29 UTC	Synchronizing application with Docker registry x.x.x.xxx:5000
+Thu Aug 23 09:58:23 UTC	Application has been uploaded
+updating anypoint from 1.7.1 to 2.0.0-xxxxxxxxxxxx
+update operation (d077277f-3c69-4336-82bf-bd8b428ae202) has been started
 the cluster is updating in background
 ----
 +
@@ -96,6 +101,9 @@ $ kubectl get pods
 ----
 https://{platform-host}:9500
 ----
++
+[WARNING]
+Before accessing Anypoint Platform, ensure that you configure your NSF server s described in the following step. Failure to configure NFS before accessing the platform may result in data loss.
 
 . Configure Anypoint Private Cloud to use your NFS server.
 +
@@ -105,8 +113,8 @@ After upgrading Anypoing Private Cloud, you configure it to use the required NFS
 .. Click *NFS Settings*.
 .. Enter the domain name of your NFS server.
 .. Enter the path to your NFS server.
-.. Click *Test NFS Server*.
 .. Click *Save*.
+.. Click *Test NFS Server* to test that your NFS server is configured correctly.
 
 
 
