@@ -186,6 +186,7 @@
 ** link:anypoint-onpremise-release-notes[Anypoint Platform On-Premises Edition]
 
 ** link:anypoint-private-cloud-release-notes[Anypoint Platform Private Cloud Edition Release Notes]
+*** link:anypoint-private-cloud-2.0.0-release-notes[Anypoint Platform Private Cloud Edition 2.0.0 Release Notes]
 *** link:anypoint-private-cloud-1.7.1-release-notes[Anypoint Platform Private Cloud Edition 1.7.1 Release Notes]
 *** link:anypoint-private-cloud-1.7.0-release-notes[Anypoint Platform Private Cloud Edition 1.7.0 Release Notes]
 *** link:anypoint-private-cloud-1.6.1-release-notes[Anypoint Platform Private Cloud Edition 1.6.1 Release Notes]
