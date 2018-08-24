@@ -2,6 +2,7 @@
 
 These release notes cover the following versions of these features:
 
+* link:/release-notes/design-center-release-notes-mule-apps#1-5-0[1.5.0]
 * link:/release-notes/design-center-release-notes-mule-apps#1-4-7[1.4.7]
 * link:/release-notes/design-center-release-notes-mule-apps#1-4-6[1.4.6]
 * link:/release-notes/design-center-release-notes-mule-apps#1-4-5[1.4.5]
@@ -20,6 +21,32 @@ These release notes cover the following versions of these features:
 * link:/release-notes/design-center-release-notes-mule-apps#1-0-2[1.0.2]
 * link:/release-notes/design-center-release-notes-mule-apps#1-0-1[1.0.1]
 * link:/release-notes/design-center-release-notes-mule-apps#1-0[1.0]
+
+
+== 1.5.0
+
+*August 25, 2018*
+
+This release includes the following enhancements and fixes.
+
+=== Enhancements
+
+* The speed and accuracy of mapping recommender within the Transform card has been improved.
+* When you configure a Database card to use a Derby connection, Microsoft SQL Server connection, or MySQL connection, a default driver is selected automatically. Therefore, you no longer need to upload a driver unless you want to use a specific one.
+* When deploying a working Mule application to a new environment, most of the time you do not have to change the configuration of the connectors. Therefore, in the Deploy Mule Application to CloudHub dialog, the fields for changing the configuration values for connectors are no longer visible unless you click the new *Advanced* button.
+* In the *Logs* section, you can now hover over a line and click *COPY* to copy a line of text.
+* The left-pane is now collapsed by default when projects for Mule applications first open.
+* Payload attributes are now listed on the left side of all cards other than cards used as triggers and Transform cards. They are listed to make it easier for you to work in the visual function editor, which is available for many fields.
+
+=== Fixed Issues
+
+* The *Script* tab on the Transform card was disabled in some scenarios. The tab is now always enabled.
+* When editing a foreach card, the collection attribute expression was defaulted to "payload", and that default value would remain even when trying to delete it. This has been fixed, ensuring the field can be cleaned up completely.
+* Script errors are now being flagged within the transform card and all expression fields, blocking the execution of the app if present.
+* The behavior supporting default connector icons has been fixed.
+Several fixes around the log pane.
+
+
 
 == 1.4.7
 
