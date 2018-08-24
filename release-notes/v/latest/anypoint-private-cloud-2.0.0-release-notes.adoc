@@ -67,10 +67,11 @@ The following table outlines the major Anypoint Platform features and versions a
 
 [%header%autowidth.spread]
 |===
-| Component | Date
+| Component | Version
 | Exchange 2.1 |  July 2018
 | Runtime Manager | July  2018
-| API Management (API Designer and API Manager) | July 2018
+| API Designer | July 2018
+| API Manager) | July 2018
 | Access Management | May 2018
 | Studio | Studio 7
 |===
