@@ -1,5 +1,4 @@
 = Backup and Restore Anypoint Private Cloud
-:keywords:on-prem, Anypoint Platform Private Cloud Edition, anypoint platform, on prem, on premise, on premises, backup, disaster recovery
 
 This topic describes how to configure backups for Anypoint Private Cloud Edition. It also describes how to perform a system restore from a backup.
 

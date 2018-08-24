@@ -1,4 +1,4 @@
-= About the Anypoint Private Cloud Installers
+= Anypoint Private Cloud Installers
 
 Anypoint Platform Private Cloud Edition provides two installers.
 

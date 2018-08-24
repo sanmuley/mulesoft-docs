@@ -1,4 +1,4 @@
-= To Add a Product License Using Ops Center
+= Add a Product License Using Ops Center
 
 This topic describes how to add your Anypoint Platform Private Cloud Edition license in Ops Center. When your product license expires, Ops Center displays a message stating that the system is under maintenance. It continues to display this message until you add a valid license.
 

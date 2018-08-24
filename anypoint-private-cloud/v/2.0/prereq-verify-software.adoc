@@ -1,4 +1,4 @@
-= To Uninstall Unsupported Software
+= Uninstall Unsupported Software
 
 The following sections describe software that may cause conflicts with Anypoint Platform Private Cloud Edition. You must uninstall these components before performing the installation.
 
