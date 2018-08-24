@@ -60,9 +60,9 @@ image:dw-quickstart-add-db2.png[]
 ** Connection: `MySQL Connection`
 ** Host: `iltdb.learn.mulesoft.com`
 ** Port: `3306`
-** User: `mule`
-** Password: `mule`
-** Database: `training`
+** User: `tbd`
+** Password: `tbd`
+** Database: `tbd`
 +
 image:dw-quickstart-db-values.png[]
 . While still in the Database Config dialog, select **Modify dependency** next to **MySQL JDBC Driver**. If you repeat this step, select **Configure > Add Maven dependency**.
