@@ -42,12 +42,12 @@ When installing a single-node configuration, the automated installer also instal
 
 == Running the Command Line Installation
 
-. Obtain the `anypoint-1.7.0-installer.tar.gz` archive from your customer success representative.
+. Obtain the `anypoint-2.0.0-installer.tar.gz` archive from your customer success representative.
 . Copy the archive to each server node in your cluster.
 . Uncompress the gzip archive:
 +
 ----
-tar xvf anypoint-1.7.0-installer.tar.gz
+tar xvf anypoint-2.0.0-installer.tar.gz
 ----
 
 . Run the following command on one of the nodes in your cluster:
@@ -99,6 +99,6 @@ curl -X POST http://bandwagon-mulesoft.default.svc.cluster.local/api/complete -H
 
 == See Also
 
-* link:/anypoint-private-cloud/v/1.7/prereq-workflow[Workflow: Install and Verify Prerequisites for Physical Servers]
+* link:/anypoint-private-cloud/v/2.0/prereq-workflow[Workflow: Install and Verify Prerequisites for Physical Servers]
 * link:install-installer[To Run the Anypoint Platform Private Cloud Edition Installer]
 * link:demo-ldap-server[About the Demo LDAP Server]

@@ -44,4 +44,4 @@ This will take a few minutes.
 == See Also
 
 * link:install-workflow[Workflow: Install Anypoint Platform Private Cloud Edition]
-* link:upgrade[To Migrate to Anypoint Platform Private Cloud Edition, Version 1.7.x]
+* link:upgrade[To Migrate to Anypoint Platform Private Cloud Edition, Version 2.0.0]

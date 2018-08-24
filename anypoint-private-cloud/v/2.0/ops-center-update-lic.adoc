@@ -9,4 +9,4 @@ This topic describes how to add your Anypoint Platform Private Cloud Edition lic
 
 == See Also
 
-* link:/anypoint-private-cloud/v/1.7/managing-via-the-ops-center[To Manage Anypoint Platform Private Cloud Edition Using Ops Center]
+* link:/anypoint-private-cloud/v/2.0/managing-via-the-ops-center[To Manage Anypoint Platform Private Cloud Edition Using Ops Center]

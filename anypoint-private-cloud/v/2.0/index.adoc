@@ -12,7 +12,7 @@ The Anypoint Platform Private Cloud Edition uses Docker and Kubernetes to provid
 
 == See Also
 
-* link:/anypoint-private-cloud/v/1.7/prereq-workflow[Workflow: Install and Verify Prerequisites for Physical Servers]
+* link:/anypoint-private-cloud/v/2.0/prereq-workflow[Workflow: Install and Verify Prerequisites for Physical Servers]
 * link:prereq-workflow[Workflow: Install and Verify Prerequisites]
 * link:/runtime-manager/index[Runtime Manager]
 * link:/anypoint-exchange[Anypoint Exchange]
