@@ -64,40 +64,16 @@ Before upgrading, you must backup your system as described in link:/anypoint-pri
 
 == Anypoint Platform Features
 
-The following sections outline the Anypoint Platform features and bug fixes added to this version of Anypoint Platform Private Cloud Edition. This information is compiled from the release notes of each platform component.
+The following table outlines the major Anypoint Platform features and versions added in this release:
 
-=== Anypoint Runtime Manager
-
-[%header,cols="2*a"]
+[%header%autowidth.spread]
 |===
-| Release | Features and Issue Fixes
-|===
-
-=== Access Management
-
-[%header,cols="2*a"]
-|===
-| Release | Features and Issue Fixes
+| Component | Date
+| Exchange 2.1 |  July 2018
+| Runtime Manager | July  2018
+| API Management | API Designer - July 2018
+New API Manager - July 2018
+| Access Management | May 2018
+| Studio | Studio 7
 |===
 
-=== Exchange
-
-[%header,cols="2*a"]
-|===
-| Release | Features and Issue Fixes
-|===
-
-
-=== Design Center
-
-[%header,cols="2*a"]
-|===
-| Release | Features and Issue Fixes
-|===
-
-=== API Designer
-
-[%header,cols="2*a"]
-|===
-| Release | Features and Issue Fixes
-|===
