@@ -1,4 +1,4 @@
-= To Verify System Requirements for Anypoint Private Cloud on a Physical Server
+= Verify System Requirements for Anypoint Private Cloud on a Physical Server
 
 After setting up your environment, you can run the `gravity check` script to verify that your system meets the minimum requirements for Anypoint Private Cloud.
 

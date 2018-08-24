@@ -1,4 +1,4 @@
-= To Create Anypoint Private Cloud Resources on Amazon Web Services (AWS)
+= Create Anypoint Private Cloud Resources on Amazon Web Services (AWS)
 
 This topic describes how to create the resources required to install Anypoint Platform Private Cloud Edition on Amazon Web Services (AWS). Anypoint Private Cloud supports 3-node and 6-node configurations in a production environment on AWS.
 

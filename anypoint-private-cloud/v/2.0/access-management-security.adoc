@@ -1,4 +1,4 @@
-= To Configure Security for Anypoint Private Cloud
+= Configure Security for Anypoint Private Cloud
 
 Using Access Management, you can configure Anypoint Platform to use a certificate to ensure secure communication within the platform. You can also provide a custom cipher and DH groups for the key exchange method, if required. 
 

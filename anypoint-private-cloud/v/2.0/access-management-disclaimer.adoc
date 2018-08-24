@@ -1,4 +1,4 @@
-= To Configure a Disclaimer for Anypoint Private Cloud
+= Configure a Disclaimer for Anypoint Private Cloud
 
 By clicking the *Disclaimer* section you can set up a disclaimer message that your users see when they access the Anypoint Platform's log-in page.
 
