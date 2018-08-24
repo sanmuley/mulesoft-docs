@@ -41,11 +41,10 @@ This release includes the following enhancements and fixes.
 === Fixed Issues
 
 * The *Script* tab on the Transform card was disabled in some scenarios. The tab is now always enabled.
-* When editing a foreach card, the collection attribute expression was defaulted to "payload", and that default value would remain even when trying to delete it. This has been fixed, ensuring the field can be cleaned up completely.
-* Script errors are now being flagged within the transform card and all expression fields, blocking the execution of the app if present.
-* The behavior supporting default connector icons has been fixed.
-Several fixes around the log pane.
-
+* In For Each cards, it is now possible to delete the default expression that is in the *Collection* field, which is `payload`. In the previous release, there was an issue that prevented this default value from being deleted.
+* Script errors are now flagged where they occur in the Transform card and in all fields that take DataWeave expressions. Such errors also now prevent applications from being run.
+* When an icon is missing for a connector, a custom default icon appears in its place, rather than the "missing image" icon that appears by default in browsers.
+* Several issues in the *Logs* section were fixed.
 
 
 == 1.4.7
