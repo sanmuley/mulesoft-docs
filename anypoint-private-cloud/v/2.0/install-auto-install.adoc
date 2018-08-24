@@ -16,6 +16,7 @@ Before running the installer, you will need the following:
 * The IP address of each server in your installation.
 * The path to the Docker installation on each server
 * Your Anypoint Platform Private Cloud Edition license file
+* Anypoint Private Cloud, version 2.0 requires that you have an NFS server installed and configured. Ensure that this is installed before beginning the upgrade. See link:/anypoint-private-cloud/v/2.0/prereq-network[Private Cloud Edition Network Requirements]
 
 == About the Installation Scripts
 
