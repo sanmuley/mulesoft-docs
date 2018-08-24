@@ -6,6 +6,15 @@
 
 This version of Anypoint Platform Private Cloud Edition contains the following features and enhancements:
 
+* Upgraded Core Paas Cluster
+* OpsCenter
+* Kubernetes 1.9
+* Support for RHEL 7.5
+* Improved Pre-installation Checks
+* Improved Installation and Provisioning flow
+* Updated Cassandra and PostgreSQL
+* New Alerts
+
 [%header,cols="2*a"]
 |===
 | Feature | Description
@@ -26,9 +35,9 @@ Before upgrading, you must backup your system as described in link:/anypoint-pri
 [%header,cols="2*a"]
 |===
 | Compatible with |Version
-| Mule runtime | 3.7.x - 3.9.0
+| Mule runtime | 3.7.x , 4.x, 4.1.x
 | API Gateway Runtime | 2.1.x - 2.2.x
-| Runtime Manager Agent | 1.5.3 - 1.9.0
+| Runtime Manager Agent | 1.7 - 1.9.x, 2.1.x
 | Infrastructure providers |
 * VMWare
 * Bare Metal
