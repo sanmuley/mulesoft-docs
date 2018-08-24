@@ -7,6 +7,41 @@
 
 REST Connect quickly converts a RAML 1.0 API specification to a connector, which you can use in a Mule application in the Design Center feature of Anypoint Platform.
 
+== 1.7.0
+
+*August 24, 2018*
+
+This release incorporates the following improvements:
+
+* Using the latest version of AMF (1.8.0)
+* Added an annotation that lets the user select which security scheme to use for every operation (When creating the flow) for Smart Connectors
+* Devkit Connectors signature is working properly
+* Improved error messages when Rest Connect fails generating Mule 4 connectors
+* Exchange improvements: Moving error email management to Rest Connect Service
+
+
+=== Fixes
+
+* Parameters defined for pass through / custom authentication schemes are now sent correctly.
+* Fixed error that caused some generated smart connectors not be able to be included in a project.
+* Fixed some string sanitization issues.
+
+== 1.6.2
+
+*August 6, 2018*
+
+Fixes:
+
+* Types defined using XML Schemas work properly for Mule 4 Connectors
+
+== 1.6.1
+
+*July 27, 2018*
+
+Fixes:
+
+* Types defined using XML Schemas work properly for Mule 4 Connectors
+
 == 1.6.0
 
 *July 26, 2018*
