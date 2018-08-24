@@ -1,14 +1,16 @@
 = Backup and Restore Anypoint Private Cloud
 
-== To Create a Backup
+This topic describes how to configure backups for Anypoint Private Cloud Edition. It also describes how to perform a system restore from a backup.
 
-To preserve your data in case of system failure, you must ensure that you system is automatically backed up. You should configure your backup to run at least once per day, although MuleSoft recommends that you back up your system hourly.
+== Prerequisites
 
-Your backup archive must be stored on external storage outside the Anypoint cluster.
+To preserve your data in case of system failure, ensure that your system is automatically backed up. Configure your backup to run at least once per day, although we recommend that you back up your system hourly. Your backup archive must be stored on external storage outside the Anypoint cluster.
 
-You can trigger backups from any of the nodes of your installation.
+Anypoint Private Cloud requires you to install, configure, and manage an NFS server. Ensure that you configure and perform frequent backups of this server.
 
-To create a backup, run the following command on any node in the cluster.
+== Create a Backup
+
+To create a backup, run the following command on any node in the cluster. You can run this command from any node in your cluster.
 
 ----
 gravity backup /var/lib/gravity/planet/share/backup.tar.gz
@@ -16,7 +18,7 @@ gravity backup /var/lib/gravity/planet/share/backup.tar.gz
 
 This command creates an archive of the current system state in: `/var/lib/gravity/planet/share/backup.tar.gz`.
 
-== To Perform a System Restore
+== Perform a System Restore
 
 To restore a system from your backup, use the existing cluster or create a new cluster containing the same number of servers as the cluster being restored.
 

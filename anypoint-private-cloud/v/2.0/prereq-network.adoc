@@ -1,4 +1,4 @@
-= About Private Cloud Edition Network Requirements
+= Private Cloud Edition Network Requirements
 
 The this topic describes the network requirements for running Anypoint Platform Private Cloud Edition.
 
