@@ -24,7 +24,7 @@ To install Anypoint Platform Private Cloud Edition on AWS, you must have an AWS 
 
 == Run the AWS Provisioner
 
-MuleSofrt provides a Docker image that you can use to provision the resources for your AWS account.
+MuleSoft provides a Docker image that you can use to provision the resources for your AWS account.
 
 . Create an initial instance (t2.small) on your AWS account on any VPC with internet access.
 +
@@ -35,7 +35,7 @@ You can also run provisioner remotely from any other machine with Docker and int
 . Download the provisioner Docker image from the following URL:
 +
 ----
-<S3 link>
+https://onprem-standalone-installers.s3.amazonaws.com/pce2.0-aws-provisioner.gz?Signature=hSgd6Vap4277eyibvfBqcXAJbqk%3D&Expires=1550697034&AWSAccessKeyId=AKIAI3RYALJL3PWNBRSQ
 ----
 
 Copy the provisioner Docker image to the instance via SCP
@@ -56,14 +56,14 @@ ssh -i 'anypoint.pem' ec2-user@18.221.155.87
 |===
 | AWS_ACCESS_KEY_ID | Specifies the AWS access ID Terraform uses to connect to your AWS account.
 | AWS_SECRET_ACCESS_KEY | Specifies the AWS access key Terraform uses to connect to your AWS account.
-| AWS_KEY_NAME |
+| AWS_KEY_NAME | Specifies the AWS SSH key. Do not include the .pem extension.
 | AWS_REGION | Specifies the AWS region where Terraform creates the cluster. For example: `us-east-2`
 | CLOUD_PROVIDER | Must be `aws`
 | CLUSTER_TYPE | Must be `pce`
 | TELEKUBE_CLUSTER_NAME |
-| TELEKUBE_NODE_PROFILE_COUNT_node | Specifies the number of nodes in your cluster. Possible values are `1`, `2`, and `3`.
+| TELEKUBE_NODE_PROFILE_COUNT_node | Specifies the number of nodes in your cluster. Possible values are `2`, and `3`.
 | TELEKUBE_NODE_PROFILE_INSTANCE_TYPE_node=m4.4xlarge
-| TELEKUBE_NODE_PROFILES | 
+| TELEKUBE_NODE_PROFILES | Must be set to `node`.
 | TF_VAR_high_performance_disks | Must be set to true
 |===
 
@@ -83,7 +83,7 @@ You can also include the following set of optional environment variables:
 | TF_VAR_role_tag_value=<AWS_TAG_VALUE_FOR_ROLE_LABEL> | You can provide a value for a ROLE tag that all AWS resources will have
 |===
 
-. Load the provisioner Docker image into the local registry:
+. Load the provisioner Docker image into the local Docker registry:
 +
 ----
 docker load -i pce2.0-aws-provisioner.gz
@@ -101,11 +101,9 @@ After the provisioner runs successfully, it displays information about your envi
 
 . Verify that the provisioning script ran successfully by checking the existence of /var/lib/bootstrap_complete on the instances
 
-.  Run UI installer.
-
 == Open Port 61009 Before Installation (Optional)
 
-If you are installing Anypoint Private Cloud Edition using the GUI-based installer, you must enable this port before running the installer.
+If you are installing Anypoint Private Cloud Edition using the GUI-based installer, you must enable this port before running the installer. You must open this port to the world in the cluster's security group before running the installer using AWS Web Console.
 
 == Install Anypoint Platform Private Cloud Edition
 
@@ -116,7 +114,7 @@ After provisioning resources in your AWS environment and uploading the installer
 
 == Disabling Port 61009 After Installation
 
-When provisioning resources on AWS the Terraform script enables inbound and outbound traffic on port 61009. This port is required to allow browser access to the installer. After you complete the installation of Anypoint Platform Private Cloud Edition, you must disable external inbound traffic on port 61009 in the `<cluster-name>-cluster` security group from the AWS web console.
+After installation is finished you can close port 61009 in the cluster security group using the AWS Web console.
 
 == See Also
 
