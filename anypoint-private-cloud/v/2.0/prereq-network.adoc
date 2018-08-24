@@ -2,18 +2,6 @@
 
 The this topic describes the network requirements for running Anypoint Platform Private Cloud Edition.
 
-==  Network File System (NFS) Server
-
-To use Anypoint Private Cloud, version 2.0 you must install and configure an NFS server. Before installing or upgrding, you must have an NFS endpoint available. You NFS server must meet the following requirements:
-
-* Must be running on a filesystem that has at least 250 GB available.
-* Must be using NFS version 4.0. 
-* Can be backed by a network attached storage system (NAS).
-* Enable ports 111 and 249 for both TCP and UDP.
-* Configure your network so that all of the PCE nodes can access the NFS server. The direct NFS client is Kubernetes 1.9 and requires conformance with NFS version 4.
-
-To secure your NFS server to work with Anypoint Platform contact your customer success representative.
-
 == IP Forwarding and Bridging
 
 To ensure proper cluster load balancing and routing, you must enable and correctly configure the following:
