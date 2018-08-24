@@ -58,11 +58,11 @@ image:dw-quickstart-add-db2.png[]
 . Select or type Mule's sample database values in the dialog:
 +
 ** Connection: `MySQL Connection`
-** Host: `iltdb.learn.mulesoft.com`
+** Host: `mudb.learn.mulesoft.com`
 ** Port: `3306`
-** User: `tbd`
-** Password: `tbd`
-** Database: `tbd`
+** User: `mule`
+** Password: `mule`
+** Database: `training`
 +
 image:dw-quickstart-db-values.png[]
 . While still in the Database Config dialog, select **Modify dependency** next to **MySQL JDBC Driver**. If you repeat this step, select **Configure > Add Maven dependency**.
