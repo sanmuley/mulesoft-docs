@@ -12,12 +12,12 @@ The installer automatically validates requirements for disk space, disk speed, n
 
 == Running the Installer
 
-. Obtain the `anypoint-1.7.0-installer.tar.gz` archive from your customer success representative.
+. Obtain the `anypoint-2.0.0-installer.tar.gz` archive from your customer success representative.
 
 . Uncompress the gzip archive:
 +
 ----
-tar xvf anypoint-1.7.0-installer.tar.gz
+tar xvf anypoint-2.0.0-installer.tar.gz
 ----
 
 . From the location where you unzipped the archive, run the following command:

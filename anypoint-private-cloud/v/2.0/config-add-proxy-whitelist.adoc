@@ -1,4 +1,4 @@
-= To Add Whitelist Addresses for API Platform Proxies
+= Add Whitelist Addresses for API Platform Proxies
 
 This topic describes how to add whitelist addresses for API Platform Proxies in Anypoint Platform Private Cloud Edition. By default, proxy requests are enabled to the domain name where the platform is running.
 

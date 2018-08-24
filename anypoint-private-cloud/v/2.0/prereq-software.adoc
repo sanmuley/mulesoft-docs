@@ -1,5 +1,4 @@
-= About Software Requirements for Anypoint Private Cloud
-
+= Software Requirements for Anypoint Private Cloud
 
 The following sections list the software required to install and run the Anypoint Platform Private Cloud Edition.
 

@@ -1,4 +1,4 @@
-= About Hardware Requirements for Anypoint Private Cloud
+= Hardware Requirements for Anypoint Private Cloud
 
 To ensure the performance and stability of Anypoint Platform Private Cloud Edition, your environment must meet the minimum system requirements described in this topic. Before installing or upgrading, review each of following sections and ensure that your environment meets these requirements.
 

@@ -1,4 +1,4 @@
-= To Verify Anypoint Private Cloud Device Requirements
+= Verify Anypoint Private Cloud Device Requirements
 
 For the platform’s configuration you must assign four dedicated devices for use. One as a system state directory, one holds application data, another holds cluster information and the final device is used as a target for Docker devicemapper configuration.
 
