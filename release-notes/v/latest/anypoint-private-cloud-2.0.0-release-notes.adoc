@@ -13,11 +13,11 @@ This version of Anypoint Platform Private Cloud Edition contains the following f
 
 == Installing
 
-See link:/anypoint-private-cloud/v/1.7/install-workflow[Workflow: Install Anypoint Private Cloud] for information on how to install Anypoint Platform Private Cloud Edition.
+See link:/anypoint-private-cloud/v/2.0/install-workflow[Workflow: Install Anypoint Private Cloud] for information on how to install Anypoint Platform Private Cloud Edition.
 
 == Upgrading to 2.0.0
 
-See link:/anypoint-private-cloud/v/2.0/upgrade[To Migrate to Anypoint Platform Private Cloud, Version 1.7.0] for information on how to upgrade to the current version.
+See link:/anypoint-private-cloud/v/2.0/upgrade[Migrate to Anypoint Platform Private Cloud, Version 2.0.0] for information on how to upgrade to the current version.
 
 Before upgrading, you must backup your system as described in link:/anypoint-private-cloud/v/2.0/backup-and-disaster-recovery[To Backup and Restore Your System].
 
