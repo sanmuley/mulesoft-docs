@@ -39,7 +39,7 @@ https://onprem-standalone-installers.s3.amazonaws.com/pce2.0-aws-provisioner.gz?
 ----
 
 Copy the provisioner Docker image to the instance via SCP
-+
+
 ----
 scp -i <guest>.pem ~/Downloads/pce2.0-aws-provisioner.gz ec2-user@18.221.155.87:/home/ec2-user
 ----
