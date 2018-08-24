@@ -20,8 +20,6 @@ To install Anypoint Platform Private Cloud Edition on AWS, you must have an AWS 
 | t2.medium | 1 | 1
 |===
 
-* Download Terraform version 0.11.0. This is the only version of Terraform supported.
-
 == Run the AWS Provisioner
 
 MuleSoft provides a Docker image that you can use to provision the resources for your AWS account.
