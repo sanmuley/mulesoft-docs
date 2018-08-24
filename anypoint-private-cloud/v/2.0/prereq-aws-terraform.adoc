@@ -22,54 +22,97 @@ To install Anypoint Platform Private Cloud Edition on AWS, you must have an AWS 
 
 * Download Terraform version 0.11.0. This is the only version of Terraform supported.
 
-== Creating Your Environment in AWS
+== Run the AWS Provisioner
 
-. Ensure that you have an AWS account that contains the prerequisites mentioned above.
-. Contact your customer success representative to obtain the Anypoint Platform Private Cloud Edition terraform configuration.
-+
-[WARNING]
-Do not modify the Terraform files provided. Anypoint Platform Private Cloud Edition does not support modifying or customizing the Terraform script.
+MuleSofrt provides a Docker image that you can use to provision the resources for your AWS account.
 
-. Extract the downloaded archive.
-. Copy the Terraform binary into the folder you extracted previously.
-. Set the following environment variables on your system:
+. Create an initial instance (t2.small) on your AWS account on any VPC with internet access.
 +
+This instance is used to run the actual provisioning of the cluster. You must use an AMI that has Docker installed by default or you must manually install Docker after creating the AWS instance.
++
+You can also run provisioner remotely from any other machine with Docker and internet access.
+
+. Download the provisioner Docker image from the following URL:
++
+----
+<S3 link>
+----
+
+Copy the provisioner Docker image to the instance via SCP
++
+----
+scp -i <guest>.pem ~/Downloads/pce2.0-aws-provisioner.gz ec2-user@18.221.155.87:/home/ec2-user
+----
+
+. SSH into the instance
++
+----
+ssh -i 'anypoint.pem' ec2-user@18.221.155.87
+----
+
+. Create the var file (pce.env) with the environment details using the template below:
+
 [%header%autowidth.spread]
 |===
-| Property | Description
-| ROLE_TAG_VALUE | (Optional) Specifies a label for the assets terraform creates. If you do not supply a value, Terraform uses `anypoint-platform` by default
-| CLUSTER_NAME | Specifies the name of the cluster in AWS. This value cannot contain any whitespace.
-| AWS_ACCESS_KEY_ID | Specifies the AWS access ID Terraform uses to connect to your AWS account. 
-| AWS_SECRET_ACCESS_KEY  | Specifies the AWS access key Terraform uses to connect to your AWS account.
-| REGION | Specifies the AWS region where Terraform creates the cluster.
-| NODES | Specifies the number of nodes that Terraform creates. Valid values are: `1`, `3`, `6`
-| KEY_PAIR | Specifies the AWS key pair that Terraform uses when creating the cluster. Do not include the `.pem` extension as part of this value.
+| AWS_ACCESS_KEY_ID | Specifies the AWS access ID Terraform uses to connect to your AWS account.
+| AWS_SECRET_ACCESS_KEY | Specifies the AWS access key Terraform uses to connect to your AWS account.
+| AWS_KEY_NAME |
+| AWS_REGION | Specifies the AWS region where Terraform creates the cluster. For example: `us-east-2`
+| CLOUD_PROVIDER | Must be `aws`
+| CLUSTER_TYPE | Must be `pce`
+| TELEKUBE_CLUSTER_NAME |
+| TELEKUBE_NODE_PROFILE_COUNT_node | Specifies the number of nodes in your cluster. Possible values are `1`, `2`, and `3`.
+| TELEKUBE_NODE_PROFILE_INSTANCE_TYPE_node=m4.4xlarge
+| TELEKUBE_NODE_PROFILES | 
+| TF_VAR_high_performance_disks | Must be set to true
 |===
-+
-These environment variables define the credentials for Terraform to connect to your AWS environment.
 
-. From the archive folder run the following command:
+You can also include the following set of optional environment variables: 
+
+[%header%autowidth.spread]
+|===
+| TF_VAR_ami_name=<AMI_ID> | Enables you to specify the version of RedHat or CentOS AMI. If you do not set this variable, the provisioner uses the folowing AMI by default: `RHEL-7.4_HVM_GA-20170808-x86_64-2-Hourly2-GP2`.
+| TF_VAR_ssh_user=<SSH_USER> | Specifies the ssh user. For example: `ec2-user`, `centos`, etc)
+| TF_VAR_monitoring=<true or false> | If true it will create basic instance alarms in Cloudwatch.
+| TF_VAR_use_bastion=<true or false> | If true it will create a small instance (using an ASG) in a public subnet as a jumpbox and associate a public IP address, and launch the cluster instances in the private subnets.
+| TF_VAR_internal=<true or false> | If true the cluster instances will be launched in private subnets and will not have public ips associated with them. The provisioned load balancer will be internal only.
+| TF_VAR_vpc_id=<VPC_ID> | Specifies an existing VPC. It should already have an internet gateway attached to it. Subnets will still be provisioned within the existing VPC.
+| TF_VAR_vpc_cidr=<VPC_CIDR> | You can pass a preferred CIDR for the new VPC that will be provisioned.
+| TF_VAR_subnets=<PRIVATE_SUBNETS_CIDRs> | You can pass the preferred CIDRs blocks for the new subnets that will be provisioned. You must pass exactly the minimum num	ber between the number of AZs of the region and the number of nodes you selected for your cluster
+| TF_VAR_public_subnets=<PUBLIC_SUBNETS_CIDRs> | You can pass the preferred CIDRs blocks for the new subnets that will be provisioned. You must pass exactly min(length(var.azs), var.node_count)
+| TF_VAR_role_tag_value=<AWS_TAG_VALUE_FOR_ROLE_LABEL> | You can provide a value for a ROLE tag that all AWS resources will have
+|===
+
+. Load the provisioner Docker image into the local registry:
 +
 ----
-make create-cluster
+docker load -i pce2.0-aws-provisioner.gz
+----
+
+. Record the image ID after running the `docker load` command. This is required in the following step.
+
+.  Run the provisioner
++
+----
+docker run --rm --env-file pce.env IMAGE_ID cluster-provision
 ----
 +
-This script displays the Terraform plan that outlines all of the resources to be created in your AWS environment.
+After the provisioner runs successfully, it displays information about your environment including IP addresses, DNS name of the load balancer, etc.
 
-. Confirm the Terraform plan by entering `yes` and pressing Return/Enter.
-+
-After confirmation, Terraform creates the required resources within your AWS account.
+. Verify that the provisioning script ran successfully by checking the existence of /var/lib/bootstrap_complete on the instances
 
-. Login to the AWS console to determine the public IP address of the bastion.
-+
-You must use this IP address to connect to the nodes of your cluster through bastion in order to install Anypoint Platform Private Cloud Edition.
+.  Run UI installer.
+
+== Open Port 61009 Before Installation (Optional)
+
+If you are installing Anypoint Private Cloud Edition using the GUI-based installer, you must enable this port before running the installer.
 
 == Install Anypoint Platform Private Cloud Edition
 
 After provisioning resources in your AWS environment and uploading the installer to one of the nodes, install Anypoint Platform Private Cloud Edition using one of the installers:
 
-* link:/anypoint-private-cloud/v/1.7/install-installer[To Install Anypoint Private Cloud using the GUI Installer]
-* link:/anypoint-private-cloud/v/1.7/install-auto-install[To Install Anypoint Private Cloud using the Command Line Installer]
+* link:/anypoint-private-cloud/v/2.0/install-installer[To Install Anypoint Private Cloud using the GUI Installer]
+* link:/anypoint-private-cloud/v/2.0/install-auto-install[To Install Anypoint Private Cloud using the Command Line Installer]
 
 == Disabling Port 61009 After Installation
 
