@@ -15,10 +15,6 @@ This version of Anypoint Platform Private Cloud Edition contains the following f
 * Updated Cassandra and PostgreSQL
 * New Alerts
 
-[%header,cols="2*a"]
-|===
-| Feature | Description
-|===
 
 == Installing
 
