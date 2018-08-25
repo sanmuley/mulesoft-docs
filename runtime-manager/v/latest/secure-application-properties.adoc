@@ -1,4 +1,4 @@
-= Safely Hiding Application Properties
+= Safely-Hiding Application Properties
 :keywords: cloudhub, jdbc, security
 
 image:logo-cloud-active.png[link="/runtime-manager/deployment-strategies", title="CloudHub"]
@@ -10,7 +10,7 @@ CloudHub supports *safely-hidden Mule application properties*, where the name of
 
 [NOTE] 
 ====
-Internally, safely-hidden application properties are encrypted and stored in a MuleSoft managed CloudHub properties database, which is encrypted per user organization. 
+Internally, a Mule application deployent's safely-hidden properties are encrypted and stored in a MuleSoft managed CloudHub properties database, which is encrypted per user organization. 
 ====
 
 Safely-hidden properties are a feature that is currently only available for setting via the Runtime Manager UI for applications deployed to CloudHub workers. For applications that you deploy through any other link:/runtime-manager/deployment-strategies[deployment strategy], you need to use secure property placeholder files bundled with your application zip file.
@@ -87,7 +87,7 @@ The `secureProperties` entry affects all properties no matter where (or if) they
 image:dbproperties2.png[dbproperties2]
 
 
-4. Commit your deployment or update. Once your Mule application is deployed, navigate to the Deployment tab and check the Mule application properties. The values for all properties that you had marked as safely hidden are now no longer visible to you or any other user. In the example below, birthdate and password are safely hidden, but username is not.
+4. Commit your deployment or update. Once your Mule application is deployed, navigate to the Deployment tab and check the Mule application properties. The values for all properties that you had marked as safely-hidden are now no longer visible to you or any other user. In the example below, birthdate and password are safely hidden, but username is not.
 
 
 image:dbproperties3.png[dbproperties3]
@@ -102,14 +102,14 @@ image:dbproperties4.png[dbproperties4]
 
 [NOTE]
 ====
-Once a Mule application is deployed with safely hidden application properties, CloudHub maintains the security flag for those properties. Even if you edit the Mule application to remove the `secureProperties` definitions from your `mule-artifact.json` file and then export and upload a new deployable archvie file to CloudHub, CloudHub maintains the invisibility of the properties previously flagged as safely-hidden.
+Once a Mule application is deployed with safely-hidden properties, CloudHub maintains the security flag for those properties. Even if you edit the Mule application to remove the `secureProperties` definitions from your `mule-artifact.json` file and then export and upload a new deployable archvie file to CloudHub, CloudHub maintains the invisibility of the properties previously flagged as safely-hidden.
 ====
 
 
-*Copying Safely Hidden Application Properties between Sandboxes*
-When moving applications between *sandboxes*, safely hidden application property values will _not_ be copied to the new environment. For all safely hidden application properties, the name of the property will be copied, but the value will be left blank. 
+*Copying Safely-Hidden Properties between Sandboxes*
+When moving applications between *sandboxes*, safely-hidden application property values will _not_ be copied to the new environment. For all safely-hidden properties, the name of the property will be copied, but the value will be left blank. 
 
-=== Adding Additional Safely Hidden Properties to an Already Deployed Mule Application
+=== Adding Additional Safely-Hidden Properties to an Already Deployed Mule Application
 You can secure Mule application properties after the Mule application is deployed to CloudHub. 
 
 First, edit the mule-artifact.json file in the Mule application's source code and add the new property name to the secureProperties array. 
@@ -135,12 +135,12 @@ In Runtime Manager, manage the deployed Mule application. Upload the new deploya
 The Mule application will now automatically restart with zero downtime. 
 
 
-=== Removing Safely Hidden Properties to an Already Deployed Mule Application
+=== Removing Safely-Hidden Properties to an Already Deployed Mule Application
 You cannot unhide a safely-hidden property in a deployed Mule application. Even if you upload a new version of the Mule application with the safely-hidden property removed from the mule-artifact.json file, the property is still flagged as safely-hidden for the entire lifetime of the Mule application deployment. 
 
-The only way to unhide a particular safely hidden property is to create a new CloudHub deployment. 
+The only way to unhide a particular safely-hidden property is to create a new CloudHub deployment. 
 
-First, just like when you add a safely hidden property, you edit the Mule application's mule-artifact.json file in the Mule application's source code to remove the property name from the secureProperties property names array, then export a new deployable archive. 
+First, just like when you add a safely-hidden property, you edit the Mule application's mule-artifact.json file in the Mule application's source code to remove the property name from the secureProperties property names array, then export a new deployable archive. 
 
 Next, in Runtime Manager, create a new deployment. Once the new Mule application deployable archive is uploaded to Runtime Manager, you should see the unhidden property value appears in clear text. 
 
@@ -152,7 +152,7 @@ Because you are deploying two copies of the same Mule application, there may be 
 ====
 
 
-== Encrypted Application Properties vs. Safely Hidden Application Properties
+== Encrypted Mule Application Properties vs. Safely-Hidden Mule Application Properties
 Mule applications can also store properties with encrypted values using secure properties placeholders.
 
 See link:/mule-user-guide/v/4.1/secure-configuration-properties[Secure Configuration Properties] for more information on creating and using secure configuration properties. 
@@ -177,7 +177,7 @@ Mule applications can also be developed to store encrypted properties in secure 
 
 For CloudHub deployments, none of the secure deployment approaches discussed for customer-hosted deployments is available in CloudHub, because operators do not have access to the CloudHub worker's file system, nor can they log in to a command-line to start up the CloudHub worker. 
 
-Encrypted properties can also be flagged as safely hidden application properties, by listing the encrypted property's name in the `secureProperties` entry in the Mule application's `mule-artifact.json` file. In particular, the secret key used to decrypt the encrypted properties can be set as a safely hidden property in the `mule-artifact.json` file's `secureProperties` key. 
+Encrypted Mule application properties can also be flagged as safely-hidden Mule application properties, by listing the encrypted property's name in the `secureProperties` entry in the Mule application's `mule-artifact.json` file. In particular, the secret key used to decrypt the encrypted properties can be set as a safely-hidden property in the `mule-artifact.json` file's `secureProperties` key. 
 
 Here is an example: 
 
@@ -229,7 +229,7 @@ But a problem arises when an operator needs to update an encrypted value. The Ru
 But there is a way for a Mule application to be designed to allow operations staff to safely override encrypted properties. 
 If encrypted property names are also listed in the Mule application's 'secureProperties' entry in 'mule-artifact.json', then once the application is deployed, the value of this encrypted property will also be hidden in the Runtime Manager Properties tab, just like decrypted properties, and just like other properties, the decrypted value is only stored in the Mule worker's memory and securely stored in the CloudHub database for your user account, and is never stored in any CloudHub worker's files, nor is it ever passed between any other machines (including the Runtime Manager Console). 
 
-So for any encrypted property that is also marked as safely hidden in the Mule application's `secureProperties` entry, you can safely replace any encrypted property with a clear-text value, which will be securely stored in the CloudHub properties database, and securely passed in to the Mule application ever time the Mule application is started. 
+So for any encrypted property that is also marked as safely-hidden in the Mule application's `secureProperties` entry, you can safely replace any encrypted property with a clear-text value, which will be securely stored in the CloudHub properties database, and securely passed in to the Mule application ever time the Mule application is started. 
 
 The new value is also hidden once the application is deployed and can never be viewed again.
 
@@ -238,7 +238,7 @@ This means that when you override a secure property in the CloudHub properties t
 For example, if a production application needs to update the database user and password stored in two properties named db.user and db.password, then an operator would enter this new db.user and db.password into the CloudHub properties tab for the application and then Start or Restart the application. This allows the new application to upgrade this secure login information with zero downtime. Once all dependent applications are migrated, the old account could be decomissioned.
 
 == CloudHub Mule Applications Do Not Need Encrypted Properties
-The previous discussion indicates that for Mule applications that will only be deployed into CloudHub workers, you may not need to encrypt properties, but instead just flag those properties as safely hidden propreties in the Mule application's `mule-artifact.json` file's `secureProperties` entry. 
+The previous discussion indicates that for Mule applications that will only be deployed into CloudHub workers, you may not need to encrypt properties, but instead just flag those properties as safely-hidden propreties in the Mule application's `mule-artifact.json` file's `secureProperties` entry. 
 
 == See Also
 * link:/mule-user-guide/v/4.1/secure-configuration-properties[Secure Configuration Properties]
