@@ -109,6 +109,48 @@ Once an application is deployed with safely hidden application properties, Cloud
 *Copying Safely Hidden Application Properties between Sandboxes*
 When moving applications between *sandboxes*, safely hidden application property values will _not_ be copied to the new environment. For all safely hidden application properties, the name of the property will be copied, but the value will be left blank. 
 
+=== Adding Additional Safely Hidden Properties to an Already Deployed Mule Application
+You can secure Mule application properties after the Mule application is deployed to CloudHub. 
+
+First, edit the mule-artifact.json file in the Mule application's source code and add the new property name to the secureProperties array. 
+
+For example, here is the previous mule-artifact.jaosn file with the "username" property added to the secureProperties array of property names. 
+
+.mule-artifact.json
+[source,json, linenums]
+----
+{
+  "configs": [
+    "secure-properties.xml"
+  ],
+  "secureProperties": ["username", "password", "birthdate"],
+  ...
+}
+----
+
+After you add the new safely-hidden property names, export a new deployable archive file. 
+
+In Runtime Manager, manage the deployed Mule application. Upload the new deployable archive file to the already running Mule application. Once the new deployable archive is uploaded, the new propery should now be hidden in the deployment's Properties tab. 
+
+The Mule application will now automatically restart with zero downtime. 
+
+
+=== Removing Safely Hidden Properties to an Already Deployed Mule Application
+You cannot unhide a safely-hidden property in a deployed Mule application. Even if you upload a new version of the Mule application with the safely-hidden property removed from the mule-artifact.json file, the property is still flagged as safely-hidden for the entire lifetime of the Mule application deployment. 
+
+The only way to unhide a particular safely hidden property is to create a new CloudHub deployment. 
+
+First, just like when you add a safely hidden property, you edit the Mule application's mule-artifact.json file in the Mule application's source code to remove the property name from the secureProperties property names array, then export a new deployable archive. 
+
+Next, in Runtime Manager, create a new deployment. Once the new Mule application deployable archive is uploaded to Runtime Manager, you should see the unhidden property value appears in clear text. 
+
+Now you can shut down the old version of the Mule application. 
+
+[NOTE]
+====
+Because you are deploying two copies of the same Mule application, there may be some time when the two Mule applications are both running, or there may be a period of time when the Mule application endpoints are not available. 
+====
+
 
 == Encrypted Application Properties vs. Safely Hidden Application Properties
 Mule applications can also store properties with encrypted values using secure properties placeholders.
