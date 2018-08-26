@@ -107,7 +107,7 @@ Once a Mule application is deployed with safely-hidden properties, CloudHub main
 
 
 *Copying Safely-Hidden Properties between Sandboxes*
-When moving applications between *sandboxes*, safely-hidden application property values will _not_ be copied to the new environment. For all safely-hidden properties, the name of the property will be copied, but the value will be left blank. 
+When moving Mule applications between *sandboxes*, safely-hidden property values will _not_ be copied to the new environment. For all safely-hidden properties, the name of the property will be copied, but the value will be left blank. 
 
 === Adding Additional Safely-Hidden Properties to an Already Deployed Mule Application
 You can secure Mule application properties after the Mule application is deployed to CloudHub. 
