@@ -1,4 +1,4 @@
-= Safely-Hiding Application Properties
+= Safely Hiding Mule Application Properties
 :keywords: cloudhub, jdbc, security
 
 image:logo-cloud-active.png[link="/runtime-manager/deployment-strategies", title="CloudHub"]
