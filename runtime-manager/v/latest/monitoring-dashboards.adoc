@@ -192,7 +192,7 @@ This metric found in the *Overview tab* refers to total CPU usage of the server,
 
 image:monitoring-dashboards-cpu.png[]
 
-* CPU Usage
+* CPU Usage (of the Mule process)
 * System Available Processing power.
 * System Load Average.
 
