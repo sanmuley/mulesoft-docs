@@ -55,6 +55,10 @@ REMOVED:
 
 Instead of processing all message payloads that it receives, the Cache scope can exclude specific payloads from the Cache scope flow based on an DataWeave expression.
 
+== Example
+
+In Anypoint Studio, you can download and open the example project _Cache Scope with Salesforce Contacts_ to learn more about how to use the Cache scope.
+
 == See Also
 
 link:cache-scope-to-configure[To Configure the Cache Scope]
