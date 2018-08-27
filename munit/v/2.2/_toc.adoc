@@ -10,6 +10,7 @@
 *** link:/munit/v/2.2/enable-flow-sources-concept[About Enable Flow Sources]
 *** link:/munit/v/2.2/before-after-scopes-concept[About Before/After Scopes]
 **** link:/munit/v/2.2/before-after-scopes-reference[Before/After Scopes Reference]
+*** link:/munit/v/2.2/munit-parameterized-suite[About Parameterized Test Suite]
 
 ** link:/munit/v/2.2/munit-maven-support[About MUnit Maven Plugin]
 *** link:/munit/v/2.2/to-set-up-munit-maven-plugin[To Set Up MUnit Maven Plugin (Maven)]
