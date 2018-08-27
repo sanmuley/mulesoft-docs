@@ -64,6 +64,7 @@
 *** link:best-practices[Best Practices]
 *** link:testing[Testing your Module]
 **** link:testing-writing-your-first-test-case[Writing Your First Test Case]
+**** link:testing-writing-your-first-munit-test[Writing Your First MUnit Test (Beta)]
 *** link:about-connector-certification-program-guidelines[About MuleSoft Connector Certification Program Guidelines]
 **** link:certification-guidelines-for-connectors[Technical Guidelines for Connector Certifications]
 *** link:license[Licensing]

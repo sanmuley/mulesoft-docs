@@ -1,0 +1,121 @@
+= Iterable and Map Matchers Reference
+
+== everyItem(Matcher)
+
+Checks that every element in the expression matches the specified matcher.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::everyItem(MunitTools::notNullValue())]"/>
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::everyItem(MunitTools::startsWith('a'))]"/>
+----
+
+== hasItem(Object)
+
+Checks that any element in the expression matches the specified matcher.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasItem('example')]"/>
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasItem(MunitTools::startsWith('a'))]"/>
+----
+
+== hasSize(Matcher|Integer)
+
+Checks that the size of the expression matches the specified matcher.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasSize(5)]"/>
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasSize(MUnitTools::greaterThan(2))]"/>
+----
+
+
+== isEmpty()
+
+Checks that the expression is an empty collection.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::isEmpty()]"/>
+----
+
+== hasKey(Matcher|String)
+
+Checks that the expression has a key that matches the specified matcher.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasKey('myKey')]"/>
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasKey(MunitTools::startsWith('a'))]"/>
+----
+
+== hasValue(Object)
+
+Checks that the expression has a value that matches the specified matcher.
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasValue('myValue')]"/>
+----
+
+.Example
+[source,xml,linenums]
+----
+<munit-tools:assert-that
+expression="#[payload]"
+is="#[MunitTools::hasValue(MunitTools::startsWith('a'))]"/>
+----
+
+== See Also
+
+* link:/munit/v/2.2/munit-matchers[About MUnit Matchers]
+* link:/munit/v/2.2/core-matchers-reference[Core Matchers Reference]
+* link:/munit/v/2.2/string-matchers-reference[String Matchers Reference]
+* link:/munit/v/2.2/comparable-matchers-reference[Comparable Matchers Reference]

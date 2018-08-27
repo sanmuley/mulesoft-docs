@@ -13,3 +13,4 @@ Here are a series of articles that explain in detail how to test your module. It
 * ValueProviders Resolution
 * Handling ClassLoading Issues
 * Best Practices
+* <<testing-writing-your-first-munit-test#, Writing your first MUnit test (Beta)>>
