@@ -25,6 +25,15 @@ Retrieves the data associated with the given key
 <munit-tools:retrieve key="myKey"/>
 ----
 
+== Remove operation
+
+Removes and returns the data associated with the given key
+
+[source,xml,linenums]
+----
+<munit-tools:remove key="myKey"/>
+----
+
 == Clear stored data operation
 
 Clears all stored data
