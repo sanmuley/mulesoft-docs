@@ -276,7 +276,7 @@ A continuous integration system:
 
 == See Also
 
-* link:/api-manager/v/1.x/tutorial-set-up-an-api[Set Up an API]
+* link:/api-manager/v/2.x/[API Manager 2.x]
 * link:/runtime-manager/runtime-manager-agent[Runtime Manager Agent]
 * link:/munit/v/1.3/[MUnit]
 * link:/mule-user-guide/v/3.9/mule-maven-plugin[Mule Maven Plugin]
