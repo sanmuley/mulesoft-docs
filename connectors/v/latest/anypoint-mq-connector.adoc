@@ -22,10 +22,21 @@ To use this connector, you should be familiar with Anypoint Studio, Anypoint con
 |Anypoint Studio |v7 and later
 |===
 
-== Selecting the MQ Connector in Design Center
+== Using MQ as a Trigger in Design Center
 
-. In Anypoint Platform, create a Mule Application in Design Center.
-. Scroll down and 
+Using MQ as a trigger means that the MQ subscriber in Design Center waits for a message to consume. 
+The message the trigger consumes is sent by an MQ connector instance running either in Anypoint Studio or 
+Runtime Manager that publishes messages. The messages that MQ connector publishes come from either the 
+MQ UI in Anypoint Platform or from calls to the REST API.
+
+. In Anypoint Platform > Design Center, create a Mule Application.
+. For the trigger, select *Anypoint MQ*.
+. For the Destination, type the MQ queue name or message exchange you want to subscribe to.
+. If needed, click Advanced to specify an output MIME type and output encoding for the messages you receive.
+. Click Set Up to specify the client ID, client secret, and region. 
+. Open a second window to Anypoint Platform > MQ > Client Apps to get the client ID and secret for an application.
+. Copy and paste the client ID and secret into the Design Center user interface. 
+. In MQ, copy the region from the main screen, for example, `+https://mq-us-east-1.anypoint.mulesoft.com/api/v1+` for US East Virginia and paste that in the Design Center URL field.
 
 == Installing the MQ Connector in Studio
 
