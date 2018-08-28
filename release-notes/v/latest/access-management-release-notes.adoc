@@ -2,7 +2,7 @@
 :keywords: release notes, access management, anypoint platform, permissions, entitlements, roles, users, administrator, gear icon
 
 == August 25, 2018
-*_Version 0.45.0_*
+*_Version 0.46.0_*
 
 Mulesoft supports using https://developer.salesforce.com/page/Identity[Salesforce Identity] as a SSO (single sign-on) provider with the https://openid.net/connect/[OpenID Connect] protocol. Salesforce is a https://openid.net/certification/[certified OpenID Provider].
 
