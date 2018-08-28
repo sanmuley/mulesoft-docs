@@ -93,14 +93,14 @@ in _Migrating the Database Connector_.
 
 
 `jbossTxManager`:
-+
+
 * Type: ERROR
 * Message: JBoss Transaction manager must be replaced by Bitronix Transaction
 Manager provided by Mule.
 
 
 `reconnectNotifiers`:
-+
+
 * Type: ERROR
 * Message: Reconnection notifiers cannot be configured on the `reconnect` element.
 +
@@ -109,7 +109,7 @@ link:migration-connectors-database#reconnection_strategies[Reconnection Strategi
 in _Migrating the Database Connector_.
 
 `source`:
-+
+
 * Type: ERROR
 * Message: `source` attribute does not exist in Mule 4. Update the query accordingly.
 +
