@@ -38,7 +38,7 @@ The migration process is a multi-part procedure, where you:
 . Run any migrated MUnit tests.
 
 These steps are detailed in <<migrate_project, Migrating a Project>>. However,
-before proceeding with a migration, it is important to review  <<min_requirements>> and <<whats_migrated>>.
+before proceeding with a migration, it is important to review  <<min_reqs>> and <<whats_migrated>>.
 
 [[min_reqs]]
 == Requirements
