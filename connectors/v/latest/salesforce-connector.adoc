@@ -94,7 +94,7 @@ Note: A channel or topic must be published to Salesforce before a subscription t
 +
 Alternatively, you can use an HTTP Listener or Scheduler trigger.
 
-== Configuring a Salesforce New Object Trigger
+=== Configuring a Salesforce New Object Trigger
 
 The following shows how to configure the Salesforce New Object trigger. 
 
@@ -111,11 +111,11 @@ image:salesforce-dc-choose-global-type.png[Authentication Options]
 [%header%autowidth.spread]
 |===
 |Connection Type |Salesforce Information Site
-| <<Username Password Configuration, Username Password>> |https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_calls_login.htm[SOAP API Username Password Login]
-| <<OAuth 2 Configuration, OAuth 2>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_web_server_flow.htm[OAuth 2.0 Web Server Authentication Flow]
-| <<OAuth JWT Configuration, OAuth JWT>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_jwt_flow.htm[OAuth 2.0 JWT Bearer Token Flow]
-| <<OAuth SAML Configuration, OAuth SAML>> |https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_SAML_bearer_flow.htm[OAuth 2.0 SAML Bearer Assertion Flow]
-| <<OAuth Username Password Configuration, OAuth Username Password>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_username_password_flow.htm[OAuth 2.0 Username-Password Flow]
+| <<Configuring Username Password, Username Password>> |https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_calls_login.htm[SOAP API Username Password Login]
+| <<Configuring OAuth 2, OAuth 2>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_web_server_flow.htm[OAuth 2.0 Web Server Authentication Flow]
+| <<Configuring OAuth JWT, OAuth JWT>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_jwt_flow.htm[OAuth 2.0 JWT Bearer Token Flow]
+| <<Configuring OAuth SAML, OAuth SAML>> |https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_SAML_bearer_flow.htm[OAuth 2.0 SAML Bearer Assertion Flow]
+| <<Configuring OAuth Username Password, OAuth Username Password>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_username_password_flow.htm[OAuth 2.0 Username-Password Flow]
 |===
 +
 . Specify the parameters as required for each configuration type, and click
@@ -140,7 +140,7 @@ Redelivery indicates the maximum number of tries to deliver trigger content.
 +
 image:salesforce-dc-redelivery-policy.png[Redelivery Policy]
 
-== Configuring Salesforce as a Component
+=== Configuring Salesforce as a Component
 
 After creating a trigger, click the plus sign. If needed, click *Transform* to 
 use DataWeave to map fields between your received data and what to use with 
@@ -175,7 +175,7 @@ Delete:
 
 image:salesforce-dc-delete.png[sfdc-delete]
 
-=== Username Password Configuration
+==== Configuring Username Password
 
 * Username: Enter the Salesforce username.
 * Password: Enter the corresponding password.
@@ -186,14 +186,14 @@ Implementing *OAuth 2.0*-based authentication mechanisms involves extra steps, b
 
 image:salesforce-dc-user-pass.png[Username Password Configuration]
 
-=== OAuth 2 Configuration
+==== Configuring OAuth 2
 
 * Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
 * Consumer Secret: The consumer secret for the connector to access Salesforce.
 
 image:salesforce-dc-oauth-2.png[OAuth v2.0 Configuration]
 
-=== OAuth JWT Configuration
+==== Configuring OAuth JWT
 
 * Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
 * Keystore File: The path to the key store used to sign data during authentication. Only Java key store format is allowed. See <<Generating a Keystore File>>.
@@ -202,7 +202,7 @@ image:salesforce-dc-oauth-2.png[OAuth v2.0 Configuration]
 
 image:salesforce-dc-oauth-jwt.png[OAuth JWT Configuration]
 
-=== OAuth SAML Configuration
+==== Configuring OAuth SAML
 
 * Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
 * Keystore File: The path to the key store used to sign data during authentication. Only Java key store format is allowed. See <<Generating a Keystore File>>.
@@ -211,7 +211,7 @@ image:salesforce-dc-oauth-jwt.png[OAuth JWT Configuration]
 
 image:salesforce-dc-oauth-saml.png[OAuth SAML Configuration]
 
-=== OAuth Username Password Configuration
+==== Configuring OAuth Username Password
 
 * Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
 * Consumer Secret: The consumer secret for the connector to access Salesforce.
@@ -221,7 +221,7 @@ image:salesforce-dc-oauth-saml.png[OAuth SAML Configuration]
 +
 image:salesforce-dc-oauth-user-pass.png[OAuth User Password]
 
-== Install Connector in Studio
+== Installing and Configuring in Studio
 
 . In Anypoint Studio, click the Exchange icon in the Studio taskbar.
 . Click Login in Anypoint Exchange.
@@ -231,7 +231,7 @@ image:salesforce-dc-oauth-user-pass.png[OAuth User Password]
 When Studio has an update, a message displays in the lower right corner, 
 which you can click to install the update.
 
-=== Configure in Studio
+To configure:
 
 . Drag and drop the connector to the Studio Canvas.
 . To create a global element for the connector, set these fields:
@@ -324,7 +324,7 @@ creating a new one). To make sure the connection doesn't close when a thread is 
 
 image:salesforce-disable-session.png[disable session checkbox]
 
-=== Apex and Proxy Settings
+=== Setting Apex and Proxy
 
 The Invoke Apex REST and Invoke Apex Soap methods work with Apex Class Name settings. When you connect to Salesforce, the Salesforce connector gets the names of the Apex classes and methods belonging to them that can be invoked.
 
@@ -335,8 +335,6 @@ All Salesforce connection configurations support these Apex settings:
 * Apex Class Name - List of Apex class names to use for limiting the set of classes you fetch along with the methods they expose. This setting can speed the fetch process if there are a lot of classes that you do not need to fetch.
 
 You can set Apex and Proxy settings in Design Center and in Anypoint Studio 7.
-
-==== Configure the Apex and Proxy Settings
 
 Apex Settings values:
 
@@ -430,7 +428,7 @@ The system now exports the public key from the keystore into the workspace. This
 +
 . Make sure that you have both the keystore (salesforce-cert.jks) and the public key (salesforce-cert.crt) files in your workspace.
 
-== Events and Topics
+== Handling Events and Topics
 
 Your application can receive events by subscribing to a Salesforce topic.
 
@@ -542,11 +540,11 @@ In this XML example, the `replay-topic` acts like an inbound endpoint for the Lo
 
 If ALL or ONLY_NEW replay option is selected, then the `replayId` value is ignored.
 
-== Push Data to Salesforce
+== Pushing Data to Salesforce
 
 Use as an outbound connector in your flow to push data to Salesforce. To use the connector in this capacity, simply place the connector in your flow at any point after an inbound endpoint.
 
-== Receive Inbound Data From Salesforce
+== Receiving Inbound Data From Salesforce
 
 You can use the Salesforce connector as an inbound connector without wrapping the connector in a poll scope to stream data from Salesforce into your application. To use the connector in this capacity, place a Salesforce connector at the start of your flow.
 
@@ -691,7 +689,7 @@ In Salesforce, you can track the status of bulk data load jobs and their associa
 
 The job detail page includes a related list of all the batches for the job. The related list provides View Request and View Response links for each batch. If the batch is a CSV file, the links return the request or response in CSV format. If the batch is an XML file, the links return the request or response in XML format. These links are available for batches created in Salesforce API version 19.0 and later.
 
-== Connector Usage Tips
+== Using Best Practices
 
 * Fields To Null: The configurations have a checkbox called Can Clear Fields by Updating Field Value to Null. If checked, all the fields in a request that have a Null value are added to the `fieldsToNull` field and sent to Salesforce.
 +
@@ -718,7 +716,7 @@ To store Date and DateTime fields, you can use DataWeave expressions to create D
 * Limits on API Calls: You need to know the rate limiting policy that applies to your account so that you do not exceed the number of allotted API calls per day.
 * Opportunity `sObject`: When extracting data from an `Opportunity`, be aware that a "quarter" is not relative to a calendar year. A "quarter" in this context is relative to the financial year of the organization.
 
-== XML Configuration
+== Configuring with XML
 
 If you are creating Salesforce connector XML by hand, add the namespace for the connector. By contrast, Anypoint Studio creates the namespace for a connector automatically when you create a project for a Mule app.
 
@@ -790,12 +788,12 @@ This snippet adds specifies a project dependency for the latest version:
 </dependency>
 ----
 
-== Use Case: Studio
+== Example: Accepting and Transforming Data
 
 image:salesforce-outbound.png[sfdc_outbound]
 
 * HTTP connector: Accepts data from HTTP requests.
-* Transform Message: Transforms data structure and format to produce the output Salesforce connector expects.
+* Transform Message: Transforms data structure and formats to produce the output Salesforce connector expects.
 * Salesforce connector: (Outbound) Connects with Salesforce and performs an operation to push data to Salesforce.
 
 === Inbound Scenario
@@ -807,7 +805,7 @@ image:salesforce-inbound.png[query_inbound]
 . Transform Message: Transforms data structure and format to produce output the File endpoint expects.
 . File connector: Records data in a file, such as a CSV and saves it to a user-defined directory or location.
 
-== Use Case: XML
+=== Implementing in XML
 
 Paste this XML code into Anypoint Studio to experiment with the two flows described in the previous section.
 
