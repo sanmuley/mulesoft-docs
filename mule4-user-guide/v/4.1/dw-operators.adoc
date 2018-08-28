@@ -59,6 +59,7 @@ DataWeave supports the following equality and relational operators:
 | `<=` | For less than or equal to.
 | `>=` | For greater than or equal to.
 | `==` | For equal to.
+| `!=` | For different to.
 | `~=` | Equality operator that tries to coerce one value to the type of the other when the types are different.
 |===
 
@@ -99,15 +100,15 @@ These examples use equality operators:
 %dw 2.0
 output application/dw
 ---
-{ "equality" :
-  [
-    (1 == 1),
-    (1 == 2),
-    ("true" == true),
-    ("true" ~= true),
-    (['true'] ~= [true]),
-    ('1' ~= 1)
-  ]
+{
+    equal:  (1 == 1),
+    differentValue: (1 == 2),
+    notEqual: (1 != 2),
+    differentType: ("true" == true),
+    differentType2: ("true" != true),
+    coerce: ("true" ~= true),
+    coerce2: (['true'] ~= [true]),
+    coerce3: ('1' ~= 1)
 }
 ----
 
@@ -115,7 +116,14 @@ output application/dw
 [source,,linenums]
 ----
 {
-  equality: [ true, false, false, true, true, true ]
+  equal: true,
+  differentValue: false,
+  notEqual: true,
+  differentType: false,
+  differentType2: true,
+  coerce: true,
+  coerce2: true,
+  coerce3: true
 }
 ----
 
