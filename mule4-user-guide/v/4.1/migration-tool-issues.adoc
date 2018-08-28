@@ -1,0 +1,862 @@
+= Migration Tool Warning and Error Reference
+
+[[batch]]
+== Batch
+//batch:
+
+`threading`:
+
+* Type: WARN
+* Message: Threading profiles do not exist in Mule 4. This may be replaced by a
+`maxConcurrency` attribute in the batch job.
++
+See
+link:intro-engine[Introduction to Mule 4: Execution Engine Threads and Concurrency].
+
+
+`filterExpression`:
+
+* Type: WARN
+* Message: `filter-expression` does not exist in Mule 4. This may be replaced
+with `acceptExpression` attribute in the batch step.
++
+See
+link:migration-core-batch#xml_changes[XML Changes to Batch Elements and Attributes for Mule 4]
+in _Migrating the Batch Module_.
+
+
+[[cache]]
+== Cache
+//cache:
+
+`filterExpression`:
+
+* Type: ERROR
+* Message: Rewrite the logic of the referenced filter as a DataWeave expression
+in the `filterExpression` attribute.
+
+
+`consumableFilter`:
+
+* Type: ERROR
+* Message: `consumableFilter-ref` is not needed in Mule 4 File Connector, since
+streams are now repeatable and enabled by default.
++
+See link:streaming-about[About Streaming].
+
+
+[[database]]
+== DataBase
+//db:
+
+`referencedDataSource`:
+
+* Type: WARN
+* Message: Mule 3 config has a `{referencer}` with a dataSource-ref. It was
+converted to a `db:data-source-connection`.
++
+See
+link:migration-connectors-database#example_data_source_db[Mule 4 Example: Data Source Reference]
+in _Migrating the Database Connector_.
+
+
+`configAttributesOverlap`:
+
+* Type: WARN
+* Message: The attributes `{otherAttributes}` overlap with properties of the
+referenced DataSource and were removed.
++
+See
+link:migration-connectors-database#example_data_source_db[Mule 4 Example: Data Source Reference]
+in _Migrating the Database Connector_.
+
+
+`jdbcDriverDependency`:
+
+* Type: ERROR
+* Message: Add a suitable JDBC driver dependency for this connection.
++
+See
+link:/connectors/db-configure-connection#setting-the-jdbc-driver[Setting the JDBC Driver]
+in _Configuring a Database Connection_.
+
+
+`jdbcUrlForSpecificEngine`:
+
+* Type: WARN
+* Message: The config in Mule 3 is specific for an engine, but it contained a
+`url` attribute. It will be made generic in order to keep the url.
++
+See
+link:migration-connectors-database#example_generic_db[Mule 4 Example: Generic]
+in _Migrating the Database Connector_.
+
+
+`jbossTxManager`:
++
+* Type: ERROR
+* Message: JBoss Transaction manager must be replaced by Bitronix Transaction
+Manager provided by Mule.
+
+
+`reconnectNotifiers`:
++
+* Type: ERROR
+* Message: Reconnection notifiers cannot be configured on the `reconnect` element.
++
+See
+link:migration-connectors-database#reconnection_strategies[Reconnection Strategies]
+in _Migrating the Database Connector_.
+
+`source`:
++
+* Type: ERROR
+* Message: `source` attribute does not exist in Mule 4. Update the query accordingly.
++
+See
+link:migration-connectors-database#database_dynamic_queries[Migrating Dynamic Queries]
+in _Migrating the Database Connector_.
+
+
+`streaming`:
+
+* Type: WARN
+* Message: Streaming is enabled by default in Mule 4
++
+See
+link:migration-connectors-database#database_streaming[Streaming Large Results]
+in _Migrating the Database Connector_.
+
+[[error_handling]]
+== Error Handling
+//errorHandling:
+
+`redelivery`:
+
+* Type: ERROR
+* Message: `maxRedeliveryAttempts` is not supported anymore in the error handler.
+A `<redelivery-policy>` element must be created on the message source.
++
+See
+link:migration-core-exception-strategies#with-redelivery[With Redelivery]
+in _Migrating Exception Strategies to Mule Error Handlers_.
+
+
+`reuse`:
+
+* Type: ERROR
+* Message: The way to reuse on-errors scopes have changed.
++
+See
+link:on-error-scope-concept#reusing-on-error-scopes[Reusing On-Error Scopes]
+in _About On-Error Scopes_.
+
+
+[[expressions]]
+== Expressions
+// expressions:
+
+`melToDw`:
+
+* Type: WARN
+* Message: MEL expression could not be migrated to a DataWeave expression.
++
+See
+link:migration-mel[Migrating MEL to DataWeave],
+link:https://blogs.mulesoft.com/dev/mule-dev/why-dataweave-main-expression-language-mule-4[MuleSoft blog: Why DataWeave is the Main Expression Language in Mule 4 Beta]
+
+
+`inboundAttachments`:
+
+* Type: ERROR
+* Message: Expressions that use inbound attachments, now should directly use the
+DataWeave features for handling multipart.
++
+See
+link:migration-manual#inbound_attachments[Inbound Attachments (Manual Post-Migration Steps)]
+in _Migration to Mule 4: Recommended Post-Migration Tasks_.
+
+
+[[file]]
+== File
+//file:
+
+`streaming`:
+
+* Type: WARN
+* Message: `streaming` is not needed in Mule 4 File Connector, since streams are
+now repeatable and enabled by default.
++
+See
+link:streaming-about[About Streaming].
+
+
+`serialiseObjects`:
+
+* Type: ERROR
+* Message: `serialiseObjects` is not needed in Mule 4 File Connector, you may
+process the payload with DataWeave directly without the need to convert it to a
+Java object.
++
+See
+link:transform-component-about[About the Transform Component].
+
+
+`workDirectory`:
+
+* Type: ERROR
+* Message: `workDirectory` is not needed in Mule 4 File Connector. The source
+file is locked, so there is no need to move it to a temporary location.
++
+See
+link:migration-connectors-file#file_configs[Migrating File Connector Configurations]
+in _Migrating the File Connector_.
+
+
+`workFileNamePattern`:
+
+* Type: WARN
+* Message: `workFileNamePattern` is not needed in Mule 4 File Connector. The
+source file is locked, so there is no need to move it to a temporary location.
++
+See
+link:migration-connectors-file#file_configs[Migrating File Connector Configurations]
+in _Migrating the File Connector_.
+
+
+`threading`:
+
+* Type: WARN
+* Message: Threading profiles do not exist in Mule 4. This may be replaced by a 'maxConcurrency' value in the flow.
++
+See
+link:intro-engine[Introduction to Mule 4: Execution Engine Threads and Concurrency].
+
+
+`filePath`:
+
+* Type: ERROR
+* Message: Use a DataWeave expression in <file:write> path attribute to set the
+filename of the file to write.
++
+See
+link:migration-connectors-file#file_write[Migrating an outbound endpoint]
+in _Migrating the File Connector_.
+
+`manyConnectors`:
+
+* Type: ERROR
+* Message: There are at least 2 connectors matching protocol `file`, so the
+connector to use must be specified on the endpoint using the `connector`
+property/attribute. Connectors in your configuration that support `file` are
+`{connectors}`.
+
+
+`caseSensitive`:
+
+* Type: WARN
+* Message: `caseSensitive` is not supported in Mule 4 File Connector. The case
+sensitivity is delegated to the file system.
++
+See
+link:/connectors/file-on-new-file[To Trigger a Flow When a New File is Created or Modified].
+
+
+`responseTimeout`:
+
+* Type: WARN
+* Message: `responseTimeout` was not being used by the file transport.
+
+
+`comparator`:
+
+* Type: ERROR
+* Message: `comparator`reverseOrder` are not yet supported by the file connector
+listener.
++
+See
+link:migration-connectors-file#file_listener[Migrating an inbound endpoint] in
+_Migrating the File Connector_.
+
+
+`notNeeded`:
+
+* Type: WARN
+* Message: `{attribute}` is not needed in Mule 4 File Connector, since streams
+are now repeatable and enabled by default.
++
+See
+link:streaming-about[About Streaming].
+
+
+[[flow]]
+== Flow
+// flow:
+
+`dynamicFlowRefName`:
+
+* Type: WARN
+* Message: Make sure the expression used in the flow-ref already has the correct
+flow name and remove the replacements from this expression.
+
+
+`processingStrategy`:
+
+* Type: WARN
+* Message: `flow` no longer has a `processingStrategy` attribute.
++
+See
+link:intro-engine[Introduction to Mule 4: Execution Engine Threads and Concurrency].
+
+
+[[jms]]
+== JMS
+//jms:
+
+`customConnector`:
+
+* Type: ERROR
+* Message: Cannot automatically migrate JMS custom-connector.
++
+See
+link:migration-connectors-jms#using-a-different-broker[Using A Different Broker]
+in _Migrating to the JMS Connector_.
+
+
+`weblogicMqConnector`:
+
+* Type: ERROR
+* Message: Add the client library of the Weblogic MQ as a shared library.
++
+See
+link:migration-connectors-jms#using-a-different-broker[Using A Different Broker]
+in _Migrating to the JMS Connector_.
+
+
+`websphereMqConnector`:
+
+* Type: ERROR
+* Message: IBM MQ Connector should be used to connect to an IBM MQ broker.
++
+See
+link:migration-connectors-jms#using-a-different-broker[Using A Different Broker]
+in _Migrating to the JMS Connector_.
+
+
+`xaConnectionCache`:
+
+* Type: ERROR
+* Message: Cannot configure the connection cache for XA in JMS.
+
+
+`propertiesListener`:
+
+* Type: WARN
+* Message: Avoid using properties to set the JMS response properties and headers.
++
+See
+link:migration-connectors-jms#ListeningForNewMessages[Listening For New Messages],
+link:migration-connectors-jms#RespondingToIncommingMessages[Responding To Incoming Messages]
+in _Migrating to the JMS Connector_.
+
+
+`listenerTx`:
+
+* Type: WARN
+* Message: There can be no transaction active before the listener, so JOIN is
+not supported at this point.
++
+See
+link:migration-connectors-jms#UsingTransactions[Using Transactions]
+in _Migrating to the JMS Connector_.
+
+
+`propertiesPublish`:
+
+* Type: WARN
+* Message: Avoid using properties to set the JMS properties and headers.
++
+See
+link:migration-connectors-jms#SendingMessages[Sending Messages] in
+in _Migrating to the JMS Connector_.
+
+
+`nestedTx`:
+
+* Type: ERROR
+* Message: Use a <try> scope to begin a nested transaction.
++
+See
+link:try-scope-xml-reference#properties-of-try[Properties of Try] in
+_Try Scope XML Reference_.
+
+
+[[http]]
+== HTTP
+//http:
+
+`mapExpression`:
+
+* Type: WARN
+* Message: Build the `{tagName}` map with a single DataWeave expression.
++
+See
+link:migration-manual#outbound_properties[Outbound Properties (Manual Post-Migration Steps)]
+in _Migration to Mule 4: Recommended Post-Migration Tasks_.
+
+
+`parseRequest`:
+
+* Type: WARN
+* Message: `parseRequest` is not needed in Mule 4, since the InputStream of the
+multipart payload is provided at it is read.
++
+See
+link:migration-connectors-http#http-mime-types[HTTP MIME Type Parsing]
+in _Migrating HTTP Connector Uses_,
+link:dataweave-formats#format_form_data[Multipart (Form-Data)]
+in _Data Formats Supported by DataWeave_.
+
+
+`statusCode`:`
+
+* Type: WARN
+* Message: Avoid using an outbound property to determine the status code.
+
+
+`method`:
+
+* Type: WARN
+* Message: Avoid using an outbound property to determine the method.
+
+
+`threading`:
+
+* Type: WARN
+* Message: Threading profiles do not exist in Mule 4. This may be replaced by a
+`maxConcurrency` value in the flow.
++
+See
+link:intro-engine[Introduction to Mule 4: Execution Engine Threads and Concurrency].
+
+
+`restConnect`:
+
+* Type: ERROR
+* Message: For consuming an API described by a RAML file, Rest-Connect is a more
+appropriate tool than using the HTTP Connector directly.
++
+See
+link:/anypoint-exchange/to-deploy-using-rest-connect[Converting a RAML to a Connector Using REST Connect],
+link:https://blogs.mulesoft.com/dev/anypoint-platform-dev/building-reusable-components-with-rest-connect-and-mule-4[MuleSoft blog: Building reusable components with REST Connect and Mule 4]
+
+
+`port`:
+
+* Type: ERROR
+* Message: `port` cannot be overridden at the HTTP request operation. You may
+use an expression in the config to make it dynamic.
++
+Original value was `port="{portNumber}"`
++
+See
+link:migration-connectors-http#http-request[HTTP Request]
+in _Migrating HTTP Connector Uses_.
+
+
+`host`:
+
+* Type: ERROR
+* Message: `host` cannot be overridden at the HTTP request operation. You may
+use an expression in the config to make it dynamic.
++
+Original value was `host="{host}"`.
++
+See link:migration-connectors-http#http-request[HTTP Request]
+in _Migrating HTTP Connector Uses_.
+
+
+`socketProperties`:
+
+* Type: ERROR
+* Message: The server socket properties may be configured at the runtime level
+in Mule 4.2.0 or higher.
++
+//* # TODO MULE-15135
+
+
+`sendBodyMode`:
+
+* Type: WARN
+* Message: `sendBodyMode` added for compatibility. This may not be needed in
+this app.
+
+
+`cookies`:
+
+* Type: ERROR
+* Message: Cookie support in Mule 4 is limited to resending any cookie received
+by the server before.
++
+See
+link:migration-connectors-http[Migrating HTTP Connector Uses].
+
+
+`reuseAddress`:
+
+* Type: ERROR
+* Message: `reuseAddress` attribute is only applicable to HTTP listeners,
+not requesters.
+
+
+`eTag`:
+
+* Type: ERROR
+* Message: Consider using a watermark for checking `eTag`.
++
+See
+link:migration-patterns-watermark[Migrating Watermarks].
+
+
+`tlsClientClass`:
+
+* Type: ERROR
+* Message: `class` attribute of `https:tls-client` was deprecated in 3.x. Use
+`type` instead.
++
+See
+link:tls-configuration[About TLS Configuration].
+
+
+`tlsServerClass`:
+
+* Type: ERROR
+* Message: `class` attribute of `https:tls-server` was deprecated in 3.x. Use
+`type` instead.
++
+See
+link:tls-configuration[About TLS Configuration].
+
+
+`tlsKeyStoreClass`:
+
+* Type: ERROR
+* Message: `class` attribute of `https:tls-key-store` was deprecated in 3.x.
+Use `type` instead.
++
+See
+link:tls-configuration[About TLS Configuration].
+
+
+[[message]]
+== Message
+//message:
+
+`sessionVars`:
+
+* Type: WARN
+* Message: Instead of using session variables in the flow, use variables.
++
+See
+link:migration-manual#session_variables[Session Properties (Manual Post-Migration Steps)]
+in _Migration to Mule 4: Recommended Post-Migration Tasks_.
+
+
+`outboundProperties`:
+
+* Type: WARN
+* Message: Instead of using outbound properties in the flow, its values must be
+set explicitly in the operation/listener.
++
+See
+link:migration-manual#outbound_properties[Outbound Properties (Manual Post-Migration Steps)]
+in _Migration to Mule 4: Recommended Post-Migration Tasks_.
+
+
+`copyProperties`:
+
+* Type: WARN
+* Message: Instead of copying properties in the flow, use the `attributes` of
+the message directly.
++
+See
+link:intro-mule-message#inbound-properties-are-now-attributes[Inbound Properties Are Now Attributes]
+in _Introduction to Mule 4: The Mule Message_.
+
+
+`attributesToInboundProperties`:
+
+* Type: WARN
+* Message: Expressions that query inboundProperties from the message should
+instead query the attributes of the message. Remove this component when there
+are no remaining usages of inboundProperties in expressions or components that
+rely on `inboundProperties` (such as `copy-properties`).
++
+See
+link:intro-mule-message#inbound-properties-are-now-attributes[Inbound Properties Are Now Attributes]
+in _Introduction to Mule 4: The Mule Message_.
+
+
+`outboundPropertyEnricher`:
+
+* Type: WARN
+* Message: Setting outbound property as variable.
++
+See
+link:migration-manual#outbound_properties[Outbound Properties (Manual Post-Migration Steps)]
+in _Migration to Mule 4: Recommended Post-Migration Tasks_.
+
+
+`inboundAttachments`:
+
+* Type: WARN
+* Message: Identify the received attachments and set them as variables.
++
+See
+link:migration-manual#inbound_attachments[Inbound Attachments (Manual Post-Migration Steps)]
+in _Migration to Mule 4: Recommended Post-Migration Tasks_.
+
+
+`outboundAttachments`:
+
+* Type: ERROR
+* Message: Refer to the documentation of the connectors/operations in the flow
+or the source to know how attachments are sent.
++
+See
+link:migration-manual#outbound_attachments[Outbound Attachments (Manual Post-Migration Steps)]
+in _Migration to Mule 4: Recommended Post-Migration Tasks_.
+
+
+`expressionsAttachments`:
+
+* Type: ERROR
+* Message: Expressions that use inbound attachments, now should directly use the
+DataWeave features for handling multipart.
++
+See
+link:migration-manual#inbound_attachments[Inbound Attachments (Manual Post-Migration Steps)]
+in _Migration to Mule 4: Recommended Post-Migration Tasks_.
+
+
+`springBeanDefinitionInsideMuleObject`:
+
+* Type: ERROR
+* Message: Spring beans definition inside mule components is not allowed. This
+inner definition must be moved to its own spring config file, and it may be
+referenced by an `ee:transform` component or in an expression in the
+operation/listener directly.
++
+See
+link:migration-module-spring[Migrating the Spring Module].
+
+
+[[scatter_gather]]
+== Scatter Gather
+//scatterGather:
+
+`threading`:
+
+* Type: WARN
+* Message: Threading Profile is no longer needed in Mule 4.
++
+See
+link:intro-engine[Introduction to Mule 4: Execution Engine Threads and Concurrency].
+
+
+`customAggregation`:
+
+* Type: ERROR
+* Message: Custom Aggregations are no longer supported. Add an `ee:transform`
+after the `scatter-gather` to perfrom the aggregation.
++
+See
+link:scatter-gather-concept[About Scatter-Gather],
+link:transform-component-about[About the Transform Component].
+
+
+[[scripting]]
+== Scripting
+//scripting:
+
+`messageFormat`:
+
+* Type: ERROR
+* Message: The message format in Mule 4 has changed. Change any usages of the
+message to match the new bindings in Mule 4.
++
+See
+link:intro-mule-message[Introduction to Mule 4: The Mule Message],
+link:migration-module-scripting[Migrating the Scripting Component].
+
+
+[[config_properties]]
+== Secure Configuration Properties
+//configProperties:
+
+`encoding`:
+
+* Type: ERROR
+* Message: `encoding` is not available in Mule 4.1.x. It will be included in
+4.2.0 or higher.
+
+
+`order`:
+
+* Type: ERROR
+* Message: `order` is no longer available. The properties are resolved in the
+order they were declared.
++
+See
+link:configuring-properties#properties-files[Properties Files] in
+_Secure Configuration Properties_.
+
+
+`springAttributes`:
+
+* Type: ERROR
+* Message: Spring specific attributes are no longer available. The default
+behavior cannot be changed in Mule 4.
++
+See
+link:configuring-properties[Configuring Properties].
+
+
+`securePrefix`:
+
+* Type: ERROR
+* Message: Review usages of properties defined in the referenced file and add the
+`secure` prefix to those.
+See link:migration-secure-properties-placeholder[Migrating the Secure Properties Placeholder], link:secure-configuration-properties#usage[Usage] in
+_Secure Configuration Properties_.
+
+
+`ignoreResourceNotFound`:
+
+* Type: ERROR
+* Message: `ignoreResourceNotFound` is no longer available. The deployment will
+fail if a referenced file does not exist.
+See link:configuring-properties#properties-files[Properties Files] in
+_Configuring Properties_.
+
+
+`ignoreUnresolvablePlaceholders`:
+
+* Type: ERROR
+* Message: `ignoreUnresolvablePlaceholders` is no longer available. The
+deployment will fail if a referenced property is not defined.
+See link:configuring-properties[Configuring Properties].
+
+
+`systemPropertiesMode`:
+
+* Type: ERROR
+* Message: `systemPropertiesMode` is no longer available. The default behavior
+cannot be changed in Mule 4.
+See link:configuring-properties#properties-hierarchy[Properties Hierarchy] in
+_Configuring Properties_.
+
+
+[[transform]]
+== Transform
+//transform:
+
+`sessionVars`:
+
+* Type: WARN
+* Message: Instead of setting session variables in the flow, you msut set Variables.
++
+See
+link:migration-manual#session_variables[Session Properties (Manual Post-Migration Steps)]
+in _Migration to Mule 4: Recommended Post-Migration Tasks_.
+
+
+`outboundProperties`:
+
+* Type: WARN
+* Message: Instead of setting outbound properties in the flow, you must set
+Variables.
++
+See link:migration-manual#outbound_properties[Outbound Properties (Manual Post-Migration Steps)]
+in _Migration to Mule 4: Recommended Post-Migration Tasks_.
+
+
+[[transports]]
+== Transports
+//transports:
+
+`cantParseAddress`:
+
+* Type: ERROR
+* Message: Unable to parse endpoint address `{address}`.
+
+
+[[validation]]
+== Validation
+//validation:
+
+`exceptionFactory`:
+
+* Type: ERROR
+* Message: Exception Factory is no longer supported.
++
+See
+link:migration-module-validation[Migrating the Validation Module].
+
+
+`customValidators`:
+
+* Type: ERROR
+* Message: Custom Validators were replaced with the Extension Validators.
++
+See
+link:migration-module-validation#custom_validator[Build a Custom Validator]
+in _Migrating the Validation Module_.
+
+
+[[vm]]
+== VM
+//vm:
+
+`externalTx`:
+
+* Type: ERROR
+* Message: Mule 4 does not support joining with external transactions.
+
+
+`listenerTx`:
+
+* Type: WARN
+* Message: There can be no transaction active before the listener, so JOIN is
+not supported at this point.
+
+
+`nestedTx`:
+
+* Type: ERROR
+* Message: Use a `<try>` scope to begin a nested transaction.
++
+See
+link:try-scope-xml-reference#properties-of-try[Properties of Try]
+in _Try Scope XML Reference_.
+
+
+`sessionVars`:
+
+* Type: WARN
+* Message: You may remove this if this flow is not using sessionVariables, or
+after those are migrated to variables.
++
+See
+link:migration-manual#session_variables[Session Properties (Manual Post-Migration Steps)]
+in _Migration to Mule 4: Recommended Post-Migration Tasks_.
+
+
+[[wsc]]
+== Web Service Consumer
+//wsc:
+
+`unsupportedProtocol`:
+
+* Type: ERROR
+* Message: WebService consumer only supports HTTP or JMS transports.

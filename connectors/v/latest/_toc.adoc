@@ -34,6 +34,8 @@
 *** link:/box-connector-reference[Box Connector Reference]
 ** link:/cassandra-connector[Cassandra Connector]
 *** link:/cassandra-connector-reference[Cassandra Connector Reference]
+** link:/cloudhub-connector[CloudHub Connector]
+*** link:/cloudhub-connector-ref[CloudHub Connector Reference]
 ** link:/compression-module[Compression Module]
 *** link:/compression-documentation[Compression Module Reference]
 ** link:/db-connector-index[Database Connector]
