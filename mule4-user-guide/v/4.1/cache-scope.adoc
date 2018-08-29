@@ -57,7 +57,7 @@ Instead of processing all message payloads that it receives, the Cache scope can
 
 == Example
 
-In Anypoint Studio, you can download and open the example project _Cache Scope with Salesforce Contacts_ to learn more about how to use the Cache scope.
+In Anypoint Studio, you can download and open the example project _Cache Scope with Salesforce Contacts_ from Anypoint Exchange to learn more about how to use the Cache scope. This example caches fetched data from Salesforce. When a query is issued to request the data again, results are returned from cache and a new call to Salesforce is not made.
 
 == See Also
 
