@@ -29,9 +29,7 @@ Resource|`firstname`|`surname`|`phone`|`email`
 |jane.doe@texasComp.com
 |===
 
-[DataWeave](https://docs.mulesoft.com/mule-user-guide/v/current/dataweave) is used to aggregate the data.
-
-The information about the contacts is aggregated to a JSON structure that represents data from both resources (`contacts-1.csv` and `contacts-2.csv`).
+DataWeave is used to aggregate the data. The information about the contacts is aggregated to a JSON structure that represents data from both resources.
 
 == See Also
 
