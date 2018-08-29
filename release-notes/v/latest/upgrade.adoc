@@ -194,6 +194,7 @@ organizations/{organizationId}/public/*
 
 The Anypoint Platform APIs section of this doc has links to the API documentation so you can update your pipeline per any of the below criteria:
 
+* CI/CD pipelines will need to be reconstructed to accomodate environments you will use for your APIs
 * If you call API Manager APIs to apply API management or policies, review the API Manager API and 
 refactor your pipeline as needed.
 * If publishing to Exchange, review the new Exchange Maven Facade API and refactor as needed.
