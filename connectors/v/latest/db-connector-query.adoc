@@ -3,7 +3,7 @@
 :toc:
 :toc-title:
 
-When you configure a Database operation using the Database Connector, there are several ways to add variable values to the SQL statement you execute in the database.
+When you configure a Database operation using the Database connector, there are several ways to add variable values to the SQL statement you execute in the database.
 
 == Using Input Parameters to Protect Database Queries
 The select operation is used to retrieve information from the RDBMS. The primary concept of this operation is that you will supply a SQL query and use DataWeave to supply the parameters:
@@ -20,7 +20,7 @@ The select operation is used to retrieve information from the RDBMS. The primary
 </flow>
 ----
 
-As you can see in the above example, input parameters are supplied as key-value pairs, which we can now create by embedding a DataWeave script. Those keys are used in conjunction with the semicolon character (:) to reference to a parameter value by name. This is the recommended approach for using parameters in your query.
+As you can see in the above example, input parameters are supplied as key-value pairs, which you can create by embedding a DataWeave script. Those keys are used in conjunction with the semicolon character (`:`) to reference a parameter value by name. This is the recommended approach for using parameters in your query.
 
 [TIP]
 *Since version 1.4.0*
