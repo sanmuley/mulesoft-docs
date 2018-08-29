@@ -283,7 +283,7 @@ This DataWeave expression link:#extracting-parameters-from-the-token-url-respons
 +
 * Response Refresh Token: `#[payload.'access_token']`
 +
-You can use a similar DataWeave expression for the refresh token; however, Github doesn't actually use a refresh token.
+You can use a similar DataWeave expression for the refresh token (i.e.: `#[payload.'refresh_token']`) if the provider you are using sends a refresh token. In this example, however, Github doesn't actually use a refresh token.
 +
 image::authentication-in-http-requests-c2070.png[authentication-in-http-requests-c2070]
 +
@@ -542,7 +542,7 @@ To identify which user is granting access to the Mule client app, define a DataW
 ------
 [tab,title="Studio Visual Editor"]
 ....
-On the *Authentication* section, configure the options as follows for the *OAuth2 - Authorization Code*:
+In the *Authentication* section, configure the options as follows for the *OAuth2 - Authorization Code*:
 
 * *Resource Owner ID* to `#[vars.userId]`
 * *Local Authorization URL resource owner id* to `#[attributes.queryParams.userId]`
@@ -609,7 +609,7 @@ By specifying a TLS context in your HTTP Request Connector authentication settin
 ------
 [tab,title="Studio Visual Editor"]
 ....
-On the *Authentication* section, configure the options as follows for the *OAuth2 - Authorization Code*:
+In the *Authentication* section, configure the options as follows for the *OAuth2 - Authorization Code*:
 
 . In the TLS configuration section, select *Global Reference*
 . Click the green plus sign next to the field to create a new TLS Context
