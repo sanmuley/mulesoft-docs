@@ -23,26 +23,26 @@ The select operation is used to retrieve information from the RDBMS. The primary
 As you can see in the above example, input parameters are supplied as key-value pairs, which you can create by embedding a DataWeave script. Those keys are used in conjunction with the semicolon character (`:`) to reference a parameter value by name. This is the recommended approach for using parameters in your query.
 
 [TIP]
-*Since version 1.4.0*
-If you need to use the semicolon character (:) in your SQL Query, you can escape it
-by putting a backslash before it. This is useful for example when using the PostgeSQL type
-casting, which uses two semicolons before the type that is required to cast to.
-Example : <db:sql>SELECT price\:\:float8 FROM PRODUCT</db:sql>
+*Since version 1.4.0 (escaping semi-colons)*: 
+If you need to use the semicolon character (`:`) in your SQL Query, you can escape it
+by putting a backslash before it. This is useful, for example, when using PostgeSQL type
+casting, which requires two semicolons before the type you are casting to, for example:
+`<db:sql>SELECT price\:\:float8 FROM PRODUCT</db:sql>`.
 
 
 The alternative is to directly write ` <db:sql>SELECT * FROM PLANET WHERE name = #[payload] </db:sql>`, but this is a very dangerous practice that is not recommended.
 
-The advantages of using input parameters to configure the WHERE clause in a SELECT statement this way are:
+Advantages of using input parameters to configure the `WHERE` clause in a `SELECT` statement this way:
 
-* The query becomes immune to SQL injection attacks
-* The connector can perform optimizations that are not possible otherwise, which improves the application’s overall performance
+* The query becomes immune to SQL injection attacks.
+* The connector can perform optimizations that are not possible otherwise, which improves the app’s overall performance.
 
 [TIP]
-DataSense is available for the operation's input and output. By analyzing the query, the connector will automatically calculate the structure of the query's output by analyzing the projection section of the SQL statement. At the same time, by comparing the conditions in the `WHERE` clause to the table structure, it will also generate input DataSense to help you build the DataWeave script that will generate the input parameters.
+DataSense is available for the operation's input and output. By analyzing the query, the connector will automatically calculate the structure of the query's output by analyzing the projection section of the SQL statement. At the same time, by comparing the conditions in the `WHERE` clause to the table structure, it will also generate DataSense input to help you build the DataWeave script that will generate the input parameters.
 
 == Dynamic Queries
 
-Sometimes, you not only need to parameterize the WHERE clause, but also parameterize parts of the query itself. Example use cases for this would be queries which need to hit online vs. historic tables depending on a condition, or complex queries where the project columns need to vary.
+Sometimes, you not only need to parameterize the `WHERE` clause, but also parameterize parts of the query itself. Examples of use cases for this are queries that need to hit online versus historic tables that dependin on a condition, or complex queries where the project columns need to vary.
 
 
 
