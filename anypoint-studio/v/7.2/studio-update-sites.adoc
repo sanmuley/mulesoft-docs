@@ -46,6 +46,12 @@ Updates:
 
 *  Mule Server Runtime 4.x.x EE.
 
+// == Patches for Anypoint Studio Update Site
+//
+// Contains all the patch versions for a given Studio version.
+//
+// `+http://studio.mulesoft.org/s2/patches/+`
+
 == RAML Editor Update Site
 
 Updates the RAML Editor in Anypoint Studio.
