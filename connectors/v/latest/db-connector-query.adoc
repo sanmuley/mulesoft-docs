@@ -3,9 +3,9 @@
 :toc:
 :toc-title:
 
-When you configure a Database operation using the Database Connector, there are several ways to add variable values to the SQL statement you execute in the database. 
+When you configure a Database operation using the Database Connector, there are several ways to add variable values to the SQL statement you execute in the database.
 
-== Using Input Parameters to Protect Databasae Queries
+== Using Input Parameters to Protect Database Queries
 The select operation is used to retrieve information from the RDBMS. The primary concept of this operation is that you will supply a SQL query and use DataWeave to supply the parameters:
 
 [source,xml,linenums]
@@ -20,9 +20,17 @@ The select operation is used to retrieve information from the RDBMS. The primary
 </flow>
 ----
 
-As you can see in the above example, input parameters are supplied as key-value pairs, which we can now create by embedding a DataWeave script. Those keys are used in conjunction with the semicolon character (:) to reference to a parameter value by name. This is the recommended approach for using parameters in your query. 
+As you can see in the above example, input parameters are supplied as key-value pairs, which we can now create by embedding a DataWeave script. Those keys are used in conjunction with the semicolon character (:) to reference to a parameter value by name. This is the recommended approach for using parameters in your query.
 
-The alternative is to directly write ` <db:sql>SELECT * FROM PLANET WHERE name = #[payload] </db:sql>`, but this is a very dangerous practice that is not recommended. 
+[TIP]
+*Since version 1.4.0*
+If you need to use the semicolon character (:) in your SQL Query, you can escape it
+by putting a backslash before it. This is useful for example when using the PostgeSQL type
+casting, which uses two semicolons before the type that we are going to cast to.
+Example : <db:sql>SELECT price\:\:float8 FROM PRODUCT</db:sql>
+
+
+The alternative is to directly write ` <db:sql>SELECT * FROM PLANET WHERE name = #[payload] </db:sql>`, but this is a very dangerous practice that is not recommended.
 
 The advantages of using input parameters to configure the WHERE clause in a SELECT statement this way are:
 
@@ -53,7 +61,7 @@ In this example, you can see how a full expression is used to produce the query 
 ----
 
 [NOTE]
-In Mule 3, the concept of select was split in parameterized and dynamic queries, and you couldn’t use both at the same time. You had to choose between having a dynamic query or having the advantages of using parameters (SQL Injection protection, PreparedStatement optimization, etc.). Furthermore, the syntax to do one or the other was different, so you had to learn two different ways of doing the same thing. But with the new Database Connector in Mule 4, you can now use both methods at the same time by using expressions in the query. 
+In Mule 3, the concept of select was split in parameterized and dynamic queries, and you couldn’t use both at the same time. You had to choose between having a dynamic query or having the advantages of using parameters (SQL Injection protection, PreparedStatement optimization, etc.). Furthermore, the syntax to do one or the other was different, so you had to learn two different ways of doing the same thing. But with the new Database Connector in Mule 4, you can now use both methods at the same time by using expressions in the query.
 
 
 Why do I need dynamic queries at all for the example above? Can I just treat the table like another Input Parameter? Then answer is no. Input Parameters can only be applied to parameters in a WHERE clause. To modify any other part of the query, you need to use DW’s interpolation operator.
@@ -83,22 +91,22 @@ The select operation provides to parameters to help with this: `fetchSize` and `
 
 [source,xml,linenums]
 ----
-<db:select fetchSize="200" maxRows="1000" config-ref="dbConfig"> 
+<db:select fetchSize="200" maxRows="1000" config-ref="dbConfig">
   <db:sql>select * from some_table</db:sql>
 </db:select>
 ----
 
-In this example, we are telling the connector to not fetch more that 1000 total rows as the result of an SQL SELECT query, but to try to only stream results from the Database to the Database Connector 200 at a time. So in this example it would require 5 separate network round trips to retrieve 1000 matching rows. 
+In this example, we are telling the connector to not fetch more that 1000 total rows as the result of an SQL SELECT query, but to try to only stream results from the Database to the Database Connector 200 at a time. So in this example it would require 5 separate network round trips to retrieve 1000 matching rows.
 
 The combination limits the total amount of information that will be retrieved (the maxRows value), and also guarantees that the data is returned from the Database over the network in smaller chunks (the fetchSize value).
 
 [NOTE]
-The fetchSize is a hint to the JDBC driver and need not always be enforced. The behavior varies between JDBC driver providers. Often, the default fetchSize for a JDBC driver is 10. 
+The fetchSize is a hint to the JDBC driver and need not always be enforced. The behavior varies between JDBC driver providers. Often, the default fetchSize for a JDBC driver is 10.
 
 == Setting a Query Timeout
 
 == Query Timeout Reference
- 
+
 Sometimes database queries take a long time to execute. The following factors often cause delays in query execution:
 
 * An inefficient query, such as one having improper indexing that iterates over many rows
@@ -106,7 +114,7 @@ Sometimes database queries take a long time to execute. The following factors of
 * A lock contention
 
 Generally, it's recommended to set a timeout on the query. To manage timeouts, configure `queryTimeout` and `queryTimeoutUnit`. The following example shows how to set a timeout for the Select operation, but all operations support setting a timeout:
- 
+
 [source,xml,linenums]
 ----
 <db:select queryTimeout="0" queryTimeoutUnit="SECONDS" config-ref="dbConfig">
