@@ -36,9 +36,9 @@ Custom dashboards and alerts require configuration before you can use them. For 
 [[required_permission]]
 == Required Permission
 
-To use Anypoint Monitoring, you need this Monitoring Center permission:
+To use Anypoint Monitoring, you need this permission:
 
-* Monitoring Center User
+* Anypoint Monitoring User
 
 Typically, administrators set permissions through Access Management. See link:/access-management/users#granting-permissions-and-roles-to-users[Granting Permissions and Roles to Users].
 
