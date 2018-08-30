@@ -5,30 +5,30 @@ TLS is a cryptographic protocol that provides communications security for your M
 
 Mule Runtime 4 (Mule 4) supports Transport Layer Security (TLS) 1.1/1.2.
 
-=== The `tls:context` Element
+== The tls:context Element
 
 The `tls:context` element is used for all connectors that support TLS. For example, you can configure TLS in HTTP (server and client), FTPS (client), Email (client) or Sockets (client) connectors, among others.
 
-=== The TLS-Enabled Server
+== The TLS-Enabled Servers and Clients
 
 A TLS-enabled server contains a private key and a public certificate:
 
 * The private key never leaves the server. 
 * The public certificate is exposed through TLS. 
 
-TLS-enabled clients verify that they trust the server by validating the public certificate against their own certificate.
+TLS-enabled clients verify that they trust the server by validating the public certificate against their own set of trusted certificates.
 
 To use TLS communications security in Mule 4, import certificates and private keys into a keystore file. Truststore files are also keystores that by convention include only public certificates of trusted servers.
 
-While there's a default Java truststore, there is no default Java keystore in the standard JRE distribution. Add your own keystore to the TLS context. You likely already have corporate certificates for your client apps and don't need to create them. Often, these certificates work with the JRE truststore, so no set up is required in the TLS context.
+While there's a default Java truststore, there is no default Java keystore in the standard JRE distribution. Add your own keystore to the TLS context. You likely already have corporate certificates for your client apps and don't need to create them. Often, these certificates work with the JRE truststore, so no setup is required in the TLS context.
 
 A well-known Certificate Authority (CA) can generate certificates, or you can generate a certificate locally without external approval (self-signed certificate). A truststore contains certificates from trusted CAs that the client uses to verify a certificate presented by the server.
 
-=== Keystores and Truststores
+== Keystores and Truststores
 
-The `tls:trust-store` and `tls:key-store` elements in a Mule configuration can reference a specific certificate and key, but if you don't provide values for `tls:trust=store`, Mule uses the default Java truststore. Java updates the default trust store when you update Java, so getting regular updates is recommended to keep well-known CA certificates up-to-date.
+The `tls:trust-store` and `tls:key-store` elements in a Mule configuration can reference a specific certificate and key, but if you don't provide values for `tls:trust-store`, Mule uses the default Java truststore. Java updates the default trust store when you update Java, so getting regular updates is recommended to keep well-known CA certificates up-to-date.
 
-Truststores and keystores contents differ depending on whether they are used for clients or servers:
+Truststore and keystore contents differ depending on whether they are used for clients or servers:
 
 * For servers: the truststore contains certificates of the trusted clients, the keystore contains the private and public key of the server.
 
@@ -36,12 +36,12 @@ Truststores and keystores contents differ depending on whether they are used for
 
 Adding both a keystore and a truststore to the configuration implements two-way TLS authentication also known as mutual authentication.
 
-The keystore contain one or two passwords:
+The keystore contains one or two passwords:
 
 * `password` accesses the entire keystore file.
 * `keyPassword` accesses the server’s private key inside the keystore.
 
-=== Client Configuration
+== Client Configuration
 
 If the `tls:context` is empty (no `tls:key-store` or `tls:trust-store` defined), then the default values of the JVM are used, which usually include a truststore with certificates for all the major certifying authorities.
 
@@ -49,7 +49,7 @@ If the client requires a certificate from the server that it is trying to connec
 
 If the server validates certificates from the clients, then the `tls:key-store` element should be  added with `path` set to the location of the keystore file that contains the private/public keys of the client.
 
-=== Server Configuration
+== Server Configuration
 
 The `tls:context` must contain a `tls:key-store` element to listen for a request using a secure connection such as HTTPS. Set `path` to the location of the keystore file that contains the private/public keys of the server.
 
@@ -186,12 +186,12 @@ Optionally, specify the protocol and cipher suite to enable them:
 
 ==== Attributes of the `trust-store` Element
 
-The `path` attribute is required, the other attributes are optional.
+The `password` attribute is required if you specify a `path`. Otherwise, the attributes are optional.
 
-* `path`: The path to the file that contains the trust store (required)
+* `path`: The path to the file that contains the trust store
 * `type`: The type of the trust store. Default = JKS
-* `password`: The trust store password
-* `algorithm`: The algorithm the trust store uses. Default = SunX509
+* `password`: The trust store password (required if you specify `path`)
+* `algorithm`: The algorithm the trust store uses. Default = `SunX509`
 * `insecure`: Boolean that determines whether or not to validate the truststore. If set to `true`, no validation occurs. The deefault value is `false`.
 
 [IMPORTANT]
@@ -220,9 +220,9 @@ You can configure TLS in Anypoint Studio. Set up a global TLS configuration from
 image::studio-tls-setup.png[]
 
 
-== Specify Protocols and Cipher Suites
+== Mule Runtime Administrator's Task: Specify Protocols and Cipher Suites
 
-When a TLS communication takes place between two systems, a negotiation determines which protocol and cipher suite are used. Optionally, you can specify the protocols and cipher suites to use.
+When a TLS communication takes place between two systems, a negotiation determines which protocol and cipher suite are used. Optionally, administrators can specify the protocols and cipher suites to use.
 
 Configure protocols and cipher suites in the Mule `/conf` directory in `$MULE_HOME. $MULE_HOME` is the directory where your Mule installation resides, for example `/opt/mule-4.0`. Select one of two files for fine-tuning the configuration by manually setting which cipher suites and protocols that Mule uses:
 
@@ -238,14 +238,14 @@ Only those protocols and cipher suites enabled on both ends can be used.
 
 If you do not configure protocols and cipher suites, the default Java environment protocol and cipher suites are used.
 
-You can then specify a subset of the configured or default values in the tls:context element for use by TLS. You configure the protocols and cipher suites in the enabledProtocols and enabledCipherSuites in the tls:context element.
+You can then specify a subset of the configured or default values in the `tls:context` element for use by TLS. You configure the protocols and cipher suites in `enabledProtocols` and `enabledCipherSuites` in the `tls:context` element.
 
 In the `tls:context` element, you can only reference protocols or cipher suites that are included in the Mule global TLS configuration file or defaults. In `tls:context`, set `enabledProtocols` and `enabledCipherSuite` to the value `default`. After these values are set, TLS uses the following protocols and cipher suites:
 
 * Those configured in your global TLS configuration if it exists
 * The defaults provided by your Java environment if a global TLS configuration does not exist
 
-Cipher suite names can be long and reduce the readability of your XML code. To improve readability keep these names in an external properties file in your Mule project. You can then reference the properties. For example:
+Cipher suite names can be long and reduce the readability of your XML code. To improve readability, keep these names in an external properties file in your Mule project. You can then reference the properties. For example:
 
 [source, xml, linenums]
 ----
@@ -254,11 +254,11 @@ Cipher suite names can be long and reduce the readability of your XML code. To i
 
 == TLS Configuration Examples
 
-You can set up TLS in a Mule XML configuration file for client or server.
+You can set up TLS in a Mule XML configuration file for a client or a server.
 
 === Example: Configuring TLS for a Client
 
-Secure an FTPS client by setting up a truststore:
+This example secures an FTPS client by setting up a truststore:
 
 [source, xml, linenums]
 ----
@@ -273,7 +273,7 @@ Secure an FTPS client by setting up a truststore:
 
 === Example: Configuring TLS for a Server
 
-Secure an HTTP listener by setting up a keystore:
+This example secures an HTTP listener by setting up a keystore:
 
 [source, xml, linenums]
 ----
@@ -288,7 +288,7 @@ Secure an HTTP listener by setting up a keystore:
 
 === Example: Configuring TLS for Two-Way Authentication
 
-Set up two-way authentication (also called mutual authentication), for an HTTP listener:
+This example sets up two-way authentication (also called mutual authentication), for an HTTP listener:
 
 [source, xml, linenums]
 ----
@@ -304,7 +304,7 @@ Set up two-way authentication (also called mutual authentication), for an HTTP l
 
 === Example: Disabling TLS Validations
 
-Using the `insecure` property, disable validations for prototyping and development. 
+This example uses the `insecure` property to disable validations for prototyping and development. 
 
 [IMPORTANT]
 Do not use the `insecure` property in production environments.
@@ -318,7 +318,7 @@ Do not use the `insecure` property in production environments.
 
 === Example: Adding Additional Cipher Suites and Protocol Restrictions
 
-Enable a protocol and cipher suite.
+This example enables a protocol and cipher suite.
 
 [source, xml, linenums]
 ----
