@@ -1,4 +1,4 @@
-= To Authenticate HTTP Requests
+= Authenticate HTTP Requests
 :keywords: http, authentication, security, users, connectors, anypoint, studio, oauth, basic auth, digest
 
 Use the authentication that you configure in HTTP requests when your Mule app is sending requests to a service that requires authentication, such as the Github OAuth2 server described in <<OAuth2 - Authorization Code>>. In this case, your Mule app is the client. On the other hand, when you want to protect your API or app from _receiving requests_ from unauthorized access, use an API Manager policy, such as the link:/api-manager/external-oauth-2.0-token-validation-policy[OAuth 2.0 Access Token Enforcement Using External Provider] policy.
@@ -761,9 +761,9 @@ The tokenManager-ref attribute need to reference a token-manager-config element 
 
 Once you have a token manager associated with the authorization grant type (in the example below, with authorization code) we can use the operations provided by the OAuth module anywhere in the flow to access information from an OAuth authorization.
 
-If you're using *client credentials* or authorization code with a *single RO*, use the following operations ina a flow:
+If you're using *client credentials* or authorization code with a *single RO*, use the following operations in a a flow:
 
-[source, code]
+[source, XML, linenums]
 ----
     <oauth:retrieve-access-token tokenManager="tokenManagerConfig"/>
 
@@ -780,9 +780,9 @@ This operations provide access to the OAuth authorization information from a tok
 
 * `tokenManager`: Name of a token manager in the configuration
 
-If you're using authorization code with **multiple RO **, use the following operations:
+If you're using authorization code with **multiple RO**, use the following operations:
 
-[source, code]
+[source, XML, linenums]
 ----
     <oauth:retrieve-access-token tokenManager="tokenManagerConfig" resourceOwnerId="#[vars.resourceOwnerId]"/>
 
@@ -874,5 +874,6 @@ By default, the token manager uses an in-memory object store to store the creden
 
 == See Also
 
-* HTTP Request Connector
-* HTTP Listener Connector
+* link:/connectors/http-connector[HTTP Connector]
+* link:/connectors/http-connector-xml-reference[HTTP Connector XML Reference]
+* link:/object-store/[Object Store V2]
