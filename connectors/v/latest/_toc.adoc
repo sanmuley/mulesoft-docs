@@ -119,6 +119,7 @@
 *** link:/java-invoke-method[Example: To Invoke Methods]
 ** link:/jms-connector[JMS Connector]
 *** link:/jms-xml-ref[JMS Connector Documentation Reference]
+*** link:/jms-activemq-configuration[Connecting To ActiveMQ]
 *** link:/jms-ack[Handling Message Acknowledgement]
 *** link:/jms-consume[To Consume JMS Messages]
 *** link:/jms-listener[To Listen For New Messages]
