@@ -5,7 +5,7 @@ _Select_
 
 The Anypoint Salesforce Connector lets you connect to the Salesforce platform APIs. This connector exposes methods for accessing Salesforce, including working with the https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_dev_process_chapter.htm[Salesforce Apex classes].
 
-This connector works with Salesforce's SOAP API, REST API, Bulk API, and Streaming API, depending on the operation you configure. Each API call uses an XML request and response over an HTTPS connection. All required request headers, error handling, and HTTPS connection configurations are built into the connector.
+This connector works with the Salesforce SOAP API, REST API, Bulk API, and Streaming API, depending on the operation you configure. Each API call uses an XML request and response over an HTTPS connection. All required request headers, error handling, and HTTPS connection configurations are built into the connector.
 
 There are three ways to use a Salesforce connector in your application: as an outbound connector, an inbound connector, or a streaming inbound connector. These are discussed later in this document.
 
@@ -26,7 +26,7 @@ Requirements for using the connector:
 * The Salesforce connector does *not* provide access to the Chatter REST API or the Tooling API.
 * See http://blogs.developerforce.com/tech-pubs/2011/10/salesforce-apis-what-they-are-when-to-use-them.html[Salesforce APIs: What they are and when to use them] and https://help.salesforce.com/HTViewHelpDoc?id=integrate_what_is_api.htm[Which API should I use?]
 
-== Developing an App
+== Developing an Application
 
 Build an application in this order:
 
@@ -40,7 +40,7 @@ you can use with the Salesforce APIs:
 
 * Batch Data Synchronization - An external system accesses, changes, deletes, or adds data in Salesforce in batches, and vice versa (Salesforce to external system).
 * Remote Call-In - An external system accesses, changes, deletes or adds data in Salesforce, and vice versa (Salesforce to external system).
-* Fire and Forget Remote Process Invocation - Salesforce initiates a process in a third-party system and receives an acknowledgement that the process has started. The third-party system continues processing independent of Salesforce.
+* Fire and Forget Remote Process Invocation - Salesforce initiates a process in a third-party system and receives an acknowledgment that the process has started. The third-party system continues processing independent of Salesforce.
 * Request-Reply Remote Process Invocation - Salesforce kicks off a process in a remote system, waits for the remote system to finish processing, then accepts control back again from the remote system.
 * User Interface Update Based on Data Changes - The Salesforce UI updates in response to a change in a third-party system.
 
@@ -112,7 +112,7 @@ image:salesforce-dc-choose-global-type.png[Authentication Options]
 |===
 |Connection Type |Salesforce Information Site
 | <<Username Password Configuration, Username Password>> |https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_calls_login.htm[SOAP API Username Password Login]
-| <<OAuth 2 Configuration, OAuth 2>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_web_server_flow.htm[OAuth 2.0 Web Server Authentication Flow]
+| <<OAuth v2.0 Configuration, OAuth 2>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_web_server_flow.htm[OAuth 2.0 Web Server Authentication Flow]
 | <<OAuth JWT Configuration, OAuth JWT>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_jwt_flow.htm[OAuth 2.0 JWT Bearer Token Flow]
 | <<OAuth SAML Configuration, OAuth SAML>> |https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_SAML_bearer_flow.htm[OAuth 2.0 SAML Bearer Assertion Flow]
 | <<OAuth Username Password Configuration, OAuth Username Password>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_username_password_flow.htm[OAuth 2.0 Username-Password Flow]
@@ -165,13 +165,13 @@ image:salesforce-dc-query.png[sfdc-query]
 Update:
 
 * Type: Salesforce object type.
-* Records: Function editor expression to produce a collection of Salesforce objects to be updated.
+* Records: link:/design-center/v/1.0/function-editor-concept[Function editor expression] to produce a collection of Salesforce objects to be updated.
 
 image:salesforce-dc-update.png[sfdc-update]
 
 Delete:
 
-* Records To Delete Ids: Function editor expression to produce a collection of Salesforce objects to be deleted.
+* Records To Delete Ids: link:/design-center/v/1.0/function-editor-concept[Function editor expression] to produce a collection of Salesforce objects to be deleted.
 
 image:salesforce-dc-delete.png[sfdc-delete]
 
@@ -186,17 +186,19 @@ Implementing *OAuth 2.0*-based authentication mechanisms involves extra steps, b
 
 image:salesforce-dc-user-pass.png[Username Password Configuration]
 
-=== OAuth 2 Configuration
+=== OAuth v2.0 Configuration
 
-* Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
-* Consumer Secret: The consumer secret for the connector to access Salesforce.
+** Display: How to optimize the display: PAGE = Full-page authorization screen (default), POPUP = Compact dialog optimized for modern web browser popup windows, and TOUCH = Mobile-optimized dialog designed for modern smart phones, such as Android and iPhone.
+** Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
+** Consumer Secret: The consumer secret for the connector to access Salesforce.
+** OAuth Callback Config: Listener Config, Callback Path, and Authorize Path.
 
 image:salesforce-dc-oauth-2.png[OAuth v2.0 Configuration]
 
 === OAuth JWT Configuration
 
 * Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
-* Keystore File: The path to the key store used to sign data during authentication. Only Java key store format is allowed. See <<Generating a Keystore File>>.
+* Key Store: The path to the key store used to sign data during authentication. Only Java key store format is allowed. See <<Generating a Keystore File>>.
 * Store Password: The password for the keystore.
 * Principal: The Salesforce username that you want to use.
 
@@ -205,7 +207,7 @@ image:salesforce-dc-oauth-jwt.png[OAuth JWT Configuration]
 === OAuth SAML Configuration
 
 * Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
-* Keystore File: The path to the key store used to sign data during authentication. Only Java key store format is allowed. See <<Generating a Keystore File>>.
+* Key Store: The path to the key store used to sign data during authentication. Only Java key store format is allowed. See <<Generating a Keystore File>>.
 * Store Password: Key store password
 * Principal: Username of desired Salesforce user
 
@@ -244,38 +246,40 @@ Username Password Authentication:
 +
 image:salesforce-studio-user-pass.png[Studio Username Password Authentication]
 +
-OAuth 2:
+OAuth v2.0:
 +
-** Consumer Key:  The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
-** Consumer Secret:  The consumer secret for the connector to access Salesforce.
+** Display: How to optimize the display: PAGE = Full-page authorization screen (default), POPUP = Compact dialog optimized for modern web browser popup windows, and TOUCH = Mobile-optimized dialog designed for modern smart phones, such as Android and iPhone.
+** Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
+** Consumer Secret: The consumer secret for the connector to access Salesforce.
+** OAuth Callback Config: Listener Config, Callback Path, and Authorize Path.
 +
 image:salesforce-studio-oauth-2.png[Studio OAuth 2]
 +
 OAuth 2 JWT:
 +
-** Consumer Key:  The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
-** Keystore File:  See <<Generating a Keystore File>>.
-** Store Password:  The password for the keystore.
-** Principal:  The password for the keystore.
+** Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
+** Key Store: See <<Generating a Keystore File>>.
+** Store Password: The password for the keystore.
+** Principal: The password for the keystore.
 +
 image:salesforce-studio-oauth-jwt.png[Studio OAuth 2 JWT]
 +
 OAuth 2 SAML:
 +
-** Consumer Key:  The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
-** Keystore File:  See <<Generating a Keystore File>>.
-** Store Password:  The password for the keystore.
-** Principal:  The password for the keystore.
+** Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
+** Key Store: See <<Generating a Keystore File>>.
+** Store Password: The password for the keystore.
+** Principal: The password for the keystore.
 +
 image:salesforce-studio-oauth-saml.png[Studio OAuth 2 SAML]
 +
-OAuth 2 Username and Password:
+OAuth Username and Password:
 +
-** Consumer Key:  The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
-** Consumer Secret:  The consumer secret for the connector to access Salesforce.
-** Username:  Enter the Salesforce username.
-** Password:  Enter the corresponding password.
-** Security Token:  Enter the corresponding security token.
+** Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
+** Consumer Secret: The consumer secret for the connector to access Salesforce.
+** Username: Enter the Salesforce username.
+** Password: Enter the corresponding password.
+** Security Token: Enter the corresponding security token.
 +
 image:salesforce-studio-oauth-user-pass.png[Studio OAuth 2 Username and Password]
 +
@@ -283,34 +287,34 @@ image:salesforce-studio-oauth-user-pass.png[Studio OAuth 2 Username and Password
 +
 Create:
 +
-** Type:  Salesforce object type.
-** Records:  DataSense expression.
+** Type: Salesforce object type.
+** Records: link:/design-center/v/1.0/function-editor-concept[Function editor expression].
 +
 image:salesforce-studio-create.png[sfdc-create]
 +
 Query:
 +
-** Salesforce Query:  Salesforce query to retrieve objects.
-** Parameters:  Values for placeholders in the salesforce query.
+** Salesforce Query: Salesforce query to retrieve objects.
+** Parameters: Values for placeholders in the salesforce query.
 +
 image:salesforce-studio-query.png[sfdc-query]
 +
 Update:
 +
 ** Type:  Salesforce object type.
-** Records:  DataSense expression to produce a collection of Salesforce objects to be updated.
+** Records: link:/design-center/v/1.0/function-editor-concept[Function editor expression] to produce a collection of Salesforce objects to be updated.
 +
 image:salesforce-studio-update.png[sfdc-update]
 +
 Delete:
 +
-** Records To Delete Ids:  DataSense expression to produce a collection of Salesforce objects to be deleted.
+** Records To Delete Ids: link:/design-center/v/1.0/function-editor-concept[Function editor expression] to produce a collection of Salesforce objects to be deleted.
 +
 image:salesforce-studio-delete.png[sfdc-delete]
 
 === Keeping a Session Alive
 
-For the Mule 4 Salesforce Connector, for all the configurations *except OAuth v2.0*, you have the option to keep the session alive until it expires by checking the *Disable session invalidation* checkbox.
+For the Mule 4 Salesforce Connector, for all the configurations *except OAuth v2*, you have the option to keep the session alive until it expires by checking the *Disable session invalidation* checkbox.
 
 The Mule app controls the lifecycle connections. When the app determines that a given connection is not needed anymore, it checks the setting of Disable Session Invalidation. When the setting is disabled, the app will automatically destroy that connection for the session. To prevent a session from closing in this case, you can check the Disable Session Invalidation checkbox.
 
@@ -350,7 +354,7 @@ Apex Class Name:
 * Create Object manually - A user creates a list and adds class names to the list - only those classes and their methods are acquired by DataSense.
 +
 [NOTE]
-The *Fetch All Apex SOAP Metadata* and *Fetch All Apex REST Metadata* checkboxes take precedence over the Apex Class Name settings. If these boxes are selected, they fetch all the Apex SOAP metadata or Apex REST metadata regardless of your selection in the Apex Class Names section.
+The *Fetch All Apex SOAP Metadata* and *Fetch All Apex REST Metadata* check boxes take precedence over the Apex Class Name settings. If these boxes are selected, they fetch all the Apex SOAP metadata or Apex REST metadata regardless of your selection in the Apex Class Names section.
 
 Proxy Settings values:
 
@@ -552,7 +556,7 @@ Use as an outbound connector in your flow to push data to Salesforce. To use the
 You can use the Salesforce connector as an inbound connector without wrapping the connector in a poll scope to stream data from Salesforce into your application. To use the connector in this capacity, place a Salesforce connector at the start of your flow.
 
 [NOTE]
-Studio automatically converts the connector to Salesforce (Streaming) mode. Technically, this is still the same connector, but it accesses Salesforce's Streaming API meaning that the _only_ operation the converted connector can perform is Subscribe to topic (that is, subscribe to PushTopic).
+Studio automatically converts the connector to Salesforce (Streaming) mode. Technically, this is still the same connector, but it accesses the Salesforce Streaming API meaning that the _only_ operation the converted connector can perform is Subscribe to topic (that is, subscribe to PushTopic).
 
 image:salesforce-studio-subscribe-streaming-channel.png[subscribe streaming channel]
 
@@ -791,7 +795,7 @@ This snippet adds specifies a project dependency for the latest version:
 </dependency>
 ----
 
-== Use Case: Studio
+== Example: Accept and Transform Data
 
 image:salesforce-outbound.png[sfdc_outbound]
 
@@ -808,7 +812,7 @@ image:salesforce-inbound.png[query_inbound]
 . Transform Message: Transforms data structure and format to produce output the File endpoint expects.
 . File connector: Records data in a file, such as a CSV and saves it to a user-defined directory or location.
 
-== Use Case: XML
+=== Example: XML
 
 Paste this XML code into Anypoint Studio to experiment with the two flows described in the previous section.
 
