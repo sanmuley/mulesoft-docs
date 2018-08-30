@@ -1,4 +1,5 @@
 = API Instance
+:keywords: api, instance, manager
 
 ** link:/api-manager/v/2.x/latest-overview-concept[Reviewing API Manager concepts]
 ** link:/api-manager/v/2.x/environments-concept[Reviewing environment concepts]

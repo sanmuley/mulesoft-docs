@@ -1,4 +1,6 @@
 = Policies
+:keywords: policy, custom, ootb, offline
+
 // Policies
 *** link:/api-manager/v/2.x/policies-4-concept[Policies]
 *** link:/api-manager/v/2.x/policies-whats-new-concept[Reviewing policies concepts]

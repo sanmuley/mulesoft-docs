@@ -1,4 +1,5 @@
 = Alerts
+:keywords: alert
 
 *** link:/api-manager/v/2.x/using-api-alerts[Reviewing Alerts concepts]
 *** link:/api-manager/v/2.x/add-api-alert-task[Adding an API Alert]
