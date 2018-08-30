@@ -9,11 +9,11 @@
 
 * JMS is Non-Blocking for Publish, Consume, and Publish-Consume Operations, improving
 the scalability of Mule Applications.
-* Support for XA Transactions. The connector can participate of Multi Resource
+* Support for XA Transactions. The connector can participate of multi-resource
 transactions, like DB, IBM MQ, and other XA compatible connectors.
 * ActiveMQ SSL Configuration Support. ActiveMQ Connections can be configured with
 SSL/TLS Configuration for secure connections.
-* JMS Listener. Now is possible to configure how to propagate the Correlation ID
+* JMS Listener. Can now configure how to propagate the Correlation ID
 on the JMS Listener Response.
 
 === Fixed Issues
