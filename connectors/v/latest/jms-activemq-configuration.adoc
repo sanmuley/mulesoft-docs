@@ -24,16 +24,17 @@ An example of a simple configuration of an ActiveMQ connection would be:
  </jms:active-mq-connection>
 </jms:config>
 ----
+
 [[on-memory-broker]]
 == On Memory Broker
 
-By default the ActiveMQ Connector uses a On Memory Broker, this make
+By default the ActiveMQ Connector uses a On Memory Broker, this makes it
 easy to start building an application without needing to configure a connection
 against a external broker.
 
 Default URL: `vm://localhost?broker.persistent=false&broker.useJmx=false`
 
-To make usage of On Memory Broker is required to configure both <<activemq-client-lib,ActiveMQ Client>>
+On Memory Broker is required to configure both <<activemq-client-lib,ActiveMQ Client>>
 and <<activemq-broker-lib,ActiveMQ Broker>> libraries.
 
 == SSL Connections
@@ -41,7 +42,7 @@ and <<activemq-broker-lib,ActiveMQ Broker>> libraries.
 *Since JMS 1.3.0*
 
 ActiveMQ Connections can be configured with SSL configurations, this enables
-to establish secure and encrypted connections against the ActiveMQ Broker.
+the connector to establish secure and encrypted connections against the ActiveMQ Broker.
 
 [source, xml, linenums]
 ----
@@ -61,7 +62,7 @@ to establish secure and encrypted connections against the ActiveMQ Broker.
 </jms:config>
 ----
 
-image:./_images/jms-ssl.png[JMS ActiveMQ SSL Configuration]
+image:jms-ssl.png[JMS ActiveMQ SSL Configuration]
 
 Also the connector can reference Global TLS Context configurations, so you can
 reuse and share the same TLS Context between connectors like HTTP.
@@ -81,7 +82,7 @@ reuse and share the same TLS Context between connectors like HTTP.
 <!--  Reusable TLS Context -->
 <tls:context name="TLS_Context">
  <tls:trust-store
-  path="clien.ts"
+  path="client.ts"
   password="password" />
 <tls:key-store
   path="client.ks"
@@ -94,17 +95,17 @@ reuse and share the same TLS Context between connectors like HTTP.
 == Delivery Handling
 
 [[poison-messages]]
-=== Avoid Poison Messages
+=== Avoiding Poison Messages
 
-When a message could not be processed correctly, is not acknowledged, the message
-will be redelivered again, probably not processing it correctly again and this
-cycle will be executed indefinitely.
+When a message cannot be processed correctly, it's not acknowledged. The message
+is redelivered again, probably not processing correctly again, and this
+cycle executes indefinitely.
 
-To prevent this cases, where a message is can't be handled and is redelivered constantly
+To prevent this case, where a message can't be handled and is redelivered constantly
 forever, "Poison Messages", a Max Redelivery configuration can be done to set
 a max number of times that a message can be delivered to the application.
 
-.In this example a message will be redelivered at max 10 times.
+.In this example a message redelivers at max 10 times.
 [source, xml, linenums]
 ----
 <jms:config name="JMS_Config">
@@ -114,17 +115,18 @@ a max number of times that a message can be delivered to the application.
 </jms:config>
 ----
 
-By Default, the JMS Connector uses a `maxRedelivery` of 0, this means that messages
-won't be redelivered, doesn't matter is the message is recovered or rollbacked
+By default, the JMS Connector uses a `maxRedelivery` of 0, this means that messages
+won't be redelivered, and doesn't matter if the message is recovered or rolled back
 from a transaction.
-If the message has a persistent delivery, ActiveMQ will send the message to
+
+If the message has persistent delivery set, ActiveMQ sends the message to
 the DLQ.QUEUE (Dead Letter Queue).
 
 === Advanced Redelivery
 
-ActiveMQ lets users have a client side redelivery configuration, as seen, is
-possible to configure the <<poison-messages,max times redelivery of a message>>
-but also configure how fast is required to redeliver the message.
+ActiveMQ lets users have a client side redelivery configuration. You can also
+configure the <<poison-messages,max times redelivery of a message>>
+and how fast the connector is required to redeliver the message.
 
 *initialRedeliveryDelay* : In milliseconds, how much time to wait until the message
 is redelivered for the first time.
@@ -144,13 +146,13 @@ is redelivered after the first redeliver.
 
 == Object Serialization
 
-Since ActiveMQ 5.12.2 and 5.13.0, ActiveMQ restrict the classes the can be serialized
-and deserialized to prevent the execution malicious payload can that can exploit
+Since ActiveMQ 5.12.2 and 5.13.0, ActiveMQ restricts the classes that can be serialized
+and deserialized to prevent the execution of a malicious payload that can exploit
 the host system.
 
 === Trusted Packages
 
-By default ActiveMQ only will allow the JDK/JRE provided classes, but if you
+By default ActiveMQ, the connector only allows the JDK/JRE provided classes, but if you
 need to exchange object messages, you need to add packages your applications are
 using:
 
@@ -168,16 +170,16 @@ using:
 </jms:config>
 ----
 
-image:./_images/jms-trusted-packages.png[JMS ActiveMQ Trusted Packages]
+image:jms-trusted-packages.png[JMS ActiveMQ Trusted Packages]
 
-In this example the JMS Connector will only allow to consume and produce ObjectMessages
+In this example the JMS Connector only allows users to consume and produce ObjectMessages
 compliant with the `com.mulesoft.someapp` and `com.mulesoft.someapp.model` packages.
 
 === Trust All Packages
 
-Other way to enable the serialization of more classes is to enable the `trustAllPackages`
-configuration, this will recover the old behavior of allowing any Object to
-be serialized and deserialized. This is totally disallowed in order to prevent
+Another way to enable the serialization of more classes is to enable the `trustAllPackages`
+configuration, this recovers the old behavior of allowing any object to
+be serialized and deserialized. This is totally disallowed to prevent
 malicious attacks.
 
 [source, xml, linenums]
@@ -191,13 +193,13 @@ malicious attacks.
 
 == Configuring Required Libraries
 
-image:./_images/jms-libs.gif[Configuring Required JMS Libraries]
+image:jms-libs.gif[Configuring Required JMS Libraries]
 
 [[activemq-client-lib]]
 === ActiveMQ Client
 
-The ActiveMQ Client Library is the only required to use ActiveMQ Connections, is
-needed to connect agains any broker.
+The ActiveMQ Client Library is the only required to use ActiveMQ Connections, and is
+needed to connect again to a broker.
 
 [source, xml, linenums]
 ----
@@ -211,7 +213,7 @@ needed to connect agains any broker.
 [[activemq-broker-lib]]
 === ActiveMQ Broker
 
-The ActiveMQ Broker is used when is required to create an <<on-memory-broker,On Memory Broker>>.
+The ActiveMQ Broker can create an <<on-memory-broker,On Memory Broker>>.
 
 [source, xml, linenums]
 ----
@@ -224,7 +226,7 @@ The ActiveMQ Broker is used when is required to create an <<on-memory-broker,On 
 
 === ActiveMQ KahaDB
 
-The ActiveMQ KahaDB is required when using a <<on-memory-broker,On Memory Broker>>
+The ActiveMQ KahaDB is required when using an <<on-memory-broker,On Memory Broker>>
 but also is required to have persistent message delivery.
 
 [source, xml, linenums]
@@ -238,11 +240,11 @@ but also is required to have persistent message delivery.
 
 == See Also
 
-* link:jms-consume[How Consume Messages]
-* link:jms-publish[How Publish Messages]
-* link:jms-listener[How Listen For New Messages]
-* link:jms-publish-consume[How Listen For A Reply]
-* link:jms-ack[Handling Message Acknowledgement]
-* link:jms-transactions[Handling Transactions in JMS]
-* link:jms-performance[JMS Tuning For Performance]
-* link:jms-documentation[JMS Connector Technical Reference]
+* link:/connectors/jms-consume[How Consume Messages]
+* link:/connectors/jms-publish[How Publish Messages]
+* link:/connectors/jms-listener[How Listen For New Messages]
+* link:/connectors/jms-publish-consume[How Listen For A Reply]
+* link:/connectors/jms-ack[Handling Message Acknowledgement]
+* link:/connectors/jms-transactions[Handling Transactions in JMS]
+* link:/connectors/jms-performance[JMS Tuning For Performance]
+* link:/connectors/jms-documentation[JMS Connector Technical Reference]
