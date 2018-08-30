@@ -1,6 +1,8 @@
 // TOC File
 
 * link:/api-manager/v/2.x/index[API Manager]
+** link:/api-manager/v/2.x/api-gateway-capabilities-mule4[API Gateway capabilities (Mule 4)]
+
 ** link:/api-manager/v/2.x/latest-overview-concept[About API Manager 2.x]
 *** link:/api-manager/v/2.x/latest-tasks[Basic API Management Tasks]
 **** link:/api-manager/v/2.x/manage-exchange-api-task[To Manage an API from Exchange]
@@ -32,6 +34,7 @@
 *** link:/api-manager/v/2.x/proxy-deploy-hybrid-latest-task[To Deploy a Proxy to Hybrid]
 *** link:/api-manager/v/2.x/download-proxy-task[To Download a Proxy]
 
+
 ** link:/api-manager/v/2.x/policies-4-concept[About Policies]
 *** link:/api-manager/v/2.x/policies-whats-new-concept[What's New in Policy Management]
 *** link:/api-manager/v/2.x/policy-scope-size-concept[About Policy Packaging, Scope, and Size]
@@ -50,7 +53,6 @@
 **** link:/api-manager/v/2.x/offline-policy-task[To Apply an Offline Policy]
 **** link:/api-manager/v/2.x/offline-remove-task[To Remove an Offline Policy]
 **** link:/api-manager/v/2.x/upload-policy-exchange-task[To Upload a Policy to Exchange]
-**** link:/api-manager/v/2.x/configure-policy-polling-task[To Configure Policy Polling Time]
 *** link:/api-manager/v/2.x/resource-level-policies-about[About Resource Level Policies]
 *** link:/api-manager/v/2.x/resource-level-policy-reference[Resource Level Policy Reference]
 *** link:/api-manager/v/2.x/available-policies[About Provided Policies]

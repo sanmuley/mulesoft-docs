@@ -1,11 +1,9 @@
 // Core Connectors 4.0 TOC File
 * link:/[Connectors and Modules (for Mule 4)]
 +
-// NOTE: Removed aggregators doc until release.
-// See https://www.mulesoft.org/jira/browse/DOCS-2440
-//** link:aggregators-module[Aggregators Module]
-//*** link:aggregators-documentation[Aggregators Module Documentation Reference]
-//*** link:aggregator-examples[Aggregator Examples]
+** link:aggregators-module[Aggregators Module]
+*** link:aggregator-examples[Aggregator Examples]
+*** link:aggregators-module-reference[Aggregators Module Reference]
 +
 ** link:/amazon-dynamodb-connector[Amazon DynamoDB Connector]
 *** link:/amazon-dynamodb-connector-reference[Amazon DynamoDB Connector Reference]
@@ -36,10 +34,10 @@
 *** link:/box-connector-reference[Box Connector Reference]
 ** link:/cassandra-connector[Cassandra Connector]
 *** link:/cassandra-connector-reference[Cassandra Connector Reference]
+** link:/cloudhub-connector[CloudHub Connector]
+*** link:/cloudhub-connector-ref[CloudHub Connector Reference]
 ** link:/compression-module[Compression Module]
 *** link:/compression-documentation[Compression Module Reference]
-** link:/cloudhub-connector[CloudHub Module]
-*** link:/cloudhub-connector-reference[CloudHub Connector Reference]
 ** link:/db-connector-index[Database Connector]
 *** link:/database-documentation[Database Connector Documentation Reference]
 *** link:/db-configure-connection[Configuring a Database Connection]
@@ -82,8 +80,8 @@
 ** link:/hl7-mllp-connector[HL7 MLLP Connector]
 *** link:/hl7-mllp-connector-reference[HL7 MLLP Connector Reference]
 ** link:/http-connector[HTTP Connector]
-*** link:/http-documentation[HTTP Connector Technical Reference]
 *** link:/http-about-http-request[About HTTP Requests and Responses]
+*** link:/http-authentication.html[Authenticate HTTP Requests]
 *** link:/http-about-http-connector[HTTP Connector (Design Center)]
 **** link:/http-trigger-app-from-browser[To Start an App from a Browser]
 **** link:/http-consume-web-service[To Consume a REST Service]
@@ -99,6 +97,7 @@
 **** link:/http-request-ref[HTTP Request Configuration Reference]
 **** link:/http-connector-xml-reference[HTTP Connector XML Reference]
 **** link:/http-about-http-connector-migration[About HTTP Connector Migration]
+*** link:/http-documentation[HTTP Connector Technical Reference]
 ** link:/ibm-ctg-connector[IBM CTG Connector]
 *** link:/ibm-ctg-connector-reference[IBM CTG Connector Reference]
 ** link:/ibm-mq-connector[IBM MQ Connector]
