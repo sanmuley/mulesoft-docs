@@ -69,7 +69,7 @@ The Salesforce link:https://www.salesforce.com/us/developer/docs/api_asynch/[Bul
 
 *Streaming API:*
 
-The Salesforce link:http://www.salesforce.com/us/developer/docs/api_streaming/[Streaming API] securely receives notifications for changes to your organization's information in Salesforce. See <<Receive Inbound Data From Salesforce>> for more information on the use of the Streaming API.
+The Salesforce link:http://www.salesforce.com/us/developer/docs/api_streaming/[Streaming API] securely receives notifications for changes to your organization's information in Salesforce. See <<Receiving Inbound Data From Salesforce>> for more information on the use of the Streaming API.
 
 *Metadata API*
 
@@ -456,8 +456,8 @@ Salesforce stores events for 24 hours, so you can retrieve stored events during 
 
 Each broadcast event is assigned a numeric ID. IDs are incremented and not guaranteed to be contiguous for consecutive events. Each ID is guaranteed to be higher than the ID of the previous event. For example, the event following the event with ID 999 can have an ID of 1,025. The ID is unique for the organization and the channel. The IDs of deleted events are not reused.
 
-See also <<Receive Inbound Data From Salesforce>> for event processing when streaming data to
-an application from Salesforce.
+See also <<Receiving Inbound Data From Salesforce>> for event processing 
+when streaming data to an application from Salesforce.
 
 Topics:
 
