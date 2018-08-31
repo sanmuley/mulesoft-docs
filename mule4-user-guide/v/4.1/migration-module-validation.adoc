@@ -245,7 +245,3 @@ public class BalanceErrorsProvider implements ErrorTypeProvider {
   }
 }
 ----
-
-== See Also
-
-link:migration-patterns[Migration Patterns]

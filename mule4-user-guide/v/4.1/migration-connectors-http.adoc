@@ -612,7 +612,9 @@ the same result could be achieved using a final transform component.
 
 == See Also
 
-link:migration-patterns[Migration Patterns]
+link:migration-message-properties[Migrating Message Properties]
+
+link:migration-patterns-reconnection-strategies[Migrating Reconnection Strategies]
 
 link:migration-core[Migrating Components]
 

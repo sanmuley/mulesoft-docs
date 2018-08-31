@@ -106,19 +106,19 @@ The same results can be achieved in Mule 4 using the AMQP Connector with the fol
 [source, xml, linenums]
 ----
 <flow name="AMQPConnectorPublish">
-		<http:listener config-ref="HTTP_Listener_config" path="/orders"/>
-		// <2>
-		<amqp:publish config-ref="AMQP_Config" exchangeName="targetExchange>
-			<amqp:message> // <1>
-				<amqp:body>#[output application/json ---
+  <http:listener config-ref="HTTP_Listener_config" path="/orders"/> // <2>
+  <amqp:publish config-ref="AMQP_Config" exchangeName="targetExchange">
+    <amqp:message> // <1>
+      <amqp:body>#[output application/json ---
         {
           order_id: payload.id,
           supplier: payload.warehouse
-        }]</amqp:body>
-        			<amqp:properties priority="3"/> // <3>
-			</amqp:message>
-		</amqp:publish>
-	</flow>
+        }]
+      </amqp:body>
+      <amqp:properties priority="3"/> // <3>
+    </amqp:message>
+  </amqp:publish>
+</flow>
 ----
 
 Differences to be noted:
@@ -369,9 +369,3 @@ Same scenarion can be implemented in Mule 4 with the following approach:
 <2> Publishing of the payload in XML format is done by the `publish` operation without modifying the current payload, also joining the transaction with `ALWAYS_JOIN`
 <3> An error handler that catches any error occurred is used to make sure the Message is not lost
 <4> Since the current payload is still the original Message received, we just publish it to the dead.letter using the `JOIN_IF_POSSIBLE` transactional action
-
-== See Also
-
-// link:migration-examples[Migration Examples]
-
-link:migration-patterns[Migration Patterns]
