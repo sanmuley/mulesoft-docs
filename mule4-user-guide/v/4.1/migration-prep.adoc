@@ -1,35 +1,43 @@
 = Preparing for a Migration to Mule 4
-// Contacts/SMEs: Esteban Wasinger, Ana Felisatti, Mariano Gonzalez
+*Manual Migration*
 
-Mule 4 introduces many changes, so plan accordingly before attempting to migrate from Mule 3.
+Mule 4 introduces many changes, so plan accordingly before attempting to migrate
+from Mule 3.
 
 [[when_to_start]]
 == When to Start Using Mule 4
 
-We recommend that you develop all *new* projects on Mule 4, provided that:
+MuleSoft recommends that you develop all _new_ projects on Mule 4 if these
+conditions are met:
 
-* You and your team have updated your skills for Mule 4 via the documentation or formal training.
-* You have the proper deployment environment (see below).
-* You do not require all applications to be on a single version of Mule (see below).
+* You and your team have updated your skills for Mule 4 through the
+documentation or formal training.
+* You have the proper deployment environment (see <<prepare_to_deploy>>).
+* You do not require all Mule apps to be on a single version of Mule (see below).
 
-For projects which are already in development or deployed on Mule 3 (whether a prospect or customer), we recommend you wait to migrate these applications until the Mule 3 to Mule 4 migration tool is available. However, you can follow this guide to migrate manually.
+*Important!* For projects that are already in development or deployed on Mule 3
+(whether a prospect or customer), MuleSoft recommends that you use the
+link:migration-tool[Mule Migration tool].
 
-Migrate your applications if any one of the following conditions is met:
+Migrate your Mule apps if any _one_ of the following conditions is met:
 
-* The 3.x version you're using reaches end of life
-* You want to make significant updates to the existing applications
-* You want to take advantage of key Mule 4 capabilities
-* You decide to upgrade all their apps to Mule 4 because you require all apps to be on one version (some onprem customers)
+* The 3.x version you are using reaches end of life.
+* You want to make significant updates to the existing apps.
+* You want to take advantage of key Mule 4 capabilities.
+* You decide to upgrade all your apps to Mule 4 because you require all apps
+to be on the same version (applies to some on-premises customers).
 
 [[prepare_dev_environ]]
-== Setting up Your Local Development Environment
+== Set Up Your Local Development Environment
 
-First, you will need to download Studio 7 and install it. If you're deploying locally, you will also need to download the Mule 4 standalone runtime.
+First, you will need to download Studio 7 and install it. If you're deploying
+locally, you also need to download the Mule 4 standalone runtime.
 // TODO link to pages
 
 [[prepare_to_deploy]]
-== Getting Ready to Deploy
-Next, you need to make sure your deployment environment is ready. Depending on which environment you have, different steps may be required.
+== Get Ready to Deploy
+Next, you need to make sure your deployment environment is ready. Depending on
+which environment you have, different steps might be required.
 
 [%header,cols="1,3"]
 |===
@@ -51,12 +59,12 @@ Next, you need to make sure your deployment environment is ready. Depending on w
 // TODO link to instructions about installing standalone Mule 4
 
 [[write_code]]
-== Writing the Code
+== Perform the Migration
 
-That's it! You're ready to start building and deploying Mule 4 applications.
+That's it! You're ready to start building and deploying Mule 4 apps.
 
-You should review these topics to get an overview of the migration process and understand changes introduced in Mule 4:
+To perform the migration process and understand changes introduced in Mule 4,
+see:
 
-link:migration-process[About the Migration Process]
-
-link:intro-overview[Introduction to Mule 4]
+* link:migration-tool-procedure[Migration to Mule 4]
+* link:intro-overview[Introduction to Mule 4]
