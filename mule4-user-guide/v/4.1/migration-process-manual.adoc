@@ -1,0 +1,44 @@
+= Performing a Completely Manual Migration to Mule 4
+*Manual Migration*
+
+MuleSoft recommends that you use the Migration tool for migrations instead
+of a completely manual migration (see link:migration-tool[Migration to Mule 4]).
+However, if you choose to perform a migration from scratch, without the tool,
+you need to understand the high-level migration steps:
+
+. Prepare for the manual migration. See
+link:migration-prep[Preparing for a Migration to Mule 4].
+. Add all required modules, such as the Database connector, to the Anypoint
+Studio 7 palette.
++
+Notes:
++
+* Other modules are available in Anypoint Exchange.
++
+* All Mule projects are Mavenized by default when you add the modules to your project.
++
+. Migrate all the global configurations.
+. Migrate configuration properties.
++
+// .yaml or .properties. Include link to properties config in Mule 4.
++
+. Learn how the components work in Mule 4 to see what has changed from Mule 3.
+. Understand how changes to the Mule message structure (attributes, payload, and variables) affect your configurations. See
+link:intro-mule-message[Introduction to Mule 4: The Mule Message].
+. Update your expressions and scripts to DataWeave version 2:
+** Be aware of changes between DataWeave 1 and DataWeave 2, for example, importing specific function modules and understanding syntax changes. See link:migration-dataweave[Migrating from DataWeave 1.0 to 2.x].
++
+// TODO: ASK ABOUT MIGRATION TOOL, TASK TO MIGRATE SCRIPTS FROM 1.0 TO 2.
++
+** Change MEL expressions to DataWeave 2, for example, in an connector or Choice component. See link:migration-mel[Migrating MEL to DataWeave].
+. Update all exception handling to Mule 4 with the new exception types that are
+available.
+. If you are working with APIs, understand how to set HTTP status codes.
+
+== See Also
+
+link:migration-tool[Migration to Mule 4]
+
+link:migration-prep[Preparing for the Migration]
+
+link:intro-overview[Introduction to Mule 4]
