@@ -111,11 +111,11 @@ image:salesforce-dc-choose-global-type.png[Authentication Options]
 [%header%autowidth.spread]
 |===
 |Connection Type |Salesforce Information Site
-| <<Username Password Configuration, Username Password>> |https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_calls_login.htm[SOAP API Username Password Login]
-| <<OAuth v2.0 Configuration, OAuth 2>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_web_server_flow.htm[OAuth 2.0 Web Server Authentication Flow]
-| <<OAuth JWT Configuration, OAuth JWT>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_jwt_flow.htm[OAuth 2.0 JWT Bearer Token Flow]
-| <<OAuth SAML Configuration, OAuth SAML>> |https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_SAML_bearer_flow.htm[OAuth 2.0 SAML Bearer Assertion Flow]
-| <<OAuth Username Password Configuration, OAuth Username Password>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_username_password_flow.htm[OAuth 2.0 Username-Password Flow]
+| <<Configuring Username Password Authorization, Username Password>> |https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_calls_login.htm[SOAP API Username Password Login]
+| <<Configuring OAuth v2.0 Authorization, OAuth 2>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_web_server_flow.htm[OAuth 2.0 Web Server Authentication Flow]
+| <<Configuring OAuth JWT Authorization, OAuth JWT>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_jwt_flow.htm[OAuth 2.0 JWT Bearer Token Flow]
+| <<Configuring OAuth SAML Authorization, OAuth SAML>> |https://help.salesforce.com/apex/HTViewHelpDoc?id=remoteaccess_oauth_SAML_bearer_flow.htm[OAuth 2.0 SAML Bearer Assertion Flow]
+| <<Configuring OAuth Username Password Authorization, OAuth Username Password>> |https://help.salesforce.com/articleView?id=remoteaccess_oauth_username_password_flow.htm[OAuth 2.0 Username-Password Flow]
 |===
 +
 . Specify the parameters as required for each configuration type, and click
@@ -140,7 +140,7 @@ Redelivery indicates the maximum number of tries to deliver trigger content.
 +
 image:salesforce-dc-redelivery-policy.png[Redelivery Policy]
 
-== Configuring Salesforce as a Component
+=== Configuring Salesforce as a Component
 
 After creating a trigger, click the plus sign. If needed, click *Transform* to 
 use DataWeave to map fields between your received data and what to use with 
@@ -175,7 +175,7 @@ Delete:
 
 image:salesforce-dc-delete.png[sfdc-delete]
 
-=== Username Password Configuration
+==== Configuring Username Password Authorization
 
 * Username: Enter the Salesforce username.
 * Password: Enter the corresponding password.
@@ -186,7 +186,7 @@ Implementing *OAuth 2.0*-based authentication mechanisms involves extra steps, b
 
 image:salesforce-dc-user-pass.png[Username Password Configuration]
 
-=== OAuth v2.0 Configuration
+==== Configuring OAuth v2.0 Authorization
 
 ** Display: How to optimize the display: PAGE = Full-page authorization screen (default), POPUP = Compact dialog optimized for modern web browser popup windows, and TOUCH = Mobile-optimized dialog designed for modern smart phones, such as Android and iPhone.
 ** Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
@@ -198,7 +198,7 @@ image:salesforce-dc-user-pass.png[Username Password Configuration]
 
 image:salesforce-dc-oauth-2.png[OAuth v2.0 Configuration]
 
-=== OAuth JWT Configuration
+==== Configuring OAuth JWT Authorization
 
 * Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
 * Key Store: The path to the key store used to sign data during authentication. Only Java key store format is allowed. See <<Generating a Keystore File>>.
@@ -207,7 +207,7 @@ image:salesforce-dc-oauth-2.png[OAuth v2.0 Configuration]
 
 image:salesforce-dc-oauth-jwt.png[OAuth JWT Configuration]
 
-=== OAuth SAML Configuration
+==== Configuring OAuth SAML Authorization
 
 * Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
 * Key Store: The path to the key store used to sign data during authentication. Only Java key store format is allowed. See <<Generating a Keystore File>>.
@@ -216,7 +216,7 @@ image:salesforce-dc-oauth-jwt.png[OAuth JWT Configuration]
 
 image:salesforce-dc-oauth-saml.png[OAuth SAML Configuration]
 
-=== OAuth Username Password Configuration
+==== Configuring OAuth Username Password Authorization
 
 * Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
 * Consumer Secret: The consumer secret for the connector to access Salesforce.
@@ -226,7 +226,7 @@ image:salesforce-dc-oauth-saml.png[OAuth SAML Configuration]
 +
 image:salesforce-dc-oauth-user-pass.png[OAuth User Password]
 
-== Install Connector in Studio
+== Installing and Configuring in Studio
 
 . In Anypoint Studio, click the Exchange icon in the Studio taskbar.
 . Click Login in Anypoint Exchange.
@@ -236,7 +236,7 @@ image:salesforce-dc-oauth-user-pass.png[OAuth User Password]
 When Studio has an update, a message displays in the lower right corner, 
 which you can click to install the update.
 
-=== Configure in Studio
+To configure:
 
 . Drag and drop the connector to the Studio Canvas.
 . To create a global element for the connector, set these fields:
@@ -334,7 +334,7 @@ creating a new one). To make sure the connection doesn't close when a thread is 
 
 image:salesforce-disable-session.png[disable session checkbox]
 
-=== Apex and Proxy Settings
+=== Setting Apex and Proxy
 
 The Invoke Apex REST and Invoke Apex Soap methods work with Apex Class Name settings. When you connect to Salesforce, the Salesforce connector gets the names of the Apex classes and methods belonging to them that can be invoked.
 
@@ -346,7 +346,7 @@ All Salesforce connection configurations support these Apex settings:
 
 You can set Apex and Proxy settings in Design Center and in Anypoint Studio 7.
 
-==== Configure the Apex and Proxy Settings
+Configure the Apex and Proxy Settings:
 
 Apex Settings values:
 
@@ -441,7 +441,7 @@ The system now exports the public key from the keystore into the workspace. This
 +
 . Make sure that you have both the keystore (salesforce-cert.jks) and the public key (salesforce-cert.crt) files in your workspace.
 
-== Events and Topics
+== Handling Events and Topics
 
 Your application can receive events by subscribing to a Salesforce topic.
 
@@ -455,7 +455,7 @@ Inbound properties of events:
 
 Salesforce stores events for 24 hours, so you can retrieve stored events during that retention window. A subscriber (to a topic or channel) can retrieve events at any time and is not restricted to listening to events at the time they are sent.
 
-Each broadcasted event is assigned a numeric ID. IDs are incremented and not guaranteed to be contiguous for consecutive events. Each ID is guaranteed to be higher than the ID of the previous event. For example, the event following the event with ID 999 can have an ID of 1,025. The ID is unique for the organization and the channel. The IDs of deleted events are not reused.
+Each broadcast event is assigned a numeric ID. IDs are incremented and not guaranteed to be contiguous for consecutive events. Each ID is guaranteed to be higher than the ID of the previous event. For example, the event following the event with ID 999 can have an ID of 1,025. The ID is unique for the organization and the channel. The IDs of deleted events are not reused.
 
 See also <<Receive Inbound Data From Salesforce>> for event processing when streaming data to
 an application from Salesforce.
@@ -508,7 +508,7 @@ PushTopic pushTopic = new PushTopic();
 pushTopic.ApiVersion = 23.0;
 pushTopic.Name = 'AllAccounts';
 pushTopic.Description = 'All records for the Account object';
-pushtopic.Query = 'SELECT Id, Name FROM Account';
+pushTopic.Query = 'SELECT Id, Name FROM Account';
 insert pushTopic;
 System.debug('Created new PushTopic: '+ pushTopic.Id);
 ----
@@ -553,11 +553,11 @@ In this XML example, the `replay-topic` acts like an inbound endpoint for the Lo
 
 If ALL or ONLY_NEW replay option is selected, then the `replayId` value is ignored.
 
-== Push Data to Salesforce
+== Pushing Data to Salesforce
 
 Use as an outbound connector in your flow to push data to Salesforce. To use the connector in this capacity, simply place the connector in your flow at any point after an inbound endpoint.
 
-== Receive Inbound Data From Salesforce
+== Receiving Inbound Data From Salesforce
 
 You can use the Salesforce connector as an inbound connector without wrapping the connector in a poll scope to stream data from Salesforce into your application. To use the connector in this capacity, place a Salesforce connector at the start of your flow.
 
@@ -683,7 +683,7 @@ The JSON received as response from the push event operation looks something like
 ]
 ----
 
-== Using the Bulk API
+== Loading Data in Batches
 
 The Salesforce Bulk API loads batches of your organization's data into Salesforce.
 
@@ -702,34 +702,57 @@ In Salesforce, you can track the status of bulk data load jobs and their associa
 
 The job detail page includes a related list of all the batches for the job. The related list provides View Request and View Response links for each batch. If the batch is a CSV file, the links return the request or response in CSV format. If the batch is an XML file, the links return the request or response in XML format. These links are available for batches created in Salesforce API version 19.0 and later.
 
-== Connector Usage Tips
+== Understanding Usage Notes
 
-* Fields To Null: The configurations have a checkbox called Can Clear Fields by Updating Field Value to Null. If checked, all the fields in a request that have a Null value are added to the `fieldsToNull` field and sent to Salesforce.
-+
-Using this feature, you can decide which fields to set to Null without being forced to use the `fieldsToNull` field.
-+
-* Upsert:
-** Unless you configure the External ID Field Name for the sObject to which you are trying to Upsert, every use of the upsert will fail. 
-** The Upsert operation does not work with the sObject `priceBookentry2`. 
-* Query: Even though you can see the fields of an SObject and their corresponding types via DataSense, the Query operation returns _all_ fields as `String`.
-+
-If you want to use the actual type of the field, you must convert that field to the desired type using a Transform (or Transform Message) component.
-+
-In this example, although `CreatedDate` field appears as `dateTime`, the query returns a String representing the date.
-+
-To actually use the field as a dateTime, you can configure it using Transform Message, like in the example.
-+
-To store Date and DateTime fields, you can use DataWeave expressions to create Date and Calendar Java objects.
-+
-* Inserting values into a Salesforce drop-down: Be aware that inserting dependent values into an existing drop-down list field in Salesforce does not always work. Test to confirm functionality.
-* Evaluating Values in Salesforce drop-down: If you are evaluating against a value in an existing drop-down list field in Salesforce, be sure to use the _exact value_ in the dropdown. For example, if you use the value "US" to evaluate against the contents of a drop-down list that contains the value "USA", the evaluation works, but you end up with two values in the dropdown: one for US and one for USA.
-* Currency:
-** Currency values cannot exceed 18 characters in length.
-** When working with multiple currencies, be aware of which currency your sObject uses so that you avoid inaccurate entries. The default currency matches the location at the organization level.
-* Limits on API Calls: You need to know the rate limiting policy that applies to your account so that you do not exceed the number of allotted API calls per day.
-* Opportunity `sObject`: When extracting data from an `Opportunity`, be aware that a "quarter" is not relative to a calendar year. A "quarter" in this context is relative to the financial year of the organization.
+*Fields To Null*
 
-== XML Configuration
+* The configurations have a checkbox called Can Clear Fields by Updating Field Value to Null. If checked, all the fields in a request that have a Null value are added to the `fieldsToNull` field and sent to Salesforce.
+
+* You can decide which fields to set to Null without being forced to use the `fieldsToNull` field.
+
+*Upsert*
+
+* Unless you configure the External ID Field Name for the sObject to which you are trying to Upsert, every use of the upsert will fail. 
+* The Upsert operation does not work with the sObject `priceBookentry2`.
+* While you can't change the contentType for bulk upsert, you can use Create Job 
+to set the contentType to either 
+CSV or zipped CSV (if you're hitting the character limit). Follow up with Create Batch.
+
+*Query*
+
+* Even though you can see the fields of an SObject and their corresponding types via DataSense, the Query operation returns _all_ fields as `String`.
+
+* If you want to use the actual type of the field, you must convert that field to the desired type using a Transform (or Transform Message) component.
+
+* Although `CreatedDate` field appears as `dateTime`, the query returns a String representing the date.
+
+* To actually use the field as a dateTime, you can configure it using Transform Message, like in the example.
+
+* To store Date and DateTime fields, you can use DataWeave expressions to create Date and Calendar Java objects.
+
+*Inserting values into a Salesforce drop-down*
+
+* Be aware that inserting dependent values into an existing drop-down list field in Salesforce does not always work. Test to confirm functionality.
+
+*Evaluating Values in a Salesforce drop-down* 
+
+* If you are evaluating against a value in an existing drop-down list field in Salesforce, be sure to use the _exact value_ in the dropdown. For example, if you use the value "US" to evaluate against the contents of a drop-down list that contains the value "USA", the evaluation works, but you end up with two values in the dropdown: one for US and one for USA.
+
+*Currency:*
+
+* Currency values cannot exceed 18 characters in length.
+* When working with multiple currencies, be aware of which currency your sObject uses so that you avoid inaccurate entries. The default currency matches the location at the organization level.
+
+*Limits on API Calls* 
+
+* You need to know the rate limiting policy that applies to your account so that you do not exceed the number of allotted API calls per day.
+
+*Opportunity `sObject`*
+
+When extracting data from an `Opportunity`, be aware that a "quarter" is not relative to a calendar year. A "quarter" in this context is relative to the financial year of the organization.
+
+
+== Configuring with XML
 
 If you are creating Salesforce connector XML by hand, add the namespace for the connector. By contrast, Anypoint Studio creates the namespace for a connector automatically when you create a project for a Mule app.
 
@@ -913,7 +936,7 @@ payload map {
 		<http:listener config-ref="HTTP_Listener_config" path="/query" doc:name="Listener"  />
 		<salesforce:query config-ref="Salesforce_Sfdc_config" doc:name="Query" >
 			<salesforce:salesforce-query>SELECT AccountNumber,BillingAddress,Id,Name FROM Account WHERE Name = ':name'</salesforce:salesforce-query>
-			<salesforce:parameters ><![CDATA[#[output applicaton/java
+			<salesforce:parameters ><![CDATA[#[output application/java
 ---
 {
 	name : payload.name
@@ -1035,6 +1058,118 @@ output application/json
 	</flow>
 </mule>
 ----
+
+== Example: Creating or Updating Salesforce Objects With Parent Child Relationships
+
+SalesForce objects can have relationships between them 
+that can be standard or custom created types.
+
+The relationships between the objects are usually one­-to­-many parent­ child relationships, 
+but can be any link between two objects residing in SalesForce.
+
+Creating or altering these objects with relationships is challenging. This section shows how to perform an upsert for an object using the SalesForce connector.
+
+Create a structure in Salesforce for this relationship. 
+
+This example assumes two custom types: MyCustomObject and MyOtherCustomObject
+
+MyCustomObject must hold a relationship to a MyOtherCustomObject. When upserting MyCustomObjects, the POJO sent as input to the SalesForce connector looks like this:
+
+[source,xml,linenums]
+----
+{
+	...
+	// MyCustomObject's fields ...
+	OtherObject__r:
+	{
+		CustomField__c : 'ABC123',
+		type: 'MyOtherCustomObject__c' 
+	}
+}
+----
+
+OtherObject is the name of MyCustomObject field whose value must be a reference to a MyOtherCustomObject object. OtherObject__r indicates the name of the field that is set and that its a relationship to another object.
+
+The value of this field must be an object with two fields.
+
+A field named type with the referenced object type name as value. In this case a custom MyOtherCustomObject type.
+
+A field with value and name appropriate to identify the right instance
+of MyOtherCustomObject to reference. In this case is the one with a value of ABC123 for the field named CustomField.
+
+The following XML example shows how to update these objects:
+
+[source,xml,linenums]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" 
+    xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" 
+    xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" 
+    xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc" 
+    xmlns="http://www.mulesoft.org/schema/mule/core" 
+    xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/sfdc 
+http://www.mulesoft.org/schema/mule/sfdc/current/mule-sfdc.xsd
+http://www.mulesoft.org/schema/mule/ee/dw 
+http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/core 
+http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking 
+http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <sfdc:config name="Salesforce__Basic_Authentication" 
+        username="username" 
+        password="password" 
+        securityToken="token" 
+        url="https://test.salesforce.com/services/Soap/u/34.0" 
+        doc:name="Salesforce: Basic Authentication"/>
+    <flow name="DirectUpsert" initialState="stopped">
+        <poll doc:name="Poll">
+            <fixed-frequency-scheduler frequency="10000" startDelay="5000"/>
+            <set-payload 
+                value="#[ [ ['Name' :'test'+server.dateTime, 'field_1__c' : 'test', 'OtherObject__r' : ['CustomField__c' : 'customFieldValue', 'type': 'MyOtherCustomObject__c'] ] ] ]" 
+                doc:name="Set Payload"/>
+        </poll>
+ 
+<sfdc:upsert config-ref="Salesforce__Basic_Authentication" externalIdFieldName="Id" 
+    type="MyCustomObject__c" doc:name="Salesforce"> 
+<sfdc:objects ref="#[payload]"/> 
+</sfdc:upsert>
+        <logger message="Upsert completed!" level="INFO" doc:name="Logger"/>
+    </flow>
+    <flow name="TransformBefore" initialState="stopped">
+        <poll doc:name="Poll">
+            <fixed-frequency-scheduler frequency="10000" startDelay="5000"/>
+            <set-payload 
+                value="#[ {'name' :&quot;Paul&quot;, 'customData' : 'JULY 11TH', 'parentRef':  'Carlos' } ]" 
+                doc:name="Set Payload"/>
+        </poll>
+        <dw:transform-message metadata:id="7f3eb56a-b4ee-49db-8722-8b303c1c8e7a" 
+            doc:name="Transform Message">
+            <dw:input-payload doc:sample="Input.dwl"/>
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+[{
+	Name: payload.name,
+	field_1__c: payload.customData,
+	OtherObject__r: {'CustomField__c' : payload.parentRef, 'type': 'MyOtherCustomObject__c'}
+}]]]></dw:set-payload>
+        </dw:transform-message>
+        <sfdc:upsert config-ref="Salesforce__Basic_Authentication" 
+            externalIdFieldName="Id" type="MyCustomObject__c" doc:name="Salesforce">
+            <sfdc:objects ref="#[payload]"/>
+        </sfdc:upsert>
+        <logger message="#[payload[0].created ? &quot;Created&quot; : &quot;Updated&quot;]"
+         level="INFO" doc:name="Logger"/>
+    </flow>
+</mule>
+----
+
 
 == See Also
 
