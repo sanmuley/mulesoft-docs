@@ -11,7 +11,8 @@ This documentation describes the differences between Mule 3 and Mule 4, indicate
 Mule Migration tool and recommended migration tasks.
 * link:migration-example-complex[Migration Example]: End-to-end example that shows the before (Mule 3) and after (Mule 4) syntax used for Mule apps.
 * More in-depth migration details:
- ** link:migration-patterns[Migration Patterns]
+ ** link:migration-message-properties[Migrating Message Properties]
+ ** link:migration-patterns-reconnection-strategies[Migrating Reconnection Strategies]
  ** link:migration-core[Migrating Core Components]
  ** link:migration-connectors[Migrating Connectors]
  ** link:migration-api-gateways[Migrating API Gateways]

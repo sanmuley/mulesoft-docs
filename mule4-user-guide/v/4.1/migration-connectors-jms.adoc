@@ -617,8 +617,8 @@ Same scenarion can be implemented in Mule 4 with the following approach:
 
 == See Also
 
-// link:migration-examples[Migration Examples]
+link:migration-message-properties[Migrating Message Properties]
 
-link:migration-patterns[Migration Patterns]
+link:migration-patterns-reconnection-strategies[Migrating Reconnection Strategies]
 
 // link:migration-components[Migrating Components]
