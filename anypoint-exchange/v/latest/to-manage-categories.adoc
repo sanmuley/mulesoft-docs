@@ -48,13 +48,10 @@ The following search terms return all assets marked as both System APIs and Sale
 
 == To Change or Delete a Category
 
-After you apply a category to an asset, to change or delete a category from the 
-Settings menu, you can delete the category. This removes the category from all assets
-that you applied the category to. 
-
-After deleting the category you want to change or delete from all assets that you applied the category to, you can return to the Settings menu and change or delete the category.
+Categories can be deleted at the individual asset level which only removes the category from that asset. 
+Categories can also be deleted at the global level in Settings, but doing so removes the category from all assets.
 
 == See Also
 
-* https://forums.mulesoft.com[MuleSoft Forum].
-* https://support.mulesoft.com[Contact MuleSoft Support].
+* https://forums.mulesoft.com[MuleSoft Forum]
+* https://support.mulesoft.com[Contact MuleSoft Support]
