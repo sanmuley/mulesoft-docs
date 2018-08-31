@@ -159,7 +159,7 @@ be required to deal with additional details that are not automatically handled
 by the tool.
 
 [[datamapper]]
-== Migrating DataMapper
+== Migrating from the DataMapper to DataWeave
 
 DataMapper is not supported by the Mule Migration tool. However, you can
 use the DataWeave Migrator tool.
@@ -182,7 +182,7 @@ migrating them, you then need to:
 * Manually adapt all the uses of such connectors.
 
 [[unsupported_projects]]
-==== Migrating from Unsupported Runtime Versions
+== Migrating from Unsupported Runtime Versions
 
 If you want to migrate apps that are currently running on unsupported
 runtime versions such as 3.7.x, 3.6.x or before, you can still use the migrator. However, a greater ratio of migration errors, unsupported patterns, or

@@ -128,7 +128,8 @@ The Mule Migration tool does not support the following migrations:
 ** `<invoke>`
 ** Anything that implements the `org.mule.api.lifecycle.Callable` interface
 ** etc.
-* DataMapper: Use the DataWeave Migration tool. See <<datamapper>>.
+* DataMapper: Use the DataWeave Migration tool. See
+link:migration-tool-procedure[Migrating from the DataMapper to DataWeave].
 
 See also:
 
