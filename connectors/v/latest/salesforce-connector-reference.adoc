@@ -1,4 +1,4 @@
-= Salesforce Connector Reference v9.1.0
+= Salesforce Connector Reference
 
 == Default Configuration
 
