@@ -191,7 +191,10 @@ image:salesforce-dc-user-pass.png[Username Password Configuration]
 ** Display: How to optimize the display: PAGE = Full-page authorization screen (default), POPUP = Compact dialog optimized for modern web browser popup windows, and TOUCH = Mobile-optimized dialog designed for modern smart phones, such as Android and iPhone.
 ** Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
 ** Consumer Secret: The consumer secret for the connector to access Salesforce.
-** OAuth Callback Config: Listener Config, Callback Path, and Authorize Path.
+** Listener Config: Configuration for the listener, for example, HTTP_Listener_config.
+** Callback Path: Path for the callback, for example, `/callback`
+** Authorize Path: Path for authorization, for example, `/authorize`
+** External Callback URL: Callback URL, for example, `+http://localhost:8085/callback+`
 
 image:salesforce-dc-oauth-2.png[OAuth v2.0 Configuration]
 
@@ -251,7 +254,10 @@ OAuth v2.0:
 ** Display: How to optimize the display: PAGE = Full-page authorization screen (default), POPUP = Compact dialog optimized for modern web browser popup windows, and TOUCH = Mobile-optimized dialog designed for modern smart phones, such as Android and iPhone.
 ** Consumer Key: The consumer key for the Salesforce connected app. See <<Creating a Consumer Key>>.
 ** Consumer Secret: The consumer secret for the connector to access Salesforce.
-** OAuth Callback Config: Listener Config, Callback Path, and Authorize Path.
+** Listener Config: Configuration for the listener, for example, HTTP_Listener_config.
+** Callback Path: Path for the callback, for example, `/callback`
+** Authorize Path: Path for authorization, for example, `/authorize`
+** External Callback URL: Callback URL, for example, `+http://localhost:8085/callback+`
 +
 image:salesforce-studio-oauth-2.png[Studio OAuth 2]
 +
