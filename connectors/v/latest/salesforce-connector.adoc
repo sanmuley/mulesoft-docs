@@ -54,9 +54,10 @@ The Salesforce link:https://www.salesforce.com/us/developer/docs/apexcode/[Apex 
 
 The Salesforce link:http://www.salesforce.com/us/developer/docs/api/index.htm[SOAP API] provides secure access to your organization's information on Salesforce. Most of the operations that the Salesforce connector performs map to this API.
 
-All the Salesforce operations performed through the SOAP API have an optional parameter called "Headers" that can take any of the following https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/soap_headers.htm[Salesforce SOAP Headers]: AllOrNoneHeader, AllowFieldTruncationHeader, AssignmentRuleHeader, CallOptions, EmailHeader, LocaleOptions, MruHeader, 
-OwnerChangeOptions, QueryOptions, UserTerritoryDeleteHeader, 
-DuplicateRuleHeader
+All the Salesforce operations performed through the SOAP API have an optional parameter called "Headers" that can take any of the following https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/soap_headers.htm[Salesforce SOAP Headers]: 
+AllOrNoneHeader, AllowFieldTruncationHeader, AssignmentRuleHeader, CallOptions, 
+EmailHeader, LocaleOptions, MruHeader, OwnerChangeOptions, QueryOptions, 
+UserTerritoryDeleteHeader, DuplicateRuleHeader
 
 *Apex REST API:*
 
@@ -64,7 +65,7 @@ The Salesforce link:https://developer.salesforce.com/page/Creating_REST_APIs_usi
 
 *Bulk API:*
 
-The Salesforce link:https://www.salesforce.com/us/developer/docs/api_asynch/[Bulk API] quickly and securely load batches of your organization's data into Salesforce. See also: <<Using the Bulk API>>
+The Salesforce link:https://www.salesforce.com/us/developer/docs/api_asynch/[Bulk API] quickly and securely load batches of your organization's data into Salesforce. See also: <<Loading Data in Batches>>.
 
 *Streaming API:*
 
@@ -369,11 +370,9 @@ Proxy Settings values:
 * Username - The username to log in to the server.
 * Password - The corresponding password. 
 
-After configuring, click OK. 
+After configuring, click OK.
 
-From the Mule Palette tab, select an operation. 
-
-image:salesforce-select-operation.png[SalesForceMain]
+In the Mule Palette, choose a Salesforce connector operation.
 
 == Creating a Consumer Key
 
@@ -738,7 +737,7 @@ CSV or zipped CSV (if you're hitting the character limit). Follow up with Create
 
 * If you are evaluating against a value in an existing drop-down list field in Salesforce, be sure to use the _exact value_ in the dropdown. For example, if you use the value "US" to evaluate against the contents of a drop-down list that contains the value "USA", the evaluation works, but you end up with two values in the dropdown: one for US and one for USA.
 
-*Currency:*
+*Currency*
 
 * Currency values cannot exceed 18 characters in length.
 * When working with multiple currencies, be aware of which currency your sObject uses so that you avoid inaccurate entries. The default currency matches the location at the organization level.
