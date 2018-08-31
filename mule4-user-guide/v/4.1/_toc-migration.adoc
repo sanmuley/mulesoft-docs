@@ -15,7 +15,7 @@
 **** link:intro-configuration[Configuring Applications]
 **** link:intro-programming-model[Mule 4 Programming Model]
 **** link:intro-engine[Execution Engine, Threads, and Concurrency]
-*** link:migration-tool[Migration to Mule 4]
+*** link:migration-tool[Migration with the Mule Migration Tool]
 **** link:migration-prep[Preparing for a Migration]
 **** link:migration-tool-procedure[Performing a Migration]
 **** link:migration-report[Mule Migration Report]

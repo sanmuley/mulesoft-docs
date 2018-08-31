@@ -1,4 +1,4 @@
-= Migration to Mule 4
+= Migration with the Mule Migration Tool
 
 //TODO: FOR GA, REMOVE *Beta* FROM GA VERSION
 *Beta Release: Mule Migration tool and Compatibility Module*
