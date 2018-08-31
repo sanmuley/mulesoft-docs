@@ -9,7 +9,7 @@ Mule Runtime 4 (Mule 4) supports Transport Layer Security (TLS) 1.1/1.2.
 
 The `tls:context` element is used for all connectors that support TLS. For example, you can configure TLS in HTTP (server and client), FTPS (client), Email (client) or Sockets (client) connectors, among others.
 
-== The TLS-Enabled Servers and Clients
+== The TLS-Enabled Server and Client
 
 A TLS-enabled server contains a private key and a public certificate:
 
@@ -47,7 +47,7 @@ If the `tls:context` is empty (no `tls:key-store` or `tls:trust-store` defined
 
 If the client requires a certificate from the server that it is trying to connect to, then add the `tls:trust-store` element. Set `path` to the location of the truststore file that contains the certificates of the trusted servers.
 
-If the server validates certificates from the clients, then the `tls:key-store` element should be  added with `path` set to the location of the keystore file that contains the private/public keys of the client.
+If the server validates certificates from the clients, then the `tls:key-store` element should be added with `path` set to the location of the keystore file that contains the private/public keys of the client.
 
 == Server Configuration
 
@@ -192,7 +192,7 @@ The `password` attribute is required if you specify a `path`. Otherwise, the att
 * `type`: The type of the trust store. Default = JKS
 * `password`: The trust store password (required if you specify `path`)
 * `algorithm`: The algorithm the trust store uses. Default = `SunX509`
-* `insecure`: Boolean that determines whether or not to validate the truststore. If set to `true`, no validation occurs. The deefault value is `false`.
+* `insecure`: Boolean that determines whether or not to validate the truststore. If set to `true`, no validation occurs. The default value is `false`.
 
 [IMPORTANT]
 Setting `insecure` to `true` renders connections vulnerable to attack. Use it only for prototyping or testing. Never use it in production environments.
@@ -220,25 +220,24 @@ You can configure TLS in Anypoint Studio. Set up a global TLS configuration from
 image::studio-tls-setup.png[]
 
 
-== Mule Runtime Administrator's Task: Specify Protocols and Cipher Suites
+== (Optional) Specify Protocols and Cipher Suites
 
-When a TLS communication takes place between two systems, a negotiation determines which protocol and cipher suite are used. Optionally, administrators can specify the protocols and cipher suites to use.
+When a TLS communication takes place between two systems, a negotiation determines which protocol and cipher suite are used. Optionally, administrators can specify the protocols and cipher suites to use, so that app developers can then specify which cipher suites and protocols to use in `tls:context`.
 
-Configure protocols and cipher suites in the Mule `/conf` directory in `$MULE_HOME. $MULE_HOME` is the directory where your Mule installation resides, for example `/opt/mule-4.0`. Select one of two files for fine-tuning the configuration by manually setting which cipher suites and protocols that Mule uses:
+[NOTE]
+Protocols and cipher suites must be enabled in Mule Runtime and individual apps to be used. If the protocols and cipher suites aren't enabled in both places, the default Java environment protocol and cipher suites are used.
 
-* `tls-default.conf` allows fine-tuning when Mule is not configured to run in Federal Information Processing Standards (FIPS) security mode.
+To configure protocols and cipher suites in the Mule Runtime:
+
+. The Mule admin edits the `/conf` directory in `$MULE_HOME`. `$MULE_HOME` points to the directory where your Mule installation resides, for example `/opt/mule-4.0`. Select the appropriate file where you specify the cipher suites and protocols:
 +
-* `tls-fips140-2.conf` allows fine-tuning when Mule is running in FIPS security mode.
-
+** `tls-default.conf` allows fine-tuning when Mule is not configured to run in Federal Information Processing Standards (FIPS) security mode.
++
+** `tls-fips140-2.conf` allows fine-tuning when Mule is running in FIPS security mode.
++
 Open the relevant file and comment or uncomment items in the lists to manually configure the allowed cipher suites and TLS protocols. If you make no changes to these files, Mule allows the configured security manager to select cipher suites and protocols.
 
-The list of protocols and cipher suites that you set in these configuration files can then be constrained locally by what is set up in an individual `tls:context` element if those parameters are defined.
-
-Only those protocols and cipher suites enabled on both ends can be used.
-
-If you do not configure protocols and cipher suites, the default Java environment protocol and cipher suites are used.
-
-You can then specify a subset of the configured or default values in the `tls:context` element for use by TLS. You configure the protocols and cipher suites in `enabledProtocols` and `enabledCipherSuites` in the `tls:context` element.
+. The list of protocols and cipher suites that the admin sets in these configuration files can then be constrained locally by what the app developer specifies in an individual `tls:context` element. The app developer specifies a subset of the configured or default values in the `tls:context` element for use by TLS. Configure the protocols and cipher suites in `enabledProtocols` and `enabledCipherSuites` in the `tls:context` element.
 
 In the `tls:context` element, you can only reference protocols or cipher suites that are included in the Mule global TLS configuration file or defaults. In `tls:context`, set `enabledProtocols` and `enabledCipherSuite` to the value `default`. After these values are set, TLS uses the following protocols and cipher suites:
 
