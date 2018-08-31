@@ -54,7 +54,8 @@ See also, link:migration-mel[Migrating MEL to DataWeave].
 
 Some MEL expressions are not simply expressions but actually procedural scripts,
 so they cannot be migrated seamlessly to a functional language such as DataWeave.
-For these cases, you should use the link:scripting-module[Scripting module] and
+For these cases, you should use the
+link:/connectors/scripting-module[Scripting module] and
 migrate the MEL script to a language supported by the Scripting module.
 
 .Example: Output of the Migration Tool
@@ -262,6 +263,6 @@ for later reference in an expression.
 
 Refer to the documentation of each connector for details on how to declare
 attachments to be sent. For example, see
-link:connectors/email-list#getting-data-from-emails[Getting Data from Emails]
+link:/connectors/email-list#getting-data-from-emails[Getting Data from Emails]
 in _Listing Emails with the Email Connector_ and the section on _Attachments_
-in link:connectors/web-service-consumer-consume[To Consume a Web Service].
+in link:/connectors/web-service-consumer-consume[To Consume a Web Service].

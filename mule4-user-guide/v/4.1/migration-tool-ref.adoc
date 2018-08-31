@@ -1,4 +1,9 @@
-= Migration Tool Warning and Error Reference
+= Migration Warning and Error Reference
+
+When migrating a Mule 3 app to Mule 4, the
+link:migration-tool#migration_tool[Mule Migration tool] can return the
+following warnings and errors in the
+link:migration-report[Mule Migration Report].
 
 [[batch]]
 == Batch
@@ -173,7 +178,7 @@ link:https://blogs.mulesoft.com/dev/mule-dev/why-dataweave-main-expression-langu
 DataWeave features for handling multipart.
 +
 See
-link:migration-manual#inbound_attachments[Inbound Attachments (Manual Post-Migration Steps)]
+link:igration-tool-post-mig#inbound_attachments[Inbound Attachments (Manual Post-Migration Steps)]
 in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 
 
@@ -401,7 +406,7 @@ _Try Scope XML Reference_.
 * Message: Build the `{tagName}` map with a single DataWeave expression.
 +
 See
-link:migration-manual#outbound_properties[Outbound Properties (Manual Post-Migration Steps)]
+link:igration-tool-post-mig#outbound_properties[Outbound Properties (Manual Post-Migration Steps)]
 in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 
 
@@ -558,7 +563,7 @@ link:tls-configuration[About TLS Configuration].
 * Message: Instead of using session variables in the flow, use variables.
 +
 See
-link:migration-manual#session_variables[Session Properties (Manual Post-Migration Steps)]
+link:igration-tool-post-mig#session_variables[Session Properties (Manual Post-Migration Steps)]
 in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 
 
@@ -569,7 +574,7 @@ in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 set explicitly in the operation/listener.
 +
 See
-link:migration-manual#outbound_properties[Outbound Properties (Manual Post-Migration Steps)]
+link:igration-tool-post-mig#outbound_properties[Outbound Properties (Manual Post-Migration Steps)]
 in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 
 
@@ -603,7 +608,7 @@ in _Introduction to Mule 4: The Mule Message_.
 * Message: Setting outbound property as variable.
 +
 See
-link:migration-manual#outbound_properties[Outbound Properties (Manual Post-Migration Steps)]
+link:igration-tool-post-mig#outbound_properties[Outbound Properties (Manual Post-Migration Steps)]
 in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 
 
@@ -613,7 +618,7 @@ in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 * Message: Identify the received attachments and set them as variables.
 +
 See
-link:migration-manual#inbound_attachments[Inbound Attachments (Manual Post-Migration Steps)]
+link:igration-tool-post-mig#inbound_attachments[Inbound Attachments (Manual Post-Migration Steps)]
 in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 
 
@@ -624,7 +629,7 @@ in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 or the source to know how attachments are sent.
 +
 See
-link:migration-manual#outbound_attachments[Outbound Attachments (Manual Post-Migration Steps)]
+link:igration-tool-post-mig#outbound_attachments[Outbound Attachments (Manual Post-Migration Steps)]
 in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 
 
@@ -635,7 +640,7 @@ in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 DataWeave features for handling multipart.
 +
 See
-link:migration-manual#inbound_attachments[Inbound Attachments (Manual Post-Migration Steps)]
+link:igration-tool-post-mig#inbound_attachments[Inbound Attachments (Manual Post-Migration Steps)]
 in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 
 
@@ -767,7 +772,7 @@ _Configuring Properties_.
 * Message: Instead of setting session variables in the flow, you msut set Variables.
 +
 See
-link:migration-manual#session_variables[Session Properties (Manual Post-Migration Steps)]
+link:igration-tool-post-mig#session_variables[Session Properties (Manual Post-Migration Steps)]
 in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 
 
@@ -777,7 +782,7 @@ in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 * Message: Instead of setting outbound properties in the flow, you must set
 Variables.
 +
-See link:migration-manual#outbound_properties[Outbound Properties (Manual Post-Migration Steps)]
+See link:igration-tool-post-mig#outbound_properties[Outbound Properties (Manual Post-Migration Steps)]
 in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 
 
@@ -848,7 +853,7 @@ in _Try Scope XML Reference_.
 after those are migrated to variables.
 +
 See
-link:migration-manual#session_variables[Session Properties (Manual Post-Migration Steps)]
+link:igration-tool-post-mig#session_variables[Session Properties (Manual Post-Migration Steps)]
 in _Migration to Mule 4: Recommended Post-Migration Tasks_.
 
 
