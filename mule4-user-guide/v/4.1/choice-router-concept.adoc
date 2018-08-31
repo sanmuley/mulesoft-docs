@@ -31,6 +31,9 @@ The example project demonstrates that, when you are planning to route messages i
 * The default routing option
 * The processing that the flow performs for each routing option
 
+To download and open this example project while you are in Anypoint Studio, click the Exchange icon in the upper-left corner. Then, in the window that opens, log into Anypoint Exchange and search on the name of the project.
+
+
 == See Also
 
 link:choice-router-xml-reference[Choice Router XML Reference]

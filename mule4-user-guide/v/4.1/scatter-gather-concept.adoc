@@ -31,6 +31,8 @@ Resource|`firstname`|`surname`|`phone`|`email`
 
 DataWeave is used to aggregate the data. The information about the contacts is aggregated to a JSON structure that represents data from both resources.
 
+To download and open this example project while you are in Anypoint Studio, click the Exchange icon in the upper-left corner. Then, in the window that opens, log into Anypoint Exchange and search on the name of the project.
+
 == See Also
 
 * link:scatter-gather-xml-reference[Scatter-Gather XML Reference]

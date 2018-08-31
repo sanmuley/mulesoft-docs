@@ -17,6 +17,8 @@ There are several example projects in Anypoint Exchange that you can open in Any
 * _Salesforce to MySQL Database Using Batch Processing_
 * _Sending a CSV File Through Email Using SMTP_
 
+To download and open an example project while you are in Anypoint Studio, click the Exchange icon in the upper-left corner. Then, in the window that opens, log into Anypoint Exchange and search on the name of the project.
+
 
 == Fixed Frequency
 
