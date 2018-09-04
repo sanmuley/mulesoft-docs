@@ -35,3 +35,7 @@ include::include-alerts-config.adoc[]
 Once alerts are listed on your Alerts page, you can use Add Alerts to link out to API and Runtime Alert configuration pages. You can also get basic instructions for configuring alerts for a chart (widget) in a custom dashboard.
 
 image::alerts-menu.png[Alerts Menu]
+
+Note that you can also select to add or edit an alert from a chart in a custom dashboard, for example:
+
+image::dashboard-custom-config-dup-delete.png[Add or Edit Alert]
