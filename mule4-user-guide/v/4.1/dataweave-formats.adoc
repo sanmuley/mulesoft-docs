@@ -187,7 +187,7 @@ After importing the copybook, you can use the `schemaPath` property to reference
 
 === Supported Copybook Features
 
-Not all copybook features are supported by the Cobol Copybook format in DataWeave. In general, the format supports most common usages and simple patterns including:
+Not all copybook features are supported by the Cobol Copybook format in DataWeave. In general, the format supports most common usages and simple patterns, including:
 
 * USAGE of DISPLAY, BINARY (COMP), and PACKED-DECIMAL (COMP-3)
 * PICTURE clauses for numeric values consisting only of:
@@ -198,14 +198,14 @@ Not all copybook features are supported by the Cobol Copybook format in DataWeav
 * PICTURE clauses for alphanumeric values consisting only of 'X' character positions
 * Repetition counts for '9', 'P', and 'X' characters in PICTURE clauses (as in `9(5)` for a 5-digit numeric value)
 
-Features which are not supported include:
+Unsupported features include:
 
 * Alphanumeric-edited PICTURE clauses
 * Numeric-edited PICTURE clauses with insertion or replacement
 * Special level-numbers:
-** Level 66 - alternate name for field or group
-** Level 77 - independent data item
-** Level 88 - condition names (equivalent to an enumeration of values)
+** Level 66 - Alternate name for field or group
+** Level 77 - Independent data item
+** Level 88 - Condition names (equivalent to an enumeration of values)
 * USAGE of COMP-1, COMP-2, or COMP-5
 * REDEFINES clause (used to provide different views of the same portion of record data)
 
@@ -213,11 +213,11 @@ Features which are not supported include:
 
 The most common issue with copybook imports is a failure to follow the Cobol standard for input line regions. The copybook import parsing ignores the contents of columns 1-6 of each line, and ignores all lines with an '*' (asterisk) in column 7. It also ignores everything beyond column 72 in each line. This means that all your actual data definitions need to be within columns 8 through 72 of input lines.
 
-Tabs in the input are not expanded, since there's no defined standard for tab positions. Each tab character is treated as a single space character when counting copybook input columns.
+Tabs in the input are not expanded because there is no defined standard for tab positions. Each tab character is treated as a single space character when counting copybook input columns.
 
-Indentation is ignored when processing the copybook, with only level-numbers treated as significant. This is not normally a problem, but means that copybooks may be accepted for import which are not accepted by Cobol compilers.
+Indentation is ignored when processing the copybook, with only level-numbers treated as significant. This is not normally a problem, but it means that copybooks might be accepted for import even though they are not accepted by Cobol compilers.
 
-Both warnings and errors may be reported as a result of a copybook import. Warnings generally tell of unsupported or unrecognized feature, which may or may not be significant. Errors are notifications of a problem that means the generated schema (if any) will not be a completely accurate representation of the copybook. You should review any warnings or errors reported and decide on the appropriate handling, which many be just accepting the schema as generated, modifying the input copybook, or modifying the generated schema.
+Both warnings and errors might be reported as a result of a copybook import. Warnings generally tell of unsupported or unrecognized feature, which might or might not be significant. Errors are notifications of a problem that means the generated schema (if any) will not be a completely accurate representation of the copybook. You should review any warnings or errors reported and decide on the appropriate handling, which might be simply accepting the schema as generated, modifying the input copybook, or modifying the generated schema.
 
 === Reader Properties (for Cobol Copybook)
 
