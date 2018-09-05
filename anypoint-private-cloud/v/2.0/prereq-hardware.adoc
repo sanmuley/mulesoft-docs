@@ -42,7 +42,7 @@ For production usage, each node in your configuration must have the following de
 | Component |Requirement |Recommended IOPS |Description
 |HDD 1 (operating system) |50GB |500 |
 |HDD 2 (system data) | 100GB |1500 |Stores system configuration and metadata, including databases and packages. As package sizes can be arbitrary large, it is important to estimate the minimum size requirements and allocate enough space as a dedicated device before installation.
-|HDD 3 (application data)| 250GB |1500 |Stores application configuration and data. The amount of space required should be at leasat 250GB, but might vary depending on your specific use case. It is important to estimate the minimum size requirements and allocate enough space as a dedicated device ahead of time.
+|HDD 3 (application data)| 250GB |1500 |Stores application configuration and data. The amount of space required should be at least 250GB, but might vary depending on your specific use case. It is important to estimate the minimum size requirements and allocate enough space as a dedicated device ahead of time.
 |HDD 4 (Docker) | 100GB |3000 |Used by Docker’s Device Mapper storage driver. This device must be a dedicated device. It must exist on every node of your cluster.
 |HDD 5 (etcd) | 20GB |3000 |Provides dedicated storage for the distributed database used for cluster coordination. This device must be a dedicated device. It must exist on every node of your cluster.
 |/tmp (installer) | 20GB |N/A |
