@@ -1,5 +1,5 @@
 = Anypoint MQ Connector
-:keywords: mq, connector
+:imagesdir: ./_images
 
 _Select_
 
