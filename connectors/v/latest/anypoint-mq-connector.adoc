@@ -24,19 +24,60 @@ To use this connector, you should be familiar with Anypoint Studio, Anypoint con
 
 == Using MQ as a Trigger in Design Center
 
-Using MQ as a trigger means that the MQ subscriber in Design Center waits for a message to consume. 
-The message the trigger consumes is sent by an MQ connector instance running either in Anypoint Studio or 
-Runtime Manager that publishes messages. The messages that MQ connector publishes come from either the 
-MQ UI in Anypoint Platform or from calls to the REST API.
+Using MQ as a trigger means that the MQ subscriber in Design Center waits 
+for a message to consume. The message the trigger consumes is sent by an 
+MQ connector instance running either in Anypoint Studio or 
+Runtime Manager that publishes messages. The messages that MQ connector 
+publishes come from either the MQ UI in Anypoint Platform or 
+from calls to the REST API.
+
+*Notes:* 
+
+* See link:/connectors/anypoint-mq-connector/reference[Anypoint MQ Connector Reference] for more information on Design Center fields.
+* If you have an autofill application such as Last Pass, temporarily disable it before using
+Design Center. Otherwise, the autofill application prevents testing the connection to MQ 
+from Design Center.
 
 . In Anypoint Platform > Design Center, create a Mule Application.
-. For the trigger, select *Anypoint MQ*.
-. For the Destination, type the MQ queue name or message exchange you want to subscribe to.
-. If needed, click Advanced to specify an output MIME type and output encoding for the messages you receive.
-. Click Set Up to specify the client ID, client secret, and region. 
-. Open a second window to Anypoint Platform > MQ > Client Apps to get the client ID and secret for an application.
+. For the trigger, select *Mule Anypoint MQ*:
++
+image:mq-trigger-name.png[Mule Anypoint MQ Connector trigger]
++
+. For the Destination, type the MQ queue name or message exchange you want to subscribe to:
++
+image:mq-trigger-destination.png[Design Center Destination field]
++
+. If needed, click the Redelivery tab. Max Redelivery Count sets the number of times
+a message is redelivered to a queue or message exchange. This value can range from -1,
+which means continually redeliver, 0 which means don't redeliver, and up to a maximum
+of 10. Setting a value over 10 converts to 10. You can also set secure hash values or
+one or more expressions to indicate when a message has been redelivered.
+. If needed, click Advanced to specify a reconnection strategy for how long and attempts to reconnect, output MIME type, output encoding for the messages you receive, cluster management,
+and prefetch values. 
+. Click *Set up* to specify the client ID, client secret, and region.
++
+image:mq-dc-setup.png[Setup button in Design Center]
++ 
+. Open a second tab to Anypoint Platform > MQ.
+. Copy the region from the main screen, for example, `+https://mq-us-east-1.anypoint.mulesoft.com/api/v1+` (for US East Virginia) and paste the URL in the URL field in Design Center.
+. Click Client Apps and get the client ID and secret for an application.
 . Copy and paste the client ID and secret into the Design Center user interface. 
-. In MQ, copy the region from the main screen, for example, `+https://mq-us-east-1.anypoint.mulesoft.com/api/v1+` for US East Virginia and paste that in the Design Center URL field.
+. In Design Center, click Test to test the connection to MQ.
+. If needed, set values for Proxy and TCP Client Socket Properties. You can also configure 
+TLS Context, Trust Store, Key Store, and Revocation Check from the TLS/SSL tab. The Advanced
+tab lets you set reconnection and expiration policy values.
+. Click Save to complete the setup.
+
+=== Using MQ as a Component
+
+As a Design Center component, MQ supports the Ack, Consume, Nack, and Publish operations.
+Publish lets you send messages from the connector to an MQ queue or message exchange. 
+Consume lets you receive messages sent from an MQ instance. 
+
+The Ack operation acknowledges a message whereupon the connector deletes it. The Nack 
+operation indicates that an application doesn’t want the current message. MQ returns the message to the queue so that another application can receive the message.
+
+The Ack and Nack operations receive an Ack Token from the connector and should not be changed. The token enables the operations to work. 
 
 == Installing the MQ Connector in Studio
 
