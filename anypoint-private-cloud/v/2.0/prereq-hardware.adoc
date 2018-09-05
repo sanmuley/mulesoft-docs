@@ -9,7 +9,7 @@ The following sections describe the minimum disk sizes and performance requireme
 
 ==  Network File System (NFS) Server
 
-To use Anypoint Private Cloud, version 2.0 you must install and configure an NFS server. Before installing or upgrding, you must have an NFS endpoint available. You NFS server must meet the following requirements:
+To use Anypoint Private Cloud, version 2.0 you must install and configure an NFS server. Before installing or upgrading, you must have an NFS endpoint available. You NFS server must meet the following requirements:
 
 * Must be running on a filesystem that has at least 250 GB available.
 * Must be using NFS version 4.0. 
