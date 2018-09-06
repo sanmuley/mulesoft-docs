@@ -245,7 +245,6 @@ You can also install the Salesforce connector manually by updating the Mule proj
 ----
 <dependency>
     <groupId>com.mulesoft.connectors</groupId>
-    <groupId>org.mule.extension</groupId>
     <artifactId>mule-salesforce-connector</artifactId>
     <version>9.3.0</version>
     <classifier>mule-plugin</classifier>
@@ -820,7 +819,7 @@ This snippet specifies a project dependency for a specific release version:
 [source, xml, linenums]
 ----
 <dependency>
-    <groupId>org.mule.extension</groupId>
+    <groupId>com.mulesoft.connectors</groupId>
     <artifactId>mule-salesforce-connector</artifactId>
     <version>RELEASE</version>
     <classifier>mule-plugin</classifier>
@@ -832,7 +831,7 @@ This snippet adds specifies a project dependency for the latest version:
 [source, xml, linenums]
 ----
 <dependency>
-    <groupId>org.mule.extension</groupId>
+    <groupId>com.mulesoft.connectors</groupId>
     <artifactId>mule-salesforce-connector</artifactId>
     <version>LATEST</version>
 </dependency>
