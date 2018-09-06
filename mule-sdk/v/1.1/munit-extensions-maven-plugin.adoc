@@ -32,7 +32,7 @@ mvn clean verify -Dmunit.test=.*my-test.*
 
 You can leverage this feature by adding naming conventions to your MUnit Test suites.
 
-== To Run Specific MUnit Tests (MUnit Maven Plugin)
+== To Run Specific MUnit Tests
 
 In the same way that you instruct MUnit to run one test suite, you can also tell it to run a specific test inside that test suite. To do so, we again make use of the property `munit.test`, with one addition:
 
@@ -72,6 +72,23 @@ When building your module, you may want to prevent a test from running. MUnit le
 ----
 mvn clean verify -DskipTests
 ----
+
+== To Debug Tests
+
+When testing your module, you may want to debug your code. MUnit leverages Java remote debugging, so if you wish to debug your tests you can make user of the parameter `munit.debug`.
+
+[source,console]
+.Debugging Code example
+----
+mvn clean verify -Dmunit.debug
+----
+
+[TIP]
+--
+The default debugger will listen on port 5005. You can override the debugger JVM argument line by specifying it as the value of the property.
+
+_mvn clean verify -Dmunit.debug="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8002"_
+--
 
 
 == See Also
