@@ -235,8 +235,8 @@ http://www.mulesoft.org/schema/mule/anypoint-mq/current/mule-anypoint-mq.xsd">
 <flow name="producerFlow">
     <anypoint-mq:subscriber doc:name="Subscriber" />
     <dw:transform-message doc:name="Create Customer">
-    <dw:set-payload><![CDATA[%dw 1.0
-%output application/json
+    <dw:set-payload><![CDATA[%dw 2.0
+output application/json
 ---
 {
     "firstName" : "Polly",
