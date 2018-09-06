@@ -87,18 +87,18 @@ image:dw-quickstart-maven1.png[]
 image:dw-quickstart-select-query.png[]
 . To test your configuration so far, run the project. You can right-click in the canvas where the flow is defined, and select **Run Project dw-tutorial4-flights-ws**.
 . Watch the Console tab and when the app is running, open your REST API client.
-. In the client, send a request to link:http://localhost:8081/flights/[http://localhost:8081/flights/]. You should see a Mule object in the result.
+. In the client, send a request to link:http://localhost:8081/flights/[http://localhost:8081/flights/]. You should see a Java streaming object as the response. Notice that the binary Java object does not display in the REST API client, just the object's fully qualified classname and object ID. 
 +
 image:dw-quickstart-object.png[]
 
-Now that the app is set up, it's time to transform some data into JSON so it can be consumed by a service that requires JSON.
+Now that the Mule application is set up, it's time to transform some data to a new JSON schema so it can be consumed by a service that requires JSON.
 
 [HINT]
-Leave the Mule app running to avoid accidentally creating an orphan process that might clog the port specified in your app.
+Leave the Mule application running to avoid accidentally creating an orphan process that might clog the port specified in your app.
 
 == Step Three: Create and Test a DataWeave Data Transformation
 
-Now that we have a Mule app that works and is listening to the Training: American Flights API, we'll add a Transform Message component and use the DataWeave drag-n-drop interface to define a transformation from Mule object into JSON.
+Now that we have a Mule application that works and is listening to the Training: American Flights API, we'll add a Transform Message component and use the DataWeave drag-n-drop interface to define a transformation from the database response's Java streaming object to a new JSON schema.
 
 . In the Mule Palette, select Core and find the Transform Message component.
 +
@@ -121,7 +121,7 @@ image:dw-quickstart-dw-palette.png[]
 +
 image:dw-quickstart-json1.png[]
 +
-With just two words in a DataWeave script, you've transformed a Mule object into JSON. Now we'll map the existing data from the API to a data structure based on an example we provide. This example represents how a second service needs to consume the data from Training: American Flights API.
+With just two words in a DataWeave script, you've transformed a database response Java streaming object into JSON. Now we'll map the existing data from the API to a data structure based on an example we provide. This example represents how a second service needs to consume the data from Training: American Flights API.
 . In the Transform Message's Output panel, select **Define metadata** to open the **Select metadata type** dialog.
 . Select **Add** to open the **Create new type** dialog.
 . Enter `american_flights_json` and select **Create type**.
@@ -196,4 +196,4 @@ image:dw-quickstart-sample-data1.png[]
 image:dw-quickstart-transformed.png[]
 Notice that the data is structured as described in the Output panel, instead of following the Input pane structure as we saw in an earlier query. 
 
-Now that you've succeeded in transforming data from Mule object to JSON, and from one data structure to another, you're ready to explore more link:/mule4-user-guide/v/4.1/dataweave[DataWeave features]. 
+Now that you've succeeded in transforming data from a Java object to JSON, and from one data structure to another, you're ready to explore more link:/mule4-user-guide/v/4.1/dataweave[DataWeave features]. 
