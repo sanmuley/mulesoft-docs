@@ -195,7 +195,7 @@ Delete the file or directory located at the designated path.
 |===
 | Name | Type | Description | Default Value | Required
 | Configuration | String | The name of the configuration to use. | | x
-| Path a| String |  the path of the file to delete. |  | x
+| Path a| String |  the path of the file or directory to delete. |  | x
 | Reconnection Strategy a| * <<reconnect>>
 * <<reconnect-forever>> |  A retry strategy in case of connectivity errors |  |
 |===
@@ -262,8 +262,8 @@ Get the metadata of a path
 [cols=".^20%,.^20%,.^35%,.^20%,^.^5%", options="header"]
 |===
 | Name | Type | Description | Default Value | Required
-| Configuration | String | The name of the configuration to use. | | x
-| Path a| String |  the path of the file to delete. |  | x
+| Configuration | String | The name of the configuration to use | | x
+| Path a| String |  the path for which metadata should be retrieved |  | x
 | Target Variable a| String |  The name of a variable on which the operation's output will be placed |  |
 | Target Value a| String |  An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable |  `#[payload]` |
 | Reconnection Strategy a| * <<reconnect>>
