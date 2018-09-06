@@ -515,7 +515,7 @@ hello-smart-connector
 +
 (2) `hello-smart-connector/smart-connector-it/src/test/munit/assertion-munit-test.xml`: An assertion operation that calls the XML SDK operation.
 +
-. Run `mvn clean install` in the `/hello-smart-connector` to create the plugin for the `Hello XML SDK` module.
+. Run `mvn clean install` in the `/hello-smart-connector` to create the plugin for the `Hello XML SDK` module (This will install parent project as well as child projects).
 +
 This command also runs the suite through MUnit for the operation defined in the module.
 +
@@ -539,6 +539,16 @@ This command also runs the suite through MUnit for the operation defined in the 
 [INFO] Final Memory: 61M/928M
 [INFO] ------------------------------------------------------------------------
 ➜  hello-smart-connector
+----
+
+(3) When you want to add this connector from your local maven repository to your project in order to test it, you need to only add following dependency, then you can use this connector from your Studio palette. 
+----
+<dependency>
+       <groupId>org.mule.smart.connector</groupId>
+       <artifactId>hello-smart-connector-smart-connector</artifactId>
+       <version>1.0.0-SNAPSHOT</version>
+       <classifier>mule-plugin</classifier>
+</dependency>
 ----
 
 == Consuming Mule Plugin from an XML SDK Module
