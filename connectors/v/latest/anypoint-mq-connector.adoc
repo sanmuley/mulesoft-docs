@@ -38,8 +38,10 @@ from calls to the REST API.
 Design Center. Otherwise, the autofill application prevents testing the connection to MQ 
 from Design Center.
 
+=== Configuring the MQ Trigger
+
 . In Anypoint Platform > Design Center, create a Mule Application.
-. For the trigger, select *Mule Anypoint MQ*:
+. For the trigger, select *Mule Anypoint MQ Connector*:
 +
 image:mq-trigger-name.png[Mule Anypoint MQ Connector trigger]
 +
@@ -52,7 +54,7 @@ a message is redelivered to a queue or message exchange. This value can range fr
 which means continually redeliver, 0 which means don't redeliver, and up to a maximum
 of 10. Setting a value over 10 converts to 10. You can also set secure hash values or
 one or more expressions to indicate when a message has been redelivered.
-. If needed, click Advanced to specify a reconnection strategy for how long and attempts to reconnect, output MIME type, output encoding for the messages you receive, cluster management,
+. If needed, click Advanced to specify a reconnection strategy for how long to wait to reconnect, and how many attempts to make to reconnect, output MIME type, output encoding for the messages you receive, ,
 and prefetch values. 
 . Click *Set up* to specify the client ID, client secret, and region.
 +
@@ -68,16 +70,41 @@ TLS Context, Trust Store, Key Store, and Revocation Check from the TLS/SSL tab. 
 tab lets you set reconnection and expiration policy values.
 . Click Save to complete the setup.
 
-=== Using MQ as a Component
+=== Specifying MQ as a Component
 
 As a Design Center component, MQ supports the Ack, Consume, Nack, and Publish operations.
-Publish lets you send messages from the connector to an MQ queue or message exchange. 
-Consume lets you receive messages sent from an MQ instance. 
+
+The Publish operation publishes messages into queues or message exchanges. For the Consume operation, subscribers can receive messages from a queue.
 
 The Ack operation acknowledges a message whereupon the connector deletes it. The Nack 
 operation indicates that an application doesn’t want the current message. MQ returns the message to the queue so that another application can receive the message.
 
-The Ack and Nack operations receive an Ack Token from the connector and should not be changed. The token enables the operations to work. 
+The Ack and Nack operations receive an Ack Token from the connector that should not be changed. The token enables the operations to work. 
+
+==== Publishing MQ Messages
+
+Configure Design Center to publish MQ messages:
+
+* Destination: The MQ queue or message exchange name to publish to.  
+* Body > Payload: The content in the body of the message to publish. 
+
+For remaining parameters, see <<Configuring the MQ Trigger>> or the
+link:/connectors/anypoint-mq-connector-reference[MQ Connector Reference].
+
+==== Consuming MQ Messages
+
+Configure Design Center General tab to consume MQ messages:
+
+* Destination: The MQ queue to consume messages from.
+* Acknowledgement Mode: 
+** IMMEDIATE (default) - An application receives a message and the MQ connector immediately acknowledges and deletes the message.
+** AUTO - The Anypoint MQ connector automatically sends an Ack or Nack at the end of a flow depending on whether the MQ connector detects a Catch Exception Strategy (ACK) or a Rollback Exception Strategy (NACK).
+** MANUAL - An application indicates that it sends its own Ack or Nack using the Anypoint MQ connector local state.
+* Acknowledgement Timeout - The time in milliseconds that a message is held waiting for an Ack or Nack.
+* Polling Time - Time in milliseconds to wait if the requested message are not yet ready to be consumed.
+
+For remaining parameters, see <<Configuring the MQ Trigger>> or the
+link:/connectors/anypoint-mq-connector-reference[MQ Connector Reference].
 
 == Installing the MQ Connector in Studio
 
@@ -98,53 +125,20 @@ Manually:
 <dependency>
   <groupId>com.mulesoft.connectors</groupId>
   <artifactId>anypoint-mq-connector</artifactId>
-  <version>3.0.0</version>
+  <version>4.0.0</version>
   <classifier>mule-plugin</classifier>
 </dependency>
 ----
 
-== To Configure with the Studio Visual Editor
+== Configuring with the Studio Visual Editor
 
 . In Studio, click File > New > Mule Project.
-. Search for "http" and drag the HTTP connector to the Studio Canvas. Click the HTTP connector, and click the green plus sign to the right of Connector Configuration. Click OK to accept the defaults. In the HTTP properties window, set the Path to `/mq/{messageId}`.
-. Search for "mq" and drag the *Anypoint MQ* connector to the canvas. If you cannot find this connector, return to
-<<To Install This Connector>> and ensure you installed the connector.
-. Click the green plus sign to the right of Connector Configuration.
-
-=== Specify Global Element Properties
-
-image:mq-global-elements-properties.png[Global Element Properties]
-
-. Specify the URL for the region you want your MQ queues and exchanges to reside.
+. If you want to have MQ as a subscriber at the start of a flow, drag the Subscriber operation to the canvas. 
+. Alternatively, you can trigger a publish using the HTTP connector -- This lets you test MQ from a browser. If using the HTTP connector at the start of the flow, click HTTP in the Mule Palette and drag the Listener operation to the Studio canvas. Click the HTTP connector, and click the green plus sign to the right of Connector Configuration. Specify values for Host and Port, and click Test Connection to ensure HTTP works correctly on your computer. Click OK. In the HTTP properties window, set the Path to `/mq/{messageId}`.
+. Click Anypoint MQ in the Mule Palette and drag an operation to the Studio canvas.
 +
-Possible values are:
-+
-** North America:
-*** US East (N. Virginia): `+https://mq-us-east-1.anypoint.mulesoft.com/api/v1+`
-*** US West (Oregon): `+https://mq-us-west-2.anypoint.mulesoft.com/api/v1+`
-*** Central Canada: `+https://mq-ca-central-1.anypoint.mulesoft.com/api/v1+`
-** Europe:
-*** EU (Ireland): `+https://mq-eu-west-1.anypoint.mulesoft.com/api/v1+`
-*** EU (London): `+https://mq-eu-west-2.anypoint.mulesoft.com/api/v1+`
-** APAC:
-*** Asia Pacific (Singapore): `+https://mq-ap-southeast-1.anypoint.mulesoft.com/api/v1+`
-*** Asia Pacific (Sydney): `+https://mq-ap-southeast-2.anypoint.mulesoft.com/api/v1+`
-+
-FIFO queues can reside in US East, US West, and EU Ireland.
-+
-. In Anypoint Platform, click MQ > Client Apps. If needed, create a client app.
-. Copy the Anypoint Platform > MQ > Client App > Client App ID value to Studio's Client ID field.
-. Copy the Client App > Client Secret value to Studio's Client Secret field. You can ignore the other settings to test your connector.
-. Click OK.
-
-=== Set the Operation
-
-. Click the *Operation* field and specify an operation such as Publish or Consume. 
-. If using the Publish or Consume operations, specify the *Destination* as the name of the queue or message exchange that you set in Anypoint Platform.
-. For the Publish operation, you can leave the Message ID field empty, or specify a message ID if you want to publish a specific message ID. If a message ID is not set, MQ auto generates a unique message ID for each message that’s sent to a queue. When publishing to FIFO queues, if you specify a Message ID and the Message ID is the same on multiple messages, the messages with the same Message ID are not redelivered.
-
 Possible operations are:
-
++
 [%header%autowidth.spread]
 |===
 |Operation |Description
@@ -153,9 +147,27 @@ Possible operations are:
 |link:/connectors/anypoint-mq-connector-reference#nack[Nack] |Changes the status of the message from in-flight to in-queue to be consumed again by a subscriber.
 |link:/connectors/anypoint-mq-connector-reference#publish[Publish] |Publishes messages
 to a queue or message exchange.
+|link:/connectors/anypoint-mq-connector-reference#subscriber[Subscriber] |Subscribes to 
+a message source.
 |===
++
+For a complete list of configuration fields for each operation, see the link:/connectors/anypoint-mq-connector-reference[Anypoint MQ Connector Reference].
++
+. Click the green plus sign to the right of Connector Configuration.
 
-For a list of configuration fields for each operation, see the link:/connectors/anypoint-mq-connector-reference[Anypoint MQ Connector Reference].
+=== Specifying MQ Global Element Properties
+
+image:mq-global-elements-properties.png[Global Element Properties]
+
+. Specify the URL for the region you want your MQ queues and exchanges to reside. See
+link:/anypoint-mq/[Anypoint MQ] for a list of available regions.
++
+. In Anypoint Platform, click MQ > Client Apps. If needed, create a client app.
+. Copy the Anypoint Platform > MQ > Client App > Client App ID value to the clipboard and paste into Studio's Client ID field.
+. Copy the Client App > Client Secret value to the clipboard and paste into Studio's Client Secret field. You can ignore the other settings to test your connector.
+. Click OK. 
+. If using the Publish or Consume operations, specify the *Destination* as the name of the queue or message exchange that you set in Anypoint Platform.
+. For the Publish operation, you can leave the Message ID field empty, or specify a message ID if you want to publish a specific message ID. If a message ID is not set, MQ auto generates a unique message ID for each message that’s sent to a queue. When publishing to FIFO queues, if you specify a Message ID and the Message ID is the same on multiple messages, the messages with the same Message ID are not redelivered.
 
 == XML and Standalone Configuration
 
@@ -184,39 +196,41 @@ Endpoint:
 
 `+http://www.mulesoft.org/schema/mule/anypoint-mq+`
 
-== Example: MQ and DataWeave
+== Example: Subscribe and Publish
 
-The following example illustrates the use of the Anypoint MQ connector 
-with DataWeave to transform a Mule message to JSON:
+The following example shows the use of an MQ Subscriber and publishing a messge:
 
 [source,xml,linenums]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 
 <mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
-	xmlns:anypoint-mq="http://www.mulesoft.org/schema/mule/anypoint-mq"
-  xmlns:http="http://www.mulesoft.org/schema/mule/http" 
-  xmlns="http://www.mulesoft.org/schema/mule/core" 
-  xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:spring="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/dw 
-  http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
-http://www.springframework.org/schema/beans 
+        xmlns:anypoint-mq="http://www.mulesoft.org/schema/mule/anypoint-mq"
+        xmlns:http="http://www.mulesoft.org/schema/mule/http"
+        xmlns="http://www.mulesoft.org/schema/mule/core"
+        xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+        xmlns:spring="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/ee/dw 
+http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd 
+http://www.mulesoft.org/schema/mule/ee/dw
+http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-current.xsd
-http://www.mulesoft.org/schema/mule/core 
+http://www.mulesoft.org/schema/mule/core
 http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/http 
+http://www.mulesoft.org/schema/mule/http
 http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-http://www.mulesoft.org/schema/mule/anypoint-mq 
+http://www.mulesoft.org/schema/mule/anypoint-mq
 http://www.mulesoft.org/schema/mule/anypoint-mq/current/mule-anypoint-mq.xsd">
   <anypoint-mq:default-subscriber-config name="Anypoint_MQ_Configuration"
-   doc:name="Anypoint MQ Configuration">
-      <anypoint-mq:connection url="https://mq-us-east-1.anypoint.mulesoft.com/api/v1" 
+  doc:name="Anypoint MQ Configuration">
+      <anypoint-mq:connection url="https://mq-us-east-1.anypoint.mulesoft.com/api/v1"
       clientId="<id>" clientSecret="<secret>"/>
   </anypoint-mq:default-subscriber-config>
 <flow name="producerFlow">
-  <poll doc:name="Poll">
+    <anypoint-mq:subscriber doc:name="Subscriber" />
     <dw:transform-message doc:name="Create Customer">
     <dw:set-payload><![CDATA[%dw 1.0
 %output application/json
@@ -227,11 +241,11 @@ http://www.mulesoft.org/schema/mule/anypoint-mq/current/mule-anypoint-mq.xsd">
     "company" : "Acme, Inc"
 }]]></dw:set-payload>
     </dw:transform-message>
-  </poll>
-        <anypoint-mq:publish config-ref="Anypoint_MQ_Configuration" 
-        destination="MyExchange" messageId="mq42" doc:name="Anypoint MQ">
-            <anypoint-mq:body >#[payload]</anypoint-mq:body>
-        </anypoint-mq:publish>
+  <anypoint-mq:publish config-ref="Anypoint_MQ_Configuration"
+    destination="MyExchange"
+    messageId="mq42" doc:name="Anypoint MQ">
+   <anypoint-mq:body>#[payload]</anypoint-mq:body>
+  </anypoint-mq:publish>
 </flow>
 </mule>
 ----
