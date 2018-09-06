@@ -1,14 +1,18 @@
 = DataWeave Tutorial
 
-Learn the basics of defining DataWeave 2.0 data transformations. Most integrations require a change to the structure of data as it moves from source to destination. Use the drag-n-drop interface in Studio or Design Center to map transformations, or write your own DataWeave expressions.
+This short tutorial teaches you the basics of defining DataWeave 2.0 data transformations. 
 
-Using a small data set and a training API available on Exchange, you'll create a project and define the transformation mapping from the API into a different structure and protocol. You'll use the drag-n-drop and also see the DataWeave code that defines the transformation. After completing this tutorial, you'll be ready to create your own data transformations with DataWeave.
+Most integrations require a change to the structure of data as it moves from source to destination. You can use the drag-n-drop interface in Anypoint Studio or Design Center to map some basic transformations, and you can also manually write your own DataWeave expressions, particulary to write more complex transformation logic.
+
+In this tutorial, you will use a small data set and a training API available on Anypoint Exchange. Then you will create a project in Anypoint Studio and define the transformation mapping from the API into a different structure and protocol. You will use the drag-n-drop functionality in Anypoint Studio, and then look at the auto-generated DataWeave code that defines the transformation. 
+
+After completing this tutorial, you will be ready to create your own data transformations with DataWeave.
 
 == Prerequisites
 
-To enable you to focus on the workflow of a DataWeave transformation, we recommend completing a few setup tasks.
+To enable you to focus on the workflow of a DataWeave transformation, you should first complete a few setup tasks.
 
-. Navigate to  link:https://anypoint.mulesoft.com/exchange/68ef9520-24e9-4cf2-b2f5-620025690913/training-american-flights-api/[Training: American Flights API] in Exchange, and click the GET button to see a sample response in JSON:
+. Navigate to  link:https://anypoint.mulesoft.com/exchange/68ef9520-24e9-4cf2-b2f5-620025690913/training-american-flights-api/[Training: American Flights API] in Anypoint Exchange, and click the GET button to see a sample response in JSON:
 +
 image:dw-quickstart-am-json.png[]
 +
@@ -186,7 +190,7 @@ Notice the DataWeave code generated as you drag and drop fields to create the tr
 . Let's add some sample data, which helps us preview the mapping results. (You can skip this step if you wish). Select **Preview** over the code view, then click the link **Create required sample data to execute preview**.
 +
 image:dw-quickstart-sample-data1.png[]
-. In the Input panel **payload** tab, replace all the question marks with data. Those values should also show up in the Output panel. Choose **File > Save All** from the Studio main menu.
+. In the Input panel **payload** tab, replace all the question marks with data. Those values should also show up in the Output panel. Choose **File > Save All** from the Anypoint Studio main menu.
 . We've finished defining the transformation, now let's test it. Assuming that you've left the Mule app running as suggested earlier, open your REST client and send another request to the API: `GET http://localhost:8081/flights`
 +
 image:dw-quickstart-transformed.png[]
