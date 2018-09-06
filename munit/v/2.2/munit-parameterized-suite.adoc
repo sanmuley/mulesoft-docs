@@ -68,7 +68,7 @@ For example if you have a test that sets a payload for a flow, and expects a res
             <flow-ref name="myFlow"/>
         </munit:execution>
         <munit:validation>
-            <munit-tools:assert-that expression="#[payload]" is="${output}" />
+            <munit-tools:assert-equals actual="#[payload]" expected="${output}" />
         </munit:validation>
     </munit:test>
 
