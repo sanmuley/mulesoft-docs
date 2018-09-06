@@ -3,6 +3,8 @@
 
 _Select_
 
+Anypoint MQ Version 4.0
+
 The Anypoint MQ connector provides publish-subscribe messaging to Mule applications in the cloud. Anypoint MQ supports a wide range of messaging use cases: enterprise messaging patterns, asynchronous communications between microservices, IoT, and more. Anypoint MQ has a REST api for publishing or consuming messages using any framework such as node.js, Java, Go, and devops bash scripts.
 
 == Prerequisites
