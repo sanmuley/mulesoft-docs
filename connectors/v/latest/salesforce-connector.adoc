@@ -3,6 +3,8 @@
 
 _Select_
 
+Salesforce Connector version 9.3.0
+
 The Anypoint Salesforce Connector lets you connect to the Salesforce platform APIs. This connector exposes methods for accessing Salesforce, including working with the https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_dev_process_chapter.htm[Salesforce Apex classes].
 
 This connector works with the Salesforce SOAP API, REST API, Bulk API, and Streaming API, depending on the operation you configure. Each API call uses an XML request and response over an HTTPS connection. All required request headers, error handling, and HTTPS connection configurations are built into the connector.
@@ -236,6 +238,19 @@ image:salesforce-dc-oauth-user-pass.png[OAuth User Password]
 
 When Studio has an update, a message displays in the lower right corner, 
 which you can click to install the update.
+
+You can also install the Salesforce connector manually by updating the Mule project's pom.xml file:
+
+[source,xml,linenums]
+----
+<dependency>
+    <groupId>com.mulesoft.connectors</groupId>
+    <groupId>org.mule.extension</groupId>
+    <artifactId>mule-salesforce-connector</artifactId>
+    <version>9.3.0</version>
+    <classifier>mule-plugin</classifier>
+</dependency>
+----
 
 To configure:
 
@@ -805,8 +820,8 @@ This snippet specifies a project dependency for a specific release version:
 [source, xml, linenums]
 ----
 <dependency>
-    <groupId>org.mule.connectors</groupId>
-    <artifactId>mule-sfdc-connector</artifactId>
+    <groupId>org.mule.extension</groupId>
+    <artifactId>mule-salesforce-connector</artifactId>
     <version>RELEASE</version>
     <classifier>mule-plugin</classifier>
 </dependency>
@@ -817,8 +832,8 @@ This snippet adds specifies a project dependency for the latest version:
 [source, xml, linenums]
 ----
 <dependency>
-    <groupId>org.mule.modules</groupId>
-    <artifactId>mule-sfdc-connector</artifactId>
+    <groupId>org.mule.extension</groupId>
+    <artifactId>mule-salesforce-connector</artifactId>
     <version>LATEST</version>
 </dependency>
 ----
