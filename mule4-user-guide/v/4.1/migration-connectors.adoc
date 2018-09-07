@@ -1,6 +1,12 @@
 = Migrating Connectors and Modules to Mule 4
 
-This section covers the migration of connector-specific features and lists connectors that are deprecated or removed from Mule 4.
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
+This section covers the manual migration of connector-specific features and lists connectors that are deprecated or removed from Mule 4.
+
+*Important!* If you have not yet used the Mule Migration tool to start migrating
+your Mule 3 app to Mule 4, see recommendations link:migration-tool[Migrating to Mule 4] before attempting a manual migration.
 
 ////
 (*NOTE: We can break the files out on a per connector basis if necessary*)

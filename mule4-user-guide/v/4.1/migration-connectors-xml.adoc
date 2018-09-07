@@ -1,5 +1,8 @@
 = Migrating the XML Module
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 A new XML module in Mule 4 replaces the one that was bundled in with Mule 3. The main changes are:
 
 * Removal of components and expressions, functions, and evaluators that were deprecated in Mule 3.6:

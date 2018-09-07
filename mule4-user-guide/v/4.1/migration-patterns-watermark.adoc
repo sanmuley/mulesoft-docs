@@ -1,5 +1,8 @@
 = Migrating Watermarks
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 // Explain generally how and why things changed between Mule 3 and Mule 4.
 Watermarking is typically used to perform data synchronization, for example, when polling a legacy resource to retrieve new data and to sync it with another destination endpoint. The watermarking technique stores and retrieves the point at which a periodic synchronization resumes the next time it executes. Watermarking is a typically used alongside ObjectStore.
 

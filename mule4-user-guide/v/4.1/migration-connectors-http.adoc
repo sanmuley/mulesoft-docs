@@ -1,6 +1,9 @@
 = Migrating HTTP Connector Uses
 // sme: afelisatti, author: afelisatti
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 For the most part, the HTTP connector has just been adapted to the Mule 4 model:
 
 * Configuration properties have been moved to a connection component when applicable.

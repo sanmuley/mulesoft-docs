@@ -1,5 +1,8 @@
 = Migrating the Mock Processor (MUnit)
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 . The name of the processor has changed from when to mock-when.
 . The attribute messageProcessor has change to processor.
 . In the child node with attribute the attribute name has changed to attributeName.

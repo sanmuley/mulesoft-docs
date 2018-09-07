@@ -1,5 +1,8 @@
 = Migrating the VM Transport
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 The VM transport was completely rewritten. It evolved away from the Mule 3 transport model into an operation-based connector. This enables many new capabilities:
 
 * The ability to consume messages from a queue on demand, unlike the old transport, which only provided a polling inbound endpoint.

@@ -1,5 +1,8 @@
 = Migrating the Anypoint Enterprise Security (AES) features
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 In Mule 4, the Anypoint Enterprise Security module was split into different modules:
 
 * link:cryptography[Cryptography Module] replaces the Mule 3 Encryption and Signature modules
@@ -7,4 +10,4 @@ In Mule 4, the Anypoint Enterprise Security module was split into different modu
 * link:/connectors/validation-connector[Validation Module] incorporated functionality from the Mule 3 Filters Module
 * link:/connectors/oauth2-provider-documentation-reference[OAauth2 Provider] replaces the Mule 3 OAuth2 Provider
 
-Please refer to the above modules documentation for information on how to migrate to Mule 4.
+Please refer to the above module documentation for information on how to migrate to Mule 4.

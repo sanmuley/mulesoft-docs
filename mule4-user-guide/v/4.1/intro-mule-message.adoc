@@ -110,6 +110,10 @@ For example, the `<file:list>` operation retrieves a List of Messages. Each mess
 
 == See Also
 
+link:migration-tool-post-mig[Migration to Mule 4: Recommended Post-Migration Tasks]
+
 link:migration-connectors-http[Migrating HTTP Connector Uses]
+
 link:dataweave-formats[DataWeave Format Support]
+
 link:migration-core-enricher[Migrating the Enricher to a Target Variable]

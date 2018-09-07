@@ -1,6 +1,9 @@
 = Migrating the Choice Router
 // sme: DF, author: sduke?
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 Little changed between Choice router for Mule 3 and Mule 4 except for:
 
 * DataWeave is now the expression language so the when statements are actually going to use it instead of MEL

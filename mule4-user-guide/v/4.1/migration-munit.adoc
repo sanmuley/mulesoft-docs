@@ -2,7 +2,10 @@
 
 // Explain generally how and why things changed between Mule 3 and Mule 4.
 
-MUnit migration is covered here:
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
+Manual MUnit migration is covered here:
 
 * link:migration-munit-assert-processor-changes[Migrating Assert Processors (MUnit)]
 
