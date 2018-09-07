@@ -1,5 +1,8 @@
 = Migrating the Scripting Component
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 The `<scripting>` component in Mule 3 is replaced with a new `<scripting>` module. This new module is pretty similar in functionality, with just some syntax changes:
 
 .Mule 3 Example: Scripting
@@ -36,7 +39,7 @@ The `<scripting>` component in Mule 3 is replaced with a new `<scripting>` modul
         <scripting:parameters>
             #[{currency: vars.currency}]
         </scripting:parameters>
-    </scripting:execute> 
+    </scripting:execute>
 </flow>
 ----
 
@@ -54,7 +57,7 @@ However, you can still access the variables from the script using the `vars` key
 <flow name="greedy">
     <scripting:execute engine="groovy">
         <scripting:code>return "currency is " + vars.currency</scripting:code>
-    </scripting:execute> 
+    </scripting:execute>
 </flow>
 ----
 
@@ -73,5 +76,3 @@ To use the Scripting module, simply add it to your application using the Studio 
 == See Also
 
 * link:/connectors/scripting-module[Scripting Module Documentation]
-
-

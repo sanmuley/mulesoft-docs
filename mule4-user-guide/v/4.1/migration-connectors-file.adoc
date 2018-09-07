@@ -1,5 +1,8 @@
 = Migrating the File Connector
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 The File transport was completely rewritten. It evolved away from the Mule 3 transport model into an operation based connector. This enables many new capabilities:
 
 * The ability to read files or fully list directory contents on demand, unlike the old transport, which only provided a polling inbound endpoint.
@@ -100,12 +103,12 @@ In Mule 3, a `<file:inbound-endpoint>` message source was used to poll a directo
 Mule 4 offers an improved way of doing that. The `<file:listener>` component (called `On New File` in the Studio palette) polls a directory and triggers a new message just like its predecessor did. However, it has the following added capabilities:
 
 * You can use a `<file:matcher>` to only accept files that match certain criteria.
-* The listening `directory` has to be created before the app starts, or a reconnection strategy must be configured. In Mule 3.x, the directory was created if it did not exist when the app started. 
+* The listening `directory` has to be created before the app starts, or a reconnection strategy must be configured. In Mule 3.x, the directory was created if it did not exist when the app started.
 * You are no longer forced to either delete or move the file, although the option to do that is still available.
 * In 3.x, deleting or moving the input file did not take place if an error occurred and a transaction was rolled back, but it was done if there was no transaction. In Mule 4, an error prevents the deletion or move operation from occurring regardless of whether there is a transaction or not.
 * You can use any of the connector's operations to change processed files in such a way that they no longer meet the matching criteria.
 * Watermark is automatically supported, allowing you to optionally filter automatically by creation or modification timestamp.
-* Mule 3 used the canonical path of the read file to add its metadata into the message inbound properties. Mule 4 uses the absolute path. 
+* Mule 3 used the canonical path of the read file to add its metadata into the message inbound properties. Mule 4 uses the absolute path.
 
 .Mule 3 Example: Inbound endpoint
 [source,xml, linenums]

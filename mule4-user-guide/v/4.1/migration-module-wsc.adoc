@@ -1,5 +1,8 @@
 = Migrating WSC
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 Here we are going to cover a couple of common cases using the Web Service Consumer how they were done in Mule 3 and how are they made now in
 the new Mule 4 release.
 

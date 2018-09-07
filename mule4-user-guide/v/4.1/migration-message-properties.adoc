@@ -1,6 +1,9 @@
 = Migrating Message Properties
 // Contacts/SMEs: Ana Felissati, Pablo La Greca
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 In Mule 3, there are several property scopes that you can use for different purposes. In Mule 4, most of these scopes have been removed.
 
 == Invocation Properties
@@ -9,11 +12,13 @@ Invocation properties are now called `variables` in Mule 4. Their behavior is ex
 
 == Inbound Properties, Outbound Properties, Inbound and Outbound Attachments
 
-These scopes do not exist in Mule 4. See link:intro-mule-message[Intro Mule Message] for more information about migration.
+These scopes do not exist in Mule 4. For information about migrating them, see:
+
+* link:migration-tool-post-mig[Migration to Mule 4: Recommended Post-Migration Tasks]
+
+* link:intro-mule-message[Intro Mule Message]
 
 == See Also
-
-link:intro-mule-message[Intro Mule Message]
 
 link:about-mule-event[About Mule Event]
 

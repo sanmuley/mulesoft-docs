@@ -1,6 +1,9 @@
 = Migrating the Validation Module
 // sme: MG, author: ndinu
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 // Explain generally how and why things changed between Mule 3 and Mule 4.
 The Validation Module in Mule 4 is very similar to the one in Mule 3. The most
 impacted areas between these mayor versions were error handling and support in expressions.

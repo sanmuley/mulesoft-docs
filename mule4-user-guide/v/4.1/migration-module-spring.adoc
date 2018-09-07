@@ -1,5 +1,8 @@
 = Migrating the Spring Module
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 Mule 3 allowed to define Spring beans as part of the Mule application using the Spring DSL directly. This approache requires Mule applications to be exposed to the Spring versions and components that the runtime uses internally. This causes two problems:
 
 * Users were limited to the Spring version and modules available in the Mule runtime.

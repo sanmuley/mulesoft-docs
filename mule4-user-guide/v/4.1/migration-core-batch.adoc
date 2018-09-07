@@ -1,6 +1,9 @@
 = Migrating the Batch Module
 // sme: MG, author: sduke?
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 // Explain generally how and why things changed between Mule 3 and Mule 4.
 The Batch module was introduced to handle Extract Transform Load (ETL) functionality.
 

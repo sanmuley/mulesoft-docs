@@ -1,5 +1,8 @@
 = Migrating the Object Store Connector
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 The Object Store Connector in Mule 4 is very similar to the one in Mule 3. The main
 differences between these major versions are:
 

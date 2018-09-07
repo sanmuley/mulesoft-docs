@@ -1,5 +1,8 @@
 = Migrating the Security Filters
 
+IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
+The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+
 In Mule 3, the Security Filters where part of the Mule Module Security. In Mule 4, this where migrated to the link:/connectors/validation-connector[Mule Validation Module].
 
 == IP filters
