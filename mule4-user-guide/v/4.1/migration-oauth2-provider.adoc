@@ -1,7 +1,6 @@
 = Migrating the OAuth2 Provider
 
-IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
+IMPORTANT: To migrate a Mule 3 app to Mule 4, MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
 
 The new OAuth2 Provider Module from Mule 4 comes to replace the previous provider from the Anypoint Enterprise Security.
 However, there are some configuration changes that need to be taken into account when migrating the applications.

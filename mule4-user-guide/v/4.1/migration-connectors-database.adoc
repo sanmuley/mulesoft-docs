@@ -1,8 +1,7 @@
 
 = Migrating the Database Connector
 
-IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
+IMPORTANT: To migrate a Mule 3 app to Mule 4, MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
 
 // Explain generally how and why things changed between Mule 3 and Mule 4.
 The main changes to the Database connector from Mule 3 to Mule 4 include:

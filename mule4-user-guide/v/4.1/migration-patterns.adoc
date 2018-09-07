@@ -1,8 +1,7 @@
 = Migration Patterns
 // Contacts/SMEs: Mariano Gonzales,
 
-IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
+IMPORTANT: To migrate a Mule 3 app to Mule 4, MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
 
 Migration patterns typically pertain to changes from Mule 3 to Mule 4 that affect more than one component, connector, or module.
 
