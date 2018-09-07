@@ -1,7 +1,6 @@
 = Migrating to the Email connector
 
-IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
+IMPORTANT: To migrate a Mule 3 app to Mule 4, MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
 
 The POP3, IMAP and SMTP transports were completely rewritten. They evolved away from the Mule 3 transport model into a single operation based connector.
 

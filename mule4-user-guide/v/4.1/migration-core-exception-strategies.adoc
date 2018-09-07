@@ -1,8 +1,7 @@
 = Migrating Exception Strategies to Mule Error Handlers
 // sme: afelisatti, author: fer?
 
-IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
+IMPORTANT: To migrate a Mule 3 app to Mule 4, MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
 
 The following examples will guide you through the migration of the different exception
 strategies of Mule 3 considering the new error handling components in Mule 4.

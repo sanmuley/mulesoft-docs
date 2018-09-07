@@ -1,7 +1,6 @@
 = Migrating the Scripting Component
 
-IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
+IMPORTANT: To migrate a Mule 3 app to Mule 4, MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
 
 The `<scripting>` component in Mule 3 is replaced with a new `<scripting>` module. This new module is pretty similar in functionality, with just some syntax changes:
 

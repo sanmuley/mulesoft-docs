@@ -2,8 +2,7 @@
 
 // Explain generally how and why things changed between Mule 3 and Mule 4.
 
-IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
+IMPORTANT: To migrate to Mule 4, MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
 
 Manual MUnit migration is covered here:
 
