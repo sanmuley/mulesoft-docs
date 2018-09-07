@@ -2,7 +2,7 @@
 // Contacts/SMEs: Ana Felissati, Pablo La Greca
 
 IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
 
 Mule 4 does not require `transformers` anymore. Now that DataWeave is the default expression language and the repeatable streams feature is supported, most (if not all) scenarios that required a transformer no longer exist.
 

@@ -3,7 +3,7 @@
 :imagesdir: ./_images
 
 IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
 
 This example covers the necessary steps for successfully migrate an APIkit-based application from Mule 3 to Mule 4. The following REST API performs CRUD (create, read, update and delete) operations over a MySQL database.
 

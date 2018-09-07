@@ -2,7 +2,7 @@
 // Contacts/SMEs: Mariano Gonzales,
 
 IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
 
 Migration patterns typically pertain to changes from Mule 3 to Mule 4 that affect more than one component, connector, or module.
 

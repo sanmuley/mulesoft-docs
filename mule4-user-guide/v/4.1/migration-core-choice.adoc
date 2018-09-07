@@ -2,7 +2,7 @@
 // sme: DF, author: sduke?
 
 IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
 
 Little changed between Choice router for Mule 3 and Mule 4 except for:
 

@@ -2,7 +2,7 @@
 // sme: afelisatti, author: fer?
 
 IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
 
 The following examples will guide you through the migration of the different exception
 strategies of Mule 3 considering the new error handling components in Mule 4.
