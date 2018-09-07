@@ -20,7 +20,6 @@
 **** link:migration-tool-procedure[Performing a Migration]
 **** link:migration-report[Mule Migration Report]
 **** link:migration-tool-post-mig[Recommended Post-Migration Tasks]
-**** link:migration-tool-ref[Migration Warning and Error Reference]
 **** link:migration-message-properties[Migrating Message Properties]
 **** link:migration-patterns-reconnection-strategies[Migrating Reconnection Strategies]
 **** link:migration-secure-properties-placeholder[Migrating the Secure Properties Placeholder]
