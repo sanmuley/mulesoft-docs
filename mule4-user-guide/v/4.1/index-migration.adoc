@@ -3,23 +3,12 @@
 
 Mule 4 improvements make it easier to learn, develop, and manage than Mule 3. For an overview of these capabilities, you should read link:mule-runtime-updates[What's New in Mule 4].
 
-This documentation describes the differences between Mule 3 and Mule 4, indicates when you should migrate to Mule 4, and shows what it takes to migrate Mule apps with the Migration tool. It includes information on these topics:
+This documentation describes the differences between Mule 3 and Mule 4, indicates when you should migrate to Mule 4, and explains how to migrate Mule 3 apps with the Migration tool. It includes information on these topics:
 
 * link:intro-overview[Introduction to Mule 4]: An overview of Mule 4 for those who already know Mule 3.
 * link:migration-prep[Preparing for a Migration]: Steps to think about before migrating a Mule app.
-* link:migration-tool[Migration to Mule 4]: An overview of migration using the
-Mule Migration tool and recommended migration tasks.
-* link:migration-example-complex[Migration Example]: End-to-end example that shows the before (Mule 3) and after (Mule 4) syntax used for Mule apps.
-* More in-depth migration details:
- ** link:migration-message-properties[Migrating Message Properties]
- ** link:migration-patterns-reconnection-strategies[Migrating Reconnection Strategies]
- ** link:migration-core[Migrating Core Components]
- ** link:migration-connectors[Migrating Connectors]
- ** link:migration-api-gateways[Migrating API Gateways]
- ** link:migration-mel[Migrating from MEL to DataWeave]
- ** link:migration-dataweave[Migrating from DataWeave 1.0 to 2.x]
- ** link:migration-munit[Migrating MUnit]
-+
+* link:migration-tool[Migrating to Mule 4]: Recommended procedure for migrating to Mule 4, using the Mule Migration tool. 
+
 // ** link:migration-devkit-to-mule-sdk[Migrating DevKit to the Mule SDK]
 
 This guide should apply to all 3.x versions. However, the 3.x examples use Mule 3.9.
