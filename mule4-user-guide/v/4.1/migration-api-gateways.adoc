@@ -3,7 +3,7 @@
 // authors: Federico Balbi and Nahuel Dalla Vecchia (assigned by Eva)
 
 IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
 
 ////
 Here's an old Gateways migration guide example: https://docs.mulesoft.com/release-notes/api-gateway-runtime-to-mule-3.8.0-migration-guide

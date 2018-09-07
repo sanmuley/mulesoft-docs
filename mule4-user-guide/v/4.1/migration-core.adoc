@@ -3,7 +3,7 @@
 :keywords: studio, server, components, connectors, elements, palette, global elements, configuration elements
 
 IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
 
 This section covers the migration of component-specific features, and the table below maps Mule 3.x components and expressions to their replacements in Mule 4.
 

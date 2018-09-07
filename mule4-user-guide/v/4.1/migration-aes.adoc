@@ -1,7 +1,7 @@
 = Migrating the Anypoint Enterprise Security (AES) features
 
 IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
 
 In Mule 4, the Anypoint Enterprise Security module was split into different modules:
 

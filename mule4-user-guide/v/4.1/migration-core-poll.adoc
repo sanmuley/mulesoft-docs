@@ -1,7 +1,7 @@
 = Migrating the Poll Component
 
 IMPORTANT: MuleSoft recommends using the link:migration-tool[Mule Migration Tool].
-The tool's Migration report will indicate whether any manual migration procedures described here are necessary.
+The tool's Migration report will indicate whether any manual migration procedures identified here are necessary.
 
 In Mule 3, the `<poll>` element was used to trigger a certain flow at a fixed frequency of time. This element was also a scope which required one (and only one) message processor to live inside of it. The output of that processor would be the message that the flow receives.
 
