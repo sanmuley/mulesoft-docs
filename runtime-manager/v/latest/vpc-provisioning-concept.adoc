@@ -36,9 +36,18 @@ For each worker deployed to CloudHub, the following IP assignation takes place:
 Due to this structure, the smallest network subnet block you can assign for your VPC is /24 and the largest /16. +
 A /24 CIDR notation subnet has 256 IP addresses. +
 Reserving one IP address for the network and one for broadcast you have 254 hosts for your worker, which get divided into 4 availability zones of 62 hosts each. Consider that each worker potentially needs two IP addresses for zero-downtime, that's around 30 IP addresses to assign to your workers. +
-Consider also the environments that would require in a VPC.  For example, f you need space for 300 instances each in Dev, QA and UAT you need to size for 1024 instances at minimum.
+Consider also the environments that would require in a VPC.  For example, if you need space for 300 instances each in Dev, QA and UAT you need to size for 1024 instances at minimum.
 
-The safe rule of thumb for deciding the size of your VPC subnet is "10 times the maximum number of expected apps to deploy in the VPC".
+For example, if you have 3 environments that will use 2 CloudHub workers per app, and you are deploying 100 Mule application, then you need at least 100x3x2=600 VPC subnet IP addresses for normal running Mule applications. However, because of the zero downtime feature, you will need additional VPC subnet IP addresses reserved for the redeployment phase when a Mule application is restarted. The length of time for this phase depends on two factors. First, a new CloudHub worker starts up within the SLA provided by AWS (typically within about 15 minutes). Next, the Mule application needs to fully deploy to this new CloudHub worker, which then signals the shutdown and removal of the old CloudHub worker. You will need to figure out how long this redeployment phase takes for all your deployed Mule applications, and anticipate how many Mule applications might need to be redeployed at the same time. Once you know these numbers, you can calculate the number of additional VPC subnet addresses you will need to safely support all possible Mule application redeployments. 
+
+So in this previous example, the very worst case safety buffer would be to reserve an additional 600 VPC subnet IP addresses (six times the number of Mule applications), which would correspond to 1024 VPC subnet IP addresses, which would need a CIDR subnet block of /22. But perhaps you will never anticipate restarting all the Mule applications at the same time. However, your only smaller option would need a CIDR subnet block of /23 which is only 512 VPC subnet IP addresses, and this will not be enough.
+
+You also need to plan for future growth. If you ever go beyond the 100 Mule applications to a point where you need more than 1024 VPC subnet IP addresses, you will have to create a new VPC. You cannot change the CIDR block size in an existing VPC. This would require you to redeploy every Mule application to the new VPC, which may also have secondary issues with either the Mule applications being offline for a time, or perhaps having duplicate Mule applications running in parallel.
+
+Also remember that there is no cost to you to reserve the VPC subnet addresses in the CIDR block, so in general you should reserve a CIDR block size that can safely accomidate all your expected future growth plans, to safely plan for the total number of Mule applications you anticipate you will ever need to deploy into this VPC. 
+
+Especially for production environments, in addition to the number of Mule applications, you also need to evaluate your expected workloads and SLAs (such as performance and reliability SLAs) for each Mule application to determine the total number of required production environments and CloudHub workers per environment, and the associated expected costs. 
+ 
 
 == FAQ: Where To Place a VPC Inside my Organization
 
